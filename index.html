@@ -227,6 +227,12 @@
                 alert("Đã xả bỏ thành công! Thấy nhẹ nhõm hơn chưa?");
             }, 800);
         }
+        document.getElementById("tamsu").addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault(); // không xuống dòng
+        sendGalaxy(); // gọi hiệu ứng
+    }
+});
         function sendGalaxy() {
     let textArea = document.getElementById('tamsu');
 
@@ -302,6 +308,7 @@
 
         setTimeout(() => dot.remove(), 1800);
     }
+    
 }
     </script>
 </body>
