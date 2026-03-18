@@ -189,7 +189,7 @@
             <textarea id="tamsu" placeholder="Hôm nay bạn thấy thế nào?..."></textarea>
             <div class="action-btns">
                 <button class="btn" onclick="throwAway()">Giữ riêng & Xả bỏ</button>
-                <button class="btn" style="border-color: #fff; color: #fff;">Gửi vào dải ngân hà</button>
+                <button class="btn" style="border-color: #fff; color: #fff;" onclick="sendGalaxy()">Gửi vào dải ngân hà</button>
             </div>
         </div>
         <div class="trash-can">
@@ -227,6 +227,82 @@
                 alert("Đã xả bỏ thành công! Thấy nhẹ nhõm hơn chưa?");
             }, 800);
         }
+        function sendGalaxy() {
+    let textArea = document.getElementById('tamsu');
+
+    if(textArea.value.trim() === "") {
+        alert("Bạn chưa viết gì để gửi!");
+        return;
+    }
+
+    // Text bay lên
+    let text = document.createElement("div");
+    text.innerText = "✨ " + textArea.value;
+    text.style.position = "fixed";
+    text.style.bottom = "50px";
+    text.style.left = "50%";
+    text.style.transform = "translateX(-50%)";
+    text.style.color = "#fff";
+    text.style.fontSize = "18px";
+    text.style.transition = "4s";
+    text.style.zIndex = "9999";
+
+    document.body.appendChild(text);
+
+    setTimeout(() => {
+        text.style.bottom = "80%";
+        text.style.opacity = "0";
+    }, 100);
+
+    setTimeout(() => text.remove(), 4000);
+
+    // Xóa nội dung
+    textArea.value = "";
+
+    // Pháo bông
+        for(let i = 0; i < 80; i++) { // ⬅️ tăng số hạt (30 → 80)
+        let dot = document.createElement("div");
+
+        dot.style.position = "fixed";
+        dot.style.width = "8px";
+        dot.style.height = "8px";
+        dot.style.borderRadius = "50%";
+
+        // 🌈 bảng màu xịn hơn
+        let colors = [
+            "#ff9800", "#ff4d4d", "#00e6ff", "#ffff66",
+            "#66ff66", "#ff66ff", "#ffffff", "#00ffcc"
+        ];
+
+        let color = colors[Math.floor(Math.random() * colors.length)];
+        dot.style.background = color;
+
+        // ✨ hiệu ứng glow
+        dot.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+
+        dot.style.left = "50%";
+        dot.style.top = "50%";
+        dot.style.zIndex = "9999";
+
+        document.body.appendChild(dot);
+
+        let angle = Math.random() * 2 * Math.PI;
+        let dist = Math.random() * 400; // ⬅️ bay xa hơn
+
+        let x = Math.cos(angle) * dist;
+        let y = Math.sin(angle) * dist;
+
+        dot.animate([
+            { transform: "translate(0,0) scale(1)", opacity: 1 },
+            { transform: `translate(${x}px, ${y}px) scale(0.5)`, opacity: 0 }
+        ], {
+            duration: 1800, // ⬅️ lâu hơn
+            easing: "ease-out"
+        });
+
+        setTimeout(() => dot.remove(), 1800);
+    }
+}
     </script>
 </body>
 </html>
