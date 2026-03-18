@@ -5,68 +5,228 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REAL FINE | Ổn Thiệt Không?</title>
     <style>
+        /* Cài đặt chung - Vibe Dark Mode */
         body {
-            background-color: #121212; /* Nền tối Dark Mode */
+            background-color: #0a0a0a;
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #ff9800; border-radius: 10px; }
+
+        /* Header */
         header {
             padding: 20px 50px;
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #333;
+            align-items: center;
+            background-color: rgba(10, 10, 10, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-sizing: border-box;
         }
-        .logo { font-weight: bold; font-size: 1.2rem; letter-spacing: 2px;}
+        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: 2px; color: #fff;}
+        nav a { color: #ccc; text-decoration: none; margin-left: 30px; transition: 0.3s; font-size: 0.9rem; text-transform: uppercase;}
+        nav a:hover { color: #ff9800; }
+
+        /* Hero Section - Đập vào mắt */
         .hero {
-            height: 80vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* Thay link ảnh dưới đây bằng ảnh chụp tại TDTU của bạn */
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1555626906-fcf10d6851b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background: linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,1)), url('https://images.unsplash.com/photo-1555626906-fcf10d6851b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
         }
-        h1 {
-            font-size: 5rem;
-            color: #ff9800; /* Màu cam phát sáng */
-            text-shadow: 0 0 20px #ff9800;
+        .hero h1 {
+            font-size: 6rem;
+            color: #ff9800;
+            text-shadow: 0 0 30px rgba(255, 152, 0, 0.8);
             margin: 0;
+            font-family: 'Brush Script MT', cursive; /* Tạo cảm giác chữ viết tay */
+            transform: rotate(-5deg);
         }
-        p.subtitle {
-            font-size: 1.5rem;
-            color: #ccc;
-            margin-top: 10px;
-        }
+        .hero p { font-size: 1.2rem; color: #bbb; margin-top: 20px; letter-spacing: 1px;}
+        
+        /* Nút chung */
         .btn {
             margin-top: 30px;
-            padding: 15px 30px;
+            padding: 15px 40px;
             background-color: transparent;
-            border: 2px solid #ff9800;
+            border: 1px solid #ff9800;
             color: #ff9800;
-            font-size: 1.2rem;
+            font-size: 1rem;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 50px;
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .btn:hover {
-            background-color: #ff9800;
-            color: #121212;
-            box-shadow: 0 0 15px #ff9800;
+        .btn:hover { background-color: #ff9800; color: #0a0a0a; box-shadow: 0 0 20px rgba(255, 152, 0, 0.6); }
+
+        /* Section Uncropped Challenge */
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #fff;}
+        .uncropped { padding: 100px 50px; background-color: #111;}
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 4/3;
+        }
+        .grid-item img {
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(50%); transition: 0.5s;
+        }
+        .grid-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
+        .grid-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 20px; color: #fff; opacity: 0; transition: 0.5s;
+        }
+        .grid-item:hover .grid-overlay { opacity: 1; }
+
+        /* Section Kể Đi Nghe Nè & Thùng Rác */
+        .confess-zone {
+            padding: 100px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .text-box { flex: 1; }
+        textarea {
+            width: 100%; height: 200px;
+            background-color: #1a1a1a;
+            border: 1px dashed #555;
+            color: #fff;
+            padding: 20px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            resize: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        textarea:focus { outline: none; border-color: #ff9800; box-shadow: 0 0 15px rgba(255, 152, 0, 0.2); }
+        .action-btns { display: flex; gap: 15px; margin-top: 20px; }
+        
+        .trash-can {
+            flex: 0.5;
+            text-align: center;
+        }
+        .trash-icon {
+            font-size: 5rem;
+            color: #333;
+            text-shadow: 0 -20px 40px #ff9800; /* Hiệu ứng đèn hắt từ dưới lên */
+            transition: 0.5s;
+        }
+        
+        /* Footer */
+        footer { text-align: center; padding: 50px; background-color: #050505; color: #555; border-top: 1px solid #222;}
     </style>
 </head>
 <body>
+
     <header>
         <div class="logo">REAL FINE</div>
-        <nav>Trang chủ &nbsp;|&nbsp; Kể Đi &nbsp;|&nbsp; Thư 3 Năm Sau</nav>
+        <nav>
+            <a href="#">Trang chủ</a>
+            <a href="#uncropped">Uncropped Challenge</a>
+            <a href="#kedi">Kể đi</a>
+        </nav>
     </header>
+
     <section class="hero">
-        <h1>ỔN THIỆT KHÔNG?</h1>
-        <p class="subtitle">Lời hỏi thăm xã giao. Ổn thật không?</p>
-        <button class="btn">Kể Đi, Nghe Nè</button>
+        <h1>Ổn Thiệt Không?</h1>
+        <p>Lời hỏi thăm đầu tiên là xã giao. Lời hỏi thăm thứ hai mới là thấu hiểu.</p>
+        <button class="btn" onclick="document.getElementById('kedi').scrollIntoView({behavior: 'smooth'})">Kể Đi, Nghe Nè</button>
     </section>
+
+    <section class="uncropped" id="uncropped">
+        <h2 class="section-title">UNCROPPED CHALLENGE</h2>
+        <div class="grid-gallery">
+            <div class="grid-item">
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bàn học bừa bộn">
+                <div class="grid-overlay">
+                    <h3>#Uncropped</h3>
+                    <p>Đêm thứ 3 thức trắng chạy deadline. Cà phê đắng nghét.</p>
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Điểm kém">
+                <div class="grid-overlay">
+                    <h3>#Uncropped</h3>
+                    <p>Bài thi giải tích rớt lần 2. Khóc xong rồi lại học tiếp thôi.</p>
+                </div>
+            </div>
+            <div class="grid-item">
+                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ngồi 1 mình">
+                <div class="grid-overlay">
+                    <h3>#Uncropped</h3>
+                    <p>Giữa sân trường đông người nhưng lại thấy lạc lõng vô cùng.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="confess-zone" id="kedi">
+        <div class="text-box">
+            <h2 style="color: #ff9800; margin-top:0;">Kể đi, Nghe nè.</h2>
+            <p style="color: #aaa; margin-bottom: 20px;">Viết những nỗi sợ, thất bại hay áp lực hiện tại của bạn. Nơi này hoàn toàn ẩn danh.</p>
+            <textarea id="tamsu" placeholder="Hôm nay bạn thấy thế nào?..."></textarea>
+            <div class="action-btns">
+                <button class="btn" onclick="throwAway()">Giữ riêng & Xả bỏ</button>
+                <button class="btn" style="border-color: #fff; color: #fff;">Gửi vào dải ngân hà</button>
+            </div>
+        </div>
+        <div class="trash-can">
+            <div class="trash-icon" id="trash">🗑️</div>
+            <p style="color: #777; margin-top: 20px;">Thùng rác phát sáng.<br>Xả bỏ quá khứ để tiến lên.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>"Chính vì cậu có đủ khả năng để vượt qua, nên thử thách này mới xuất hiện."</p>
+        <p>Chiến dịch <strong>REAL FINE</strong> - Hẹn gặp bạn ở trạm kế tiếp.</p>
+    </footer>
+
+    <script>
+        // Một chút code để làm hiệu ứng khi bấm nút "Xả bỏ"
+        function throwAway() {
+            let textArea = document.getElementById('tamsu');
+            let trash = document.getElementById('trash');
+            
+            if(textArea.value.trim() === "") {
+                alert("Bạn chưa viết gì cả, không có gì để xả bỏ đâu!");
+                return;
+            }
+
+            // Xóa nội dung
+            textArea.value = "";
+            
+            // Làm thùng rác nhấp nháy sáng lên
+            trash.style.textShadow = "0 -20px 80px #ff0000, 0 0 40px #ff9800";
+            trash.style.transform = "scale(1.2)";
+            
+            setTimeout(() => {
+                trash.style.textShadow = "0 -20px 40px #ff9800";
+                trash.style.transform = "scale(1)";
+                alert("Đã xả bỏ thành công! Thấy nhẹ nhõm hơn chưa?");
+            }, 800);
+        }
+    </script>
 </body>
 </html>
