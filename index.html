@@ -3,313 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REAL FINE | Ổn Thiệt Không?</title>
+    <title>REAL FINE - Trạm Hóa Bướm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* Cài đặt chung - Vibe Dark Mode */
+        :root {
+            --bg-color: #0d1117; /* Dark cinematic background */
+            --text-main: #f0f0f0;
+        }
         body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-thumb { background: #ff9800; border-radius: 10px; }
-
-        /* Header */
-        header {
-            padding: 20px 50px;
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background-color: rgba(10, 10, 10, 0.9);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            box-sizing: border-box;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden;
         }
-        .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: 2px; color: #fff;}
-        nav a { color: #ccc; text-decoration: none; margin-left: 30px; transition: 0.3s; font-size: 0.9rem; text-transform: uppercase;}
-        nav a:hover { color: #ff9800; }
-
-        /* Hero Section - Đập vào mắt */
-        .hero {
-            height: 100vh;
+        h1, h2, .cinematic-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+        .container {
+            width: 100%; max-width: 400px; padding: 20px;
+        }
+        .screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .screen.active {
+            display: block;
+            opacity: 1;
+        }
+        input[type="text"] {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #555;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            padding: 10px;
+            text-align: center;
+            width: 80%;
+            margin-bottom: 30px;
+            outline: none;
+        }
+        input[type="text"]:focus { border-bottom: 1px solid #fff; }
+        .btn {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 12px 30px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn:hover { background: #fff; color: #000; }
+        .options { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .option-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .option-btn:hover { background: rgba(255,255,255,0.15); }
+        
+        /* Ticket Design */
+        #ticket-card {
+            background: #111;
+            border-radius: 15px;
+            padding: 40px 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 2s ease;
+            aspect-ratio: 9/16;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(10,10,10,0.6), rgba(10,10,10,1)), url('https://images.unsplash.com/photo-1555626906-fcf10d6851b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
         }
-        .hero h1 {
-            font-size: 6rem;
-            color: #ff9800;
-            text-shadow: 0 0 30px rgba(255, 152, 0, 0.8);
-            margin: 0;
-            font-family: 'Brush Script MT', cursive; /* Tạo cảm giác chữ viết tay */
-            transform: rotate(-5deg);
+        .glow {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.15; z-index: 0;
         }
-        .hero p { font-size: 1.2rem; color: #bbb; margin-top: 20px; letter-spacing: 1px;}
-        
-        /* Nút chung */
-        .btn {
-            margin-top: 30px;
-            padding: 15px 40px;
-            background-color: transparent;
-            border: 1px solid #ff9800;
-            color: #ff9800;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 50px;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .btn:hover { background-color: #ff9800; color: #0a0a0a; box-shadow: 0 0 20px rgba(255, 152, 0, 0.6); }
-
-        /* Section Uncropped Challenge */
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #fff;}
-        .uncropped { padding: 100px 50px; background-color: #111;}
-        .grid-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .grid-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            aspect-ratio: 4/3;
-        }
-        .grid-item img {
-            width: 100%; height: 100%; object-fit: cover; filter: grayscale(50%); transition: 0.5s;
-        }
-        .grid-item:hover img { filter: grayscale(0%); transform: scale(1.05); }
-        .grid-overlay {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            padding: 20px; color: #fff; opacity: 0; transition: 0.5s;
-        }
-        .grid-item:hover .grid-overlay { opacity: 1; }
-
-        /* Section Kể Đi Nghe Nè & Thùng Rác */
-        .confess-zone {
-            padding: 100px 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .text-box { flex: 1; }
-        textarea {
-            width: 100%; height: 200px;
-            background-color: #1a1a1a;
-            border: 1px dashed #555;
-            color: #fff;
-            padding: 20px;
-            font-size: 1.1rem;
-            font-family: inherit;
-            resize: none;
-            border-radius: 10px;
-            box-sizing: border-box;
-        }
-        textarea:focus { outline: none; border-color: #ff9800; box-shadow: 0 0 15px rgba(255, 152, 0, 0.2); }
-        .action-btns { display: flex; gap: 15px; margin-top: 20px; }
-        
-        .trash-can {
-            flex: 0.5;
-            text-align: center;
-        }
-        .trash-icon {
-            font-size: 5rem;
-            color: #333;
-            text-shadow: 0 -20px 40px #ff9800; /* Hiệu ứng đèn hắt từ dưới lên */
-            transition: 0.5s;
-        }
-        
-        /* Footer */
-        footer { text-align: center; padding: 50px; background-color: #050505; color: #555; border-top: 1px solid #222;}
+        .ticket-content { position: relative; z-index: 1; }
+        .user-name-display { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; opacity: 0.7;}
+        .cinematic-msg { font-size: 24px; line-height: 1.4; margin-bottom: 20px; }
+        .poetic-msg { font-size: 13px; line-height: 1.6; opacity: 0; transition: opacity 2s ease 1s; }
+        .poetic-msg.show { opacity: 0.8; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">REAL FINE</div>
-        <nav>
-            <a href="#">Trang chủ</a>
-            <a href="#uncropped">Uncropped Challenge</a>
-            <a href="#kedi">Kể đi</a>
-        </nav>
-    </header>
+<div class="container">
+    <div id="screen-intro" class="screen active">
+        <h1 style="font-size: 28px; margin-bottom: 10px; letter-spacing: 2px;">REAL FINE</h1>
+        <p style="font-size: 12px; letter-spacing: 1px; opacity: 0.6; margin-bottom: 50px;">ỔN THẬT KHÔNG?</p>
+        <h2 style="font-size: 18px; margin-bottom: 40px;">Dừng lại một chút, tên cậu là gì?</h2>
+        <input type="text" id="userName" placeholder="Nhập tên của cậu...">
+        <br>
+        <button class="btn" onclick="startQuiz()">Bắt đầu bước vào kén</button>
+    </div>
 
-    <section class="hero">
-        <h1>Ổn Thiệt Không?</h1>
-        <p>Lời hỏi thăm đầu tiên là xã giao. Lời hỏi thăm thứ hai mới là thấu hiểu.</p>
-        <button class="btn" onclick="document.getElementById('kedi').scrollIntoView({behavior: 'smooth'})">Kể Đi, Nghe Nè</button>
-    </section>
+    <div id="screen-quiz" class="screen">
+        <h2 id="question-text" style="font-size: 20px; line-height: 1.5;">Question</h2>
+        <div class="options" id="options-container">
+            </div>
+    </div>
 
-    <section class="uncropped" id="uncropped">
-        <h2 class="section-title">UNCROPPED CHALLENGE</h2>
-        <div class="grid-gallery">
-            <div class="grid-item">
-                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bàn học bừa bộn">
-                <div class="grid-overlay">
-                    <h3>#Uncropped</h3>
-                    <p>Đêm thứ 3 thức trắng chạy deadline. Cà phê đắng nghét.</p>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Điểm kém">
-                <div class="grid-overlay">
-                    <h3>#Uncropped</h3>
-                    <p>Bài thi giải tích rớt lần 2. Khóc xong rồi lại học tiếp thôi.</p>
-                </div>
-            </div>
-            <div class="grid-item">
-                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ngồi 1 mình">
-                <div class="grid-overlay">
-                    <h3>#Uncropped</h3>
-                    <p>Giữa sân trường đông người nhưng lại thấy lạc lõng vô cùng.</p>
-                </div>
+    <div id="screen-result" class="screen">
+        <div id="ticket-card">
+            <div class="glow" id="ticket-glow"></div>
+            <div class="ticket-content">
+                <div class="user-name-display">Kén của <span id="display-name"></span></div>
+                <div class="cinematic-text cinematic-msg" id="msg-cinematic"></div>
+                <div class="poetic-msg" id="msg-poetic"></div>
             </div>
         </div>
-    </section>
+        <button class="btn" style="margin-top: 30px;" onclick="location.reload()">Thử lại</button>
+    </div>
+</div>
 
-    <section class="confess-zone" id="kedi">
-        <div class="text-box">
-            <h2 style="color: #ff9800; margin-top:0;">Kể đi, Nghe nè.</h2>
-            <p style="color: #aaa; margin-bottom: 20px;">Viết những nỗi sợ, thất bại hay áp lực hiện tại của bạn. Nơi này hoàn toàn ẩn danh.</p>
-            <textarea id="tamsu" placeholder="Hôm nay bạn thấy thế nào?..."></textarea>
-            <div class="action-btns">
-                <button class="btn" onclick="throwAway()">Giữ riêng & Xả bỏ</button>
-                <button class="btn" style="border-color: #fff; color: #fff;" onclick="sendGalaxy()">Gửi vào dải ngân hà</button>
-            </div>
-        </div>
-        <div class="trash-can">
-            <div class="trash-icon" id="trash">🗑️</div>
-            <p style="color: #777; margin-top: 20px;">Thùng rác phát sáng.<br>Xả bỏ quá khứ để tiến lên.</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>"Chính vì cậu có đủ khả năng để vượt qua, nên thử thách này mới xuất hiện."</p>
-        <p>Chiến dịch <strong>REAL FINE</strong> - Hẹn gặp bạn ở trạm kế tiếp.</p>
-    </footer>
-
-    <script>
-        // Một chút code để làm hiệu ứng khi bấm nút "Xả bỏ"
-        function throwAway() {
-            let textArea = document.getElementById('tamsu');
-            let trash = document.getElementById('trash');
-            
-            if(textArea.value.trim() === "") {
-                alert("Bạn chưa viết gì cả, không có gì để xả bỏ đâu!");
-                return;
-            }
-
-            // Xóa nội dung
-            textArea.value = "";
-            
-            // Làm thùng rác nhấp nháy sáng lên
-            trash.style.textShadow = "0 -20px 80px #ff0000, 0 0 40px #ff9800";
-            trash.style.transform = "scale(1.2)";
-            
-            setTimeout(() => {
-                trash.style.textShadow = "0 -20px 40px #ff9800";
-                trash.style.transform = "scale(1)";
-                alert("Đã xả bỏ thành công! Thấy nhẹ nhõm hơn chưa?");
-            }, 800);
+<script>
+    // Data cho câu hỏi
+    const questions = [
+        {
+            text: "Nếu nỗi lòng hiện tại là một thanh âm, đó sẽ là:",
+            answers: [
+                { text: "A. Tiếng sóng ngầm dưới đáy sâu", value: 1 },
+                { text: "B. Tiếng lá xào xạc rơi", value: 2 },
+                { text: "C. Tiếng gió thổi qua khe cửa", value: 3 }
+            ]
+        },
+        {
+            text: "Bạn đang nhìn thế giới qua lăng kính màu gì?",
+            answers: [
+                { text: "A. Một màu trầm lắng", value: 1 },
+                { text: "B. Một màu trung tính, mờ ảo", value: 2 },
+                { text: "C. Bắt đầu có những vệt sáng rực rỡ", value: 3 }
+            ]
+        },
+        {
+            text: "Bên trong chiếc kén của bạn, bạn muốn:",
+            answers: [
+                { text: "A. Được bao bọc và trốn đi thêm chút nữa", value: 1 },
+                { text: "B. Nhìn thấy một tia sáng lọt vào", value: 2 },
+                { text: "C. Chuẩn bị vỗ cánh thênh thang", value: 3 }
+            ]
         }
-        document.getElementById("tamsu").addEventListener("keydown", function(event) {
-    if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault(); // không xuống dòng
-        sendGalaxy(); // gọi hiệu ứng
+    ];
+
+    // Data cho 6 màu kết quả
+    const resultsData = {
+        3: { color: "#006400", hex: "Dark Green", cinematic: "Khép lại xôn xao,<br>trốn vào tĩnh lặng.", poetic: "Cậu được quyền mệt mỏi. Hãy mượn khoảng xanh thẳm này để rễ cắm sâu hơn trước khi đón bão." },
+        4: { color: "#00008B", hex: "Deep Sea Blue", cinematic: "Chìm xuống đáy sâu,<br>ôm lấy chính mình.", poetic: "Có những nỗi buồn trong vắt như đại dương. Đừng giấu đi, cứ để chúng được tự do vỗ sóng trong lòng cậu." },
+        5: { color: "#008080", hex: "Teal", cinematic: "Lưng chừng chông chênh,<br>học cách xoa dịu.", poetic: "Không cần gồng mình vội vã. Giữa những ngổn ngang tuổi trẻ, sự bình yên vốn cần thời gian để thành hình." },
+        6: { color: "#E0E0E0", hex: "Dotted White", cinematic: "Nơi bóng tối nứt vỡ,<br>ánh sáng đi vào.", poetic: "Một chấm trắng nhỏ nhoi cũng đủ thắp lên bầu trời đêm. Lớp vỏ 'vẫn ổn' đang nhường chỗ cho những hy vọng thật thà nhất." },
+        7: { color: "#FFF44F", hex: "Lemon Yellow", cinematic: "Gói lại những cơn mưa,<br>nhường chỗ cho nắng.", poetic: "Đủ sự dịu dàng và ấm áp, lớp kén kiên cố nhất cũng sẽ tự khắc mềm ra. Phần đời rực rỡ của cậu bắt đầu rồi." },
+        8: { color: "#FD5E53", hex: "Sunset Orange", cinematic: "Trọn vẹn dũng khí,<br>dang cánh thênh thang.", poetic: "Bầu trời rực rỡ nhất là phần thưởng cho những nỗ lực thầm lặng. Không còn chắp vá, cậu đã sẵn sàng bay bằng đôi cánh nguyên vẹn." },
+        9: { color: "#FD5E53", hex: "Sunset Orange", cinematic: "Trọn vẹn dũng khí,<br>dang cánh thênh thang.", poetic: "Bầu trời rực rỡ nhất là phần thưởng cho những nỗ lực thầm lặng. Không còn chắp vá, cậu đã sẵn sàng bay bằng đôi cánh nguyên vẹn." }
+    };
+
+    let currentStep = 0;
+    let score = 0;
+    let userName = "";
+
+    function switchScreen(hideId, showId) {
+        document.getElementById(hideId).classList.remove('active');
+        setTimeout(() => {
+            document.getElementById(showId).classList.add('active');
+        }, 800); // Cinematic fade delay
     }
-});
-        function sendGalaxy() {
-    let textArea = document.getElementById('tamsu');
 
-    if(textArea.value.trim() === "") {
-        alert("Bạn chưa viết gì để gửi!");
-        return;
+    function startQuiz() {
+        const inputName = document.getElementById('userName').value.trim();
+        userName = inputName ? inputName : "Cậu";
+        switchScreen('screen-intro', 'screen-quiz');
+        loadQuestion();
     }
 
-    // Text bay lên
-    let text = document.createElement("div");
-    text.innerText = "✨ " + textArea.value;
-    text.style.position = "fixed";
-    text.style.bottom = "50px";
-    text.style.left = "50%";
-    text.style.transform = "translateX(-50%)";
-    text.style.color = "#fff";
-    text.style.fontSize = "18px";
-    text.style.transition = "4s";
-    text.style.zIndex = "9999";
+    function loadQuestion() {
+        if (currentStep >= questions.length) {
+            showResult();
+            return;
+        }
+        
+        const q = questions[currentStep];
+        const qText = document.getElementById('question-text');
+        const optContainer = document.getElementById('options-container');
+        
+        // Fade out old text
+        qText.style.opacity = 0;
+        optContainer.style.opacity = 0;
 
-    document.body.appendChild(text);
-
-    setTimeout(() => {
-        text.style.bottom = "80%";
-        text.style.opacity = "0";
-    }, 100);
-
-    setTimeout(() => text.remove(), 4000);
-
-    // Xóa nội dung
-    textArea.value = "";
-
-    // Pháo bông
-        for(let i = 0; i < 80; i++) { // ⬅️ tăng số hạt (30 → 80)
-        let dot = document.createElement("div");
-
-        dot.style.position = "fixed";
-        dot.style.width = "8px";
-        dot.style.height = "8px";
-        dot.style.borderRadius = "50%";
-
-        // 🌈 bảng màu xịn hơn
-        let colors = [
-            "#ff9800", "#ff4d4d", "#00e6ff", "#ffff66",
-            "#66ff66", "#ff66ff", "#ffffff", "#00ffcc"
-        ];
-
-        let color = colors[Math.floor(Math.random() * colors.length)];
-        dot.style.background = color;
-
-        // ✨ hiệu ứng glow
-        dot.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
-
-        dot.style.left = "50%";
-        dot.style.top = "50%";
-        dot.style.zIndex = "9999";
-
-        document.body.appendChild(dot);
-
-        let angle = Math.random() * 2 * Math.PI;
-        let dist = Math.random() * 400; // ⬅️ bay xa hơn
-
-        let x = Math.cos(angle) * dist;
-        let y = Math.sin(angle) * dist;
-
-        dot.animate([
-            { transform: "translate(0,0) scale(1)", opacity: 1 },
-            { transform: `translate(${x}px, ${y}px) scale(0.5)`, opacity: 0 }
-        ], {
-            duration: 1800, // ⬅️ lâu hơn
-            easing: "ease-out"
-        });
-
-        setTimeout(() => dot.remove(), 1800);
+        setTimeout(() => {
+            qText.innerHTML = q.text;
+            optContainer.innerHTML = '';
+            q.answers.forEach(ans => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = ans.text;
+                btn.onclick = () => selectAnswer(ans.value);
+                optContainer.appendChild(btn);
+            });
+            // Fade in new text
+            qText.style.opacity = 1;
+            optContainer.style.opacity = 1;
+        }, 500);
     }
-    
-}
-    </script>
+
+    function selectAnswer(val) {
+        score += val;
+        currentStep++;
+        loadQuestion();
+    }
+
+    function showResult() {
+        switchScreen('screen-quiz', 'screen-result');
+        
+        document.getElementById('display-name').innerText = userName;
+        
+        // Lấy kết quả dựa trên tổng điểm (score từ 3 đến 9)
+        const result = resultsData[score] || resultsData[6]; 
+        
+        document.getElementById('msg-cinematic').innerHTML = result.cinematic;
+        document.getElementById('msg-poetic').innerHTML = result.poetic;
+        
+        // Đổi màu sắc ánh sáng của vé
+        const ticket = document.getElementById('ticket-card');
+        const glow = document.getElementById('ticket-glow');
+        glow.style.background = `radial-gradient(circle at center, ${result.color} 0%, transparent 70%)`;
+        ticket.style.boxShadow = `0 0 40px ${result.color}40`; // 40 là mã hex cho độ trong suốt 25%
+
+        // Cinematic text reveal
+        setTimeout(() => {
+            document.getElementById('msg-poetic').classList.add('show');
+        }, 1500);
+    }
+</script>
+
 </body>
 </html>
