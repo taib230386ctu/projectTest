@@ -109,10 +109,143 @@
             font-size: 20px; opacity: 0.5; animation: bounce 2s infinite;
         }
         @keyframes bounce { 0%, 100% {transform: translateY(0) translateX(-50%);} 50% {transform: translateY(-10px) translateX(-50%);} }
+    .footer {
+    margin-top: 100px;
+    padding: 50px 20px 30px;
+    border-top: 1px solid #222;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* LEFT */
+.footer-left {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-left a {
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.footer-left a:hover {
+    color: #fff;
+}
+
+/* RIGHT */
+.footer-right a {
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.footer-right a:hover {
+    color: #fff;
+}
+
+/* ABOUT BOX */
+.about-box {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    border: 1px solid #222;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+
+    transition: 0.5s;
+}
+
+.about-box.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* COPYRIGHT */
+.copyright {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+}
+/* scroll mượt */
+html {
+    scroll-behavior: smooth;
+}
+
+/* section mô tả */
+.about-section {
+    width: 100%;
+    padding: 100px 20px;
+    background: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+}
+
+.about-content {
+    max-width: 600px;
+    text-align: center;
+}
+
+.about-content h1 {
+    font-family: 'Playfair Display';
+    letter-spacing: 6px;
+    margin-bottom: 30px;
+}
+
+.about-content p {
+    color: var(--text-gray);
+    line-height: 1.8;
+    font-size: 14px;
+}
+/* animation item */
+.fade-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+
+/* khi hiện */
+.fade-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* section spacing */
+.about-section {
+    padding: 120px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.about-content {
+    max-width: 600px;
+    text-align: center;
+}
     </style>
 </head>
 <body>
-
 <div class="hero-section">
     <img src="images/main_image.jpg" alt="Hero Background">
     <div class="scroll-down">↓</div>
@@ -147,9 +280,48 @@
             </div>
             <button class="btn" style="margin-top: 40px;" onclick="location.reload()">LÀM LẠI</button>
         </div>
+        <div id="aboutPage" class="screen">
+    <h1>GIỚI THIỆU</h1>
+
+    <p class="desc">
+        REAL FINE không hỏi bạn đúng hay sai.<br><br>
+
+        Nó chỉ hỏi một điều duy nhất:<br>
+        "Bạn có thật sự ổn không?"<br><br>
+
+        Ở đây, bạn không cần phải mạnh mẽ.<br>
+        Không cần phải giả vờ.<br><br>
+
+        Chỉ cần dừng lại một chút,<br>
+        và thành thật với chính mình.
+    </p>
+
+    <button class="btn" onclick="goPage('intro')">QUAY LẠI</button>
+</div>
 
     </div>
 </div>
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- BÊN TRÁI -->
+        <div class="footer-left">
+            <a href="https://www.facebook.com/joney.huynh.37" target="_blank">Facebook</a>
+            <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fjhuyoenynhhuynhi%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExSUFHODhoM253YWpSb294Q3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5W3R72qCsACVbZP5JacUcLAs1B0UDD-19_9S1Oqgjz44hArbjUwTHkRX8RJg_aem_g4xrblRxatLxju1hxLyYNw&h=AT6Ehr580EZlUEmMVQXUJpjmrY0RpjTjIShq7vkZlOeEn7jpLMBwPlttLTzk_LQGyJtb5G4wX9qb8S5nOdK2pMIvAno_f0rmwEYK5jjZUiKqN7LjqXceDze3s_pvOSVggoa2aq1Nw4wqkn8JUUgk" target="_blank">Instagram</a>
+        </div>
+
+        <!-- BÊN PHẢI -->
+        <div class="footer-right">
+            <a href="#" onclick="goPage('aboutPage')">Mô tả trang</a>
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+        © 2026 REAL FINE
+    </div>
+</footer>
 
 <script>
     document.getElementById('nameInput').addEventListener('keydown', function(e) {
@@ -219,6 +391,24 @@
         document.getElementById('ticket').style.backgroundImage = `url('${res.img}')`;
         transitionTo('result');
     }
+   function goPage(pageId){
+    document.querySelectorAll('.screen').forEach(s => {
+        s.classList.remove('active');
+        s.style.opacity = '0';
+    });
+
+    const page = document.getElementById(pageId);
+    page.classList.add('active');
+
+    setTimeout(() => {
+        page.style.opacity = '1';
+    }, 50);
+
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', checkFade);
+window.addEventListener('load', checkFade);
 </script>
 </body>
 </html>
