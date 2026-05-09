@@ -1,234 +1,175 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>REAL FINE - Phá Kén</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="test.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        /* Khai báo Font Maglony của cậu */
-        @font-face {
-            font-family: 'Maglony'; 
-            src: url('fonts/1FTV-Maglony.ttf') format('truetype');
-            font-display: swap; /* Giúp load chữ nhanh hơn */
-        }
-
-        /* ÁP DỤNG CHO TOÀN BỘ TRANG WEB */
-        :root {
-            --main-font: 'Maglony', serif;
-            --sub-font: 'Montserrat', sans-serif;
-            --gold: #d4af37;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: #fff;
-            /* Font Montserrat làm mặc định cho các đoạn văn dài để đỡ mỏi mắt */
-            font-family: var(--sub-font);
-        }
-
-        /* Những chỗ dùng Font Maglony để tạo điểm nhấn */
-        h1, h2, h3, .main-title, .logo-text, .start-btn, .gallery-title {
-            font-family: var(--main-font) !important;
-            letter-spacing: 2px;
-        }
-
-        .main-title {
-            font-size: 4rem;
-            letter-spacing: 10px;
-        }
-
-        /* Đảm bảo trên điện thoại font không bị quá to */
-        @media screen and (max-width: 768px) {
-            .main-title {
-                font-size: 2.5rem;
-                letter-spacing: 5px;
-            }
-            .logo-text {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
 
     <script type="module" src="app.js"></script>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
+    <!-- NAVBAR -->
+    <nav class="navbar">
 
-    <div class="nav-inner">
+        <div class="nav-inner">
 
-        <div class="logo">
+            <div class="logo">
 
-            <img src="images/logo_temp.png">
+                <img src="images/logo_temp.png" alt="logo">
 
-            <div class="logo-text">
-                Phá Kén
+                <div class="logo-text">
+                    Phá Kén
+                </div>
+
             </div>
 
-        </div>
-        
-        <div class="menu-toggle">
-            ☰
-        </div>
+            <!-- MENU MOBILE -->
+            <div class="menu-toggle">
+                ☰
+            </div>
 
-        <div class="menu">
+            <!-- MENU -->
+            <div class="menu">
 
-            <a class="active">
-                Giới thiệu
-            </a>
+                <a class="active">Giới thiệu</a>
 
-            <a>
-                Hướng dẫn
-            </a>
+                <a>Hướng dẫn</a>
 
-            <a>
-                Về dự án
-            </a>
+                <a>Về dự án</a>
 
-            <a>
-                Liên hệ
-            </a>
+                <a>Liên hệ</a>
 
-        </div>
-
-    </div>
-
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-
-    <!-- BIG BG BUTTERFLY -->
-    <div class="bg-butterfly"></div>
-
-    <div class="hero-content">
-
-        <div class="brand-image-wrapper">
-            <img class="brand-image" src="images/main01.png" alt="Phá Kén">
-            <!--<img class="butterfly" src="./images/bufterfly.png" alt="Phá Kén">-->
-        </div>
-
-        <div class="line"></div>
-
-        <!-- TITLE -->
-        <div class="main-title">
-            REAL FINE
-        </div>
-
-        <!-- SUBTITLE -->
-        <div class="subtitle">
-            Dạo này bạn thế nào?
-        </div>
-
-        <div class="line"></div>
-
-        <!-- DESCRIPTION -->
-        <div class="desc">
-
-            Chào cậu, hãy để tâm hồn mình được "thở"
-            <br>
-            trong chiếc kén nhỏ này một chút.
-
-        </div>
-
-        <!-- INPUT -->
-        <div class="input-label">
-            Tên của cậu là...
-        </div>
-
-        <div class="input-box">
-
-            <input
-            type="text"
-            placeholder="Nhập tên của bạn...">
-
-            <div class="feather">
-                ✦
             </div>
 
         </div>
 
-        <!-- BUTTON -->
-        <button class="start-btn">
-            ✦ BẮT ĐẦU HÀNH TRÌNH ✦
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="brand-image-wrapper">
+
+                <img class="brand-image"
+                    src="images/main01.png"
+                    alt="Phá Kén">
+
+            </div>
+
+            <div class="line"></div>
+
+            <div class="main-title">
+                REAL FINE
+            </div>
+
+            <div class="subtitle">
+                Dạo này bạn thế nào?
+            </div>
+
+            <div class="line"></div>
+
+            <div class="desc">
+
+                Chào cậu, hãy để tâm hồn mình được "thở"
+
+                <br>
+
+                trong chiếc kén nhỏ này một chút.
+
+            </div>
+
+            <div class="input-label">
+                Tên của cậu là...
+            </div>
+
+            <div class="input-box">
+
+                <input type="text" placeholder="Nhập tên của bạn...">
+
+                <div class="feather">
+                    ✦
+                </div>
+
+            </div>
+
+            <button class="start-btn">
+                ✦ BẮT ĐẦU HÀNH TRÌNH ✦
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- GALLERY -->
+    <section class="upload-gallery">
+
+        <h2 class="gallery-title">
+            ✦ KHOẢNH KHẮC CỦA MỌI NGƯỜI ✦
+        </h2>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-card">
+
+                <img src="images/demo.jpg" alt="demo">
+
+                <div class="card-content">
+
+                    <h3>Đêm nay mình ổn hơn rồi</h3>
+
+                    <p>
+                        Một chút tâm sự nhỏ trong chiếc kén này.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FORM -->
+    <div class="upload-form">
+
+        <h3>Thả khoảnh khắc vào Galaxy</h3>
+
+        <input type="text" id="imgTitle"
+            placeholder="Tiêu đề khoảnh khắc...">
+
+        <input type="file" id="imgFile"
+            accept="video/*,image/*">
+
+        <button id="btnUpload" class="start-btn">
+            ✦ THẢ VÀO VŨ TRỤ GALAXY ✦
         </button>
 
     </div>
 
-</section>
-<section class="upload-gallery">
+    <!-- REALTIME -->
+    <section class="moments-section">
 
-    <h2 class="gallery-title">
-        ✦ KHOẢNH KHẮC CỦA MỌI NGƯỜI ✦
-    </h2>
+        <h2 class="moments-title">
+            ✦ GALAXY CỦA CHÚNG TA ✦
+        </h2>
 
-    <div class="gallery-grid">
+        <div id="galleryGrid" class="gallery-grid"></div>
 
-        <!-- CARD -->
-
-        <div class="gallery-card">
-
-            <img src="images/demo.jpg">
-
-            <div class="card-content">
-
-                <h3>Đêm nay mình ổn hơn rồi</h3>
-
-                <p>
-                    Một chút tâm sự nhỏ trong chiếc kén này.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- VIDEO -->
-        <div class="gallery-card">
-
-            <video controls>
-                <source src="videos/demo.mp4">
-            </video>
-
-            <div class="card-content">
-
-                <h3>Healing journey ✦</h3>
-
-                <p>
-                    Một đoạn video mình muốn lưu lại.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-</section>
-<div class="upload-form">
-    <h3>Thả khoảnh khắc vào Galaxy</h3>
-    
-    <input type="text" id="imgTitle" placeholder="Tiêu đề khoảnh khắc...">
-    
-    <input type="file" id="imgFile" accept="video/*,image/*">
-    
-    <button id="btnUpload" class="start-btn">✦ THẢ VÀO VŨ TRỤ GALAXY ✦</button>
-</div>
-<section class="moments-section">
-    <h2 class="moments-title">✦ GALAXY CỦA CHÚNG TA ✦</h2>
-    
-    <div id="galleryGrid" class="gallery-grid">
-        </div>
-</section>
+    </section>
 
 </body>
+
 </html>
