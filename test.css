@@ -54,14 +54,27 @@ body {
     padding: 0 5px;
 }
 
-.logo { display: flex; align-items: center; gap: 0; }
-.logo img { margin-right: -15px; margin-left: -70%; width: 100px; }
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
 
-.logo-text {
+.logo img{
+    width: 70px;
+    height: auto;
+    display: block;
+    margin: 0;
+    object-fit: contain;
+}
+
+.logo-text{
     font-family: var(--font-art);
     color: var(--gold);
     font-size: 28px;
     font-style: italic;
+    white-space: nowrap;
 }
 
 .menu { display: flex; gap: 55px; }
@@ -133,15 +146,39 @@ body {
 
 /* Hình ảnh thương hiệu & Con bướm */
 .brand-image-wrapper {
-    width: 100%; max-width: 80%; height: 100%;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto 20px auto;
-    display: flex; justify-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
 }
 
 .brand-image {
-    width: 100%; height: 100%; object-fit: cover; object-position: center;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+
+    -webkit-mask-image:
+    linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+    );
+
+    mask-image:
+    linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+    );
 }
 
 .butterfly {
@@ -304,30 +341,240 @@ body {
 /* =========================================================
    8. TỐI ƯU GIAO DIỆN DI ĐỘNG (MOBILE RESPONSIVE)
    ========================================================= */
-@media screen and (max-width: 768px) {
-    /* Navbar Mobile */
-    .navbar { padding: 10px 15px; }
-    .nav-inner { flex-direction: column; gap: 10px; }
-    .menu { display: flex; overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 5px; gap: 15px; }
-    .menu a { font-size: 0.85rem; white-space: nowrap; }
+/* =========================================================
+   RESPONSIVE FULL
+   ========================================================= */
 
-    /* Hero & Brand Mobile */
-    .hero { padding: 40px 15px; min-height: auto; }
-    .brand-image-wrapper { width: 80%; margin: 0 auto 20px; height: 200px; }
-    .butterfly { width: 40px; }
-    .bg-butterfly { width: 600px; height: 600px; opacity: 0.3; transform: scale(0.8); }
+/* Tablet */
+@media screen and (max-width: 1024px){
 
-    /* Text & Form Mobile */
-    .main-title { font-size: 2.5rem !important; letter-spacing: 5px; }
-    .subtitle { font-size: 1.2rem !important; margin-bottom: 15px; }
-    .desc { font-size: 0.9rem; line-height: 1.5; padding: 0 10px; }
-    .input-label { font-size: 18px; }
-    .input-box input { font-size: 16px !important; height: 60px; }
-    .start-btn { width: 100%; height: 55px; font-size: 0.9rem; border-radius: 30px; }
+    .nav-inner{
+        padding: 0 20px;
+    }
 
-    /* Upload Form Mobile */
-    .upload-form { margin: 20px 15px; padding: 20px; }
-    .upload-form h3 { font-size: 20px; }
+    .menu{
+        gap: 25px;
+    }
+
+    .menu a{
+        font-size: 16px;
+    }
+
+    .brand-image-wrapper{
+        max-width: 95%;
+    }
+
+    .main-title{
+        font-size: 54px;
+    }
+
+    .desc{
+        font-size: 18px;
+        padding: 0 20px;
+    }
+
+    .butterfly{
+        width: 420px;
+        top: 120px;
+    }
+
+}
+
+
+/* Mobile */
+@media screen and (max-width: 768px){
+
+    body{
+        overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    .navbar{
+        padding: 10px 0;
+    }
+
+    .nav-inner{
+        height: auto;
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 15px;
+    }
+
+    .logo{
+        gap: 10px;
+    }
+
+    .logo img{
+        width: 70px;
+        margin: 0;
+    }
+
+    .logo-text{
+        font-size: 22px;
+    }
+
+    .menu{
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 20px;
+        padding-bottom: 5px;
+    }
+
+    .menu::-webkit-scrollbar{
+        display: none;
+    }
+
+    .menu a{
+        white-space: nowrap;
+        font-size: 15px;
+    }
+
+    /* HERO */
+    .hero{
+        min-height: auto;
+        padding-top: 180px;
+        padding-bottom: 80px;
+    }
+
+    .hero-content{
+        padding: 0 15px;
+    }
+
+    .brand-image-wrapper{
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .brand-image{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .butterfly{
+        width: 260px;
+        top: 160px;
+    }
+
+    .bg-butterfly{
+        width: 350px;
+        height: 350px;
+    }
+
+    /* TEXT */
+    .main-title{
+        font-size: 40px !important;
+        letter-spacing: 3px;
+        line-height: 1.2;
+    }
+
+    .subtitle{
+        font-size: 14px !important;
+        letter-spacing: 2px;
+        padding: 0 10px;
+    }
+
+    .desc{
+        font-size: 15px;
+        line-height: 1.8;
+        padding: 0 10px;
+    }
+
+    .input-label{
+        font-size: 18px;
+    }
+
+    .input-box{
+        max-width: 100%;
+    }
+
+    .input-box input{
+        height: 58px;
+        font-size: 15px !important;
+    }
+
+    .start-btn{
+        width: 100%;
+        height: 58px;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    /* GALLERY */
+    .upload-gallery{
+        padding: 80px 15px;
+    }
+
+    .gallery-title{
+        font-size: 28px;
+        line-height: 1.4;
+    }
+
+    .gallery-grid{
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 20px;
+    }
+
+    .gallery-card img,
+    .gallery-card video{
+        height: 220px;
+    }
+
+    .moments-title{
+        font-size: 28px;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .upload-form{
+        margin: 30px 15px;
+        padding: 20px;
+    }
+
+}
+@media screen and (max-width: 768px){
+
+    .logo{
+        justify-content: center;
+    }
+
+    .logo img{
+        width: 55px;
+    }
+
+    .logo-text{
+        font-size: 22px;
+    }
+
+}
+
+
+/* Small phones */
+@media screen and (max-width: 480px){
+
+    .main-title{
+        font-size: 32px !important;
+    }
+
+    .subtitle{
+        font-size: 13px !important;
+    }
+
+    .desc{
+        font-size: 14px;
+    }
+
+    .gallery-title,
+    .moments-title{
+        font-size: 24px;
+    }
+
+    .butterfly{
+        width: 200px;
+    }
+
 }
 
 /* =========================================================
@@ -343,4 +590,76 @@ body {
 @keyframes glowButterfly {
     0%, 100% { filter: drop-shadow(0 0 20px rgba(255,220,150,.35)) drop-shadow(0 0 50px rgba(120,180,255,.2)); opacity: .92; }
     50% { filter: drop-shadow(0 0 40px rgba(255,220,150,.8)) drop-shadow(0 0 90px rgba(120,180,255,.45)); opacity: 1; }
+}
+/* =========================================================
+   HAMBURGER MENU MOBILE
+   ========================================================= */
+
+.menu-toggle{
+    display: none;
+    font-size: 32px;
+    color: var(--gold);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px){
+
+    .nav-inner{
+        position: relative;
+    }
+
+    .menu-toggle{
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        z-index: 999;
+    }
+
+    .menu{
+        position: absolute;
+        top: 80px;
+        right: 15px;
+
+        width: 220px;
+
+        background: rgba(5,10,18,.96);
+
+        border: 1px solid rgba(212,176,106,.25);
+
+        border-radius: 18px;
+
+        padding: 20px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 18px;
+
+        backdrop-filter: blur(16px);
+
+        box-shadow:
+        0 10px 40px rgba(0,0,0,.5);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+
+        transition: .35s ease;
+    }
+
+    .menu.active{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .menu a{
+        font-size: 16px;
+        width: 100%;
+        text-align: left;
+    }
+
 }
