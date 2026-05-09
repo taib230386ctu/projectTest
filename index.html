@@ -1,14 +1,61 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>REAL FINE - Phá Kén</title>
 
-<title>REAL FINE - Phá Kén</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="test.css">
+    
+    <style>
+        /* Khai báo Font Maglony của cậu */
+        @font-face {
+            font-family: 'Maglony'; 
+            src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
+            font-display: swap; /* Giúp load chữ nhanh hơn */
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="test.css">
-<script type="module" src="app.js"></script>
+        /* ÁP DỤNG CHO TOÀN BỘ TRANG WEB */
+        :root {
+            --main-font: 'Maglony', serif;
+            --sub-font: 'Montserrat', sans-serif;
+            --gold: #d4af37;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            /* Font Montserrat làm mặc định cho các đoạn văn dài để đỡ mỏi mắt */
+            font-family: var(--sub-font);
+        }
+
+        /* Những chỗ dùng Font Maglony để tạo điểm nhấn */
+        h1, h2, h3, .main-title, .logo-text, .start-btn, .gallery-title {
+            font-family: var(--main-font) !important;
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            letter-spacing: 10px;
+        }
+
+        /* Đảm bảo trên điện thoại font không bị quá to */
+        @media screen and (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 5px;
+            }
+            .logo-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+
+    <script type="module" src="app.js"></script>
 </head>
 
 <body>
@@ -61,8 +108,8 @@
     <div class="hero-content">
 
         <div class="brand-image-wrapper">
-            <img class="brand-image" src="images/main01.png" alt="Phá Kén">
-            <!--<img class="butterfly" src="images/bufterfly.png" alt="Phá Kén">-->
+            <img class="brand-image" src="./images/main01.png" alt="Phá Kén">
+            <!--<img class="butterfly" src="./images/bufterfly.png" alt="Phá Kén">-->
         </div>
 
         <div class="line"></div>
@@ -74,7 +121,7 @@
 
         <!-- SUBTITLE -->
         <div class="subtitle">
-            ỔN THẬT KHÔNG?
+            Dạo này bạn thế nào?
         </div>
 
         <div class="line"></div>
@@ -125,7 +172,7 @@
 
         <div class="gallery-card">
 
-            <img src="images/demo.jpg">
+            <img src="./images/demo.jpg">
 
             <div class="card-content">
 
@@ -140,7 +187,7 @@
         </div>
 
 
-        -- VIDEO -- 
+        <!-- VIDEO -->
         <div class="gallery-card">
 
             <video controls>
@@ -163,21 +210,19 @@
 
 
 </section>
-<div class="upload-form" style="max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid var(--gold); border-radius: 15px; background: #0a0a0a;">
-    <h3 style="color: var(--gold); margin-bottom: 15px;">Đăng khoảnh khắc (Ảnh/Video)</h3>
+<div class="upload-form">
+    <h3>Thả khoảnh khắc vào Galaxy</h3>
     
-    <input type="text" id="imgTitle" placeholder="Tiêu đề khoảnh khắc..." 
-           style="width: 100%; margin-bottom: 10px; padding: 12px; background: #000; border: 1px solid #333; border-radius: 8px; color: #fff;">
+    <input type="text" id="imgTitle" placeholder="Tiêu đề khoảnh khắc...">
     
-    <input type="file" id="imgFile" accept="video/*,image/*" 
-           style="width: 100%; margin-bottom: 15px; color: #ccc;">
+    <input type="file" id="imgFile" accept="video/*,image/*">
     
-    <button id="btnUpload" class="start-btn" style="height: 50px; width: 100%;">✦ TẢI LÊN HÀNH TRÌNH ✦</button>
+    <button id="btnUpload" class="start-btn">✦ THẢ VÀO VŨ TRỤ GALAXY ✦</button>
 </div>
 <section class="moments-section">
-    <h2 style="text-align: center; color: var(--gold); margin-top: 50px;">KHOẢNH KHẮC ĐÃ LƯU</h2>
+    <h2 class="moments-title">✦ GALAXY CỦA CHÚNG TA ✦</h2>
     
-    <div id="galleryGrid" class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px;">
+    <div id="galleryGrid" class="gallery-grid">
         </div>
 </section>
 
