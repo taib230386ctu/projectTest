@@ -246,8 +246,8 @@ body{
 /* Container bọc ngoài butterfly */
 .brand-image-wrapper {
     width: 100%;
-    max-width: 100%; /* Độ rộng tối đa của khu vực hiển thị ảnh, bạn có thể tùy chỉnh */
-    height: 550px; /* Chiều cao cố định giúp CẮT BỚT trên và dưới */
+    max-width: 80%; /* Độ rộng tối đa của khu vực hiển thị ảnh, bạn có thể tùy chỉnh */
+    height: 100%; /* Chiều cao cố định giúp CẮT BỚT trên và dưới */
     margin: 0 auto 20px auto; /* Căn giữa và tạo khoảng cách bên dưới */
     display: flex;
     justify-content: center;
