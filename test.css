@@ -1,963 +1,346 @@
-:root{
-    --gold:#d4b06a;
-    --gold-light:#f6d28d;
+/* =========================================================
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+    --font-art: 'Maglony', serif;
+    --font-text: 'Montserrat', sans-serif;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+@font-face {
+    font-family: 'TenFontCuaTai'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
 }
 
-body{
-    background:#050b14;
-    color:white;
-    font-family:'Montserrat',sans-serif;
-    overflow-x:hidden;
+@font-face {
+    font-family: 'Maglony'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
 }
 
-/* ===== NAVBAR ===== */
-
-.navbar{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    z-index:100;
-
-    backdrop-filter:blur(14px);
-
-    background:
-    rgba(5,10,18,.45);
-
-
-    border-bottom:
-    1px solid rgba(255,255,255,.05);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.nav-inner{
-
-    max-width:1500px;
-
-    height:64px;
-
-    margin:auto;
-
-    display:flex;
-
-    justify-content:space-between;
-    align-items:center;
-
-    padding:0 5px;
+body {
+    background: #050b14;
+    color: white;
+    font-family: var(--font-text);
+    overflow-x: hidden;
 }
 
-.logo{
-
-    display:flex;
-    align-items:center;
-    gap:0;
+/* =========================================================
+   2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU)
+   ========================================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(5, 10, 18, .45);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
 }
 
-.logo img{
-    margin-right:-15px;
-    margin-left:-70%;
-    width:100px;
+.nav-inner {
+    max-width: 1500px;
+    height: 64px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
 }
 
-.logo-text{
+.logo { display: flex; align-items: center; gap: 0; }
+.logo img { margin-right: -15px; margin-left: -70%; width: 100px; }
 
-    font-family: var(--font-main); /* Áp dụng Maglony */
-
-    color:var(--gold);
-
-    font-size:28px;
-
-    font-style:italic;
+.logo-text {
+    font-family: var(--font-art);
+    color: var(--gold);
+    font-size: 28px;
+    font-style: italic;
 }
 
-/* ===== MENU ===== */
+.menu { display: flex; gap: 55px; }
 
-.menu{
-
-    display:flex;
-    gap:55px;
-    
-}
-
-.menu a{
-
-   /* Áp dụng font Maglony của cậu */
+.menu a {
     font-family: 'Maglony', serif; 
-    
     color: white;
     text-decoration: none;
     position: relative;
-    
-    /* Font nghệ thuật thường hiển thị hơi nhỏ, 
-       nên mình tăng size lên 18px-20px cho vừa mắt */
     font-size: 20px; 
-    
-    /* Tăng khoảng cách chữ để menu nhìn thoáng và sang hơn */
     letter-spacing: 2px;
-    
     transition: .4s;
     cursor: pointer;
-    
 }
 
-.menu a:hover, 
-.menu a.active {
+.menu a:hover, .menu a.active {
     color: var(--gold-light);
-    /* Thêm một chút đổ bóng nhẹ cho chữ rực rỡ hơn */
     text-shadow: 0 0 10px rgba(246, 210, 141, 0.5);
 }
 
 .menu a.active::after {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -10px; /* Chỉnh lại khoảng cách dòng kẻ cho khớp với font mới */
-    width: 100%;
-    height: 2px;
+    left: 0; bottom: -10px;
+    width: 100%; height: 2px;
     background: linear-gradient(to right, transparent, var(--gold), transparent);
     box-shadow: 0 0 15px var(--gold);
 }
 
-/* ===== HERO ===== */
-
-.hero{
-
+/* =========================================================
+   3. KHU VỰC CHÍNH (HERO SECTION)
+   ========================================================= */
+.hero {
     font-family: 'Maglony', serif;
-
-    position:relative;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    overflow:hidden;
-}
-
-/* ===== BACKGROUND ===== */
-
-.hero::before{
-
-    content:'';
-
-    position:absolute;
-
-    inset:0;
-
-    background: #000;
-
-    opacity:.52;
-
-    filter:
-    brightness(.65)
-    blur(1px);
-
-    transform:scale(1.05);
-
-    z-index:1;
-}
-
-/* ===== DARK OVERLAY ===== */
-
-.hero::after{
-
-    content:'';
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-    to bottom,
-
-    rgba(5,10,18,.12) 0%,
-
-    rgba(5,10,18,.42) 35%,
-
-    rgba(5,10,18,.82) 75%,
-
-    rgba(5,10,18,.98) 100%
-    );
-
-    z-index:2;
-}
-
-/* ===== BIG BUTTERFLY ===== */
-
-.bg-butterfly{
-
-    position:absolute;
-
-    width:900px;
-    height:900px;
-
-    left:50%;
-    top:50%;
-
-    transform:
-    translate(-50%,-35%);
-    opacity:.05;
-
-    filter:
-    blur(2px);
-
-    z-index:2;
-}
-
-
-/* ===== CONTENT ===== */
-
-.hero-content{
-
-    position:relative;
-
-    z-index:5;
-
-    width:100%;
-    max-width:100%;
-    text-align:center;
-    padding:70px 20px 80px;
-}
-
-/* ===== GLOW ===== */
-
-
-/* Container bọc ngoài butterfly */
-.brand-image-wrapper {
-    width: 100%;
-    max-width: 80%; /* Độ rộng tối đa của khu vực hiển thị ảnh, bạn có thể tùy chỉnh */
-    height: 100%; /* Chiều cao cố định giúp CẮT BỚT trên và dưới */
-    margin: 0 auto 20px auto; /* Căn giữa và tạo khoảng cách bên dưới */
+    position: relative;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-/* Tùy chỉnh trực tiếp trên ảnh */
+/* Hiệu ứng lớp phủ nền */
+.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: #000; opacity: .52;
+    filter: brightness(.65) blur(1px);
+    transform: scale(1.05); z-index: 1;
+}
+
+.hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(5,10,18,.12) 0%, rgba(5,10,18,.42) 35%, rgba(5,10,18,.82) 75%, rgba(5,10,18,.98) 100%);
+    z-index: 2;
+}
+
+.bg-butterfly {
+    position: absolute; width: 900px; height: 900px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -35%);
+    opacity: .05; filter: blur(2px); z-index: 2;
+}
+
+.hero-content {
+    position: relative; z-index: 5;
+    width: 100%; text-align: center;
+    padding: 70px 20px 80px;
+}
+
+/* Hình ảnh thương hiệu & Con bướm */
+.brand-image-wrapper {
+    width: 100%; max-width: 80%; height: 100%;
+    margin: 0 auto 20px auto;
+    display: flex; justify-content: center;
+}
+
 .brand-image {
-    width: 100%;
-    height: 100%;
-    
-    /* Cắt bớt phần thừa trên/dưới và giữ focus vào giữa ảnh */
-    object-fit: cover; 
-    object-position: center; 
-    
-    /* Hiệu ứng làm mờ dần 2 bên trái/phải */
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 
-/* Responsive: Thu nhỏ chiều cao trên điện thoại để ảnh không bị quá to */
-@media (max-width: 768px) {
-    .brand-image-wrapper {
-        height: 200px;
-    }
+.butterfly {
+    position: absolute; top: 90px; left: 50%;
+    transform: translateX(-50%); width: 700px; z-index: 10;
+    animation: floatButterfly 5s ease-in-out infinite, glowButterfly 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(255,220,150,.45)) drop-shadow(0 0 60px rgba(120,180,255,.25));
+    opacity: .95;
 }
 
-/* CON BƯỚM - main */
-
-.butterfly{
-
-    position:absolute;
-
-    top:90px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:700px; /*kich thuong cua con buom*/
-
-    z-index:10;
-
-    animation:
-    floatButterfly 5s ease-in-out infinite,
-    glowButterfly 3s ease-in-out infinite;
-
-    filter:
-    drop-shadow(0 0 25px rgba(255,220,150,.45))
-    drop-shadow(0 0 60px rgba(120,180,255,.25));
-
-    opacity:.95;
+.butterfly::after {
+    content: ''; position: absolute; inset: -40px;
+    background: radial-gradient(circle, rgba(255,240,180,.25), rgba(120,180,255,.12), transparent 70%);
+    filter: blur(40px); z-index: -1;
 }
 
-/* BAY LƠ LỬNG*/
-
-@keyframes floatButterfly{
-
-    0%,100%{
-        transform:
-        translateX(-50%)
-        translateY(0px)
-        rotate(0deg)
-        scale(1);
-    }
-
-    25%{
-        transform:
-        translateX(-50%)
-        translateY(-10px)
-        rotate(-1deg)
-        scale(1.02);
-    }
-
-    50%{
-        transform:
-        translateX(-50%)
-        translateY(-22px)
-        rotate(1deg)
-        scale(1.04);
-    }
-
-    75%{
-        transform:
-        translateX(-50%)
-        translateY(-10px)
-        rotate(-1deg)
-        scale(1.02);
-    }
+/* =========================================================
+   4. CÁC THÀNH PHẦN NỘI DUNG (TITLE, DESC, INPUT)
+   ========================================================= */
+.main-title {
+    font-family: 'TenFontCuaTai', sans-serif;
+    font-size: 68px; letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(255,255,255,.08);
 }
 
-/* PHÁT SÁNG */
+.subtitle { margin-top: 12px; letter-spacing: 6px; color: #b5bbc4; font-size: 16px; }
 
-@keyframes glowButterfly{
-
-    0%,100%{
-
-        filter:
-        drop-shadow(0 0 20px rgba(255,220,150,.35))
-        drop-shadow(0 0 50px rgba(120,180,255,.2));
-
-        opacity:.92;
-    }
-
-    50%{
-
-        filter:
-        drop-shadow(0 0 40px rgba(255,220,150,.8))
-        drop-shadow(0 0 90px rgba(120,180,255,.45));
-
-        opacity:1;
-    }
-}
-.butterfly::after{
-    content:'';
-    position:absolute;
-    inset:-40px;
-
-    background:
-    radial-gradient(
-    circle,
-    rgba(255,240,180,.25),
-    rgba(120,180,255,.12),
-    transparent 70%
-    );
-
-    filter:blur(40px);
-
-    z-index:-1;
+.line {
+    width: 100%; max-width: 560px; height: 1px; margin: 26px auto;
+    background: linear-gradient(to right, transparent, rgba(212, 176, 106, .45), transparent);
+    position: relative;
 }
 
-
-
-/* ===== LINE ===== */
-
-.line{
-
-    width:100%;
-    max-width:560px;
-
-    height:1px;
-
-    margin:26px auto;
-
-    background:
-    linear-gradient(
-    to right,
-    transparent,
-    rgba(212,176,106,.45),
-    transparent
-    );
-
-    position:relative;
+.line::after {
+    content: '✦'; position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%,-50%); color: var(--gold);
+    background: #08101c; padding: 0 12px; font-size: 16px;
 }
 
-.line::after{
+.desc { margin-top: 36px; color: #d0d0d0; line-height: 1.9; font-size: 20px; font-weight: 300; }
 
-    content:'✦';
+.input-label { margin-top: 40px; margin-bottom: 14px; color: #bdbdbd; font-size: 22px; }
 
-    position:absolute;
+.input-box { width: 100%; max-width: 520px; margin: auto; position: relative; }
 
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    color:var(--gold);
-
-    background:#08101c;
-
-    padding:0 12px;
-
-    font-size:16px;
+.input-box input {
+    width: 100%; height: 70px; border-radius: 14px;
+    border: 1px solid rgba(212, 176, 106, .45);
+    background: rgba(0,0,0,.28); outline: none; color: white;
+    font-size: 18px; padding: 0 55px 0 22px;
+    backdrop-filter: blur(10px); transition: .4s;
 }
 
-/* ===== REAL FINE ===== */
+.input-box input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 176, 106, .2); }
+.input-box input::placeholder { color: #777; }
+.feather { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 22px; }
 
-.main-title{
-
-    font-family:'Cinzel',serif;
-
-    font-size:68px;
-
-    letter-spacing:4px;
-
-    text-shadow:
-    0 0 20px rgba(255,255,255,.08);
+.start-btn {
+    margin-top: 24px; width: 100%; max-width: 520px; height: 72px;
+    border-radius: 14px; border: 1px solid rgba(212, 176, 106, .45);
+    background: linear-gradient(to bottom, rgba(26,20,10,.7), rgba(0,0,0,.85));
+    color: #e6c27a; letter-spacing: 5px; font-size: 18px; font-weight: 600;
+    cursor: pointer; transition: .4s;
+    box-shadow: inset 0 0 15px rgba(255,255,255,.03), 0 0 20px rgba(212, 176, 106, .1);
 }
 
-/* ===== SUB ===== */
+.start-btn:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(212, 176, 106, .28); }
 
-.subtitle{
-
-    margin-top:12px;
-
-    letter-spacing:6px;
-
-    color:#b5bbc4;
-
-    font-size:16px;
+/* =========================================================
+   5. KHU VỰC GALAXY & KHOẢNH KHẮC (GALLERY)
+   ========================================================= */
+.upload-gallery {
+    padding: 120px 8%; font-family: 'Maglony', serif;
+    background: linear-gradient(to bottom, #040914, #071425);
 }
 
-/* ===== DESC ===== */
-
-.desc{
-
-    margin-top:36px;
-
-    color:#d0d0d0;
-
-    line-height:1.9;
-
-    font-size:20px;
-
-    font-weight:300;
+.gallery-title {
+    text-align: center; font-size: 42px; margin-bottom: 70px;
+    color: #f6d28d; font-family: 'Maglony', serif; letter-spacing: 4px;
 }
 
-/* ===== INPUT ===== */
+.moments-section { font-family: 'Maglony', serif; }
 
-.input-label{
-
-    margin-top:40px;
-
-    margin-bottom:14px;
-
-    color:#bdbdbd;
-
-    font-size:22px;
+.moments-title {
+    font-family: var(--font-art); text-align: center; color: var(--gold);
+    font-size: 36px; margin-top: 80px; margin-bottom: 40px;
+    letter-spacing: 3px; text-shadow: 0 0 15px rgba(212, 176, 106, 0.3);
 }
 
-.input-box{
-
-    width:100%;
-    max-width:520px;
-
-    margin:auto;
-
-    position:relative;
+.gallery-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px; padding: 20px 5%;
 }
 
-.input-box input{
-
-    width:100%;
-
-    height:70px;
-
-    border-radius:14px;
-
-    border:
-    1px solid rgba(212,176,106,.45);
-
-    background:
-    rgba(0,0,0,.28);
-
-    outline:none;
-
-    color:white;
-
-    font-size:18px;
-
-    padding:0 55px 0 22px;
-
-    backdrop-filter:blur(10px);
-
-    transition:.4s;
+.gallery-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,220,150,.15);
+    border-radius: 24px; overflow: hidden; backdrop-filter: blur(10px);
+    transition: .4s; box-shadow: 0 0 25px rgba(0,0,0,.35);
 }
 
-.input-box input:focus{
+.gallery-card:hover { transform: translateY(-8px); box-shadow: 0 0 35px rgba(255,220,150,.15); }
 
-    border-color:var(--gold);
+.gallery-card img, .gallery-card video { width: 100%; height: 260px; object-fit: cover; display: block; }
 
-    box-shadow:
-    0 0 20px rgba(212,176,106,.2);
+.card-content { padding: 24px; }
+.card-content h3, .gallery-card h3 {
+    font-family: 'Maglony', serif !important;
+    color: #ffe7a8; margin-bottom: 12px; font-size: 24px; letter-spacing: 1px;
 }
 
-.input-box input::placeholder{
-
-    color:#777;
-}
-
-.feather{
-
-    position:absolute;
-
-    right:20px;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    color:var(--gold);
-
-    font-size:22px;
-}
-
-/* ===== BUTTON ===== */
-
-.start-btn{
-
-    margin-top:24px;
-
-    width:100%;
-    max-width:520px;
-
-    height:72px;
-
-    border-radius:14px;
-
-    border:
-    1px solid rgba(212,176,106,.45);
-
-    background:
-    linear-gradient(
-    to bottom,
-    rgba(26,20,10,.7),
-    rgba(0,0,0,.85));
-
-    color:#e6c27a;
-
-    letter-spacing:5px;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.4s;
-
-    box-shadow:
-    inset 0 0 15px rgba(255,255,255,.03),
-    0 0 20px rgba(212,176,106,.1);
-}
-
-.start-btn:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-    0 0 35px rgba(212,176,106,.28);
-}
-
-/* ===== MOBILE ===== */
-
-@media(max-width:768px){
-
-    .menu{
-        gap:20px;
-    }
-
-    .brand{
-        font-size:52px;
-    }
-
-    .main-title{
-        font-size:42px;
-    }
-
-    .subtitle{
-        font-size:14px;
-        letter-spacing:4px;
-    }
-
-    .desc{
-        font-size:16px;
-    }
-
-    .butterfly{
-        width:110px;
-    }
-
-    .bg-butterfly{
-        width:600px;
-        height:600px;
-    }
-
-    .input-label{
-        font-size:18px;
-    }
-
-    .input-box input{
-        height:60px;
-        font-size:15px;
-    }
-
-    .start-btn{
-        height:60px;
-        font-size:15px;
-        letter-spacing:3px;
-    }
-}
-
-/* ==== Upload ===*/
-.upload-gallery{
-
-    padding:120px 8%;
-    font-family: 'Maglony', serif;
-    background:
-    linear-gradient(
-    to bottom,
-    #040914,
-    #071425
-    );
-}
-
-.gallery-title{
-
-    text-align:center;
-
-    font-size:42px;
-
-    margin-bottom:70px;
-
-    color:#f6d28d;
-    font-family: 'Maglony', serif;
-    letter-spacing:4px;
-}
-
-.gallery-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
-
-    gap:35px;
-}
-
-.gallery-card{
-
-    background:
-    rgba(255,255,255,.03);
-
-    border:
-    1px solid rgba(255,220,150,.15);
-
-    border-radius:24px;
-
-    overflow:hidden;
-
-    backdrop-filter:blur(10px);
-
-    transition:.4s;
-
-    box-shadow:
-    0 0 25px rgba(0,0,0,.35);
-}
-
-.gallery-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-    0 0 35px rgba(255,220,150,.15);
-}
-
-.gallery-card img,
-.gallery-card video{
-
-    width:100%;
-
-    height:260px;
-
-    object-fit:cover;
-
-    display:block;
-}
-
-.card-content{
-
-    padding:24px;
-}
-
-.card-content h3{
-
-    color:#ffe7a8;
-
-    margin-bottom:12px;
-
-    font-size:24px;
-}
-
-.card-content p{
-
-    color:#cfcfcf;
-
-    line-height:1.7;
-}
-/* ===== KHUNG UPLOAD KHOẢNH KHẮC ===== */
+.card-content p, .gallery-card p { font-family: 'Montserrat', sans-serif; font-size: 14px; color: #cfcfcf; line-height: 1.7; }
+
+/* =========================================================
+   6. KHUNG UPLOAD VŨ TRỤ GALAXY
+   ========================================================= */
 .upload-form {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    border: 1px solid rgba(212, 176, 106, 0.3); /* Màu gold mờ */
-    border-radius: 20px;
-    background: rgba(5, 11, 20, 0.8);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    text-align: center;
+    max-width: 500px; margin: 40px auto; padding: 30px;
+    border: 1px solid rgba(212, 176, 106, 0.3); border-radius: 20px;
+    background: rgba(5, 11, 20, 0.8); backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); text-align: center;
 }
 
 .upload-form h3 {
-    font-family: 'Maglony', serif; /* Áp dụng font của cậu */
-    color: var(--gold);
-    font-size: 24px;
-    margin-bottom: 25px;
-    letter-spacing: 1px;
+    font-family: 'Maglony', serif !important;
+    color: var(--gold); font-size: 24px; margin-bottom: 25px; letter-spacing: 1px;
 }
 
 .upload-form input[type="text"] {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(212, 176, 106, 0.2);
-    border-radius: 10px;
-    color: #fff;
-    font-family: 'Montserrat', sans-serif; /* Ô nhập liệu dùng font cơ bản cho dễ đọc */
-    outline: none;
-    transition: 0.3s;
+    width: 100%; margin-bottom: 15px; padding: 15px;
+    background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(212, 176, 106, 0.2);
+    border-radius: 10px; color: #fff; font-family: 'Montserrat', sans-serif;
+    outline: none; transition: 0.3s;
 }
 
-.upload-form input[type="text"]:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 10px rgba(212, 176, 106, 0.2);
-}
-
-.upload-form input[type="file"] {
-    width: 100%;
-    margin-bottom: 20px;
-    color: #888;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* Tùy chỉnh nút Upload */
-#btnUpload {
-    font-family: 'Maglony', serif; /* Áp dụng font vào nút */
-    height: 60px;
-    width: 100%;
-    background: linear-gradient(135deg, rgba(26, 20, 10, 0.9), rgba(0, 0, 0, 0.9));
-    color: var(--gold-light);
-    border: 1px solid var(--gold);
-    border-radius: 12px;
-    font-size: 18px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: 0.4s;
-}
-
-#btnUpload:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(212, 176, 106, 0.3);
-    background: var(--gold);
-    color: #000;
-}
-.moments-section{
-    font-family: 'Maglony', serif;
-}
-/* Tiêu đề mục Khoảnh khắc */
-.moments-title {
-    font-family: var(--font-art); /* Áp dụng Maglony */
-    text-align: center;
-    color: var(--gold);
-    font-size: 36px;
-    margin-top: 80px;
-    margin-bottom: 40px;
-    letter-spacing: 3px;
-    text-shadow: 0 0 15px rgba(212, 176, 106, 0.3);
-}
-
-/* Cấu trúc Grid hiển thị */
-.gallery-grid {
-    display: grid;
-    /* Tự động điều chỉnh số cột tùy theo màn hình */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 25px;
-    padding: 20px 5%;
-}
-
-/* Tinh chỉnh font cho các Card con khi được load từ JS */
-.gallery-card h3 {
-    font-family: var(--font-art) !important;
-    color: var(--gold-light);
-    letter-spacing: 1px;
-}
-
-.gallery-card p {
-    font-family: var(--font-text); /* Dùng Montserrat cho nội dung dài */
-    font-size: 14px;
-    color: #ccc;
-}
-
-/* Tối ưu cho Mobile */
-@media screen and (max-width: 768px) {
-    .upload-form {
-        margin: 20px 15px;
-        padding: 20px;
-    }
-    .upload-form h3 {
-        font-size: 20px;
-    }
-}
-
-/* --- TRANG TRÍ RIÊNG CHO ĐIỆN THOẠI (Mobile) --- */
-@media screen and (max-width: 768px) {
-    
-    /* 1. NAVBAR: Chuyển menu thành dạng cuộn hoặc ẩn bớt */
-    .navbar {
-        padding: 10px 15px;
-    }
-
-    .nav-inner {
-        flex-direction: column; /* Logo ở trên, menu ở dưới */
-        gap: 10px;
-    }
-
-    .menu {
-        display: flex;
-        overflow-x: auto; /* Cho phép vuốt ngang menu nếu quá dài */
-        width: 100%;
-        justify-content: flex-start;
-        padding-bottom: 5px;
-        gap: 15px;
-        -webkit-overflow-scrolling: touch; /* Vuốt mượt trên iPhone */
-    }
-
-    .menu a {
-        font-size: 0.85rem;
-        white-space: nowrap; /* Không cho chữ xuống dòng */
-    }
-
-    /* 2. HERO SECTION: Thu nhỏ khoảng cách */
-    .hero {
-        padding: 40px 15px;
-        min-height: auto; /* Không bắt buộc chiếm hết màn hình để dễ cuộn */
-    }
-
-    /* 3. BRAND IMAGE: Hình ảnh bướm và nền */
-    .brand-image-wrapper {
-        width: 80%; /* Thu nhỏ lại để không chiếm hết màn hình */
-        margin: 0 auto 20px;
-    }
-
-    .brand-image {
-        width: 100%;
-        height: auto;
-    }
-
-    .butterfly {
-        width: 40px; /* Con bướm nhỏ lại một chút */
-    }
-
-    /* 4. TITLE & SUBTITLE: Chữ to quá sẽ bị vỡ dòng */
-    .main-title {
-        font-size: 2.5rem !important; /* Dùng !important để ghi đè code cũ */
-        letter-spacing: 5px;
-    }
-
-    .subtitle {
-        font-size: 1.2rem !important;
-        margin-bottom: 15px;
-    }
-
-    .desc {
-        font-size: 0.9rem;
-        line-height: 1.5;
-        padding: 0 10px;
-    }
-
-    /* 5. INPUT & BUTTON: Quan trọng nhất để người dùng tương tác */
-    .input-box {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .input-box input {
-        font-size: 16px !important; /* Chống tự động zoom trên iOS */
-        padding: 12px 15px;
-    }
-
-    .start-btn {
-        width: 100%; /* Nút bấm tràn chiều ngang */
-        height: 55px;
-        font-size: 0.9rem;
-        letter-spacing: 2px;
-        border-radius: 30px; /* Làm nút bo tròn hơn cho cảm giác hiện đại */
-    }
-
-    /* 6. HIỆU ỨNG NỀN */
-    .bg-butterfly {
-        opacity: 0.3; /* Giảm độ đậm của nền để nhìn chữ rõ hơn trên màn hình nhỏ */
-        transform: scale(0.8);
-    }
-}
-@font-face {
-    font-family: 'TenFontCuaTai'; 
-    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
-}
-
-/* Áp dụng vào các mục trong web */
-.main-title {
-    font-family: 'TenFontCuaTai', sans-serif;
-}
-.upload-form h3 {
-    font-family: 'Maglony', serif !important; /* Đảm bảo dùng font nghệ thuật */
-    color: var(--gold);
-    margin-bottom: 20px;
-}
+.upload-form input[type="file"] { width: 100%; margin-bottom: 20px; color: #888; font-size: 14px; }
 
 #btnUpload {
     font-family: 'Maglony', serif !important;
+    height: 60px; width: 100%;
     background: linear-gradient(135deg, #050b14 0%, #1a140a 100%);
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    letter-spacing: 2px;
-    box-shadow: 0 0 15px rgba(212, 176, 106, 0.2);
-    cursor: pointer;
-    transition: 0.4s;
+    border: 1px solid var(--gold); color: var(--gold-light);
+    border-radius: 12px; font-size: 18px; letter-spacing: 2px;
+    cursor: pointer; transition: 0.4s; box-shadow: 0 0 15px rgba(212, 176, 106, 0.2);
 }
 
 #btnUpload:hover {
-    box-shadow: 0 0 30px rgba(212, 176, 106, 0.5);
-    transform: scale(1.02);
-    background: var(--gold);
-    color: #000;
+    box-shadow: 0 0 30px rgba(212, 176, 106, 0.5); transform: scale(1.02);
+    background: var(--gold); color: #000;
+}
+
+/* =========================================================
+   7. GIAO DIỆN THÔNG BÁO (SWEETALERT2)
+   ========================================================= */
+.swal2-title { font-family: 'Maglony', serif !important; color: #d4b06a !important; letter-spacing: 2px; }
+.swal2-html-container { font-family: 'Montserrat', sans-serif !important; line-height: 1.6; }
+.swal2-popup { border: 1px solid rgba(212, 176, 106, 0.3) !important; border-radius: 25px !important; }
+.swal2-html-container b { color: var(--gold-light); }
+.swal2-html-container div { border: 1px solid rgba(212, 176, 106, 0.2); }
+
+/* =========================================================
+   8. TỐI ƯU GIAO DIỆN DI ĐỘNG (MOBILE RESPONSIVE)
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    /* Navbar Mobile */
+    .navbar { padding: 10px 15px; }
+    .nav-inner { flex-direction: column; gap: 10px; }
+    .menu { display: flex; overflow-x: auto; width: 100%; justify-content: flex-start; padding-bottom: 5px; gap: 15px; }
+    .menu a { font-size: 0.85rem; white-space: nowrap; }
+
+    /* Hero & Brand Mobile */
+    .hero { padding: 40px 15px; min-height: auto; }
+    .brand-image-wrapper { width: 80%; margin: 0 auto 20px; height: 200px; }
+    .butterfly { width: 40px; }
+    .bg-butterfly { width: 600px; height: 600px; opacity: 0.3; transform: scale(0.8); }
+
+    /* Text & Form Mobile */
+    .main-title { font-size: 2.5rem !important; letter-spacing: 5px; }
+    .subtitle { font-size: 1.2rem !important; margin-bottom: 15px; }
+    .desc { font-size: 0.9rem; line-height: 1.5; padding: 0 10px; }
+    .input-label { font-size: 18px; }
+    .input-box input { font-size: 16px !important; height: 60px; }
+    .start-btn { width: 100%; height: 55px; font-size: 0.9rem; border-radius: 30px; }
+
+    /* Upload Form Mobile */
+    .upload-form { margin: 20px 15px; padding: 20px; }
+    .upload-form h3 { font-size: 20px; }
+}
+
+/* =========================================================
+   9. HIỆU ỨNG CHUYỂN ĐỘNG (ANIMATIONS)
+   ========================================================= */
+@keyframes floatButterfly {
+    0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg) scale(1); }
+    25% { transform: translateX(-50%) translateY(-10px) rotate(-1deg) scale(1.02); }
+    50% { transform: translateX(-50%) translateY(-22px) rotate(1deg) scale(1.04); }
+    75% { transform: translateX(-50%) translateY(-10px) rotate(-1deg) scale(1.02); }
+}
+
+@keyframes glowButterfly {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(255,220,150,.35)) drop-shadow(0 0 50px rgba(120,180,255,.2)); opacity: .92; }
+    50% { filter: drop-shadow(0 0 40px rgba(255,220,150,.8)) drop-shadow(0 0 90px rgba(120,180,255,.45)); opacity: 1; }
 }
