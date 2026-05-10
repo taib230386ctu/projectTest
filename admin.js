@@ -45,26 +45,16 @@ function loadAllPosts() {
     const adminGrid = document.getElementById('adminGrid');
     const approvedGrid = document.getElementById('approvedGrid');
 
-    // 1. Lắng nghe bài CHỜ DUYỆT (Sắp xếp mới nhất lên đầu)
-    const qPending = query(
-        collection(db, "moments"), 
-        where("status", "==", "pending"),
-        orderBy("createdAt", "desc")
-    );
-    
+    // Lắng nghe bài CHỜ DUYỆT (Sắp xếp mới nhất lên đầu)
+    const qPending = query(collection(db, "moments"), where("status", "==", "pending"), orderBy("createdAt", "desc"));
     onSnapshot(qPending, (snapshot) => {
         adminGrid.innerHTML = "";
         if (snapshot.empty) adminGrid.innerHTML = "<p style='color:#444; grid-column:1/-1; text-align:center;'>Vũ trụ đang yên bình...</p>";
         snapshot.forEach(docSnap => renderCard(docSnap, adminGrid, 'pending'));
     });
 
-    // 2. Lắng nghe bài ĐÃ DUYỆT (Giữ nguyên sắp xếp mới nhất)
-    const qApproved = query(
-        collection(db, "moments"), 
-        where("status", "==", "approved"), 
-        orderBy("createdAt", "desc")
-    );
-    
+    // Lắng nghe bài ĐÃ DUYỆT
+    const qApproved = query(collection(db, "moments"), where("status", "==", "approved"), orderBy("createdAt", "desc"));
     onSnapshot(qApproved, (snapshot) => {
         approvedGrid.innerHTML = "";
         if (snapshot.empty) approvedGrid.innerHTML = "<p style='color:#444; grid-column:1/-1; text-align:center;'>Chưa có bài nào tỏa sáng.</p>";
@@ -91,71 +81,51 @@ function renderCard(docSnap, container, type) {
                 <h3 style="font-family:'Maglony', serif; color: var(--gold); font-size: 1.1rem; margin-bottom: 15px;">${data.title}</h3>
                 <div style="display: flex; gap: 8px;">
                     ${actionBtn}
-                    <button onclick="deletePost('${id}')" style="flex:1; background:#dc3545; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer;">XÓA</button>
+                    <button onclick="deletePost('${id}', '${data.url}', '${data.type}', '${data.title}')" style="flex:1; background:#dc3545; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer;">XÓA</button>
                 </div>
             </div>
         </div>
     `;
 }
 
-// --- 5. HÀM XỬ LÝ (GIAO DIỆN SWEETALERT2) ---
-
+// --- 5. Hàm xử lý Duyệt/Gỡ/Xóa ---
 window.updateStatus = async (id, newStatus) => {
     const isApproving = newStatus === 'approved';
-    
     const result = await Swal.fire({
         title: isApproving ? 'Duyệt lên Galaxy?' : 'Gỡ khỏi Galaxy?',
-        text: isApproving 
-            ? 'Khoảnh khắc này sẽ được tỏa sáng công khai trên dải ngân hà.' 
-            : 'Khoảnh khắc sẽ quay về trạng thái chờ duyệt và biến mất khỏi trang chủ.',
+        text: isApproving ? 'Khoảnh khắc này sẽ được tỏa sáng công khai.' : 'Khoảnh khắc sẽ quay về trạng thái chờ duyệt.',
         icon: isApproving ? 'success' : 'warning',
         showCancelButton: true,
         confirmButtonColor: isApproving ? '#28a745' : '#6c757d',
         cancelButtonColor: '#333',
         confirmButtonText: isApproving ? 'DUYỆT NGAY! ✨' : 'GỠ XUỐNG ↩️',
-        cancelButtonText: 'HỦY',
-        background: '#0a0a0a',
-        color: '#fff',
-        backdrop: `rgba(5,11,20,0.8)`
+        background: '#0a0a0a', color: '#fff'
     });
 
     if (result.isConfirmed) {
-        try {
-            await updateDoc(doc(db, "moments", id), { status: newStatus });
-            
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                background: '#0a0a0a',
-                color: '#d4b06a'
-            });
-            
-            Toast.fire({
-                icon: 'success',
-                title: isApproving ? 'Đã duyệt thành công!' : 'Đã gỡ bài xuống.'
-            });
-        } catch (error) {
-            Swal.fire('Lỗi!', 'Không thể kết nối với vũ trụ.', 'error');
-        }
+        await updateDoc(doc(db, "moments", id), { status: newStatus });
     }
 };
 
-window.deletePost = async (id, publicId, title) => {
+window.deletePost = async (id, url, type, title) => {
+    const previewMedia = type === 'video'
+        ? `<video src="${url}" autoplay muted loop style="width:100%; border-radius:10px; margin-top:10px; max-height:200px; object-fit:contain; background:#000;"></video>`
+        : `<img src="${url}" style="width:100%; border-radius:10px; margin-top:10px; max-height:200px; object-fit:contain;">`;
+
     const result = await Swal.fire({
-        title: 'XÓA VĨNH VIỄN?',
-        html: `Khoảnh khắc <b>"${title}"</b> sẽ biến mất.<br><small style="color:red">Đừng quên xóa file trên Cloudinary với ID: <b>${publicId}</b></small>`,
-        icon: 'error',
+        title: 'XÁC NHẬN XÓA?',
+        html: `<div style="text-align: center;"><p style="color:#d4b06a;"><b>✦ ${title} ✦</b></p>${previewMedia}</div>`,
+        icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'XÓA TRÊN WEB ❌',
-        background: '#0a0a0a',
-        color: '#fff'
+        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'XÓA NGAY ❌',
+        cancelButtonText: 'GIỮ LẠI',
+        background: '#0a0a0a', color: '#fff'
     });
 
     if (result.isConfirmed) {
         await deleteDoc(doc(db, "moments", id));
-        Swal.fire('Đã xóa trên Web!', 'Hãy vào Cloudinary xóa file có ID trên để sạch bộ nhớ nhé.', 'success');
+        Swal.fire({ title: 'Đã xóa!', icon: 'success', timer: 1500, showConfirmButton: false, background: '#0a0a0a', color: '#fff' });
     }
 };
 
