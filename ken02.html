@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Phá Kén | Mùa 2</title>
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================== */
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        @font-face{
+            font-family:'Maglony';
+            src:url('./fonts/1FTV-Maglony.ttf') format('truetype');
+            font-display:swap;
+        }
+
+        :root{
+
+            --main-font:'Maglony', serif;
+
+            --gold:#ecc38f;
+            --gold-light:#f6d9ad;
+
+            --text-soft:rgba(255,255,255,0.76);
+
+            --glass:rgba(255,255,255,0.04);
+
+            --border:rgba(255,255,255,0.08);
+        }
+
+        body{
+
+            font-family:var(--main-font);
+
+            background:
+            radial-gradient(circle at top,
+            rgba(236,195,143,0.08),
+            transparent 35%),
+            linear-gradient(to bottom,
+            #050b14,
+            #09101d);
+
+            color:white;
+
+            overflow-x:hidden;
+
+            line-height:2;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        img{
+            display:block;
+            max-width:100%;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar{
+
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100%;
+
+            z-index:1000;
+
+            background:rgba(5,11,20,0.72);
+
+            backdrop-filter:blur(18px);
+
+            border-bottom:
+            1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-container{
+
+            max-width:1250px;
+
+            margin:auto;
+
+            padding:22px 35px;
+
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+        }
+
+        .logo{
+
+            display:flex;
+            align-items:center;
+
+            gap:16px;
+        }
+
+        .logo img{
+
+            width:62px;
+            height:62px;
+
+            object-fit:contain;
+        }
+
+        .logo-text{
+
+            font-size:2rem;
+
+            color:var(--gold-light);
+        }
+
+        /* =========================
+           MENU
+        ========================== */
+
+        .menu{
+
+            display:flex;
+            align-items:center;
+
+            gap:52px;
+        }
+
+        .menu a{
+
+            position:relative;
+
+            color:
+            rgba(255,255,255,0.82);
+
+            font-size:18px;
+
+            letter-spacing:1.5px;
+
+            padding-bottom:8px;
+
+            transition:0.3s;
+        }
+
+        .menu a:hover,
+        .menu .active{
+
+            color:var(--gold-light);
+        }
+
+        .menu a::after{
+
+            content:"";
+
+            position:absolute;
+
+            left:0;
+            bottom:-5px;
+
+            width:0%;
+            height:1px;
+
+            background:var(--gold);
+
+            transition:0.3s;
+        }
+
+        .menu a:hover::after,
+        .menu .active::after{
+
+            width:100%;
+        }
+
+        /* =========================
+           MOBILE BUTTON
+        ========================== */
+
+        .menu-toggle{
+
+            display:none;
+
+            font-size:30px;
+
+            color:var(--gold-light);
+
+            cursor:pointer;
+
+            line-height:1;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero{
+
+            min-height:78vh;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            text-align:center;
+
+            padding:190px 20px 110px;
+
+            position:relative;
+        }
+
+        .hero::before{
+
+            content:"";
+
+            position:absolute;
+            inset:0;
+
+            background:
+            radial-gradient(circle at center,
+            rgba(236,195,143,0.12),
+            transparent 50%);
+        }
+
+        .hero-content{
+
+            position:relative;
+
+            z-index:2;
+
+            max-width:950px;
+        }
+
+        .hero-subtitle{
+
+            color:var(--gold);
+
+            font-size:16px;
+
+            letter-spacing:6px;
+
+            margin-bottom:25px;
+        }
+
+        .hero-title{
+
+            font-size:5rem;
+
+            color:var(--gold-light);
+
+            margin-bottom:28px;
+
+            line-height:1.2;
+        }
+
+        .hero-text{
+
+            color:var(--text-soft);
+
+            font-size:18px;
+
+            line-height:2.3;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================== */
+
+        .container{
+
+            width:min(1180px, calc(100% - 40px));
+
+            margin:auto;
+
+            padding-bottom:100px;
+        }
+
+        /* =========================
+           SECTION
+        ========================== */
+
+        .section{
+
+            margin-bottom:42px;
+
+            background:var(--glass);
+
+            border:
+            1px solid var(--border);
+
+            border-radius:30px;
+
+            padding:48px;
+
+            backdrop-filter:blur(18px);
+
+            box-shadow:
+            0 10px 40px rgba(0,0,0,0.35);
+        }
+
+        .section-title{
+
+            color:var(--gold-light);
+
+            font-size:2.3rem;
+
+            margin-bottom:28px;
+        }
+
+        .section-text{
+
+            color:var(--text-soft);
+
+            font-size:17px;
+
+            line-height:2.3;
+
+            text-align:justify;
+        }
+
+        /* =========================
+           GRID
+        ========================== */
+
+        .grid-2{
+
+            display:grid;
+
+            grid-template-columns:repeat(2,1fr);
+
+            gap:28px;
+        }
+
+        /* =========================
+           CARD
+        ========================== */
+
+        .card{
+
+            background:
+            rgba(255,255,255,0.02);
+
+            border:
+            1px solid rgba(255,255,255,0.06);
+
+            border-radius:24px;
+
+            padding:34px;
+        }
+
+        .card h3{
+
+            color:var(--gold);
+
+            font-size:1.5rem;
+
+            margin-bottom:16px;
+        }
+
+        .card p{
+
+            color:var(--text-soft);
+
+            font-size:16px;
+
+            line-height:2.2;
+
+            text-align:justify;
+        }
+
+        /* =========================
+           LIST
+        ========================== */
+
+        .list{
+
+            list-style:none;
+        }
+
+        .list li{
+
+            position:relative;
+
+            padding-left:30px;
+
+            margin-bottom:22px;
+
+            color:var(--text-soft);
+
+            font-size:17px;
+
+            line-height:2.2;
+        }
+
+        .list li::before{
+
+            content:"";
+
+            position:absolute;
+
+            left:0;
+            top:17px;
+
+            width:12px;
+            height:1px;
+
+            background:var(--gold);
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta{
+
+            text-align:center;
+
+            margin-top:35px;
+        }
+
+        .cta a{
+
+            display:inline-flex;
+            align-items:center;
+
+            gap:10px;
+
+            padding:16px 36px;
+
+            border-radius:999px;
+
+            background:
+            rgba(236,195,143,0.08);
+
+            border:
+            1px solid rgba(236,195,143,0.18);
+
+            color:var(--gold-light);
+
+            font-size:16px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer{
+
+            text-align:center;
+
+            padding:40px 20px 60px;
+
+            color:
+            rgba(255,255,255,0.45);
+
+            font-size:14px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media(max-width:700px){
+
+            body{
+                line-height:1.8;
+            }
+
+            .nav-container{
+
+                padding:18px 20px;
+
+                flex-wrap:wrap;
+
+                justify-content:space-between;
+
+                align-items:center;
+            }
+
+            .logo{
+
+                gap:12px;
+            }
+
+            .logo img{
+
+                width:48px;
+                height:48px;
+            }
+
+            .logo-text{
+
+                font-size:1.45rem;
+            }
+
+            .menu-toggle{
+
+                display:block;
+
+                font-size:28px;
+            }
+
+            .menu{
+
+                width:100%;
+
+                display:none;
+
+                flex-direction:column;
+
+                gap:18px;
+
+                padding-top:22px;
+
+                text-align:center;
+            }
+
+            .menu.show{
+                display:flex;
+            }
+
+            .menu a{
+
+                font-size:15px;
+            }
+
+            .hero{
+
+                min-height:auto;
+
+                padding:
+                160px 18px 70px;
+            }
+
+            .hero-subtitle{
+
+                font-size:11px;
+
+                letter-spacing:3px;
+
+                margin-bottom:18px;
+            }
+
+            .hero-title{
+
+                font-size:2.4rem;
+
+                line-height:1.3;
+
+                margin-bottom:20px;
+            }
+
+            .hero-text{
+
+                font-size:14px;
+
+                line-height:2;
+            }
+
+            .container{
+
+                width:calc(100% - 22px);
+            }
+
+            .section{
+
+                padding:26px 18px;
+
+                border-radius:22px;
+
+                margin-bottom:24px;
+            }
+
+            .section-title{
+
+                font-size:1.5rem;
+
+                margin-bottom:18px;
+            }
+
+            .section-text{
+
+                font-size:14px;
+
+                line-height:2;
+            }
+
+            .grid-2{
+
+                grid-template-columns:1fr;
+
+                gap:18px;
+            }
+
+            .card{
+
+                padding:22px;
+            }
+
+            .card h3{
+
+                font-size:1.2rem;
+
+                margin-bottom:12px;
+            }
+
+            .card p{
+
+                font-size:14px;
+
+                line-height:2;
+            }
+
+            .list li{
+
+                font-size:14px;
+
+                line-height:2;
+
+                padding-left:24px;
+
+                margin-bottom:16px;
+            }
+
+            .cta a{
+
+                font-size:14px;
+
+                padding:14px 24px;
+            }
+
+            footer{
+
+                font-size:12px;
+
+                padding:30px 20px 50px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="logo">
+
+                <img src="./images/logo_temp.png" alt="Logo">
+
+                <div class="logo-text">
+                    Phá Kén
+                </div>
+
+            </a>
+
+            <div class="menu-toggle">
+                ☰
+            </div>
+
+            <div class="menu">
+
+                <a href="index.html">
+                    Giới thiệu
+                </a>
+
+                <a href="ken01.html">
+                    Phá Kén 1
+                </a>
+
+                <a href="ken02.html" class="active">
+                    Phá Kén 2
+                </a>
+
+                <a href="contact.html">
+                    Liên hệ
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-subtitle">
+                CHẠM • TỎA • TRƯỞNG THÀNH
+            </div>
+
+            <h1 class="hero-title">
+                PHÁ KÉN — MÙA 2
+            </h1>
+
+            <p class="hero-text">
+                Không cần trở nên hoàn hảo để tỏa sáng.
+                Chỉ cần bạn vẫn đang bước tiếp,
+                bạn đã rực rỡ theo cách của riêng mình.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <section class="section">
+
+            <h2 class="section-title">
+                GIỚI THIỆU CHUNG
+            </h2>
+
+            <p class="section-text">
+                Tiếp nối hành trình của “Phá Kén – Mùa 1”, “Phá Kén – Mùa 2” được tạo ra như một không gian dành cho người trẻ đang loay hoay giữa những áp lực phải trở nên “rực rỡ” và nỗi sợ mình chưa đủ nổi bật.
+                <br><br>
+
+                Nếu mùa 1 là hành trình dám bước ra khỏi lớp kén của sự tự ti và e dè, thì mùa 2 là câu chuyện sau đó — khi người trẻ bắt đầu học cách chấp nhận bản thân, kiên nhẫn với nhịp đi riêng và tìm ra cách “tỏa” theo màu sắc của chính mình.
+                <br><br>
+
+                “Phá Kén – Mùa 2” không hướng đến việc tạo ra những phiên bản hoàn hảo, mà mong muốn mang đến cho sinh viên một không gian để trải nghiệm, dấn thân và sống thật với điều bản thân mong muốn.
+            </p>
+
+        </section>
+
+        <section class="section">
+
+            <h2 class="section-title">
+                CHUỖI CHƯƠNG TRÌNH
+            </h2>
+
+            <div class="grid-2">
+
+                <div class="card">
+
+                    <h3>
+                        “Gửi lời đến chính mình”
+                    </h3>
+
+                    <p>
+                        Cuộc thi nghệ thuật kết hợp Showcase giải trí với đêm nhạc kịch truyền cảm hứng, mang đến những câu chuyện rất “đời” về tuổi trẻ, sự trưởng thành và hành trình đi tìm giá trị riêng của mỗi người.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>
+                        Chuyến đi “2 Ngày 1 Đêm”
+                    </h3>
+
+                    <p>
+                        Hành trình trải nghiệm giúp sinh viên kết nối với bạn bè, giảng viên và chính bản thân mình thông qua các hoạt động tập thể, sẻ chia và khám phá giới hạn cá nhân.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <h2 class="section-title">
+                TINH THẦN MÙA 2
+            </h2>
+
+            <p class="section-text">
+                “Phá Kén – Chạm Tỏa” mong muốn lan tỏa tinh thần rằng mỗi người đều có một cách hiện diện riêng trong cuộc sống.
+                <br><br>
+
+                Không so sánh, không chạy theo khuôn mẫu, không ép bản thân phải giống bất kỳ ai — hãy cứ tỏa sáng theo chất riêng của mình.
+                <br><br>
+
+                Chỉ cần bạn vẫn không ngừng bước tiếp, bạn đã đang rực rỡ theo cách của chính mình.
+            </p>
+
+        </section>
+
+        <section class="section">
+
+            <div class="grid-2">
+
+                <div class="card">
+
+                    <h3>
+                        TẦM NHÌN
+                    </h3>
+
+                    <p>
+                        Trở thành chuỗi dự án dành cho người trẻ với những trải nghiệm có chiều sâu cảm xúc, giúp sinh viên được kết nối, chữa lành và trưởng thành theo cách riêng.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>
+                        SỨ MỆNH
+                    </h3>
+
+                    <p>
+                        Tạo nên không gian nơi người trẻ được lắng nghe, được trải nghiệm thật và có cơ hội dấn thân để khám phá phiên bản chân thật nhất của bản thân.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <h2 class="section-title">
+                MỤC TIÊU
+            </h2>
+
+            <ul class="list">
+
+                <li>
+                    Đồng hành cùng sinh viên trong hành trình trưởng thành và khám phá bản thân.
+                </li>
+
+                <li>
+                    Tạo ra môi trường kết nối chân thật giữa sinh viên, giảng viên và cộng đồng.
+                </li>
+
+                <li>
+                    Khuyến khích người trẻ dám trải nghiệm, dám thể hiện và sống đúng với màu sắc riêng của mình.
+                </li>
+
+                <li>
+                    Lan tỏa góc nhìn tích cực rằng: không cần trở nên hoàn hảo để được tỏa sáng.
+                </li>
+
+            </ul>
+
+        </section>
+
+        <div class="cta">
+
+            <a href="index.html">
+                ✦ QUAY LẠI VŨ TRỤ GALAXY ✦
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        © 2026 PHÁ KÉN PROJECT
+    </footer>
+
+    <script>
+
+        const menuToggle =
+        document.querySelector(".menu-toggle");
+
+        const menu =
+        document.querySelector(".menu");
+
+        menuToggle.onclick = () => {
+
+            menu.classList.toggle("show");
+        };
+
+    </script>
+
+</body>
+
+</html>
