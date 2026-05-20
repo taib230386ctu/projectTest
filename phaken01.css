@@ -20,11 +20,11 @@
 }
 
 body {
+    font-family: var(--font-art)   ;
     background: #050b14;
     color: white;
-    font-family: 'Maglony', sans-serif; /* Montserrat làm mặc định, Maglony làm điểm nhấn */
     overflow-x: hidden;
-    overflow-y: scroll; /* <-- THÊM DÒNG NÀY ĐỂ KHÓA THANH CUỘN DỌC CỐ ĐỊNH */
+    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
 }
 
 /* =========================================================
@@ -56,7 +56,7 @@ body {
     gap: 10px;
     flex-shrink: 0;
     cursor: pointer;
-    text-decoration: none; /* Tránh gạch chân nếu dùng thẻ a */
+    text-decoration: none;
 }
 
 .logo img {
@@ -68,16 +68,15 @@ body {
 }
 
 .logo-text {
-    font-family: var(--font-art);
     color: var(--gold);
     font-size: 28px;
-    font-style: italic;
     white-space: nowrap;
 }
 
 .menu { display: flex; gap: 55px; }
 
 .menu a {
+    
     color: white;
     text-decoration: none;
     position: relative;
@@ -107,13 +106,7 @@ body {
     transform: translateX(-50%);
     width: 85%;
     height: 2px;
-    background: linear-gradient(
-        to right, 
-        transparent 0%, 
-        var(--gold) 40%, 
-        var(--gold) 60%, 
-        transparent 100%
-    );
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
     box-shadow: 0 0 12px var(--gold);
     border-radius: 10px;
 }
