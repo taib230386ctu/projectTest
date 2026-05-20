@@ -68,8 +68,10 @@ body {
 }
 
 .logo-text {
+    font-family: var(--font-art);
     color: var(--gold);
     font-size: 28px;
+    /* font-style: italic; */
     white-space: nowrap;
 }
 
