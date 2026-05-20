@@ -71,7 +71,7 @@ body {
     font-family: var(--font-art);
     color: var(--gold);
     font-size: 28px;
-    /* font-style: italic; */
+    font-style: normal !important;
     white-space: nowrap;
 }
 
