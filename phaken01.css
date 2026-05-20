@@ -1,0 +1,119 @@
+/* =========================================================
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+    --font-art: 'Maglony', serif;
+    --font-text: 'Montserrat', sans-serif;
+}
+
+@font-face {
+    font-family: 'Maglony'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-art)   ;
+    background: #050b14;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
+}
+
+/* =========================================================
+   2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU) - ĐÃ ĐỒNG BỘ 100%
+   ========================================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(5, 10, 18, .45);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.nav-inner {
+    max-width: 1500px;
+    height: 64px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 70px;
+    height: auto;
+    display: block;
+    margin: 0;
+    object-fit: contain;
+}
+
+.logo-text {
+    color: var(--gold);
+    font-size: 28px;
+    white-space: nowrap;
+}
+
+.menu { display: flex; gap: 55px; }
+
+.menu a {
+    
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px; 
+    letter-spacing: 2px;
+    transition: .4s;
+    cursor: pointer;
+    padding-bottom: 6px;
+    display: inline-block;
+}
+
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, 0.5);
+}
+
+.menu a.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
