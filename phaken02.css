@@ -1,0 +1,238 @@
+/* =========================================================
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+    --font-art: 'Maglony', serif;
+    --font-text: 'Montserrat', sans-serif;
+}
+
+@font-face {
+    font-family: 'Maglony'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* ĐÃ SỬA: Đưa font Montserrat làm nền đứng thẳng, không bị nghiêng chữ thường */
+    font-family: var(--font-text);   
+    background: #050b14;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
+}
+
+/* =========================================================
+   2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU) - HIỆU ỨNG CHUYỂN ĐỘNG ✨
+   ========================================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(5, 10, 18, .45);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+    
+    /* Hiệu ứng sương mờ hạ cánh mềm mại khi load trang */
+    animation: navEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.nav-inner {
+    max-width: 1500px;
+    height: 64px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 70px;
+    height: auto;
+    display: block;
+    margin: 0;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-family: var(--font-art); /* Ép font nghệ thuật riêng cho tên thương hiệu */
+    font-style: normal !important;
+    color: var(--gold);
+    font-size: 28px;
+    white-space: nowrap;
+}
+
+.menu { display: flex; gap: 55px; }
+
+.menu a {
+    font-family: var(--font-art); /* Ép font nghệ thuật cho các chữ menu */
+    font-style: normal !important;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px; 
+    letter-spacing: 2px;
+    transition: .4s;
+    cursor: pointer;
+    padding-bottom: 6px;
+    display: inline-block;
+    
+    /* Chuyển động nảy chữ nhẹ từ dưới lên so le */
+    animation: menuItemFade 0.5s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Đẩy delay so le cho từng mục menu */
+.menu a:nth-child(1) { animation-delay: 0.1s; }
+.menu a:nth-child(2) { animation-delay: 0.18s; }
+.menu a:nth-child(3) { animation-delay: 0.26s; }
+.menu a:nth-child(4) { animation-delay: 0.34s; }
+
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, 0.5);
+}
+
+.menu a.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    
+    /* Vệt sáng active tự động bung tỏa từ tâm chữ rộng ra hai bên */
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* =========================================================
+   3. TỐI ƯU RESPONSIVE MOBILE & DI ĐỘNG (BỔ SUNG CHO PHAKEN01)
+   ========================================================= */
+@media screen and (max-width: 1024px){
+    .nav-inner { padding: 0 20px; }
+    .menu { gap: 25px; }
+    .menu a { font-size: 16px; }
+}
+
+@media screen and (max-width: 768px){
+    body { overflow-x: hidden; }
+    .navbar { padding: 0; }
+
+    .nav-inner {
+        height: 70px;
+        flex-direction: row !important; /* Khóa cứng trên một dòng */
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    .logo { display: flex; align-items: center; gap: 8px; justify-content: flex-start !important; }
+    .logo img { width: 50px !important; height: auto; margin: 0; }
+    .logo-text { font-size: 22px !important; margin-left: 0 !important; }
+
+    .menu-toggle {
+        display: block !important; /* Hiện nút 3 gạch trên di động */
+        font-size: 28px;
+        color: var(--gold);
+        cursor: pointer;
+        user-select: none;
+        order: 2;
+    }
+
+    .menu {
+        position: absolute;
+        top: 75px; right: 20px; width: 200px;
+        background: rgba(5, 10, 18, 0.96);
+        border: 1px solid rgba(212, 176, 106, 0.2); border-radius: 16px; padding: 20px;
+        display: flex; flex-direction: column !important; gap: 20px;
+        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        
+        /* Trạng thái ẩn mặc định */
+        opacity: 0; visibility: hidden; 
+        transform: translateY(-10px); transition: all 0.35s ease;
+    }
+
+    .menu.active { 
+        opacity: 1 !important; 
+        visibility: visible !important; 
+        transform: translateY(0) !important; 
+    }
+    
+    .menu a { font-size: 16px; width: 100%; text-align: center !important; padding-bottom: 4px; }
+}
+
+/* =========================================================
+   4. ĐỊNH NGHĨA CÁC KHUNG CHUYỂN ĐỘNG (KEYFRAMES ANIMATION)
+   ========================================================= */
+@keyframes navEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+@keyframes menuItemFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowSlideIn {
+    from {
+        width: 0%;
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.3);
+    }
+    to {
+        width: 85%;
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+}
