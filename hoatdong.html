@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>REAL FINE - Phá Kén</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="hoatdong.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="hoatdong.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+
+            <a href="index.html" class="logo">
+                <img src="./images/logo/logo.png">
+                <div class="logo-text">
+                    <span class="part-main">Phá Kén Mùa </span>
+                    <span class="part-season"> 2</span>
+                </div>
+            </a>
+            
+            <div class="menu-toggle">☰</div>
+
+            <div class="menu">
+                <a href="index_t.html">Phá Kén 2</a>
+                <a href="phaken01.html">Phá Kén 1</a>
+                <a href="hoatdong.html"  class="active">Hoạt động</a>
+                <a>Tin tức</a>
+                <a>Liên hệ</a>
+            </div>
+
+        </div>
+    </nav>
+<section class="hero">
+
+    <div class="hero-content">
+        <div class="line"></div>
+        <div class="main-title">
+            REAL FINE
+        </div>
+        <div class="subtitle">
+            Dạo này bạn thế nào?
+        </div>
+        <div class="line"></div>
+        <div class="desc">
+            Chào bạn, hãy để tâm hồn mình được "thở"
+            <br>
+            trong chiếc kén nhỏ này một chút.
+        </div>
+        <div class="input-label">
+            Tên của bạn là...
+        </div>
+        <div class="input-box">
+            <input type="text" id="visitorName" placeholder="Nhập tên của bạn...">
+        </div>
+        <button class="start-btn">
+            ✦ BẮT ĐẦU HÀNH TRÌNH ✦
+        </button>
+    </div>
+</section>
+
+<div class="upload-form" id="uploadSection" style="display: none;">
+    <h3>Thả khoảnh khắc vào Galaxy</h3>
+    
+    <textarea id="imgTitle" placeholder="Tiêu đề khoảnh khắc..." rows="2"></textarea>
+    
+    <div class="file-upload-wrapper">
+        <label for="imgFile" class="preview-box" id="previewContainer">
+            <div class="preview-placeholder" id="previewPlaceholder">
+                <span class="upload-icon">✦</span>
+                <p>Bấm vào đây để chọn khoảnh khắc</p>
+                <span style="font-size: 0.8rem; opacity: 0.6;">(Hỗ trợ Ảnh hoặc Video)</span>
+            </div>
+            <img id="imagePreview" style="display: none;">
+            <video id="videoPreview" controls style="display: none;"></video>
+        </label>
+        <input type="file" id="imgFile" accept="video/*,image/*" style="display: none;">
+        <div id="file-name-display" class="file-name-display">Bạn chưa chọn khoảnh khắc nào...</div>
+    </div>
+
+    <div class="form-actions">
+        <button id="btnCancel" type="button" class="cancel-btn">Bỏ vào thùng rác</button>
+        <button id="btnUpload" class="start-btn">Thả vào Galaxy</button>
+    </div>
+</div>
+
+<section class="moments-section">
+    <h2 class="moments-title">✦ KHOẢNH KHẮC CỦA MỌI NGƯỜI ✦</h2>
+    <p style="text-align: center; color: #555; font-size: 13px; font-style: italic; margin-top: -30px; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
+        Những khoảnh khắc được ghi lại...
+    </p>
+    <div class="gallery-container">
+        <div id="videoGrid" class="gallery-grid"></div>
+        <div style="text-align: center; margin-top: 40px;">
+            <button id="btnLoadMoreVideo" class="cancel-btn" style="padding: 12px 35px; display: none;">✦ Xem thêm...</button>
+        </div>
+    </div>
+</section>
+
+<section class="moments-section" style="margin-top: 80px;">
+    <h2 class="moments-title">✦ GALAXY CỦA CHÚNG TA ✦</h2>
+    <p style="text-align: center; color: #555; font-size: 13px; font-style: italic; margin-top: -30px; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
+        Những hình ảnh được lưu lại...
+    </p>
+    <div class="gallery-container">
+        <div id="imageGrid" class="gallery-grid"></div>
+        <div style="text-align: center; margin-top: 40px;">
+            <button id="btnLoadMoreImage" class="cancel-btn" style="padding: 12px 35px; display: none;">✦ Xem thêm...</button>
+        </div>
+    </div>
+</section>
+<section class="Footer">
+    <div class="footer-inner">
+        <div class="footer-col footer-brand">
+            <a href="" class="logo">
+                <img src="./images/logo//AVT_ken2.png" alt="">
+            </a>
+        </div>
+
+        <div class="footer-col">
+            <h3>Khám Phá</h3>
+            <ul class="footer-links">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Hoạt Động</a></li>
+                <li><a href="#">Tin Tức</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Liên Hệ</h3>
+            <ul class="footer-info">
+                <li>Email: contact@yourwebsite.com</li>
+                <li>Hotline: +84 900 123 456</li>
+                <li>Địa chỉ: 123 Đường Nghệ Thuật, TP. HCM</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Theo Dõi</h3>
+            <p>Kết nối và cập nhật những thông tin mới nhất từ chúng tôi:</p>
+            <div class="social-icons">
+                <a href="#" title="Facebook" class="fb"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" title="Instagram" class="ig"><i class="fa-brands fa-instagram"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</section>
+</body>
+</html>

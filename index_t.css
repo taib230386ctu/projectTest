@@ -1,0 +1,799 @@
+/* =========================================================
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+   
+}
+
+@font-face {
+    font-family: 'Maglony'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'LASTCHRISTMAS'; 
+    src: url('./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nillota'; 
+    src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Mặc định chữ thường đứng thẳng đứng, không nghiêng ríu mắt */
+    font-family: var(--font-text);
+    background: #050b14;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
+}
+html, body {
+    /* Cho trình duyệt Chrome, Safari và Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Cho trình duyệt Firefox */
+    scrollbar-width: none;
+    
+    /* Cho trình duyệt Internet Explorer và Edge cũ */
+    -ms-overflow-style: none; 
+}
+
+/* =========================================================
+   2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU) - HIỆU ỨNG CHUYỂN ĐỘNG ✨
+   ========================================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(5, 10, 18, .45);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+    
+    /* Hiệu ứng sương mờ hạ cánh mềm mại khi tải trang */
+    animation: navEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.nav-inner {
+    max-width: 100%;
+    height: 64px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0;
+    object-fit: contain;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: flex-row; /* Xếp chồng theo chiều dọc nếu muốn hoặc để mặc định flex-row */
+    align-items: flex-start;
+}
+
+.part-main {
+    font-family: 'LastChristmas', serif; /* Font nghệ thuật của cậu */
+    font-size: 28px;
+    color: var(--gold);
+}
+
+.part-season {
+    font-family: 'Nillota', cursive; /* Font mới cậu vừa thêm */
+    font-size: 28px;
+    color: var(--gold);
+    
+}
+/* =========================================================
+ĐỊNH NGHĨA CÁC KHUNG CHUYỂN ĐỘNG (KEYFRAMES ANIMATION)
+   ========================================================= */
+@keyframes navEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+@keyframes menuItemFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowSlideIn {
+    from {
+        width: 0%;
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.3);
+    }
+    to {
+        width: 85%;
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+.menu { display: flex; gap: 55px; }
+
+.menu a {
+    font-family: var(--font-art);
+    font-style: normal !important;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px; 
+    letter-spacing: 2px;
+    transition: .4s;
+    cursor: pointer;
+    padding-bottom: 6px;
+    display: inline-block;
+    
+    /* Chuyển động nảy chữ nhẹ từ dưới lên so le */
+    animation: menuItemFade 0.5s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Thời gian xuất hiện so le của thanh Nav */
+.menu a:nth-child(1) { animation-delay: 0.1s; }
+.menu a:nth-child(2) { animation-delay: 0.18s; }
+.menu a:nth-child(3) { animation-delay: 0.26s; }
+.menu a:nth-child(4) { animation-delay: 0.34s; }
+
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, 0.5);
+}
+
+.menu a.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    
+    /* Vệt sáng active bung tỏa nhẹ nhàng từ giữa chữ giãn ra 2 bên */
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* =========================================================
+   3. KHU VỰC CHÍNH (HERO SECTION)
+   ========================================================= */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: #000; opacity: .52;
+    filter: brightness(.65) blur(1px);
+    transform: scale(1.05); z-index: 1;
+}
+
+.hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(5,10,18,.12) 0%, rgba(5,10,18,.42) 35%, rgba(5,10,18,.82) 75%, rgba(5,10,18,.98) 100%);
+    z-index: 2;
+}
+
+.bg-butterfly {
+    position: absolute; width: 900px; height: 900px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -35%);
+    opacity: .05; filter: blur(2px); z-index: 2;
+}
+
+.hero-content {
+    position: relative; z-index: 5;
+    width: 100%; text-align: center;
+    padding: 70px 20px 0px;
+}
+
+/* 1. KHUNG CHỨA BƯỚM: Phải có relative để làm điểm tựa xếp lớp */
+.brand-image-wrapper {
+    position: relative; /* Quan trọng để bướm con bay đè lên đúng vị trí */
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* 2. BƯỚM NỀN (BACKGROUND): Hiệu ứng "nhịp thở" (Pulse) mờ ảo */
+.brand-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    z-index: 1;
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    
+    /* Chuyển động tỏa sáng, phóng to thu nhỏ nhịp nhàng liên tục */
+    animation: pulseBackground 4s ease-in-out infinite alternate;
+}
+
+/* 3. BƯỚM CON BÊN TRÊN: Hiệu ứng bay bồng bềnh 3D */
+.flying-butterfly {
+    position: absolute; /* Lơ lửng đè lên bướm nền */
+    z-index: 2;
+    width: 60%; /* Tùy chỉnh độ to nhỏ của bướm bay so với bướm nền */
+    max-width: 500px; /* Không cho bướm bay bự quá trên PC */
+    filter: drop-shadow(0 0 20px rgba(212, 176, 106, 0.4)); /* Phủ sương lấp lánh vàng */
+    
+    /* Chuyển động bay lên xuống, nghiêng cánh liên tục */
+    animation: floatButterfly 6s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   ĐỊNH NGHĨA CHUYỂN ĐỘNG CHO BƯỚM (ANIMATIONS)
+   ========================================================= */
+
+/* Hiệu ứng nhịp thở cho bướm nền */
+@keyframes pulseBackground {
+    0% { 
+        transform: scale(0.98); 
+        opacity: 0.6; 
+    }
+    100% { 
+        transform: scale(1.02); 
+        opacity: 1; 
+    }
+}
+
+/* Hiệu ứng bay lượn êm ái cho bướm trên */
+@keyframes floatButterfly {
+    0% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg); 
+    }
+    33% { 
+        transform: translateY(-15px) translateX(8px) rotate(2deg); /* Lên cao, nghiêng qua phải */
+    }
+    66% { 
+        transform: translateY(10px) translateX(-5px) rotate(-1deg); /* Bay thấp, nghiêng qua trái */
+    }
+    100% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg); 
+    }
+}
+
+/* =========================================================
+   TỐI ƯU CHUYỂN ĐỘNG BƯỚM SIÊU MƯỢT TRÊN ĐIỆN THOẠI 📱
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    
+    /* Thu nhỏ kích thước bướm bay và đổi sang Animation biên độ nhỏ */
+    .flying-butterfly {
+        width: 25%; 
+        max-width: 320px;
+        filter: drop-shadow(0 0 12px rgba(212, 176, 106, 0.35)); /* Giảm bớt độ nhòe sáng */
+        
+        /* Đổi sang cụm chuyển động nhẹ floatButterflyMobile dưới đây */
+        animation: floatButterflyMobile 5s ease-in-out infinite;
+    }
+    /* Giảm luôn nhịp thở của bướm nền cho đỡ bị ngợp mắt */
+    .brand-image {
+        animation: pulseBackgroundMobile 4s ease-in-out infinite alternate;
+    }
+}
+
+
+/* =========================================================
+   ĐỊNH NGHĨA KEYFRAMES RIÊNG CHO MOBILE (BIÊN ĐỘ SIÊU NHỎ)
+   ========================================================= */
+
+/* Ép bướm con chỉ nhích nhẹ 3px - 5px bồng bềnh, nghiêng cánh cực khẽ */
+@keyframes floatButterflyMobile {
+    0% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg); 
+    }
+    33% { 
+        transform: translateY(-5px) translateX(2px) rotate(1deg); /* Chỉ nhích lên 5px thay vì 15px */
+    }
+    66% { 
+        transform: translateY(3px) translateX(-1px) rotate(-0.5deg); /* Chỉ hạ xuống 3px */
+    }
+    100% { 
+        transform: translateY(0px) translateX(0px) rotate(0deg); 
+    }
+}
+/* Ép bướm nền đập nhịp cực khẽ, gần như giữ nguyên vị trí tránh mỏi mắt */
+@keyframes pulseBackgroundMobile {
+    0% { 
+        transform: scale(0.99); 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: scale(1.01); 
+        opacity: 1; 
+    }
+}
+.GioiThieuChung, .TinhThanMua2{
+    padding: 3%;
+    background: url('./images/background/02.jpg');
+}
+.section-title{
+    color:var(--gold-light);
+    font-size:2.3rem;
+    margin-bottom:25px;
+    padding-left: 5%;
+    }
+.section-text{
+    color:var(--text-soft);
+    font-size:17px;
+    line-height:2;
+    text-align:justify;
+    padding-left: 8%;
+}
+/* video */
+.video-pk2 {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+  /* QUAN TRỌNG: SỬ DỤNG HÌNH NỀN ĐỂ CHE */
+  background-image: url('./images/background/02.jpg'); /* Đặt đường dẫn đến tấm hình */
+  
+  /* CÀI ĐẶT HÌNH NỀN PHỦ KÍN */
+  background-size: cover; /* Phủ kín khung chứa */
+  background-position: center; /* Căn giữa */
+  
+  position: relative; /* Hoặc fixed tùy cách cuộn */
+  z-index: 1; /* (Như turn trước) */
+}
+
+.video-pk2 video {
+  width: 100%;
+  height: 100%;
+  
+  /* QUAN TRỌNG: GIỮ TỶ LỆ, CÓ KHOẢNG ĐEN SẼ ĐƯỢC HÌNH NỀN CHE */
+  object-fit: contain; 
+  
+  display: block;
+}
+.ChuoiChuongTrinh{
+    padding: 30px;
+    background-image: url('./images/background/02.jpg');
+}
+.grid-2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+}
+.card{
+    background:
+    rgba(255,255,255,0.02);
+    border:
+    1px solid rgba(255,255,255,0.06);
+    border-radius:24px;
+    padding:30px;
+}
+.card h3{
+    color:var(--gold);
+    font-size:30px;
+    margin-bottom:16px;
+}
+.card p{
+    color:var(--text-soft);
+    font-size:20px;
+    line-height:2.2;
+    text-align:justify;
+}
+
+
+/* =========================================================
+   CẤU TRÚC HÀNG NGANG 3 ĐỐI TƯỢNG (PC / LAPTOP)
+   ========================================================= */
+.TN-SM-MT {
+    width: 100%; /* Ép phần nền rộng full 100% màn hình */
+    margin: 0 auto; /* Đổi thành 0 để hình nền sát khít phần trên và phần dưới */
+    padding: 60px 4% ; /* 60px trên/dưới để tạo khoảng đệm cho hình nền, 4% hai bên */
+    
+    /* 1. CHÈN HÌNH NỀN VÀ TỐI ƯU HIỂN THỊ */
+    background: url('./images/background/02.jpg');
+    background-size: cover;         /* Phủ kín toàn bộ không gian của section */
+    background-position: center;    /* Căn tấm hình vào chính giữa */
+    background-repeat: no-repeat;   /* Ngăn không cho hình bị lặp lại nếu thiếu chiều cao */
+
+    /* 2. GIỮ NGUYÊN CÁC THUỘC TÍNH FLEXBOX ĐỂ DÀN HÀNG NGANG */
+    display: flex;
+    justify-content: center; /* Đưa 3 cái vào giữa */
+    gap: 30px;
+    align-items: stretch;
+}
+
+/* Thêm đoạn này để giới hạn 3 thẻ con không bị dạt ra quá xa trên màn hình máy tính lớn */
+.TN-SM-MT .item-card {
+    flex: 1;
+    max-width: 420px; /* Giới hạn độ rộng tối đa của mỗi ô */
+    background: rgba(5, 10, 18, 0.65); /* Đổi nền item tối hơn một chút để nổi bật trên nền ảnh */
+    border: 1px solid rgba(212, 176, 106, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+/* Hiệu ứng bay bổng nhẹ khi rê chuột vào tấm card giống như bướm bay */
+.item-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold-light);
+    box-shadow: 0 12px 30px rgba(212, 176, 106, 0.1);
+}
+
+/* Khung chứa ảnh */
+.item-image {
+    width: 100%;
+    height: 240px; /* Cố định chiều cao vùng chứa ảnh */
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Áp dụng mẹo chống méo hình đã hướng dẫn */
+    transition: transform 0.5s ease;
+}
+
+.item-card:hover .item-image img {
+    transform: scale(1.06); /* Hình ảnh phóng to nhẹ khi hover */
+}
+
+/* Vùng chứa nội dung chữ */
+.item-content {
+    padding: 25px;
+}
+
+.item-content h3 {
+    font-family: 'Maglony', serif; /* Dùng font chữ nghệ thuật của bạn */
+    color: var(--gold);
+    font-size: 25px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.item-content p {
+    color: rgba(255, 255, 255, 0.7); /* Chữ màu trắng mờ sang trọng */
+    font-size: 20px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* footer*/
+/* =========================================================
+   4. CHÂN TRANG (FOOTER STYLE)
+   ========================================================= */
+.Footer {
+    background-color: #050b14; /* Đồng bộ màu nền tối với toàn trang */
+    border-top: 1px solid rgba(212, 176, 106, 0.2); /* Tạo đường viền vàng gold mờ tinh tế ở trên */
+    padding: 60px 0 20px 0;
+    width: 100%;
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    
+    /* Dàn hàng ngang 4 cột */
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* Tự động xuống dòng linh hoạt nếu màn hình thu nhỏ */
+}
+
+/* Định dạng cột chung */
+.footer-col {
+    flex: 1.5;
+    min-width: 220px; /* Giới hạn không cho cột bị bóp quá nhỏ */
+}
+
+/* Ưu tiên cột logo rộng hơn các cột còn lại một chút */
+.footer-col.footer-brand {
+    flex: 1;
+}
+
+.footer-brand .brand-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+/* Tiêu đề của các cột (Khám phá, Liên hệ, Theo dõi) */
+.footer-col h3 {
+    font-family: 'Maglony', serif; /* Sử dụng font chữ nghệ thuật của bạn */
+    color: var(--gold);
+    font-size: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+/* Tạo một gạch chân nhỏ dưới mỗi tiêu đề cột */
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 35px;
+    height: 2px;
+    background-color: var(--gold);
+}
+
+/* Định dạng danh sách đường link và thông tin */
+.footer-links, .footer-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li, .footer-info li {
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Hiệu ứng nảy chữ sang phải và đổi màu gold khi di chuột vào link */
+.footer-links a:hover {
+    color: var(--gold-light);
+    transform: translateX(5px);
+}
+
+/* Khu vực các ô tròn mạng xã hội (Theo dõi) */
+.footer-col p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 176, 106, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Hiệu ứng sáng bừng lên khi hover vào nút mạng xã hội */
+.social-icons a:hover {
+    background: var(--gold);
+    color: #050b14;
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(212, 176, 106, 0.3);
+}
+
+/* Bản quyền dưới đáy cùng */
+.footer-bottom {
+    max-width: 1400px;
+    margin: 50px auto 0 auto;
+    padding: 20px 20px 0 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Đường ngăn cách thanh đáy */
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    margin: 0;
+}
+/* =========================================================
+   CHỈNH KÍCH THƯỚC LOGO Ở FOOTER
+   ========================================================= */
+.Footer .logo img {
+    width: 180px;        /* Tăng kích thước chiều rộng lên 180px (mặc định đang là 100px) */
+    max-width: 100%;     /* Đảm bảo ảnh không bị tràn khung */
+    height: auto;        /* Tự động tính toán chiều cao để không bị méo hình */
+    object-fit: contain;
+}
+
+/* Tối ưu kích thước logo trên điện thoại để không bị quá to */
+@media screen and (max-width: 768px) {
+    .Footer .logo img {
+        width: 140px;    /* Trên điện thoại thu nhỏ lại một chút cho cân đối bốc cục */
+        margin: 0 auto;  /* Căn giữa logo nếu footer trên mobile của bạn xếp hàng dọc */
+    }
+}
+
+/* =========================================================
+   TỐI ƯU TRÊN ĐIỆN THOẠI (MOBILE RESPONSIVE)
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    .Footer {
+        padding: 40px 0 20px 0;
+    }
+
+    .footer-inner {
+        flex-direction: column; /* Chuyển từ hàng ngang sang hàng dọc xếp chồng trên mobile */
+        gap: 35px;
+    }
+
+    .footer-col {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   TỐI ƯU TRÊN ĐIỆN THOẠI (MOBILE RESPONSIVE)
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    .TN-SM-MT {
+        /* Trên điện thoại, đổi từ hàng ngang thành hàng dọc */
+        flex-direction: column; 
+        gap: 25px;
+        padding: 0 15px;
+        margin: 40px auto;
+    }
+
+    .item-image {
+        height: 200px; /* Thu nhỏ chiều cao ảnh trên mobile cho cân đối */
+    }
+    
+    .item-content {
+        padding: 20px;
+    }
+    
+    .item-content h3 {
+        font-size: 19px;
+    }
+}
+
+
+/*====================Dien thoai================*/
+@media screen and (max-width: 768px){
+    body{ overflow-x: hidden; }
+    .navbar{ padding: 0; }
+
+    .nav-inner{
+        height: 70px;
+        flex-direction: row !important; /* Khóa cứng thanh Nav trên một dòng nằm ngang */
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    .logo{ display: flex; align-items: center; justify-content: flex-start !important; }
+    .logo img{ width: 80px !important; height: auto; margin: 0; }
+    
+    /* CO NHỎ TÊN THƯƠNG HIỆU: Đảm bảo không đẩy nút 3 gạch rớt dòng */
+    .logo-text{ font-size: 22px !important; margin-left: 0 !important; }
+    .hero-content {
+        position: relative; z-index: 5;
+        width: 100%; text-align: center;
+        padding: 0px 20px 80px;
+    }
+    .menu-toggle {
+        display: block !important;
+        font-size: 28px;
+        color: var(--gold);
+        cursor: pointer;
+        user-select: none;
+        order: 2;
+    }
+
+    .menu {
+        position: absolute;
+        top: 75px; right: 20px; width: 200px;
+        background: rgba(5, 10, 18, 0.96);
+        border: 1px solid rgba(212, 176, 106, 0.2); border-radius: 16px; padding: 20px;
+        display: flex; flex-direction: column !important; gap: 20px;
+        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.35s ease;
+    }
+
+    .menu.active { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+    .menu a{ font-size: 16px; width: 100%; text-align: center !important; padding-bottom: 4px; }
+
+    .hero{ padding-top: 90px; padding-bottom: 80px; min-height: auto; } /* Giữ khoảng đệm chuẩn 90px để xóa vệt đen */
+    
+    /* CO NHỎ TIÊU ĐỀ CHÍNH HERO: Ép nằm gọn gàng trên một dòng duy nhất */
+    .main-title{ font-size: 38px !important; letter-spacing: 2px; line-height: 1.1; white-space: nowrap; }
+    .subtitle{ font-size: 13px !important; letter-spacing: 1px; }
+    .desc{ font-size: 14px; line-height: 1.7; padding: 0 5px; }
+    
+    /* THU GỌN Ô NHẬP TÊN VÀ NÚT BẮT ĐẦU */
+    .input-label { font-size: 18px; margin-top: 30px; }
+    .input-box input { height: 58px; font-size: 15px !important; border-radius: 10px; }
+    .feather { font-size: 18px; right: 15px; }
+    .start-btn{ height: 60px; font-size: 15px; letter-spacing: 2px; margin-top: 15px; border-radius: 10px; }
+
+    /* THU GỌN KHUNG GALAXY MẠNG LƯỚI */
+    .moments-title { font-size: 26px; margin-bottom: 25px; letter-spacing: 1px; }
+    .gallery-grid{ grid-template-columns: 1fr; padding: 0; gap: 20px; }
+    .gallery-card img, .gallery-card video { height: 230px; }
+    
+    /* ÉP TIÊU ĐỀ CARD THẲNG ĐỨNG VÀ KHÔNG CHO VỠ DÒNG QUÁ DÀI */
+    .card-content { padding: 15px; }
+    .card-content h3 { font-size: 18px; margin-bottom: 6px; font-style: normal !important; }
+    .card-content p { font-style: normal !important; font-size: 12px; }
+
+    /* THU GỌN FORM ĐĂNG BÀI TRÊN MOBILE */
+    .upload-form{ margin: 30px 15px; padding: 22px; border-radius: 16px; }
+    .upload-form h3 { font-size: 20px; margin-bottom: 18px; font-style: normal !important; }
+    .upload-form input[type="text"] { padding: 12px; margin-bottom: 15px; font-size: 14px; }
+    .preview-box { min-height: 160px; border-radius: 12px; }
+}

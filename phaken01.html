@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Phá Kén 1</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="phaken01.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="phaken01.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+
+            <a href="index.html" class="logo">
+                <img src="./images/logo/logo.png">
+                <div class="logo-text">
+                    <span class="part-main">Phá Kén Mùa </span>
+                    <span class="part-season"> 2</span>
+                </div>
+            </a>
+            
+            <div class="menu-toggle">☰</div>
+
+            <div class="menu">
+                <a href="index_t.html" >Phá Kén 2</a>
+                <a href="phaken01.html" class="active">Phá Kén 1</a>
+                <a href="hoatdong.html">Hoạt động</a>
+                <a>Tin tức</a>
+                <a>Liên hệ</a>
+            </div>
+        </div>
+    </nav>
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-subtitle">
+                A JOURNEY OF GROWTH
+            </div>
+
+            <h1 class="hero-title">
+                PHÁ KÉN MÙA 1
+            </h1>
+
+            <p class="hero-text">
+                Mỗi người trẻ đều có một chiếc kén của riêng mình.
+                Và đôi khi, trưởng thành bắt đầu từ khoảnh khắc
+                ta đủ can đảm để bước ra khỏi nó.
+            </p>
+
+        </div>
+
+    </section>
+    <!-- MAIN -->
+    <main class="container">
+        <section class="section flex-layout">
+            <img src="./images/h.anh/talkshow/IMG_4612.jpg" alt="Phá Kén" class="section-image">
+            
+            <div class="section-content">
+                <h2 class="section-title">GIỚI THIỆU CHUNG</h2>
+                <p class="section-text">
+                    “Phá Kén” là dự án dành cho sinh viên được tạo ra với mong muốn đồng hành cùng người trẻ trên hành trình bước ra khỏi vùng an toàn, vượt qua sự tự ti và mạnh dạn khám phá bản thân trong môi trường đại học.
+                    <br><br>
+                    Không chỉ là một sự kiện, “Phá Kén” hướng đến việc xây dựng một không gian nơi sinh viên được lắng nghe, kết nối và truyền cảm hứng thông qua những trải nghiệm thật, câu chuyện thật và cảm xúc thật.
+                </p>
+            </div>
+        </section>
+    <div class="video-section-container">
+        <div class="video-wrapper">
+            <video id="myVideo" class="responsive-video" controls>
+                <source src="https://res.cloudinary.com/dkn0v4yv2/video/upload/v1780576948/0513_erbsy2.mp4" type="video/mp4">
+                Trình duyệt không hỗ trợ định dạng này.
+            </video>
+            <div class="play-btn" onclick="togglePlay()"> </div>
+        </div>
+    </div>
+    </main>
+    <section class="section-cct">
+            <h2 class="section-title">
+                CHUỖI CHƯƠNG TRÌNH
+            </h2>
+            <div class="cct-wrapper">
+                <div class="cct-mcnbd">
+                    <div class="cct-spacer"></div>
+                    <div class="talk-show-mcnbd">
+                            <h3 class="talk-show-mcnbd-title" >
+                            Talkshow “Mình của ngày bắt đầu”
+                            </h3>
+                            <p class="mcnbd-content">
+                                Không gian chia sẻ dành cho sinh viên được lắng nghe những 
+                                câu chuyện chân thật về tuổi trẻ, sự bắt đầu và hành trình 
+                                trưởng thành cùng Siêu mẫu Minh Triệu và Host Dược Sĩ Tiến.
+                            </p>
+                    </div>
+                    <div class="image-slider">
+                        <img src="./images/h.anh/talkshow/IMG_0064.jpg" class="slide" alt="Ảnh 1">
+                        <img src="./images/h.anh/talkshow/IMG_0229.jpg" class="slide" alt="Ảnh 2">
+                        <img src="./images/h.anh/talkshow/IMG_0117.jpg" class="slide" alt="Ảnh 3">
+                        <img src="./images/h.anh/talkshow/IMG_0095.jpg" class="slide" alt="Ảnh 4">
+                    </div>
+                </div>
+            </div>
+            <div class="cct-2n1d">
+                <div class="cct-spacer"></div>
+                <div class="image-slider-2n1d">
+                    <img src="./images/h.anh/2n1d/DSC02506.jpg" class="slide-2n1d" alt="Ảnh 1">
+                    <img src="./images/h.anh/2n1d/DSC01941.jpg" class="slide-2n1d" alt="Ảnh 2">
+                    <img src="./images/h.anh/2n1d/DSC02075.jpg" class="slide-2n1d" alt="Ảnh 3">
+                    <img src="./images/h.anh/2n1d/DSC02381.jpg" class="slide-2n1d" alt="Ảnh 4">
+                </div>
+                <div class="noidung-2n1d">
+                    <h3 class="trip-2n1d-title">
+                        Chuyến đi “2 Ngày 1 Đêm”
+                    </h3>
+                    <p class="trip-2n1d-content">
+                        Hành trình kết nối giúp tân sinh viên gặp gỡ bạn mới,
+                        giảng viên và khám phá bản thân thông qua teambuilding,
+                        hoạt động tập thể và trải nghiệm thực tế.
+                    </p>
+                </div>
+                
+            </div>
+    </section>
+    <section class="season-mark">
+    <h2 class="section-title">DẤU ẤN MÙA 1</h2>
+
+    <p class="season-intro">
+        Sau hành trình đầu tiên, “Phá Kén” đã nhận được rất nhiều sự quan tâm
+        và đồng hành từ các bạn sinh viên.
+    </p>
+
+    <div class="season-grid">
+
+        <div class="season-card">
+            <div class="season-number">3.000+</div>
+            <h3>Sinh viên tham gia</h3>
+            <p>
+                Đăng ký tham gia Talkshow
+                “Mình của ngày bắt đầu”.
+            </p>
+        </div>
+
+        <div class="season-card">
+            <div class="season-number">5.000+</div>
+            <h3>Lượt tương tác</h3>
+            <p>
+                Trên các nền tảng mạng xã hội.
+            </p>
+        </div>
+
+        <div class="season-card season-text-card">
+            <h3>Kết nối</h3>
+            <p>
+                Tạo nên không gian sẻ chia dành cho
+                hàng ngàn sinh viên trong giai đoạn
+                đầu đại học.
+            </p>
+        </div>
+
+        <div class="season-card season-text-card">
+            <h3>Lan tỏa</h3>
+            <p>
+                Truyền cảm hứng về sự trưởng thành,
+                dám bắt đầu và vượt qua giới hạn
+                của bản thân.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="season-quote">
+        “Những con số không chỉ là thành tích,
+        mà còn là minh chứng cho hành trình
+        đồng hành cùng người trẻ trên bước đường trưởng thành.”
+    </div>
+</section>
+<section class="vision-section">
+    <div class="vision-grid">
+
+        <div class="vision-card vision-left">
+            <div class="vision-img">
+                <img src="./images/background/02.jpg" alt="Tầm nhìn">
+            </div>
+            <div class="vision-content">
+                <h3>TẦM NHÌN</h3>
+                <p>
+                    Trở thành chuỗi dự án truyền cảm hứng dành cho người trẻ,
+                    nơi sinh viên được kết nối, thấu hiểu và phát triển theo
+                    cách riêng của chính mình.
+                </p>
+            </div>
+        </div>
+
+        <div class="vision-card vision-right">
+            <div class="vision-img">
+                <img src="./images/background/02.jpg" alt="Sứ mệnh">
+            </div>
+            <div class="vision-content">
+                <h3>SỨ MỆNH</h3>
+                <p>
+                    Tạo ra những không gian trải nghiệm chân thật giúp người trẻ
+                    tự tin khám phá bản thân, vượt qua nỗi sợ và mạnh dạn bước tiếp
+                    trên hành trình trưởng thành.
+                </p>
+            </div>
+        </div>
+
+        <div class="vision-card vision-bottom">
+            <div class="vision-img">
+                <img src="./images/background/02.jpg" alt="Mục tiêu">
+            </div>
+            <div class="vision-content">
+                <h3>MỤC TIÊU</h3>
+                <ul>
+                    <li>Đồng hành cùng tân sinh viên trong giai đoạn chuyển tiếp vào môi trường đại học.</li>
+                    <li>Xây dựng môi trường kết nối, sẻ chia và phát triển bản thân dành cho người trẻ.</li>
+                    <li>Lan tỏa tinh thần dám thử, dám bắt đầu và dám sống thật với chính mình.</li>
+                    <li>Tạo nên những trải nghiệm có chiều sâu cảm xúc thay vì chỉ là hoạt động giải trí đơn thuần.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<section class="Footer">
+    <div class="footer-inner">
+        <div class="footer-col footer-brand">
+            <a href="" class="logo">
+                <img src="./images/logo//AVT_ken2.png" alt="">
+            </a>
+        </div>
+
+        <div class="footer-col">
+            <h3>Khám Phá</h3>
+            <ul class="footer-links">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Hoạt Động</a></li>
+                <li><a href="#">Tin Tức</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Liên Hệ</h3>
+            <ul class="footer-info">
+                <li>Email: contact@yourwebsite.com</li>
+                <li>Hotline: +84 900 123 456</li>
+                <li>Địa chỉ: 123 Đường Nghệ Thuật, TP. HCM</li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Theo Dõi</h3>
+            <p>Kết nối và cập nhật những thông tin mới nhất từ chúng tôi:</p>
+            <div class="social-icons">
+                <a href="#" title="Facebook" class="fb"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" title="Instagram" class="ig"><i class="fa-brands fa-instagram"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+    
+</section>
+    
+    
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- ĐOẠN NÀY LÀ THỨ CẬU ĐANG THIẾU -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+        });
+    </script>
+</body>
+</html>

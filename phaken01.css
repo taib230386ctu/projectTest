@@ -1,0 +1,1210 @@
+/* =========================================================
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+   
+}
+
+@font-face {
+    font-family: 'Maglony'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'LASTCHRISTMAS'; 
+    src: url('./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nillota'; 
+    src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Mặc định chữ thường đứng thẳng đứng, không nghiêng ríu mắt */
+    font-family: var(--font-text);
+    background: #050b14;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
+}
+html, body {
+    /* Cho trình duyệt Chrome, Safari và Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Cho trình duyệt Firefox */
+    scrollbar-width: none;
+    
+    /* Cho trình duyệt Internet Explorer và Edge cũ */
+    -ms-overflow-style: none; 
+}
+
+/* =========================================================
+   2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU) - HIỆU ỨNG CHUYỂN ĐỘNG ✨
+   ========================================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(5, 10, 18, .45);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+    
+    /* Hiệu ứng sương mờ hạ cánh mềm mại khi tải trang */
+    animation: navEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.nav-inner {
+    max-width: 100%;
+    height: 64px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0;
+    object-fit: contain;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: flex-row; /* Xếp chồng theo chiều dọc nếu muốn hoặc để mặc định flex-row */
+    align-items: flex-start;
+}
+.part-main {
+    font-family: 'LastChristmas', serif; /* Font nghệ thuật của cậu */
+    font-size: 28px;
+    color: var(--gold);
+}
+
+.part-season {
+    font-family: 'Nillota', cursive; /* Font mới cậu vừa thêm */
+    font-size: 28px;
+    color: var(--gold);
+    
+}
+/* =========================================================
+ĐỊNH NGHĨA CÁC KHUNG CHUYỂN ĐỘNG (KEYFRAMES ANIMATION)
+   ========================================================= */
+@keyframes navEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+@keyframes menuItemFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowSlideIn {
+    from {
+        width: 0%;
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.3);
+    }
+    to {
+        width: 85%;
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+
+.menu { display: flex; gap: 55px; }
+
+.menu a {
+    font-family: var(--font-art);
+    font-style: normal !important;
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px; 
+    letter-spacing: 2px;
+    transition: .4s;
+    cursor: pointer;
+    padding-bottom: 6px;
+    display: inline-block;
+    
+    /* Chuyển động nảy chữ nhẹ từ dưới lên so le */
+    animation: menuItemFade 0.5s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Thời gian xuất hiện so le của thanh Nav */
+.menu a:nth-child(1) { animation-delay: 0.1s; }
+.menu a:nth-child(2) { animation-delay: 0.18s; }
+.menu a:nth-child(3) { animation-delay: 0.26s; }
+.menu a:nth-child(4) { animation-delay: 0.34s; }
+
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, 0.5);
+}
+
+.menu a.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    
+    /* Vệt sáng active bung tỏa nhẹ nhàng từ giữa chữ giãn ra 2 bên */
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+@media screen and (max-width: 1024px){
+    .nav-inner{ padding: 0 20px; }
+    .menu{ gap: 25px; }
+    .menu a{ font-size: 16px; }
+}
+@media screen and (max-width: 768px){
+body{ overflow-x: hidden; }
+    .navbar{ padding: 0; }
+
+    .nav-inner{
+        height: 70px;
+        flex-direction: row !important; /* Khóa cứng thanh Nav trên một dòng nằm ngang */
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    .logo{ display: flex; align-items: center; justify-content: flex-start !important; }
+    .logo img{ width: 80px !important; height: auto; margin: 0; }
+    
+    /* CO NHỎ TÊN THƯƠNG HIỆU: Đảm bảo không đẩy nút 3 gạch rớt dòng */
+    .logo-text{ font-size: 22px !important; margin-left: 0 !important; }
+
+    .menu-toggle {
+        display: block !important;
+        font-size: 28px;
+        color: var(--gold);
+        cursor: pointer;
+        user-select: none;
+        order: 2;
+    }
+
+    .menu {
+        position: absolute;
+        top: 75px; right: 20px; width: 200px;
+        background: rgba(5, 10, 18, 0.96);
+        border: 1px solid rgba(212, 176, 106, 0.2); border-radius: 16px; padding: 20px;
+        display: flex; flex-direction: column !important; gap: 20px;
+        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.35s ease;
+    }
+
+    .menu.active { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }
+    .menu a{ font-size: 16px; width: 100%; text-align: center !important; padding-bottom: 4px; }
+}
+
+
+.hero{
+    min-height:40vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top: 80px; /* Chỉ giữ lại padding trên để tránh menu */
+    position:relative;
+    padding-bottom: 20px; /* Giảm padding dưới để co lại */
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(circle at center,
+    rgba(236,195,143,0.12),
+    transparent 50%);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:950px;
+}
+
+.hero-subtitle{
+    color:var(--gold);
+    font-size:20px;
+    letter-spacing:6px;
+    margin-bottom:25px;
+}
+
+.hero-title{
+    font-size:4.5rem;
+    color:var(--gold-light);
+    margin-bottom:15px;
+    line-height:1.2;
+}
+
+.hero-text{
+    color:var(--text-soft);
+    font-size:18px;
+    line-height:2.3;
+}
+/* Tối ưu hóa Hero Section cho Mobile */
+@media screen and (max-width: 768px) {
+    .hero {
+        min-height: 40vh;         /* Giảm thêm chiều cao để trông gọn gàng hơn */
+        padding: 80px 20px 40px;  /* Tăng padding-top lên 80px để không bị vướng Navbar */
+    }
+
+    .hero-content {
+        padding: 0;
+        width: 100%;
+    }
+
+    .hero-subtitle {
+        font-size: 11px;         /* Nhỏ nhưng vẫn đủ thanh thoát */
+        letter-spacing: 4px;
+        margin-bottom: 12px;
+    }
+
+    .hero-title {
+        font-size: 2rem;       /* Tăng nhẹ lên 2.2rem để tiêu đề nổi bật */
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+
+    .hero-text {
+        font-size: 14px;         /* Đưa về 14px là chuẩn đọc trên mobile */
+        line-height: 1.6;
+        padding: 0 20px;         /* Tăng padding 2 bên để chữ không bị tràn sát mép */
+        text-align: center;
+        max-width: 100%;        /* Giới hạn độ rộng để chữ không bị dàn quá dài */
+        margin: 0 auto;
+    }
+}
+/* MAIN */
+/* Container bao bọc toàn bộ phần Giới thiệu và Video */
+.section {
+    position: relative;
+    background: linear-gradient(rgba(5, 11, 20, 0.6), rgba(5, 11, 20, 0.6)), 
+                url('./images/bg1.png') no-repeat center center/cover;
+
+}
+.section-title{
+    font-family: var(--font-art);
+    font-size: 35px;
+    color: var(--gold);
+    margin-bottom: 40px;
+    text-align: center;
+}
+.flex-layout {
+    display: flex;
+    align-items: center;
+    margin: 0 30px; /* Căn giữa theo chiều dọc */
+    gap: 100px;          /* Khoảng cách giữa ảnh và chữ */
+    
+}
+
+/* Kích thước ảnh */
+.section-image {
+    width: 50%;          /* Ảnh chiếm 40% chiều rộng */
+    height: auto;
+    border-radius: 20px; /* Bo góc ảnh cho mềm mại */
+    object-fit: cover;
+    magrin-left: 20px;
+}
+/* Phần nội dung chiếm 60% còn lại */
+.section-content {
+    width: 50%;
+}
+.section-text {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 176, 106, 0.2);
+    font-size: 19px;        /* Tăng kích thước chữ (mặc định của bạn đang là 17px) */
+    line-height: 1.8;      /* Tăng giãn dòng để chữ không bị dính vào nhau */
+    color: #e0e0e0;
+    line-height: 1.8;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);      /* Độ dày chữ vừa phải */
+}
+@media screen and (max-width: 768px) {
+    .flex-layout {
+        flex-direction: column; /* Chuyển sang dạng cột dọc */
+        text-align: center;
+        margin: 0 10px; /* Căn giữa theo chiều dọc */
+        gap: 10px;           /* Giảm khoảng cách giữa ảnh và chữ trên mobile */
+    }
+    
+    .section-image {
+        width: 100%;           /* Ảnh full chiều rộng trên mobile */
+        margin-bottom: 20px;
+    }
+    
+    .section-content {
+        width: 100%;
+    }
+}
+.video-section-container {
+    /* Đảm bảo hình nền chỉ hiện trong phạm vi khối này */
+    width: 100%;
+    height: 100%;
+    
+    /* Căn giữa nội dung video bên trong */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.video-wrapper {
+    position: relative; /* Quan trọng để nút play căn theo div này */
+    overflow: hidden;
+}
+
+.responsive-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #000;
+    border-radius: 20px;
+
+}
+
+/* Nút Play căn giữa */
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 55px; /* Tỉ lệ chuẩn của nút YouTube */
+    background: rgba(255, 0, 0, 0.9); /* Màu đỏ YouTube */
+    border-radius: 15px; /* Bo góc đặc trưng */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+/* Tạo hình tam giác bên trong */
+.play-btn::after {
+    content: '';
+    border-style: solid;
+    border-width: 12px 0 12px 20px; /* Kích thước tam giác */
+    border-color: transparent transparent transparent white;
+    margin-left: 5px; /* Căn chỉnh tam giác vào giữa */
+}
+
+.play-btn:hover {
+    background: #ff0000; /* Đỏ đậm hơn khi di chuột */
+    transform: translate(-50%, -50%) scale(1.1);
+}
+.video-wrapper .play-btn {
+    opacity: 0; /* Ẩn đi ban đầu */
+    transition: opacity 0.3s ease;
+}
+
+.video-wrapper:hover .play-btn {
+    opacity: 1; /* Hiện ra khi di chuột vào */
+}
+
+.section-cct{
+    min-height: 80vh;
+    padding: 0 80px;
+    background: linear-gradient(rgba(5, 11, 20, 0.6), rgba(5, 11, 20, 0.6)),
+                    url('/h.anh/BGKM2.jpg') no-repeat center center/cover;
+    
+}
+.section-cct .section-title{
+    padding: 60px 0 40px 0;
+    text-align: center;
+    font-size: 50px;
+}
+.talk-show-mcnbd-title{
+    font-family: var(--font-art);
+    font-size: 28px;
+    color: var(--gold);
+
+}
+.trip-2n1d-title{
+    font-family: var(--font-art);
+    font-size: 28px;
+    color: var(--gold);
+
+}
+.cct-mcnbd {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* Dồn hết sang trái */
+    align-items: flex-start;    /* Căn lề trên */
+    gap: 60px;                  /* Khoảng cách giữa chữ và ảnh */
+    
+}
+
+
+.mcnbd-content, .trip-2n1d-content{
+    margin: 20px 0;
+    font-size: 20px; 
+    line-height: 1.6;
+    color: #ccc;
+}
+.cct-spacer {
+    flex: 0 0 15%;
+}
+.talk-show-mcnbd {
+    flex: 0 0 25%;
+    padding-right: 20px; /* Tạo khoảng thở cho chữ không chạm vào ảnh */
+}
+/* Khối ảnh bên phải (Image Slider) */
+.image-slider {
+    flex: 0 0 50%;                    /* Chiếm phần còn lại */
+    height: 550px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(212, 176, 106, 0.2);
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0; left: 0;
+    opacity: 0;
+    /* Hiệu ứng chuyển động kéo dài 1.5 giây */
+    transition: opacity 1.5s ease-in-out; 
+}
+/* Responsive: Dồn về một cột trên mobile */
+@media screen and (max-width: 768px) {
+    .cct-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .talk-show-mcnbd {
+        flex: 0 0 100%;
+    }
+    .image-slider {
+        width: 100%;
+    }
+}
+.cct-2n1d {
+    display: flex; /* Quan trọng để nó hiểu cột 15% - 25% - 50% */
+    width: 100%;
+    align-items: flex-start;
+    padding: 60px 0;
+}
+.cct-spacer {
+    flex: 0 0 15%;
+}
+
+.image-slider-2n1d {
+    flex: 0 0 50%;
+    height: 400px;
+    position: relative;
+    overflow: hidden; /* Che ảnh khi trượt */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.image-slider-2n1d {
+    width: 100%;
+    height: 480px;
+    position: relative;
+    overflow: hidden; /* Cực kỳ quan trọng để che ảnh trượt ngoài khung */
+    border-radius: 20px;
+    background-color: #050b14;
+}
+.noidung-2n1d {
+    flex: 0 0 25%;
+    padding-left: 40px; /* Tạo khoảng thở với ảnh bên trái */
+    text-align: left;
+}
+
+.slide-2n1d {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Trạng thái ảnh ẩn: nằm lệch hoàn toàn sang trái */
+    transform: translateX(-100%);
+    transition: transform 1s ease-in-out;
+}
+
+/* Ảnh đang hiện: nằm ở giữa */
+.slide-2n1d.active {
+    transform: translateX(0);
+}
+
+/* Ảnh vừa chạy xong: trượt tiếp sang phải */
+.slide-2n1d.exit {
+    transform: translateX(100%);
+}
+
+@media screen and (max-width: 768px) {
+
+    .section-cct{
+        padding: 0 20px;
+    }
+
+    .section-cct .section-title{
+        font-size: 32px;
+        padding: 40px 0 30px;
+    }
+
+    /* TALKSHOW */
+    .cct-mcnbd{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .cct-spacer{
+        display: none;
+    }
+
+    .talk-show-mcnbd{
+        width: 100%;
+        flex: none;
+        text-align: center;
+        padding-right: 0;
+        order: 1;
+    }
+
+    .image-slider{
+        width: 100%;
+        flex: none;
+        height: 250px;
+        order: 2;
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .slide{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* 2N1Đ */
+    .cct-2n1d{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        padding: 40px 0;
+    }
+
+    .noidung-2n1d{
+        width: 100%;
+        flex: none;
+        text-align: center;
+        padding-left: 0;
+        order: 1;
+    }
+
+    .image-slider-2n1d{
+        width: 100%;
+        flex: none;
+        height: 250px;
+        order: 2;
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .slide-2n1d{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .talk-show-mcnbd-title,
+    .trip-2n1d-title{
+        font-size: 24px;
+    }
+
+    .mcnbd-content,
+    .trip-2n1d-content{
+        font-size: 16px;
+        line-height: 1.7;
+        margin: 15px 0;
+    }
+}
+/* ==========================
+   DẤU ẤN MÙA 1
+========================== */
+
+.season-mark{
+    padding: 100px 80px;
+    background: rgba(194, 241, 119, 0.397);
+    
+}
+
+.season-intro{
+    max-width: 900px;
+    margin: 0 auto 50px;
+    text-align: center;
+    color: #d8d8d8;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+.season-grid{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:25px;
+}
+
+.season-card{
+    background: rgba(255,255,255,.04);
+    border:1px solid rgba(212,176,106,.25);
+    border-radius:24px;
+    padding:30px 20px;
+    text-align:center;
+    transition:.35s;
+}
+
+.season-card:hover{
+    transform: translateY(-8px);
+
+    border-color: var(--gold);
+
+    box-shadow:
+    0 0 20px rgba(212,176,106,.15);
+}
+
+
+
+.season-number{
+    font-family: var(--font-art);
+    color: var(--gold);
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.season-card h3{
+    margin-bottom:12px;
+    color:#fff;
+}
+
+.season-card p{
+    color:#cfcfcf;
+    line-height:1.7;
+}
+
+.season-quote{
+    max-width:850px;
+    margin:60px auto 0;
+    text-align:center;
+    color:var(--gold-light);
+    font-size:20px;
+    line-height:1.8;
+    font-style:italic;
+}
+.season-text-card{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.season-text-card h3{
+    font-family: var(--font-art);
+    color: var(--gold);
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width:768px){
+
+    .season-mark{
+        padding:60px 20px;
+    }
+
+    .season-intro{
+        font-size:15px;
+        line-height:1.7;
+        margin-bottom:30px;
+    }
+
+    .season-grid{
+        grid-template-columns: 1fr;
+        gap:15px;
+    }
+
+    .season-card{
+        min-height:auto;
+        padding:25px 20px;
+    }
+
+    .season-number{
+        font-size:32px;
+    }
+
+    .season-card h3{
+        font-size:20px;
+    }
+
+    .season-card p{
+        font-size:14px;
+        line-height:1.7;
+    }
+
+    .season-quote{
+        font-size:15px;
+        line-height:1.8;
+        margin-top:35px;
+    }
+}
+/* =========================================================
+   CẤU TRÚC GRID CHO TẦM NHÌN - SỨ MỆNH - MỤC TIÊU
+   ========================================================= */
+.vision-section {
+    width: 100%; /* Ép phần nền rộng full 100% màn hình */
+    margin: 0 auto; /* Đổi margin để hình nền sát với phần trên dưới */
+    padding: 80px 0; /* Tạo khoảng đệm trên dưới cho hình nền thở */
+
+    /* 1. CHÈN HÌNH NỀN VÀ TỐI ƯU */
+    background: url('./images/background/02.jpg'); /* Thay đường dẫn hình nền của bạn vào đây */
+    background-size: cover;         /* Phủ kín toàn bộ không gian section */
+    background-position: center;    /* Giữ tâm hình nền luôn ở chính giữa */
+    background-repeat: no-repeat;   /* Ngăn lặp hình */
+    background-attachment: scroll;  /* Bạn có thể đổi thành 'fixed' nếu muốn hiệu ứng cuộn parallax */
+}
+
+.vision-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    
+    max-width: 1300px; /* Giới hạn độ rộng của khối nội dung */
+    margin: 0 auto;    /* Căn giữa khối nội dung */
+    padding: 0 20px;   /* Khoảng cách an toàn cho 2 rìa khi thu nhỏ màn hình */
+}
+
+/* Định dạng chung cho cả 3 khối card */
+.vision-card {
+    background: rgba(5, 10, 18, 0.75); /* Tăng độ tối nền card (0.75) để dễ đọc chữ đè lên hình nền */
+    border: 1px solid rgba(212, 176, 106, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s ease;
+}
+
+.vision-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-light);
+    box-shadow: 0 10px 25px rgba(212, 176, 106, 0.08);
+}
+
+/* QUAN TRỌNG: Ép ô Mục Tiêu dàn hết hàng dưới */
+.vision-bottom {
+    grid-column: span 2; /* Chiếm cả 2 cột */
+    flex-direction: row; /* Riêng mục tiêu đổi thành: Ảnh bên trái, chữ bên phải cho đẹp */
+}
+
+/* Định dạng chung cho vùng chứa ảnh */
+.vision-img {
+    width: 100%;
+    height: 250px; /* Chiều cao ảnh của Tầm Nhìn và Sứ Mệnh */
+    overflow: hidden;
+}
+
+/* Riêng vùng chứa ảnh của Mục Tiêu (khi nằm ngang) */
+.vision-bottom .vision-img {
+    width: 45%; /* Ảnh chiếm 45% bề ngang */
+    height: auto; /* Chiều cao tự động căng theo phần chữ */
+    min-height: 280px;
+}
+
+.vision-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Chống méo hình tuyệt đối */
+    transition: transform 0.6s ease;
+}
+
+.vision-card:hover .vision-img img {
+    transform: scale(1.05); /* Hiệu ứng zoom nhẹ ảnh khi hover */
+}
+
+/* Định dạng phần nội dung chữ bên trong */
+.vision-content {
+    padding: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Riêng phần chữ của Mục Tiêu */
+.vision-bottom .vision-content {
+    width: 55%;
+}
+
+.vision-content h3 {
+    font-family: 'Maglony', serif; /* Font nghệ thuật gold của bạn */
+    color: var(--gold);
+    font-size: 24px;
+    margin-bottom: 15px;
+    letter-spacing: 1.5px;
+}
+
+.vision-content p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Định dạng danh sách dấu chấm của Mục Tiêu */
+.vision-content ul {
+    list-style: none; /* Bỏ dấu chấm tròn mặc định */
+    padding: 0;
+    margin: 0;
+}
+
+.vision-content ul li {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 20px; /* Nhường chỗ cho dấu icon tự chế */
+}
+
+/* Thay dấu chấm tròn bằng dấu mũi tên/vạch vàng gold xinh xắn */
+.vision-content ul li::before {
+    content: "✦"; 
+    position: absolute;
+    top: 4px;
+    left: 2px;
+    color: var(--gold);
+    font-size: 12px;
+}
+
+/* =========================================================
+   TỐI ƯU RESPONSIVE TRÊN ĐIỆN THOẠI (MOBILE)
+   ========================================================= */
+@media screen and (max-width: 900px) {
+    .vision-grid {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột duy nhất */
+    }
+
+    .vision-bottom {
+        grid-column: span 1; /* Hủy chiếm 2 cột */
+        flex-direction: column; /* Mục tiêu quay về dạng dọc như 2 ô trên */
+    }
+
+    .vision-bottom .vision-img, 
+    .vision-bottom .vision-content {
+        width: 100%; /* Trả lại 100% chiều rộng trên mobile */
+    }
+
+    .vision-img {
+        height: 200px; /* Thu nhỏ ảnh lại một chút trên điện thoại */
+    }
+    
+    .vision-content {
+        padding: 20px;
+    }
+}
+@media screen and (max-width:768px){
+
+    .vision-section{
+        padding:50px 20px;
+    }
+
+    .vision-grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .vision-left,
+    .vision-right,
+    .vision-bottom{
+        grid-column:auto;
+        max-width:100%;
+        min-height:auto;
+    }
+
+    .vision-card{
+        padding:20px;
+        min-height:auto;
+    }
+
+    .vision-card h3{
+        font-size:22px;
+        margin-bottom:12px;
+    }
+
+    .vision-card p{
+        font-size:14px;
+        line-height:1.7;
+        max-width:100%;
+    }
+
+    .vision-bottom ul{
+        max-width:100%;
+        padding-left:18px;
+    }
+
+    .vision-bottom li{
+        font-size:14px;
+        line-height:1.7;
+        margin-bottom:10px;
+    }
+}
+.item_tamnhin{
+    width: 350px;
+    height: 350px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+/* footer*/
+/* =========================================================
+   4. CHÂN TRANG (FOOTER STYLE)
+   ========================================================= */
+.Footer {
+    background-color: #050b14; /* Đồng bộ màu nền tối với toàn trang */
+    border-top: 1px solid rgba(212, 176, 106, 0.2); /* Tạo đường viền vàng gold mờ tinh tế ở trên */
+    padding: 60px 0 20px 0;
+    width: 100%;
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    
+    /* Dàn hàng ngang 4 cột */
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* Tự động xuống dòng linh hoạt nếu màn hình thu nhỏ */
+}
+
+/* Định dạng cột chung */
+.footer-col {
+    flex: 1.5;
+    min-width: 220px; /* Giới hạn không cho cột bị bóp quá nhỏ */
+}
+
+/* Ưu tiên cột logo rộng hơn các cột còn lại một chút */
+.footer-col.footer-brand {
+    flex: 1;
+}
+
+.footer-brand .brand-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+/* Tiêu đề của các cột (Khám phá, Liên hệ, Theo dõi) */
+.footer-col h3 {
+    font-family: 'Maglony', serif; /* Sử dụng font chữ nghệ thuật của bạn */
+    color: var(--gold);
+    font-size: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+/* Tạo một gạch chân nhỏ dưới mỗi tiêu đề cột */
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 35px;
+    height: 2px;
+    background-color: var(--gold);
+}
+
+/* Định dạng danh sách đường link và thông tin */
+.footer-links, .footer-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li, .footer-info li {
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* Hiệu ứng nảy chữ sang phải và đổi màu gold khi di chuột vào link */
+.footer-links a:hover {
+    color: var(--gold-light);
+    transform: translateX(5px);
+}
+
+/* Khu vực các ô tròn mạng xã hội (Theo dõi) */
+.footer-col p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 176, 106, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Hiệu ứng sáng bừng lên khi hover vào nút mạng xã hội */
+.social-icons a:hover {
+    background: var(--gold);
+    color: #050b14;
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(212, 176, 106, 0.3);
+}
+
+/* Bản quyền dưới đáy cùng */
+.footer-bottom {
+    max-width: 1400px;
+    margin: 50px auto 0 auto;
+    padding: 20px 20px 0 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Đường ngăn cách thanh đáy */
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    margin: 0;
+}
+/* =========================================================
+   CHỈNH KÍCH THƯỚC LOGO Ở FOOTER
+   ========================================================= */
+.Footer .logo img {
+    width: 180px;        /* Tăng kích thước chiều rộng lên 180px (mặc định đang là 100px) */
+    max-width: 100%;     /* Đảm bảo ảnh không bị tràn khung */
+    height: auto;        /* Tự động tính toán chiều cao để không bị méo hình */
+    object-fit: contain;
+}
+
+/* Tối ưu kích thước logo trên điện thoại để không bị quá to */
+@media screen and (max-width: 768px) {
+    .Footer .logo img {
+        width: 140px;    /* Trên điện thoại thu nhỏ lại một chút cho cân đối bốc cục */
+        margin: 0 auto;  /* Căn giữa logo nếu footer trên mobile của bạn xếp hàng dọc */
+    }
+}
+
+/* =========================================================
+   TỐI ƯU TRÊN ĐIỆN THOẠI (MOBILE RESPONSIVE)
+   ========================================================= */
+@media screen and (max-width: 768px) {
+    .Footer {
+        padding: 40px 0 20px 0;
+    }
+
+    .footer-inner {
+        flex-direction: column; /* Chuyển từ hàng ngang sang hàng dọc xếp chồng trên mobile */
+        gap: 35px;
+    }
+
+    .footer-col {
+        width: 100%;
+    }
+}
