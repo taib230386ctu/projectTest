@@ -1,0 +1,799 @@
+/* =========================================================
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+    --font-art: 'Maglony', serif;
+    --font-text: 'Montserrat', sans-serif;
+}
+
+@font-face {
+    font-family: 'Maglony'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050b14;
+    color: white;
+    font-family: var(--font-text);
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU) - ĐÃ ĐỒNG BỘ 100%
+   ========================================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(5, 10, 18, .45);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.nav-inner {
+    max-width: 1500px;
+    height: 64px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Đảm bảo khoảng đệm 2 đầu cố định */
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.logo img{
+    width: 70px;
+    height: auto;
+    display: block;
+    margin: 0;
+    object-fit: contain;
+}
+
+.logo-text{
+    font-family: var(--font-art);
+    color: var(--gold);
+    font-size: 28px;
+    font-style: italic;
+    white-space: nowrap;
+}
+
+.menu { display: flex; gap: 55px; }
+
+/* Cấu trúc nút cơ bản chung cho cả 2 trang */
+.menu a {
+    font-family: 'Maglony', serif; 
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px; 
+    letter-spacing: 2px;
+    transition: .4s;
+    cursor: pointer;
+    padding-bottom: 6px; /* Tạo khoảng khoảng cách chuẩn xuống dải sáng */
+    display: inline-block;
+}
+
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, 0.5);
+}
+
+/* Thao tác đổ màu chữ khi active */
+.menu a.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+/* HIỆU ỨNG VỆT SÁNG "MỜ DẦN VỀ 2 ĐẦU" - HOÀN HẢO CHO CẢ 2 TRANG */
+.menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; /* Đẩy tịnh tiến xuống dưới chân chữ đều nhau chằn chặn */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%; /* Độ dài vệt sáng chiếm 85% độ rộng chữ */
+    height: 2px; /* Độ dày dải sáng mảnh mai nghệ thuật */
+    
+    /* Đổ màu gradient chuyển tiếp trong suốt sang vàng gold đậm */
+    background: linear-gradient(
+        to right, 
+        transparent 0%, 
+        var(--gold) 40%, 
+        var(--gold) 60%, 
+        transparent 100%
+    );
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+}
+/* =========================================================
+   3. KHU VỰC CHÍNH (HERO SECTION)
+   ========================================================= */
+.hero {
+    font-family: 'Maglony', serif;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Hiệu ứng lớp phủ nền */
+.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: #000; opacity: .52;
+    filter: brightness(.65) blur(1px);
+    transform: scale(1.05); z-index: 1;
+}
+
+.hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(5,10,18,.12) 0%, rgba(5,10,18,.42) 35%, rgba(5,10,18,.82) 75%, rgba(5,10,18,.98) 100%);
+    z-index: 2;
+}
+
+.bg-butterfly {
+    position: absolute; width: 900px; height: 900px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -35%);
+    opacity: .05; filter: blur(2px); z-index: 2;
+}
+
+.hero-content {
+    position: relative; z-index: 5;
+    width: 100%; text-align: center;
+    padding: 70px 20px 80px;
+}
+
+/* Hình ảnh thương hiệu & Con bướm */
+.brand-image-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.brand-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+
+    -webkit-mask-image:
+    linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+    );
+
+    mask-image:
+    linear-gradient(
+        to right,
+        transparent 0%,
+        black 15%,
+        black 85%,
+        transparent 100%
+    );
+}
+
+.butterfly {
+    position: absolute; top: 90px; left: 50%;
+    transform: translateX(-50%); width: 700px; z-index: 10;
+    animation: floatButterfly 5s ease-in-out infinite, glowButterfly 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(255,220,150,.45)) drop-shadow(0 0 60px rgba(120,180,255,.25));
+    opacity: .95;
+}
+
+.butterfly::after {
+    content: ''; position: absolute; inset: -40px;
+    background: radial-gradient(circle, rgba(255,240,180,.25), rgba(120,180,255,.12), transparent 70%);
+    filter: blur(40px); z-index: -1;
+}
+
+/* =========================================================
+   4. CÁC THÀNH PHẦN NỘI DUNG (TITLE, DESC, INPUT)
+   ========================================================= */
+.main-title {
+    font-family: 'TenFontCuaTai', sans-serif;
+    font-size: 68px; letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(255,255,255,.08);
+}
+
+.subtitle { margin-top: 12px; letter-spacing: 6px; color: #b5bbc4; font-size: 16px; }
+
+.line {
+    width: 100%; max-width: 560px; height: 1px; margin: 26px auto;
+    background: linear-gradient(to right, transparent, rgba(212, 176, 106, .45), transparent);
+    position: relative;
+}
+
+.line::after {
+    content: '✦'; position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%,-50%); color: var(--gold);
+    background: #08101c; padding: 0 12px; font-size: 16px;
+}
+
+.desc { margin-top: 36px; color: #d0d0d0; line-height: 1.9; font-size: 20px; font-weight: 300; }
+
+.input-label { margin-top: 40px; margin-bottom: 14px; color: #bdbdbd; font-size: 22px; }
+
+.input-box { width: 100%; max-width: 520px; margin: auto; position: relative; }
+
+.input-box input {
+    width: 100%; height: 70px; border-radius: 14px;
+    border: 1px solid rgba(212, 176, 106, .45);
+    background: rgba(0,0,0,.28); outline: none; color: white;
+    font-size: 18px; padding: 0 55px 0 22px;
+    backdrop-filter: blur(10px); transition: .4s;
+}
+
+.input-box input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 176, 106, .2); }
+.input-box input::placeholder { color: #777; }
+.feather { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 22px; }
+
+.start-btn {
+    margin-top: 24px; width: 100%; max-width: 520px; height: 72px;
+    border-radius: 14px; border: 1px solid rgba(212, 176, 106, .45);
+    background: linear-gradient(to bottom, rgba(26,20,10,.7), rgba(0,0,0,.85));
+    color: #e6c27a; letter-spacing: 5px; font-size: 18px; font-weight: 600;
+    cursor: pointer; transition: .4s;
+    box-shadow: inset 0 0 15px rgba(255,255,255,.03), 0 0 20px rgba(212, 176, 106, .1);
+}
+
+.start-btn:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(212, 176, 106, .28); }
+
+/* =========================================================
+   5. KHU VỰC GALAXY & KHOẢNH KHẮC (GALLERY)
+   ========================================================= */
+.upload-gallery {
+    padding: 120px 8%; font-family: 'Maglony', serif;
+    background: linear-gradient(to bottom, #040914, #071425);
+}
+
+.gallery-title {
+    text-align: center; font-size: 42px; margin-bottom: 70px;
+    color: #f6d28d; font-family: 'Maglony', serif; letter-spacing: 4px;
+}
+
+.moments-section { font-family: 'Maglony', serif; }
+
+.moments-title {
+    font-family: var(--font-art); text-align: center; color: var(--gold);
+    font-size: 36px; margin-top: 80px; margin-bottom: 40px;
+    letter-spacing: 3px; text-shadow: 0 0 15px rgba(212, 176, 106, 0.3);
+}
+
+.gallery-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px; padding: 20px 5%;
+}
+
+.gallery-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,220,150,.15);
+    border-radius: 24px; overflow: hidden; backdrop-filter: blur(10px);
+    transition: .4s; box-shadow: 0 0 25px rgba(0,0,0,.35);
+}
+
+.gallery-card:hover { transform: translateY(-8px); box-shadow: 0 0 35px rgba(255,220,150,.15); }
+
+.gallery-card img, .gallery-card video { width: 100%; height: 260px; object-fit: cover; display: block; }
+
+.card-content { padding: 24px; }
+.card-content h3, .gallery-card h3 {
+    font-family: 'Maglony', serif !important;
+    color: #ffe7a8; margin-bottom: 12px; font-size: 24px; letter-spacing: 1px;
+}
+
+.card-content p, .gallery-card p { font-family: 'Montserrat', sans-serif; font-size: 14px; color: #cfcfcf; line-height: 1.7; }
+
+/* =========================================================
+   6. KHUNG UPLOAD VŨ TRỤ GALAXY
+   ========================================================= */
+.upload-form {
+    max-width: 500px; margin: 40px auto; padding: 30px;
+    border: 1px solid rgba(212, 176, 106, 0.3); border-radius: 20px;
+    background: rgba(5, 11, 20, 0.8); backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); text-align: center;
+}
+
+.upload-form h3 {
+    font-family: 'Maglony', serif !important;
+    color: var(--gold); font-size: 24px; margin-bottom: 25px; letter-spacing: 1px;
+}
+
+.upload-form input[type="text"] {
+    width: 100%; margin-bottom: 15px; padding: 15px;
+    background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(212, 176, 106, 0.2);
+    border-radius: 10px; color: #fff; font-family: 'Montserrat', sans-serif;
+    outline: none; transition: 0.3s;
+}
+
+.upload-form input[type="file"] { width: 100%; margin-bottom: 20px; color: #888; font-size: 14px; }
+
+#btnUpload {
+    font-family: 'Maglony', serif !important;
+    height: 60px; width: 100%;
+    background: linear-gradient(135deg, #050b14 0%, #1a140a 100%);
+    border: 1px solid var(--gold); color: var(--gold-light);
+    border-radius: 12px; font-size: 18px; letter-spacing: 2px;
+    cursor: pointer; transition: 0.4s; box-shadow: 0 0 15px rgba(212, 176, 106, 0.2);
+}
+
+#btnUpload:hover {
+    box-shadow: 0 0 30px rgba(212, 176, 106, 0.5); transform: scale(1.02);
+    background: var(--gold); color: #000;
+}
+
+/* =========================================================
+   7. GIAO DIỆN THÔNG BÁO (SWEETALERT2)
+   ========================================================= */
+.swal2-title { font-family: 'Maglony', serif !important; color: #d4b06a !important; letter-spacing: 2px; }
+.swal2-html-container { font-family: 'Montserrat', sans-serif !important; line-height: 1.6; }
+.swal2-popup { border: 1px solid rgba(212, 176, 106, 0.3) !important; border-radius: 25px !important; }
+.swal2-html-container b { color: var(--gold-light); }
+.swal2-html-container div { border: 1px solid rgba(212, 176, 106, 0.2); }
+
+/* =========================================================
+   8. TỐI ƯU GIAO DIỆN DI ĐỘNG (MOBILE RESPONSIVE)
+   ========================================================= */
+/* =========================================================
+   RESPONSIVE FULL
+   ========================================================= */
+
+/* Tablet */
+@media screen and (max-width: 1024px){
+
+    .nav-inner{
+        padding: 0 20px;
+    }
+
+    .menu{
+        gap: 25px;
+    }
+
+    .menu a{
+        font-size: 16px;
+    }
+
+    .brand-image-wrapper{
+        max-width: 95%;
+    }
+
+    .main-title{
+        font-size: 54px;
+    }
+
+    .desc{
+        font-size: 18px;
+        padding: 0 20px;
+    }
+
+    .butterfly{
+        width: 420px;
+        top: 120px;
+    }
+
+}
+
+
+/* Mobile */
+@media screen and (max-width: 768px){
+
+    body{
+        overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    .navbar{
+        padding: 10px 0;
+    }
+
+    .nav-inner{
+        height: auto;
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 15px;
+    }
+
+    .logo{
+        gap: 10px;
+    }
+
+    .logo img{
+        width: 70px;
+        margin: 0;
+    }
+
+    .logo-text{
+        font-size: 22px;
+        margin-left: -15px;
+        margin-top: 5px;
+    }
+
+    .menu{
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 20px;
+        padding-bottom: 5px;
+    }
+
+    .menu::-webkit-scrollbar{
+        display: none;
+    }
+
+    .menu a{
+        white-space: nowrap;
+        font-size: 15px;
+    }
+
+    /* HERO */
+    .hero{
+        min-height: auto;
+        padding-top: 180px;
+        padding-bottom: 80px;
+    }
+
+    .hero-content{
+        padding: 0 15px;
+    }
+
+    .brand-image-wrapper{
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .brand-image{
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .butterfly{
+        width: 260px;
+        top: 160px;
+    }
+
+    .bg-butterfly{
+        width: 350px;
+        height: 350px;
+    }
+
+    /* TEXT */
+    .main-title{
+        font-size: 40px !important;
+        letter-spacing: 3px;
+        line-height: 1.2;
+    }
+
+    .subtitle{
+        font-size: 14px !important;
+        letter-spacing: 2px;
+        padding: 0 10px;
+    }
+
+    .desc{
+        font-size: 15px;
+        line-height: 1.8;
+        padding: 0 10px;
+    }
+
+    .input-label{
+        font-size: 18px;
+    }
+
+    .input-box{
+        max-width: 100%;
+    }
+
+    .input-box input{
+        height: 58px;
+        font-size: 15px !important;
+    }
+
+    .start-btn{
+        width: 100%;
+        height: 58px;
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    /* GALLERY */
+    .upload-gallery{
+        padding: 80px 15px;
+    }
+
+    .gallery-title{
+        font-size: 28px;
+        line-height: 1.4;
+    }
+
+    .gallery-grid{
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 20px;
+    }
+
+    .gallery-card img,
+    .gallery-card video{
+        height: 220px;
+    }
+
+    .moments-title{
+        font-size: 28px;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .upload-form{
+        margin: 30px 15px;
+        padding: 20px;
+    }
+
+}
+@media screen and (max-width: 768px){
+
+    .logo{
+        justify-content: center;
+    }
+
+    .logo img{
+        width: 55px;
+    }
+
+    .logo-text{
+        font-size: 22px;
+    }
+
+}
+
+
+/* Small phones */
+@media screen and (max-width: 480px){
+
+    .main-title{
+        font-size: 32px !important;
+    }
+
+    .subtitle{
+        font-size: 13px !important;
+    }
+
+    .desc{
+        font-size: 14px;
+    }
+
+    .gallery-title,
+    .moments-title{
+        font-size: 24px;
+    }
+
+    .butterfly{
+        width: 200px;
+    }
+
+}
+
+/* =========================================================
+   9. HIỆU ỨNG CHUYỂN ĐỘNG (ANIMATIONS)
+   ========================================================= */
+@keyframes floatButterfly {
+    0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg) scale(1); }
+    25% { transform: translateX(-50%) translateY(-10px) rotate(-1deg) scale(1.02); }
+    50% { transform: translateX(-50%) translateY(-22px) rotate(1deg) scale(1.04); }
+    75% { transform: translateX(-50%) translateY(-10px) rotate(-1deg) scale(1.02); }
+}
+
+@keyframes glowButterfly {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(255,220,150,.35)) drop-shadow(0 0 50px rgba(120,180,255,.2)); opacity: .92; }
+    50% { filter: drop-shadow(0 0 40px rgba(255,220,150,.8)) drop-shadow(0 0 90px rgba(120,180,255,.45)); opacity: 1; }
+}
+/* =========================================================
+   HAMBURGER MENU MOBILE
+   ========================================================= */
+
+.menu-toggle{
+    display: none;
+    font-size: 32px;
+    color: var(--gold);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px){
+
+    .nav-inner{
+        position: relative;
+    }
+
+    .menu-toggle{
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        z-index: 999;
+    }
+
+    .menu{
+        position: absolute;
+        top: 80px;
+        right: 15px;
+
+        width: 220px;
+
+        background: rgba(5,10,18,.96);
+
+        border: 1px solid rgba(212,176,106,.25);
+
+        border-radius: 18px;
+
+        padding: 20px;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 18px;
+
+        backdrop-filter: blur(16px);
+
+        box-shadow:
+        0 10px 40px rgba(0,0,0,.5);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+
+        transition: .35s ease;
+    }
+
+    .menu.active{
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .menu a{
+        font-size: 16px;
+        width: 100%;
+        text-align: left;
+    }
+
+}
+/* =========================================================
+   SWEETALERT2 GALAXY CUSTOM (Trang chủ & Admin)
+   ========================================================= */
+
+/* 1. Tiêu đề Popup - Ép font Maglony */
+.swal2-title, .swal-title-art {
+    font-family: 'Maglony', serif !important;
+    color: #d4b06a !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 2px !important;
+    text-shadow: 0 0 15px rgba(212, 176, 106, 0.3);
+}
+
+/* 2. Nội dung văn bản phụ */
+.swal2-html-container {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #ccc !important;
+    line-height: 1.6;
+}
+
+/* 3. Ô nhập liệu (Mật khẩu & Input) */
+.swal2-input, .swal-input-gold {
+    background: rgba(0, 0, 0, 0.7) !important;
+    border: 1px solid #d4b06a !important;
+    color: #f6d28d !important;
+    border-radius: 15px !important;
+    text-align: center !important;
+    letter-spacing: 5px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    transition: 0.3s !important;
+}
+
+.swal2-input:focus, .swal-input-gold:focus {
+    box-shadow: 0 0 20px rgba(212, 176, 106, 0.4) !important;
+    border-color: #f6d28d !important;
+}
+
+/* 4. Khung Popup chính */
+.swal2-popup {
+    background: #050b14 !important;
+    border: 1px solid rgba(212, 176, 106, 0.2) !important;
+    border-radius: 25px !important;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 5. Nút bấm xác nhận */
+.swal2-confirm {
+    font-family: 'Maglony', serif !important;
+    letter-spacing: 1px !important;
+    border-radius: 10px !important;
+    padding: 12px 30px !important;
+    text-transform: uppercase;
+}
+
+/* 6. Nút hủy/đóng */
+.swal2-cancel {
+    font-family: 'Montserrat', sans-serif !important;
+    border-radius: 10px !important;
+}
+
+/* =========================================================
+   QUẢN LÝ CARD TRONG ADMIN
+   ========================================================= */
+
+/* Hiệu ứng chung cho nút trên card */
+.gallery-card button {
+    transition: 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.gallery-card button:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+/* Nút GỠ (Chuyển về pending) - Màu trầm, tinh tế */
+button[onclick*="pending"] {
+    background: rgba(108, 117, 125, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #999 !important;
+}
+
+button[onclick*="pending"]:hover {
+    background: rgba(108, 117, 125, 0.4) !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+/* Nút DUYỆT (Chuyển về approved) */
+button[onclick*="approved"] {
+    background: #28a745 !important;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+/* SWEETALERT2 GALAXY CUSTOM */
+.swal2-title, .swal-title-art {
+    font-family: 'Maglony', serif !important;
+    color: #d4b06a !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 2px !important;
+}
+
+.swal2-popup {
+    background: #050b14 !important;
+    border: 1px solid rgba(212, 176, 106, 0.2) !important;
+    border-radius: 25px !important;
+}
+
+.swal-input-gold {
+    background: rgba(0, 0, 0, 0.7) !important;
+    border: 1px solid #d4b06a !important;
+    color: #f6d28d !important;
+    border-radius: 15px !important;
+    text-align: center !important;
+    letter-spacing: 5px !important;
+}

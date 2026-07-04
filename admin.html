@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kiểm duyệt Vũ trụ</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin(test).css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body style="background:#050b14; padding-top: 80px; padding-bottom: 100px;">
+
+    <div class="admin-container" style="width: 90%; max-width: 1400px; margin: auto;">
+    <h1 style="color:var(--gold); margin-top:40px;">✦ CHƯA DUYỆT ✦</h1>
+    <h2 class="moments-title">Hình ảnh</h2>
+    <div id="pendingImage" class="gallery-grid" style="margin-bottom: 40px;"></div>
+    <h2 class="moments-title">Video</h2>
+    <div id="pendingVideo" class="gallery-grid" style="margin-bottom: 80px;"></div>
+
+    <h1 style="color:#28a745; border-top: 1px solid rgba(255,255,255,0.1); padding-top:40px;">✦ ĐÃ DUYỆT ✦</h1>
+    <h2 class="moments-title">Hình ảnh</h2>
+    <div id="approvedImage" class="gallery-grid" style="margin-bottom: 40px;"></div>
+    <h2 class="moments-title">Video</h2>
+    <div id="approvedVideo" class="gallery-grid"></div>
+</div>
+
+    <a href="index.html" style="position: fixed; bottom: 20px; right: 20px; color: var(--gold); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--gold); padding: 10px 20px; border-radius: 50px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000;">← VỀ TRANG CHỦ</a>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
