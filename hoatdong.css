@@ -6,6 +6,10 @@
     --gold-light: #f6d28d;
    
 }
+@font-face {
+    font-family: 'DancingScript'; 
+    src: url('./fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
+}
 
 @font-face {
     font-family: 'Maglony'; 
@@ -103,10 +107,11 @@ html, body {
 }
 
 .part-season {
-    font-family: 'Nillota', cursive; /* Font mới cậu vừa thêm */
-    font-size: 28px;
+    font-family: 'DancingScript', cursive; /* 💡 Nên đổi dự phòng thành cursive (chữ viết tay) thay vì serif */
+    font-size: 24px;
     color: var(--gold);
-    
+    padding-top:2px;
+    padding-left: 5px;
 }
 /* =========================================================
 ĐỊNH NGHĨA CÁC KHUNG CHUYỂN ĐỘNG (KEYFRAMES ANIMATION)
