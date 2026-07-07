@@ -1,17 +1,11 @@
 /* =========================================================
-1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
    ========================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital@0;1&family=Quicksand&display=swap');
-
-
 :root {
     --gold: #d4b06a;
     --gold-light: #f6d28d;
-    /* Định nghĩa font chữ mặc định cho toàn trang web ở đây nếu muốn */
-    --font-text: 'Arial', sans-serif; 
+   
 }
-
-/* --- KHAI BÁO FONT FACE --- */
 @font-face {
     font-family: 'DancingScript'; 
     src: url('./fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
@@ -23,15 +17,14 @@
 }
 
 @font-face {
-    font-family: 'LastChristmas'; /* Sửa thành chữ thường cho dễ đồng bộ */
-    src: url('./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF') format('opentype'); /* Sửa thành opentype */
+    font-family: 'LASTCHRISTMAS'; 
+    src: url('./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF') format('truetype');
 }
 
 @font-face {
     font-family: 'Nillota'; 
     src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
 }
-
 * {
     margin: 0;
     padding: 0;
@@ -39,23 +32,28 @@
 }
 
 body {
+    /* Mặc định chữ thường đứng thẳng đứng, không nghiêng ríu mắt */
     font-family: var(--font-text);
     background: #050b14;
     color: white;
     overflow-x: hidden;
-    overflow-y: scroll; 
+    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
 }
-
 html, body {
+    /* Cho trình duyệt Chrome, Safari và Opera */
     &::-webkit-scrollbar {
         display: none;
     }
+    
+    /* Cho trình duyệt Firefox */
     scrollbar-width: none;
+    
+    /* Cho trình duyệt Internet Explorer và Edge cũ */
     -ms-overflow-style: none; 
 }
 
 /* =========================================================
-2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU)
+   2. THANH ĐIỀU HƯỚNG (NAVBAR & MENU) - HIỆU ỨNG CHUYỂN ĐỘNG ✨
    ========================================================= */
 .navbar {
     position: fixed;
@@ -64,6 +62,8 @@ html, body {
     z-index: 100;
     background: rgba(5, 10, 18, .45);
     border-bottom: 1px solid rgba(255, 255, 255, .05);
+    
+    /* Hiệu ứng sương mờ hạ cánh mềm mại khi tải trang */
     animation: navEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
@@ -96,12 +96,12 @@ html, body {
 
 .logo-text {
     display: flex;
-    flex-direction: row; /* ❌ SỬA LỖI: Cú pháp đúng là 'row', không phải 'flex-row' */
+    flex-direction: flex-row; /* Xếp chồng theo chiều dọc nếu muốn hoặc để mặc định flex-row */
     align-items: flex-start;
 }
 
 .part-main {
-    font-family: 'LastChristmas', cursive; /* Đã khớp tên viết hoa/thường */
+    font-family: 'LastChristmas', serif; /* Font nghệ thuật của cậu */
     font-size: 28px;
     color: var(--gold);
 }
@@ -110,6 +110,7 @@ html, body {
     font-family: 'DancingScript', cursive; /* 💡 Nên đổi dự phòng thành cursive (chữ viết tay) thay vì serif */
     font-size: 24px;
     color: var(--gold);
+    padding-top:2px;
     padding-left: 5px;
 }
 /* =========================================================
