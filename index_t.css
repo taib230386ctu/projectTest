@@ -371,7 +371,7 @@ html, body {
 }
 .GioiThieuChung, .TinhThanMua2{
     padding: 3%;
-    background: url('./images/background/02.jpg');
+    background: rgba(194, 241, 119, 0.397);
 }
 .section-title{
     color:var(--gold-light);
@@ -387,34 +387,66 @@ html, body {
     padding-left: 8%;
 }
 /* video */
-.video-pk2 {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  
-  /* QUAN TRỌNG: SỬ DỤNG HÌNH NỀN ĐỂ CHE */
-  background-image: url('./images/background/02.jpg'); /* Đặt đường dẫn đến tấm hình */
-  
-  /* CÀI ĐẶT HÌNH NỀN PHỦ KÍN */
-  background-size: cover; /* Phủ kín khung chứa */
-  background-position: center; /* Căn giữa */
-  
-  position: relative; /* Hoặc fixed tùy cách cuộn */
-  z-index: 1; /* (Như turn trước) */
+.video-section-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: rgba(194, 241, 119, 0.397);
 }
 
-.video-pk2 video {
-  width: 100%;
-  height: 100%;
-  
-  /* QUAN TRỌNG: GIỮ TỶ LỆ, CÓ KHOẢNG ĐEN SẼ ĐƯỢC HÌNH NỀN CHE */
-  object-fit: contain; 
-  
-  display: block;
+.video-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.responsive-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #000;
+    border-radius: 20px;
+}
+
+/* Nút Play căn giữa */
+.play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 55px;
+    background: rgba(255, 0, 0, 0.9);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0; /* Ẩn đi ban đầu */
+    transition: 0.3s ease;
+}
+
+/* Tạo hình tam giác bên trong */
+.play-btn::after {
+    content: '';
+    border-style: solid;
+    border-width: 12px 0 12px 20px;
+    border-color: transparent transparent transparent white;
+    margin-left: 5px;
+}
+
+/* Hiệu ứng hover vào wrapper thì hiện nút và phóng to nút */
+.video-wrapper:hover .play-btn {
+    opacity: 1;
+    background: #ff0000;
+    transform: translate(-50%, -50%) scale(1.1);
 }
 .ChuoiChuongTrinh{
     padding: 30px;
-    background-image: url('./images/background/02.jpg');
+    background: rgba(194, 241, 119, 0.397);
 }
 .grid-2{
     display:grid;
@@ -451,7 +483,7 @@ html, body {
     padding: 60px 4% ; /* 60px trên/dưới để tạo khoảng đệm cho hình nền, 4% hai bên */
     
     /* 1. CHÈN HÌNH NỀN VÀ TỐI ƯU HIỂN THỊ */
-    background: url('./images/background/02.jpg');
+    background: rgba(194, 241, 119, 0.397);;
     background-size: cover;         /* Phủ kín toàn bộ không gian của section */
     background-position: center;    /* Căn tấm hình vào chính giữa */
     background-repeat: no-repeat;   /* Ngăn không cho hình bị lặp lại nếu thiếu chiều cao */
