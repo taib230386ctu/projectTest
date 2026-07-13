@@ -1,261 +1,55 @@
 /* =========================================================
-   GLOBAL SETTINGS
+   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
    ========================================================= */
-
-/* ---------- Biến màu ---------- */
-:root{
-    --gold:#d4b06a;
-    --gold-light:#f6d28d;
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+   
+}
+@font-face {
+    font-family: 'DancingScript'; 
+    src: url('./fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
 }
 
-/* ---------- Fonts ---------- */
-@font-face{
-    font-family:"DancingScript";
-    src:url("./fonts/DancingScript-VariableFont_wght.ttf") format("truetype");
+@font-face {
+    font-family: 'Maglony'; 
+    src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
 }
 
-@font-face{
-    font-family:"Maglony";
-    src:url("./fonts/1FTV-Maglony.ttf") format("truetype");
+@font-face {
+    font-family: 'LASTCHRISTMAS'; 
+    src: url('./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF') format('truetype');
 }
 
-@font-face{
-    font-family:"LASTCHRISTMAS";
-    src:url("./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF") format("opentype");
+@font-face {
+    font-family: 'Nillota'; 
+    src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-@font-face{
-    font-family:"Nillota";
-    src:url("./fonts/1FTV-NILLOTA.TTF") format("truetype");
+body {
+    background: #050b14;
+    color: white;
+    overflow-x: hidden;
+    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
 }
-
-/* ---------- Reset CSS ---------- */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-/* ---------- Trang ---------- */
-html{
-    scrollbar-width:none;
-    -ms-overflow-style:none;
-}
-
-html::-webkit-scrollbar{
-    display:none;
-}
-
-body{
-    background:#050b14;
-    color:#fff;
-    overflow-x:hidden;
-}
-
-/* =========================================================
-   NAVBAR
-   ========================================================= */
-.navbar{
-    position: fixed;
-    inset: 0 0 auto 0;             /* top:0; left:0; right:0 */
-    width: 100%;
-    z-index: 1000;
-
-    background: rgba(5, 10, 18, 0.45);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-
-    border-bottom: 1px solid rgba(255,255,255,.05);
-
-    animation: navEntrance .8s cubic-bezier(.25,1,.5,1) forwards;
-
-    transition:
-        background .3s ease,
-        backdrop-filter .3s ease;
-}
-
-/* =========================================================
-   NỘI DUNG NAVBAR
-   ========================================================= */
-.nav-inner{
-    width: min(92%, 1400px);
-    height: 64px;
-
-    margin: 0 auto;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 20px;
-}
-.logo{
-    display: flex;
-    align-items: center;
-    gap: clamp(0.5rem, 1vw, 0.75rem);
-
-    flex-shrink: 0;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.logo img{
-    width: clamp(4.5rem, 7vw, 6.25rem);
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-
-.logo-text{
-    display: flex;
-    align-items: center;
-    gap: clamp(0.2rem, 0.5vw, 0.35rem);
-}
-.part-main{
-    font-family: "LASTCHRISTMAS", serif;
-    font-size: clamp(1.4rem, 2vw, 1.75rem);
-    color: var(--gold);
-    line-height: 1;
-}
-
-.part-season{
-    font-family: "DancingScript", cursive;
-    font-size: clamp(1.1rem, 1.7vw, 1.5rem);
-    color: var(--gold);
-
-    padding-top: 0.125rem;
-    padding-left: 0.15rem;
-
-    line-height: 1;
-}
-
-/*Menu navbar*/
-.menu{
-    display:flex;
-    align-items:center;
-    gap:clamp(1.2rem,3vw,3.4rem);
-}
-.menu a{
-
-    font-family:var(--font-art);
-    font-style:normal !important;
-
-    position:relative;
-
-    color:#fff;
-    text-decoration:none;
-
-    font-size:clamp(1rem,1vw + .4rem,1.25rem);
-
-    letter-spacing:.12em;
-
-    cursor:pointer;
-
-    transition:
-        color .3s ease,
-        text-shadow .3s ease;
-
-    animation:menuItemFade .5s cubic-bezier(.25,1,.5,1) both;
-}
-.menu a:hover{
-    color:var(--gold-light);
-    text-shadow:0 0 10px rgba(246,210,141,.5);
-}
-.menu a.active {
-    color: var(--gold-light) !important;
-    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
-}
-.menu a.active::after {
-    content: '';
-    position: absolute;
-    bottom:-.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    height: 2px;
-    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
-    box-shadow: 0 0 12px var(--gold);
-    border-radius: 10px;
+html, body {
+    /* Cho trình duyệt Chrome, Safari và Opera */
+    &::-webkit-scrollbar {
+        display: none;
+    }
     
-    /* Vệt sáng active bung tỏa nhẹ nhàng từ giữa chữ giãn ra 2 bên */
-    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-.menu-toggle{
-
-    display:none;
-
-    font-size:clamp(1.5rem,3vw,2rem);
-
-    color:#fff;
-
-    cursor:pointer;
-
-    user-select:none;
-}
-.menu a:nth-child(1) { animation-delay: 0.1s; }
-.menu a:nth-child(2) { animation-delay: 0.18s; }
-.menu a:nth-child(3) { animation-delay: 0.26s; }
-.menu a:nth-child(4) { animation-delay: 0.34s; }
-/* =========================================================
-ĐỊNH NGHĨA CÁC KHUNG CHUYỂN ĐỘNG (KEYFRAMES ANIMATION)
-   ========================================================= */
-@keyframes navEntrance {
-    from {
-        opacity: 0;
-        transform: translateY(-1rem);
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-    }
+    /* Cho trình duyệt Firefox */
+    scrollbar-width: none;
+    
+    /* Cho trình duyệt Internet Explorer và Edge cũ */
+    -ms-overflow-style: none; 
 }
 
-@keyframes menuItemFade {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes glowSlideIn {
-    from {
-        width: 0%;
-        opacity: 0;
-        transform: translateX(-50%) scaleX(0.3);
-    }
-    to {
-        width: 85%;
-        opacity: 1;
-        transform: translateX(-50%) scaleX(1);
-    }
-}
-@media (max-width:768px){
-
-    .menu{
-        display:none;
-    }
-
-    .menu-toggle{
-        display:block;
-    }
-
-    .part-main{
-        font-size:1.4rem;
-    }
-
-    .part-season{
-        font-size:1.15rem;
-    }
-
-}
 /* =========================================================
    3. KHU VỰC CHÍNH (HERO SECTION)
    ========================================================= */
@@ -269,8 +63,6 @@ body{
     align-items: center;
 
     overflow: hidden;
-
-    padding: 2rem 1rem;
 }
 
 /* Lớp tối nền */
@@ -504,21 +296,22 @@ body{
 /* =========================================================
    VIDEO SECTION FULL SCREEN
    ========================================================= */
-
 .video-section-container{
 
     width:100%;
 
-    height:100svh;
-
     display:flex;
 
     justify-content:center;
+
     align-items:center;
+
+    background:#000;
 
     overflow:hidden;
 
-    background:#000;
+    padding:0;
+
 }
 
 
@@ -526,21 +319,25 @@ body{
 
     position:relative;
 
-    width:100%;
-    height:100%;
+    width:min(95vw,1400px);
+
+    aspect-ratio:16 / 9;
 
     overflow:hidden;
+
 }
 
 
 .responsive-video{
 
     width:100%;
+
     height:100%;
 
     display:block;
 
     object-fit:contain;
+
 }
 /* =========================================================
    PLAY BUTTON
@@ -1138,8 +935,6 @@ body{
 
         height:auto;
 
-        min-height:0;
-
         padding:0;
 
     }
@@ -1149,6 +944,8 @@ body{
 
         width:100%;
 
+        aspect-ratio:16 / 9;
+
     }
 
 
@@ -1156,185 +953,10 @@ body{
 
         width:100%;
 
-        height:auto;
+        height:100%;
 
-        border-radius:0;
+        object-fit:contain;
 
     }
 
-}
-/* footer*/
-/* =========================================================
-   4. CHÂN TRANG (FOOTER STYLE)
-   ========================================================= */
-.Footer {
-    background-color: #050b14; /* Đồng bộ màu nền tối với toàn trang */
-    border-top: 1px solid rgba(212, 176, 106, 0.2); /* Tạo đường viền vàng gold mờ tinh tế ở trên */
-    padding: 60px 0 20px 0;
-    width: 100%;
-}
-
-.footer-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    
-    /* Dàn hàng ngang 4 cột */
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap; /* Tự động xuống dòng linh hoạt nếu màn hình thu nhỏ */
-}
-
-/* Định dạng cột chung */
-.footer-col {
-    flex: 1.5;
-    min-width: 220px; /* Giới hạn không cho cột bị bóp quá nhỏ */
-}
-
-/* Ưu tiên cột logo rộng hơn các cột còn lại một chút */
-.footer-col.footer-brand {
-    flex: 1;
-}
-
-.footer-brand .brand-desc {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-top: 15px;
-}
-
-/* Tiêu đề của các cột (Khám phá, Liên hệ, Theo dõi) */
-.footer-col h3 {
-    font-family: 'Maglony', serif; /* Sử dụng font chữ nghệ thuật của bạn */
-    color: var(--gold);
-    font-size: 20px;
-    margin-bottom: 20px;
-    position: relative;
-    letter-spacing: 1px;
-}
-
-/* Tạo một gạch chân nhỏ dưới mỗi tiêu đề cột */
-.footer-col h3::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 35px;
-    height: 2px;
-    background-color: var(--gold);
-}
-
-/* Định dạng danh sách đường link và thông tin */
-.footer-links, .footer-info {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-links li, .footer-info li {
-    margin-bottom: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 20px;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-/* Hiệu ứng nảy chữ sang phải và đổi màu gold khi di chuột vào link */
-.footer-links a:hover {
-    color: var(--gold-light);
-    transform: translateX(5px);
-}
-
-/* Khu vực các ô tròn mạng xã hội (Theo dõi) */
-.footer-col p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-.social-icons {
-    display: flex;
-    gap: 12px;
-}
-
-.social-icons a {
-    width: 38px;
-    height: 38px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 176, 106, 0.2);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-/* Hiệu ứng sáng bừng lên khi hover vào nút mạng xã hội */
-.social-icons a:hover {
-    background: var(--gold);
-    color: #050b14;
-    border-color: var(--gold);
-    transform: translateY(-4px);
-    box-shadow: 0 5px 15px rgba(212, 176, 106, 0.3);
-}
-
-/* Bản quyền dưới đáy cùng */
-.footer-bottom {
-    max-width: 1400px;
-    margin: 50px auto 0 auto;
-    padding: 20px 20px 0 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Đường ngăn cách thanh đáy */
-    text-align: center;
-}
-
-.footer-bottom p {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 13px;
-    margin: 0;
-}
-/* =========================================================
-   CHỈNH KÍCH THƯỚC LOGO Ở FOOTER
-   ========================================================= */
-.Footer .logo img {
-    width: 180px;        /* Tăng kích thước chiều rộng lên 180px (mặc định đang là 100px) */
-    max-width: 100%;     /* Đảm bảo ảnh không bị tràn khung */
-    height: auto;        /* Tự động tính toán chiều cao để không bị méo hình */
-    object-fit: contain;
-}
-
-/* Tối ưu kích thước logo trên điện thoại để không bị quá to */
-@media screen and (max-width: 768px) {
-    .Footer .logo img {
-        width: 140px;    /* Trên điện thoại thu nhỏ lại một chút cho cân đối bốc cục */
-        margin: 0 auto;  /* Căn giữa logo nếu footer trên mobile của bạn xếp hàng dọc */
-    }
-}
-
-/* =========================================================
-   TỐI ƯU TRÊN ĐIỆN THOẠI (MOBILE RESPONSIVE)
-   ========================================================= */
-@media screen and (max-width: 768px) {
-    .Footer {
-        padding: 40px 0 20px 0;
-    }
-
-    .footer-inner {
-        flex-direction: column; /* Chuyển từ hàng ngang sang hàng dọc xếp chồng trên mobile */
-        gap: 35px;
-    }
-
-    .footer-col {
-        width: 100%;
-    }
 }
