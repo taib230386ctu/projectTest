@@ -9,14 +9,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         (function() {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'hoatdong.css?v=' + new Date().getTime(); 
-            document.head.appendChild(link);
+            // File CSS thứ nhất (có sẵn của bạn)
+            const link1 = document.createElement('link');
+            link1.rel = 'stylesheet';
+            link1.href = 'hoatdong.css?v=' + new Date().getTime(); 
+            document.head.appendChild(link1);
+
+            // File CSS thứ hai muốn thêm vào
+            const link2 = document.createElement('link');
+            link2.rel = 'stylesheet';
+            link2.href = 'header_footer.css?v=' + new Date().getTime(); // Thay 'style2.css' bằng tên file của bạn
+            document.head.appendChild(link2);
         })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="hoatdong.js"></script>
+    <script type="module" src="navbar.js"></script>
+
 </head>
 <body>
     <nav class="navbar">
@@ -35,7 +44,7 @@
             <div class="menu">
                 <a href="index.html">Phá Kén Mùa 2</a>
                 <a href="phaken01.html">Phá Kén Mùa 1</a>
-                <a href="hoatdong.html"  class="active">Hoạt Động</a>
+                <a href="hoatdong.html"  class="active">Hoạt động</a>
                 <a>Tin tức</a>
                 <a>Liên hệ</a>
             </div>
