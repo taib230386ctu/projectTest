@@ -8,15 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <script>
         (function() {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'index_t.css?v=' + new Date().getTime(); 
-            document.head.appendChild(link);
+            const link1 = document.createElement('link');
+            link1.rel = 'stylesheet';
+            link1.href = 'index_t.css?v=' + new Date().getTime(); 
+            document.head.appendChild(link1);
+
+            // File CSS thứ hai muốn thêm vào
+            const link2 = document.createElement('link');
+            link2.rel = 'stylesheet';
+            link2.href = 'header_footer.css?v=' + new Date().getTime(); // Thay 'style2.css' bằng tên file của bạn
+            document.head.appendChild(link2);
         })();
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="index_t.js"></script>
+    <script type="module" src="navbar.js"></script>
 </head>
 <body>
 <nav class="navbar">
@@ -58,7 +65,7 @@
 
 <section class="video-pk2 video-section-container">
     <div class="video-wrapper">
-        <video src="./video/clip_pk2.mp4" class="responsive-video"></video>
+        <video src="./Video chuyển ss1 thành ss2 final.mp4" class="responsive-video" controls></video>
         <div class="play-btn"></div> 
     </div>
 </section>
