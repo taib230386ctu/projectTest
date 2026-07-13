@@ -27,27 +27,11 @@ const db = getFirestore(app);
 let currentVisitorName = "";
 
 // =========================================================
-// 2. QUẢN LÝ SỰ KIỆN GIAO DIỆN (UI CONTROLLERS)
+// 2. XỬ LÝ LOGIC HOẠT ĐỘNG CỦA WEB (CORE LOGIC & UI)
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- [A] XỬ LÝ MENU MOBILE (HAMBURGER BANNER) ---
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-
-    if (menuToggle && menu) {
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menu.classList.toggle('active');
-        });
-        document.addEventListener('click', (e) => {
-            if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
-                menu.classList.remove('active');
-            }
-        });
-    }
-
-    // --- [B] XỬ LÝ XEM TRƯỚC FILE KHI CHỌN (PREVIEW ENGINE) ---
+    // --- [A] XỬ LÝ XEM TRƯỚC FILE KHI CHỌN (PREVIEW ENGINE) ---
     const fileInput = document.getElementById('imgFile');
     const placeholder = document.getElementById('previewPlaceholder');
     const imgPreview = document.getElementById('imagePreview');
@@ -83,15 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =========================================================
-    // 3. XỬ LÝ LOGIC FIREBASE & CLOUDINARY (CORE LOGIC)
-    // =========================================================
-
+    // --- [B] TÁC VỤ 1: GHI NHẬN DANH TÍNH VISITOR ---
     const startBtn = document.querySelector('.start-btn');
     const nameInput = document.getElementById('visitorName');
     const uploadSection = document.getElementById('uploadSection');
 
-    // --- TÁC VỤ 1: GHI NHẬN DANH TÍNH VISITOR ---
     if (startBtn && nameInput) {
         startBtn.addEventListener('click', async (e) => {
             e.preventDefault();
@@ -109,11 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                // Khóa nút bấm ngay lập tức chống người dùng click nhiều lần liên tục
                 startBtn.disabled = true;
                 startBtn.innerText = "ĐANG MỞ KÉN...";
 
-                // Hiện thông báo Loading
                 Swal.fire({
                     title: 'Đang mở kén...',
                     html: 'Vũ trụ đang ghi nhớ tên bạn...',
@@ -123,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Đẩy dữ liệu lưu tên lên Firebase
                 await addDoc(collection(db, "visitors"), {
                     ten_nguoi_dung: userName,
                     ngay_gui: new Date()
@@ -131,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 currentVisitorName = userName;
 
-                // Hiện thông báo thành công sau khi hoàn tất lưu dữ liệu
                 Swal.fire({
                     title: `Chào mừng ${userName}!`,
                     html: 'Chúc bạn có một hành trình thật nhẹ nhàng tại <b>Phá Kén</b>. ✨',
@@ -143,10 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).then((result) => {
                     if (!uploadSection) return;
 
-                    // 1. Hiện form upload dữ liệu lên (Trình duyệt sẽ hiểu display: block trước)
                     uploadSection.style.display = 'block';
 
-                    // 2. Chờ 10ms cực ngắn để trình duyệt cập nhật DOM xong, rồi nạp class kích hoạt TỰ BAY LÊN
                     setTimeout(() => {
                         uploadSection.classList.add('active-fly');
                     }, 10);
@@ -159,21 +133,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Vũ trụ không thể ghi nhớ tên bạn lúc này, thử lại sau nhé!',
                     'error'
                 );
-                // Nếu lỗi, mở lại nút cho họ bấm thử lại
                 startBtn.disabled = false;
                 startBtn.innerText = "✦ BẮT ĐẦU HÀNH TRÌNH ✦";
             }
         });
     }
 
+    // --- [C] TÁC VỤ 2: ĐẨY FILE LÊN CLOUDINARY & LƯU THÔNG TIN MOMENT ---
     const btnUpload = document.getElementById('btnUpload');
     const imgTitle = document.getElementById('imgTitle');
 
-    // --- TÁC VỤ 2: ĐẨY FILE LÊN CLOUDINARY & LƯU THÔNG TIN MOMENT ---
     if (btnUpload) {
         btnUpload.onclick = async () => {
-            const file = fileInput.files[0];
-            const title = imgTitle.value.trim();
+            const file = fileInput ? fileInput.files[0] : null;
+            const title = imgTitle ? imgTitle.value.trim() : "";
             const author = currentVisitorName;
 
             if (!author) {
@@ -243,11 +216,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                 icon: 'success', confirmButtonColor: '#d4b06a', background: '#050b14', color: '#fff'
                             });
 
-                            imgTitle.value = ""; fileInput.value = "";
-                            imgPreview.style.display = 'none'; videoPreview.style.display = 'none';
-                            placeholder.style.display = 'block';
-                            fileNameDisplay.innerText = "Bạn chưa chọn khoảnh khắc nào...";
-                            fileNameDisplay.style.color = '#666';
+                            if (imgTitle) imgTitle.value = ""; 
+                            if (fileInput) fileInput.value = "";
+                            if (imgPreview) imgPreview.style.display = 'none'; 
+                            if (videoPreview) videoPreview.style.display = 'none';
+                            if (placeholder) placeholder.style.display = 'block';
+                            if (fileNameDisplay) {
+                                fileNameDisplay.innerText = "Bạn chưa chọn khoảnh khắc nào...";
+                                fileNameDisplay.style.color = '#666';
+                            }
                         }
                     } catch (error) {
                         console.error("Upload Logic Error: ", error);
@@ -261,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // --- TÁC VỤ 3: LẮNG NGHE DỮ LIỆU REAL-TIME & XEM THÊM ---
+    // --- [D] TÁC VỤ 3: LẮNG NGHE DỮ LIỆU REAL-TIME & XEM THÊM ---
     const videoGrid = document.getElementById('videoGrid');
     const imageGrid = document.getElementById('imageGrid');
     const btnLoadMoreVideo = document.getElementById('btnLoadMoreVideo');
@@ -273,8 +250,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let unsubVideo = null;
     let unsubImage = null;
 
-    // --- HÀM TẢI VIDEO ---
     function loadVideos() {
+        if (!videoGrid) return;
         if (unsubVideo) unsubVideo(); 
         
         const qVideo = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "video"), orderBy("createdAt", "desc"), limit(currentVideoLimit));
@@ -292,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const authorName = data.author ? data.author : "Người ẩn danh";
                 const posterUrl = data.url.replace(/\.[^/.]+$/, ".jpg");
                 
-                // Tránh lỗi hiển thị ngày giờ khi Firebase cập nhật Real-time lơ lửng
                 const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
                     ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') 
                     : 'Vừa xong';
@@ -317,8 +293,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- HÀM TẢI HÌNH ẢNH ---
     function loadImages() {
+        if (!imageGrid) return;
         if (unsubImage) unsubImage();
         
         const qImage = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "image"), orderBy("createdAt", "desc"), limit(currentImageLimit));
@@ -335,7 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = docSnap.data();
                 const authorName = data.author ? data.author : "Người ẩn danh";
                 
-                // Tránh lỗi hiển thị ngày giờ khi Firebase cập nhật Real-time lơ lửng
                 const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
                     ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') 
                     : 'Vừa xong';
@@ -377,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- TÁC VỤ: XỬ LÝ NÚT "CẤT LẠI VÀO KÉN" ---
+    // --- [E] TÁC VỤ: XỬ LÝ NÚT "CẤT LẠI VÀO KÉN" (CANCEL) ---
     const btnCancel = document.getElementById('btnCancel');
 
     if (btnCancel) {
@@ -428,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // --- XỬ LÝ TEXTAREA TỰ ĐỘNG CO GIÃN ---
+    // --- [F] XỬ LÝ TEXTAREA TỰ ĐỘNG CO GIÃN ---
     const imgTitleTextarea = document.getElementById('imgTitle');
     if (imgTitleTextarea) {
         imgTitleTextarea.addEventListener('input', function () {
