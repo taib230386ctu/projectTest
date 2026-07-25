@@ -29,6 +29,11 @@
     src:url("./fonts/1FTV-NILLOTA.TTF") format("truetype");
 }
 
+@font-face{
+    font-family:"JosefinSans";
+    src:url("./fonts/JosefinSans-Medium.ttf") format("truetype");
+}
+
 /* ---------- Reset CSS ---------- */
 *{
     margin:0;
@@ -284,33 +289,59 @@ body{
    4. CHÂN TRANG (FOOTER STYLE)
    ========================================================= */
 .Footer {
-    background-color: #050b14; /* Đồng bộ màu nền tối với toàn trang */
-    border-top: 1px solid rgba(212, 176, 106, 0.2); /* Tạo đường viền vàng gold mờ tinh tế ở trên */
+    background:linear-gradient(
+        180deg,
+        #091731 0%,
+        #0c111dd7 55%,
+        #000000 100%
+    );
+    border-top: 1px solid rgba(236, 161, 11, 0.2); /* Tạo đường viền vàng gold mờ tinh tế ở trên */
     padding: 60px 0 20px 0;
     width: 100%;
+    font-family: 'JosefinSans', sans-serif; /* Sử dụng font chữ Josefin Sans cho footer */
+    font-size: 18px;
 }
 
-.footer-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    
-    /* Dàn hàng ngang 4 cột */
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap; /* Tự động xuống dòng linh hoạt nếu màn hình thu nhỏ */
-}
+.footer-inner{
+    max-width:1600px;
+    margin:0 auto;
+    padding:0 10px;
 
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;   /* Thay vì center */
+    gap:10px;
+    flex-wrap:wrap;
+}
 /* Định dạng cột chung */
-.footer-col {
-    flex: 1.5;
-    min-width: 220px; /* Giới hạn không cho cột bị bóp quá nhỏ */
+/* =========================
+   Chia tỉ lệ các cột
+========================= */
+
+.footer-col{
+    min-width:200px;
 }
 
-/* Ưu tiên cột logo rộng hơn các cột còn lại một chút */
-.footer-col.footer-brand {
-    flex: 1;
+/* Logo nhỏ hơn */
+.footer-brand{
+    flex:0.7;
+}
+
+/* Khám phá nhỏ */
+.footer-col:nth-child(2){
+    flex:0.8;
+    
+}
+
+/* Liên hệ rộng nhất */
+.footer-col:nth-child(3){
+    flex:1.4;
+    margin-right: 40px;
+}
+
+/* Theo dõi */
+.footer-col:nth-child(4){
+    flex:1;
 }
 
 .footer-brand .brand-desc {
@@ -319,28 +350,85 @@ body{
     line-height: 1.6;
     margin-top: 15px;
 }
+/* =========================
+   LOGO FOOTER (ĐÃ CĂN CHỈNH THẲNG MÈP TIÊU ĐỀ)
+========================= */
+.footer-brand{
+    position:relative;
+    min-width:220px;
+}
 
-/* Tiêu đề của các cột (Khám phá, Liên hệ, Theo dõi) */
+/* Logo */
+.footer-brand .logo{
+    position:absolute;
+
+    left:clamp(10px,2vw,30px);
+    top: clamp(-80px, -4vw, -50px);
+
+    transform:scale(clamp(1.1,1.4vw,1.45));
+    transform-origin:left top;
+}
+
+.footer-brand .logo img{
+    width:clamp(150px,11vw,200px);
+    height:auto;
+    display:block;
+}
+
+/* Đường vàng */
+.footer-brand::after{
+    content:"";
+    position:absolute;
+    right:clamp(10px,2vw,40px);
+    
+    width:2px;
+    height:clamp(140px,70%,220px);
+    border-radius:2px;
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        rgba(212,176,106,.95),
+        rgba(212,176,106,.45),
+        transparent
+    );
+
+    box-shadow:0 0 10px rgba(212,176,106,.4);
+}
+
+/* Reset margin-top của h3 để tất cả các cột xuất phát cùng 1 tọa độ 0 */
 .footer-col h3 {
-    font-family: 'Maglony', serif; /* Sử dụng font chữ nghệ thuật của bạn */
+    font-family: 'JosefinSans', sans-serif;
     color: var(--gold);
-    font-size: 20px;
+    font-size: 23px;
+    margin-top: 0; /* Đảm bảo h3 không bị margin mặc định đẩy xuống */
     margin-bottom: 20px;
     position: relative;
     letter-spacing: 1px;
+    line-height: 1.2;
 }
 
 /* Tạo một gạch chân nhỏ dưới mỗi tiêu đề cột */
-.footer-col h3::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 35px;
-    height: 2px;
-    background-color: var(--gold);
-}
+.footer-col h3::after{
+    content: "";
 
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 120px;      /* Dài hơn */
+    height: 2px;
+
+    border-radius: 2px;
+
+    background: linear-gradient(
+        to right,
+        rgba(212,176,106,1),
+        rgba(212,176,106,.75),
+        rgba(212,176,106,.35),
+        transparent
+    );
+}
 /* Định dạng danh sách đường link và thông tin */
 .footer-links, .footer-info {
     list-style: none;
@@ -351,7 +439,6 @@ body{
 .footer-links li, .footer-info li {
     margin-bottom: 12px;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 20px;
 }
 
 .footer-links a {
@@ -370,7 +457,6 @@ body{
 /* Khu vực các ô tròn mạng xã hội (Theo dõi) */
 .footer-col p {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 15px;
     line-height: 1.6;
     margin-bottom: 15px;
 }
@@ -383,15 +469,15 @@ body{
 .social-icons a {
     width: 38px;
     height: 38px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 176, 106, 0.2);
+    background: rgb(255, 255, 255);
+    border: 1px solid rgba(231, 220, 197, 0.815);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: rgb(7, 0, 0);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
     transition: all 0.3s ease;
 }
@@ -410,7 +496,7 @@ body{
     max-width: 1400px;
     margin: 50px auto 0 auto;
     padding: 20px 20px 0 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Đường ngăn cách thanh đáy */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
 }
 
@@ -418,16 +504,6 @@ body{
     color: rgba(255, 255, 255, 0.4);
     font-size: 13px;
     margin: 0;
-}
-
-/* =========================================================
-   CHỈNH KÍCH THƯỚC LOGO Ở FOOTER
-   ========================================================= */
-.Footer .logo img {
-    width: 180px;        /* Tăng kích thước chiều rộng lên 180px (mặc định đang là 100px) */
-    max-width: 100%;     /* Đảm bảo ảnh không bị tràn khung */
-    height: auto;        /* Tự động tính toán chiều cao để không bị méo hình */
-    object-fit: contain;
 }
 
 /* Tối ưu kích thước logo trên điện thoại để không bị quá to */
@@ -540,4 +616,99 @@ body{
     .upload-form h3 { font-size: 20px; margin-bottom: 18px; font-style: normal !important; }
     .upload-form input[type="text"] { padding: 12px; margin-bottom: 15px; font-size: 14px; }
     .preview-box { min-height: 160px; border-radius: 12px; }
+}
+@media (max-width:768px){
+
+    .Footer{
+        padding:40px 24px 30px;
+    }
+
+    .footer-inner{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;   /* căn trái */
+        gap:32px;
+        padding:0;
+    }
+
+    /* ================= LOGO ================= */
+
+    .footer-brand{
+        width:100% !important;
+        height:auto !important;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        padding:0;
+        margin:0;
+
+        overflow:visible;
+    }
+
+    /* Ẩn vạch vàng trên mobile */
+    .footer-brand::after{
+        display:none;
+    }
+
+    .footer-brand .logo{
+        position:static !important;
+        transform:none !important;
+
+        display:inline-block;
+        margin:0 auto;
+    }
+
+    .footer-brand .logo img{
+        width:clamp(240px,75vw,380px) !important;
+        max-width:none;
+        height:auto;
+
+        display:block;
+        margin:0 auto;
+    }
+
+    /* ================= CỘT ================= */
+
+    .footer-col{
+        width:100%;
+        text-align:left;
+    }
+
+    .footer-col h3{
+        font-size:24px;
+        margin-bottom:18px;
+        text-align:left;
+    }
+
+    .footer-col h3::after{
+        left:0;
+        transform:none;
+        width:70px;
+    }
+
+    .footer-links,
+    .footer-info{
+        padding:0;
+        margin:0;
+        list-style:none;
+    }
+
+    .footer-links li,
+    .footer-info li{
+        text-align:left;
+        margin-bottom:10px;
+        line-height:1.7;
+    }
+
+    .footer-col p{
+        text-align:left;
+        margin-bottom:16px;
+        max-width:100%;
+    }
+
+    .social-icons{
+        justify-content:flex-start;
+    }
 }
