@@ -25,6 +25,17 @@
     font-family: 'Nillota'; 
     src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
 }
+
+@font-face {
+    font-family: 'Josefin Sans'; 
+    src: url('./fonts/JosefinSans-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Quicksand';
+    src: url('./fonts/Quicksand-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -410,155 +421,461 @@ html, body {
 }
 
 /* =========================================================
-   GIỚI THIỆU CHUNG / TINH THẦN MÙA 2
-   ========================================================= */
+GIỚI THIỆU CHUNG / TINH THẦN MÙA 2
+========================================================= */
+/* =========================================================
+GIỚI THIỆU CHUNG / TINH THẦN MÙA 2
+========================================================= */
 
-.GioiThieuChung,
-.TinhThanMua2{
-
-    padding:clamp(2rem,5vw,4rem) clamp(1rem,8vw,6rem);
+.main-content{
+    width:100%;
+    box-sizing:border-box;
 
     background:
-        rgba(194,241,119,.397);
+        
+        url('./images/background/02.jpg');
+
+    background-repeat:no-repeat;
+    background-position:center top;
+    background-size:cover;
+
+    padding:30px 0 80px;
 }
 
 
-/* Tiêu đề */
-.section-title{
+/* =========================================================
+1. GIỚI THIỆU CHUNG
+========================================================= */
 
-    color:var(--gold-light);
+.GTC{
+    position:relative;
+    width:100%;
+    height:58px;
 
-    font-size:clamp(1.8rem,4vw,2.3rem);
+    margin-top:clamp(8px,5vw,20px);
 
-    margin-bottom:1.5rem;
-
-    padding-left:0;
-
-    text-align:left;
+    display:flex;
+    align-items:center;
 }
 
 
-/* Nội dung */
+/* SHAPE */
+
+.GTC-shape{
+    position:absolute;
+
+    left:clamp(10px,3vw,30px);
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:clamp(170px,21vw,280px);
+    height:70px;
+
+    background:linear-gradient(
+        90deg,
+        rgba(255,255,255,.28) 0%,
+        rgba(255,255,255,.22) 25%,
+        rgba(255,255,255,.12) 55%,
+        rgba(255,255,255,.03) 80%,
+        transparent 100%
+    );
+
+    border-radius:24px;
+}
+
+
+/* SHAPE LỚP 2 */
+
+.GTC-shape::after{
+    content:"";
+
+    position:absolute;
+
+    left:30px;
+    top:0;
+
+    width:clamp(125px,15vw,210px);
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        rgba(255,255,255,.25),
+        rgba(255,255,255,.12) 45%,
+        transparent 100%
+    );
+
+    border-radius:24px;
+}
+
+
+/* TIÊU ĐỀ */
+
+.GTC .section-title{
+    position:absolute;
+
+    left:clamp(80px,5vw,85px);
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:clamp(180px,25vw,280px);
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:3;
+
+    color:#fff;
+
+    font-family:'Josefin Sans',sans-serif;
+
+    font-size:clamp(17px,2.5vw,28px);
+    font-weight:800;
+
+    letter-spacing:clamp(.3px,.12vw,1px);
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.6);
+}
+
+
+/* NỘI DUNG */
+
 .section-text{
+    width:min(90%,1400px);
 
-    color:var(--text-soft);
+    margin:35px auto 0;
 
-    font-size:clamp(.95rem,1.5vw,1.1rem);
+    color:rgba(255,255,255,.92);
+
+    font-family:'Quicksand',sans-serif;
+
+    font-size:23px;
+    font-weight:600;
 
     line-height:1.8;
 
     text-align:justify;
 
-    padding-left:0;
+    letter-spacing:.2px;
 
-    max-width:55rem;
+    text-shadow:
+        0 1px 3px rgba(0,0,0,.25);
+}
+
+
+/* =========================================================
+2. CHUỖI CHƯƠNG TRÌNH
+========================================================= */
+
+.CCT, .TTM2{
+    position:relative;
+    width:100%;
+
+    /* khoảng cách với phần GIỚI THIỆU */
+    margin-top:90px;
+
+    /* chỉ dành chỗ cho tiêu đề */
+    padding-top:58px;
+
+    box-sizing:border-box;
+}
+
+
+/* =========================================================
+SHAPE CCT
+========================================================= */
+
+.CCT-shape, .TTM2-shape{
+    position:absolute;
+
+    left:clamp(10px,3vw,30px);
+    top:0;
+
+    width:clamp(230px,28vw,360px);
+    height:70px;
+
+    background:linear-gradient(
+        90deg,
+        rgba(255,255,255,.28) 0%,
+        rgba(255,255,255,.22) 25%,
+        rgba(255,255,255,.12) 55%,
+        rgba(255,255,255,.03) 80%,
+        transparent 100%
+    );
+
+    border-radius:24px;
+}
+
+
+/* SHAPE LỚP 2 */
+
+.CCT-shape::after, .TTM2-shape::after{
+    content:"";
+
+    position:absolute;
+
+    left:30px;
+    top:0;
+
+    width:clamp(170px,20vw,280px);
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        rgba(255,255,255,.25),
+        rgba(255,255,255,.12) 45%,
+        transparent 100%
+    );
+
+    border-radius:24px;
+}
+
+
+/* =========================================================
+TIÊU ĐỀ CCT
+========================================================= */
+
+.CCT .section-title, .TTM2 .section-title{
+    position:absolute;
+
+    left:clamp(90px,6vw,100px);
+    top:0px;
+
+    width:clamp(230px,25vw,320px);
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:3;
+
+    margin:0;
+
+    color:#fff;
+
+    font-family:'Josefin Sans',sans-serif;
+
+    font-size:clamp(17px,2.5vw,28px);
+    font-weight:800;
+
+    letter-spacing:clamp(.3px,.12vw,1px);
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.6);
 }
 /* =========================================================
-   CHUỖI CHƯƠNG TRÌNH - CĂN PHẢI
-   ========================================================= */
+TIÊU ĐỀ TTM2
+========================================================= */
 
-/* Khung chung */
-
-.GioiThieuChung,
-.ChuoiChuongTrinh,
-.TinhThanMua2{
-
-    padding:clamp(3rem,6vw,5rem) clamp(1.5rem,8vw,7rem);
-
-    background:rgba(194,241,119,.397);
+.TTM2 .section-title{
+    left:clamp(80px,5vw,85px);
+    width:clamp(180px,25vw,280px);
+    height:70px;
 }
 
 
-.GTC,
-.CCT,
-.TTM2{
-
-    width:min(100%,75rem);
-
-}
-.GTC{
-
-    margin-right:auto;
-    margin-left:4%;
-
-}
 
 
-.GTC .section-title{
+/* =========================================================
+3. GRID 2 CARD
+========================================================= */
 
-    text-align:left;
-
-}
-
-
-.GTC .section-text{
-
-    max-width:55rem;
-
-    text-align:justify;
-
-}
-.CCT{
-
-    width:min(100%,900px);
-
-    margin-left:auto;
-    margin-right:4%;
-
-}
-
-
-.ChuoiChuongTrinh .section-title{
-
-    text-align:center;
-
-    margin-bottom:40px;
-
-}
-
+/* =========================================================
+3. GRID 2 CARD
+========================================================= */
 
 .grid-2{
+    width:min(90%,1400px);
+
+    /* nằm bên dưới hoàn toàn tiêu đề */
+    margin:35px auto 0;
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
 
-    gap:30px;
+    gap:25px;
 
+    box-sizing:border-box;
 }
+
+
+/* =========================================================
+CARD
+========================================================= */
 
 .card{
+    padding:25px 28px;
 
-    padding:1.5rem;
+    background:rgba(255,255,255,.07);
 
-    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.16);
 
-    border-radius:1rem;
+    border-radius:16px;
 
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.15);
+
+    box-sizing:border-box;
 }
 
+
+/* TIÊU ĐỀ CARD */
 
 .card h3{
+    color:#fff;
 
-    color:var(--gold-light);
+    font-family:'Josefin Sans',sans-serif;
 
-    margin-bottom:1rem;
+    font-size:21px;
+    font-weight:700;
 
+    line-height:1.4;
+
+    margin:0 0 12px;
+
+    letter-spacing:.3px;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.4);
 }
 
+
+/* NỘI DUNG CARD */
 
 .card p{
+    color:rgba(255,255,255,.86);
 
-    color:var(--text-soft);
+    font-family:'Quicksand',sans-serif;
 
-    line-height:1.8;
+    font-size:18px;
+    font-weight:500;
 
+    line-height:1.7;
+
+    margin:0;
 }
-.TinhThanMua2 .section-text{
 
-    line-height:1.3;
+/* =========================================================
+RESPONSIVE
+========================================================= */
 
+@media (max-width:768px){
+
+    /* =========================
+       GIỚI THIỆU CHUNG
+    ========================= */
+
+    .GTC{
+        margin-top:10px;
+        margin-bottom:25px;
+    }
+
+    .section-text{
+        width:90%;
+
+        margin:30px auto 0;
+
+        font-size:18px;
+        line-height:1.7;
+    }
+
+
+    /* =========================
+       CHUỖI CHƯƠNG TRÌNH
+    ========================= */
+
+    .CCT{
+        margin-top:85px;
+
+        /* Khoảng thở sau toàn bộ CCT */
+        margin-bottom:120px;
+
+        padding-top:65px;
+
+        top:auto;
+    }
+
+    .CCT .section-title{
+        top:0;
+    }
+
+
+    /* =========================
+       GRID CARD
+    ========================= */
+
+    .grid-2{
+        width:90%;
+
+        margin:40px auto 0;
+
+        display:grid;
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+    }
+
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card{
+        padding:22px;
+    }
+
+    .card h3{
+        font-size:19px;
+
+        line-height:1.4;
+
+        margin-bottom:14px;
+    }
+
+    .card p{
+        font-size:16px;
+
+        line-height:1.7;
+    }
+
+
+    /* =========================
+       TINH THẦN MÙA 2
+    ========================= */
+
+    .TTM2{
+        /* Không dùng top để tránh chồng */
+        top:auto;
+
+        /* Chừa khoảng cho shape + tiêu đề */
+        padding-top:65px;
+
+        /* Tạo khoảng cách với CCT */
+        margin-top:0;
+
+        margin-bottom:50px;
+    }
+
+    .TTM2 .section-title{
+        top:0;
+    }
 }
+
 /* =========================================================
    3 CARD NGANG - PC / LAPTOP
    ========================================================= */
