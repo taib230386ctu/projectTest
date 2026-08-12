@@ -1031,3 +1031,42 @@ html, body {
 body.swal2-shown .swal2-container {
     z-index: 1000000 !important;
 }
+/* =========================================================
+   CỐ ĐỊNH VỊ TRÍ ICON TIM & BÌNH LUẬN Ở ĐÁY CARD
+   ========================================================= */
+
+/* 1. Biến Gallery Card thành Flexbox container theo chiều dọc */
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Giúp các card trong cùng hàng có chiều cao bằng nhau */
+}
+
+/* 2. Ép phần nội dung bên trong trải rộng hết khoảng trống còn lại */
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Chiếm trọn chiều cao dư thừa từ card */
+}
+
+/* 3. Giới hạn chiều cao tiêu đề bài viết (tối đa 2 dòng) tránh bể khung */
+.card-content h3 {
+    font-family: var(--font-art);
+    font-style: normal !important;
+    color: #ffe7a8;
+    margin-bottom: 10px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    
+    /* Ép tiêu đề nếu quá dài sẽ tự ngắt bằng dấu ... */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 4. Magic Margin-Top Auto: Đẩy khung chứa Tim & Comment sát xuống mép dưới card */
+.card-content > div:last-child {
+    margin-top: auto !important; /* Luôn ghì thanh tương tác xuống đáy card */
+}
