@@ -670,4 +670,364 @@ html, body {
     min-height: 300px; /* Ép vùng chọn ảnh/video dài ra tối thiểu 300px */
     margin-top: 15px;
 }
+/* Container bao ngoài */
+.search-container {
+    width: 100%;
+    max-width: 500px;           /* Độ rộng vừa vặn cho góc phải */
+    margin-left: auto;          /* Đẩy toàn bộ khung sang lề bên phải */
+    margin-right: 30px;           /* Sát lề phải */
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding: 0 20px;            /* Khoảng cách đệm với mép màn hình */
+    box-sizing: border-box;
+}
 
+/* Khung chứa input & icon */
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 176, 106, 0.25);
+    border-radius: 50px;
+    padding: 4px 16px 4px 45px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Hiệu ứng khi Hover */
+.search-box:hover {
+    border-color: rgba(212, 176, 106, 0.6);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 6px 24px rgba(212, 176, 106, 0.12);
+}
+
+/* Hiệu ứng khi Focus */
+.search-box:focus-within {
+    border-color: #d4b06a;
+    background: rgba(20, 20, 25, 0.85);
+    box-shadow: 0 0 20px rgba(212, 176, 106, 0.3), 
+                inset 0 0 10px rgba(212, 176, 106, 0.05);
+    transform: translateY(-1px);
+}
+
+/* Icon Kính lúp */
+.search-icon {
+    position: absolute;
+    left: 16px;
+    width: 18px;
+    height: 18px;
+    stroke: rgba(212, 176, 106, 0.7);
+    transition: stroke 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.search-box:focus-within .search-icon {
+    stroke: #d4b06a;
+    transform: scale(1.1);
+}
+
+/* Ô nhập liệu */
+.search-box input {
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13.5px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+.search-box:focus-within input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================================
+   1. NÚT XÓA NHANH (CLEAR BUTTON)
+   ========================================================= */
+.clear-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    margin-left: 8px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.clear-btn:hover {
+    color: #d4b06a;
+    transform: scale(1.2);
+}
+
+/* =========================================================
+   2. KHUNG NỀN PHỦ TOÀN MÀN HÌNH (MODAL OVERLAY)
+   ========================================================= */
+.media-modal,
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.media-modal.show,
+.modal.show {
+    display: flex !important;
+    opacity: 1;
+}
+
+/* =========================================================
+   3. MODAL ĐƠN (MEDIA-MODAL) - ĐÃ PHÓNG TO
+   ========================================================= */
+.modal-content {
+    position: relative;
+    background: #121216;
+    border: 1px solid rgba(212, 176, 106, 0.4);
+    border-radius: 16px;
+    max-width: 1200px; /* Tăng từ 800px -> 1200px */
+    width: 95%;        /* Tăng diện tích phủ màn hình */
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 176, 106, 0.2);
+    display: flex;
+    flex-direction: column;
+    animation: modalZoom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalZoom {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    line-height: 44px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.modal-close:hover {
+    color: #d4b06a;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.modal-media-container img, 
+.modal-media-container video {
+    width: 100%;
+    max-height: 72vh; /* Mở rộng chiều cao ảnh/video */
+    object-fit: contain;
+    background: #000;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.modal-info {
+    padding: 25px 30px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal-info h2 {
+    color: #fff;
+    font-size: 24px; /* Tăng cỡ chữ tiêu đề */
+    margin-bottom: 12px;
+}
+
+.modal-info #modalAuthor {
+    color: #d4b06a;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.modal-info #modalDate {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* =========================================================
+   4. MODAL CHI TIẾT 2 CỘT (LIGHTBOX) - ĐÃ PHÓNG TO TOÀN DIỆN
+   ========================================================= */
+.modal-content-lightbox {
+    max-width: 1400px; /* Tăng từ 1000px -> 1400px */
+    width: 95%;
+    background: #050b14;
+    border: 1px solid rgba(212,176,106,0.4);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+    margin: auto;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9);
+}
+
+.close-lightbox {
+    color: #fff;
+    position: absolute;
+    top: 15px;
+    right: 22px;
+    font-size: 38px;
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.2s;
+}
+.close-lightbox:hover { 
+    color: #f6d28d; 
+    transform: scale(1.1);
+}
+
+.lightbox-layout {
+    display: flex;
+    flex-direction: row;
+    min-height: 650px; /* Tăng từ 500px -> 650px */
+    max-height: 90vh;  /* Chiếm 90% chiều cao màn hình */
+}
+
+.lightbox-media {
+    flex: 1.8; /* Tăng tỉ lệ hiển thị ảnh/video (cũ là 1.4) */
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lightbox-media img, 
+.lightbox-media video {
+    width: 100%;
+    height: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.lightbox-sidebar {
+    flex: 1.2; /* Tăng tỉ lệ cột thông tin & bình luận */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(212,176,106,0.2);
+    background: rgba(255,255,255,0.02);
+}
+
+.lightbox-header h3 {
+    color: #f6d28d;
+    font-size: 1.6rem; /* Tăng kích thước tiêu đề bài viết */
+    margin-bottom: 12px;
+    word-break: break-word;
+    line-height: 1.3;
+}
+
+.lightbox-header p {
+    color: #ccc;
+    font-size: 1.05rem; /* Tăng cỡ chữ tác giả & ngày đăng */
+    margin: 5px 0;
+}
+
+.lightbox-like-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212,176,106,0.3);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: 0.2s;
+    font-size: 1rem;
+}
+.lightbox-like-btn:hover {
+    background: rgba(212,176,106,0.2);
+}
+
+.lightbox-comments {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212,176,106,0.3) transparent;
+}
+
+.lightbox-input-box {
+    display: flex;
+    gap: 10px;
+}
+
+.lightbox-input-box input {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212,176,106,0.3);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.lightbox-input-box button {
+    padding: 12px 20px;
+    background: #d4af37;
+    border: none;
+    border-radius: 10px;
+    color: #050b14;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* =========================================================
+   5. RESPONSIVE CHO THIẾT BỊ DI ĐỘNG
+   ========================================================= */
+@media (max-width: 768px) {
+    .lightbox-layout {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .lightbox-media {
+        max-height: 350px;
+    }
+    .lightbox-sidebar {
+        border-left: none;
+        border-top: 1px solid rgba(212,176,106,0.2);
+        padding: 20px;
+    }
+}
+
+body.swal2-shown .swal2-container {
+    z-index: 1000000 !important;
+}
