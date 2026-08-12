@@ -261,240 +261,6 @@ html, body {
     opacity: 1; /* Hiện ra khi di chuột vào */
 }
 
-.section-cct{
-    min-height: 80vh;
-    padding: 0 80px;
-    background: linear-gradient(rgba(5, 11, 20, 0.6), rgba(5, 11, 20, 0.6)),
-                    url('images/background/02.jpg') no-repeat center center/cover;
-    
-}
-.section-cct .section-title{
-    padding: 60px 0 40px 0;
-    text-align: center;
-    font-size: 50px;
-}
-.talk-show-mcnbd-title{
-    font-family: var(--font-art);
-    font-size: 28px;
-    color: var(--gold);
-
-}
-.trip-2n1d-title{
-    font-family: var(--font-art);
-    font-size: 28px;
-    color: var(--gold);
-
-}
-.cct-mcnbd {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start; /* Dồn hết sang trái */
-    align-items: flex-start;    /* Căn lề trên */
-    gap: 60px;                  /* Khoảng cách giữa chữ và ảnh */
-    
-}
-
-
-.mcnbd-content, .trip-2n1d-content{
-    margin: 20px 0;
-    font-size: 20px; 
-    line-height: 1.6;
-    color: #ccc;
-}
-.cct-spacer {
-    flex: 0 0 15%;
-}
-.talk-show-mcnbd {
-    flex: 0 0 25%;
-    padding-right: 20px; /* Tạo khoảng thở cho chữ không chạm vào ảnh */
-}
-/* Khối ảnh bên phải (Image Slider) */
-.image-slider {
-    flex: 0 0 50%;                    /* Chiếm phần còn lại */
-    height: 550px;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(212, 176, 106, 0.2);
-}
-
-.slide {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0; left: 0;
-    opacity: 0;
-    /* Hiệu ứng chuyển động kéo dài 1.5 giây */
-    transition: opacity 1.5s ease-in-out; 
-}
-/* Responsive: Dồn về một cột trên mobile */
-@media screen and (max-width: 768px) {
-    .cct-wrapper {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .talk-show-mcnbd {
-        flex: 0 0 100%;
-    }
-    .image-slider {
-        width: 100%;
-    }
-}
-.cct-2n1d {
-    display: flex; /* Quan trọng để nó hiểu cột 15% - 25% - 50% */
-    width: 100%;
-    align-items: flex-start;
-    padding: 60px 0;
-}
-.cct-spacer {
-    flex: 0 0 15%;
-}
-
-.image-slider-2n1d {
-    flex: 0 0 50%;
-    height: 400px;
-    position: relative;
-    overflow: hidden; /* Che ảnh khi trượt */
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.image-slider-2n1d {
-    width: 100%;
-    height: 480px;
-    position: relative;
-    overflow: hidden; /* Cực kỳ quan trọng để che ảnh trượt ngoài khung */
-    border-radius: 20px;
-    background-color: #050b14;
-}
-.noidung-2n1d {
-    flex: 0 0 25%;
-    padding-left: 40px; /* Tạo khoảng thở với ảnh bên trái */
-    text-align: left;
-}
-
-.slide-2n1d {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* Trạng thái ảnh ẩn: nằm lệch hoàn toàn sang trái */
-    transform: translateX(-100%);
-    transition: transform 1s ease-in-out;
-}
-
-/* Ảnh đang hiện: nằm ở giữa */
-.slide-2n1d.active {
-    transform: translateX(0);
-}
-
-/* Ảnh vừa chạy xong: trượt tiếp sang phải */
-.slide-2n1d.exit {
-    transform: translateX(100%);
-}
-
-@media screen and (max-width: 768px) {
-
-    .section-cct{
-        padding: 0 20px;
-    }
-
-    .section-cct .section-title{
-        font-size: 32px;
-        padding: 40px 0 30px;
-    }
-
-    /* TALKSHOW */
-    .cct-mcnbd{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-    }
-
-    .cct-spacer{
-        display: none;
-    }
-
-    .talk-show-mcnbd{
-        width: 100%;
-        flex: none;
-        text-align: center;
-        padding-right: 0;
-        order: 1;
-    }
-
-    .image-slider{
-        width: 100%;
-        flex: none;
-        height: 250px;
-        order: 2;
-        position: relative;
-        overflow: hidden;
-        border-radius: 20px;
-    }
-
-    .slide{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* 2N1Đ */
-    .cct-2n1d{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-        padding: 40px 0;
-    }
-
-    .noidung-2n1d{
-        width: 100%;
-        flex: none;
-        text-align: center;
-        padding-left: 0;
-        order: 1;
-    }
-
-    .image-slider-2n1d{
-        width: 100%;
-        flex: none;
-        height: 250px;
-        order: 2;
-        position: relative;
-        overflow: hidden;
-        border-radius: 20px;
-    }
-
-    .slide-2n1d{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .talk-show-mcnbd-title,
-    .trip-2n1d-title{
-        font-size: 24px;
-    }
-
-    .mcnbd-content,
-    .trip-2n1d-content{
-        font-size: 16px;
-        line-height: 1.7;
-        margin: 15px 0;
-    }
-}
 /* ==========================
    DẤU ẤN MÙA 1
 ========================== */
@@ -918,5 +684,214 @@ html, body {
     }
     .thanhvien-header h2 {
         font-size: 1.6rem;
+    }
+}
+
+/* =========================================================
+   THIẾT KẾ PHẦN CHUỖI CHƯƠNG TRÌNH (SECTION CCT)
+   ========================================================= */
+
+.section-cct {
+    min-height: 80vh;
+    background: linear-gradient(rgba(5, 11, 20, 0.6), rgba(5, 11, 20, 0.6)),
+                url('images/background/02.jpg') no-repeat center center/cover;
+    padding-bottom: 60px;
+}
+
+.section-cct .section-title {
+    padding: 60px 0 40px 0;
+    text-align: center;
+    font-size: 50px;
+}
+
+/* Khoảng đệm bên trái */
+.cct-spacer {
+    flex: 0 0 5%;
+}
+.cct-wrapper {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box; /* Tính cả padding/border vào tổng độ rộng */
+}
+
+/* ---------------------------------------------------------
+   1. TALKSHOW "MÌNH CỦA NGÀY BẮT ĐẦU"
+   --------------------------------------------------------- */
+.cct-mcnbd {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+}
+
+.talk-show-mcnbd {
+    flex: 0 0 35%;
+    padding-right: 20px;
+}
+
+.talk-show-mcnbd-title {
+    font-family: var(--font-art);
+    font-size: 38px;
+    color: var(--gold);
+    line-height: 1.3;
+}
+
+.mcnbd-content {
+    margin: 20px 0;
+    font-size: 21px;
+    line-height: 1.7;
+    color: #e0e0e0;
+}
+
+/* KHUNG SLIDER TALKSHOW - TĂNG LÊN 600PX */
+.image-slider {
+    flex: 0 0 48% !important;
+    width: 48% !important;
+    
+    /* Dùng aspect-ratio thay cho height cố định */
+    aspect-ratio: 16 / 10;          /* Giữ tỉ lệ khung hình chuẩn 16:10 */
+    height: auto !important;        /* Chiều cao tự động nhảy theo chiều rộng */
+    max-height: 650px;              /* Giới hạn chiều cao tối đa trên màn PC cực lớn */
+    min-height: 350px;              /* Chiều cao tối thiểu không sợ bị quá bé */
+    
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(212, 176, 106, 0.2);
+}
+
+.slide {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    position: absolute;
+    top: 0; 
+    left: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* ---------------------------------------------------------
+   2. CHUYẾN ĐỊ "2 NGÀY 1 ĐÊM"
+   --------------------------------------------------------- */
+.cct-2n1d {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: space-between; /* Căn đều 2 khối ảnh và chữ trong màn hình */
+    box-sizing: border-box;
+    gap: 20px; /* Thu hẹp khoảng cách giữa ảnh và chữ tránh bị xô tràn */
+    padding: 40px 0;
+}
+
+/* KHUNG SLIDER 2N1Đ - TĂNG LÊN 600PX */
+.image-slider-2n1d {
+    flex: 0 0 50% !important;
+    width:50% !important;
+    max-width: 50% !important;
+    
+    aspect-ratio: 16 / 10;
+    height: auto !important;
+    max-height: 650px;
+    min-height: 350px;
+    
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: #050b14;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(212, 176, 106, 0.2);
+    box-sizing: border-box;
+}
+
+.slide-2n1d {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 1s ease-in-out;
+}
+
+.slide-2n1d.active { transform: translateX(0); }
+.slide-2n1d.exit { transform: translateX(100%); }
+
+.noidung-2n1d {
+    flex: 0 0 38% !important; /* Dùng 38% để tổng (55% ảnh + 38% chữ + gap) < 100% */
+    width: 38% !important;
+    max-width: 38% !important;
+    box-sizing: border-box;   /* Quan trọng: Để padding-left không đẩy khung ra ngoài mép */
+    padding-left: 20px;
+    padding-right: 100px;         /* Bỏ hoàn toàn padding bên phải */
+    text-align: left;
+}
+
+.trip-2n1d-title {
+    font-family: var(--font-art);
+    font-size: 38px;
+    color: var(--gold);
+    line-height: 1.3;
+}
+
+.trip-2n1d-content {
+    margin: 20px 0;
+    font-size: 21px;
+    line-height: 1.7;
+    color: #e0e0e0;
+}
+.slide, 
+.slide-2n1d {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;      /* Tự cắt viền thừa để phủ kín khung khi thu phóng */
+    object-position: center !important;
+}
+/* ---------------------------------------------------------
+   RESPONSIVE MOBILE
+   --------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+    .section-cct { padding: 0 20px; }
+
+    .cct-spacer { display: none; }
+
+    .cct-mcnbd, 
+    .cct-2n1d {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 30px 0;
+    }
+
+    .talk-show-mcnbd, 
+    .noidung-2n1d {
+        width: 100%;
+        flex: none;
+        text-align: center;
+        padding: 0;
+    }
+
+    .image-slider, 
+    .image-slider-2n1d {
+        width: 100% !important;
+        flex: none;
+        height: 280px !important;
+        min-height: 280px !important;
+    }
+
+    .talk-show-mcnbd-title,
+    .trip-2n1d-title {
+        font-size: 26px;
+    }
+
+    .mcnbd-content,
+    .trip-2n1d-content {
+        font-size: 16px;
     }
 }
