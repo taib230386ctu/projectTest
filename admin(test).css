@@ -440,3 +440,74 @@ button[onclick*="approved"] {
         padding: 20px;
     }
 }
+/* =========================================================
+   FIX KHUNG CARD & CỐ ĐỊNH VỊ TRÍ FOOTER DƯỚI ĐÁY CARD
+   ========================================================= */
+
+.gallery-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    background: #090d16;
+    border: 1px solid rgba(255, 220, 150, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    color: #fff;
+}
+
+.card-content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important; /* Dãn rộng để lấp đầy card */
+    padding: 16px !important;
+}
+
+/* Giới hạn tiêu đề 2 dòng, quá dài sẽ có dấu ... */
+.card-content h3 {
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: #e6ca65 !important;
+    margin-bottom: 12px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    word-break: break-word;
+    min-height: 2.7rem; /* Giữ khoảng trống đồng đều ngay cả khi tiêu đề chỉ 1 dòng */
+}
+
+/* Đẩy phần tương tác (tim/comment/nút) xuống đáy card */
+.card-footer-wrapper {
+    margin-top: auto !important;
+}
+/* =========================================================
+   ÉP TIM, COMMENT VÀ NÚT BẤM DƯỚI ĐÁY CARD
+   ========================================================= */
+
+/* 1. Đảm bảo card là flexbox dọc và kéo giãn 100% chiều cao cột */
+.gallery-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+
+/* 2. Ép phần chứa chữ chiếm hết khoảng trống dãn ra */
+.card-content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+}
+
+/* 3. Đẩy toàn bộ nhóm (Tim, Comment, Duyệt, Xóa) sát đít card */
+.card-footer-wrapper {
+    margin-top: auto !important;
+}
+
+/* 4. Khóa tiêu đề tối đa 2 dòng để bài viết gọn gàng */
+.card-content h3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    word-break: break-word;
+}
