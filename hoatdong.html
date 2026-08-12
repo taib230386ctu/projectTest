@@ -102,8 +102,21 @@
             <button id="btnUpload" class="start-btn">Thả vào Galaxy</button>
         </div>
     </div>
+    <div class="search-container">
+        <div class="search-box">
+            <!-- Icon kính lúp (SVG) -->
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
 
-    <section class="moments-section">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm tiêu đề hoặc tên người đăng..." autocomplete="off">
+            
+            <!-- Nút xóa nhanh khi gõ chữ -->
+            <button id="clearSearch" class="clear-btn" type="button" aria-label="Xóa">&times;</button>
+        </div>
+    </div>
+    <section id="sectionVideo" class="moments-section">
         <h2 class="moments-title">✦ KHOẢNH KHẮC CỦA MỌI NGƯỜI ✦</h2>
         <p style="text-align: center; color: #555; font-size: 13px; font-style: italic; margin-top: -30px; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
             Những khoảnh khắc được ghi lại...
@@ -116,7 +129,7 @@
         </div>
     </section>
 
-    <section class="moments-section" style="margin-top: 80px;">
+    <section id="sectionImage" class="moments-section" style="margin-top: 80px;">
         <h2 class="moments-title">✦ GALAXY CỦA CHÚNG TA ✦</h2>
         <p style="text-align: center; color: #555; font-size: 13px; font-style: italic; margin-top: -30px; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
             Những hình ảnh được lưu lại...
@@ -170,5 +183,75 @@
 
         
     </section>
+    <!-- Modal Phóng to Media (Lightbox 2 Cột) -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content-lightbox">
+            <!-- Nút đóng Modal -->
+            <span id="closeModal" class="close-lightbox">&times;</span>
+
+            <div class="lightbox-layout">
+                <!-- CỘT BÊN TRÁI: HIỂN THỊ ẢNH / VIDEO -->
+                <div class="lightbox-media" id="modalMediaContainer">
+                    <!-- File media sẽ load vào đây -->
+                </div>
+
+                <!-- CỘT BÊN PHẢI: CHI TIẾT + TIM + BÌNH LUẬN -->
+                <div class="lightbox-sidebar">
+                    <div class="lightbox-header">
+                        <h3 id="modalTitle">Tiêu đề bài viết</h3>
+                        <p id="modalAuthor">✦ Bởi: Tên tác giả</p>
+                        <p id="modalDate">✦ Ngày đăng: --/--/----</p>
+                    </div>
+
+                    <!-- Thanh đếm lượt Tim & icon tương tác -->
+                    <div class="lightbox-stats">
+                        <button id="modalLikeBtn" class="lightbox-like-btn">
+                            <i id="modalLikeIcon" class="fa-regular fa-heart"></i>
+                            <span id="modalLikeCount">0</span> lượt thích
+                        </button>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid rgba(212,176,106,0.2); margin: 15px 0;">
+
+                    <!-- Danh sách bình luận -->
+                    <h4 style="color: #f6d28d; margin-bottom: 10px; font-size: 1rem;">Bình luận</h4>
+                    <div id="modalCommentList" class="lightbox-comments">
+                        <!-- Bình luận sẽ load vào đây -->
+                    </div>
+
+                    <!-- Ô nhập bình luận nhanh trong Lightbox -->
+                    <div class="lightbox-input-box">
+                        <input type="text" id="modalCommentInput" placeholder="Viết bình luận...">
+                        <button id="modalBtnSendComment"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL BÌNH LUẬN -->
+    <div id="commentModal" class="modal">
+        <div class="modal-content" style="max-width: 500px; width: 90%; background: #050b14; border: 1px solid rgba(212,176,106,0.3); color: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; backdrop-filter: blur(10px);">
+            <!-- Nút đóng Modal -->
+            <span id="closeCommentModal" class="close" style="color: #aaa; position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#f6d28d'" onmouseout="this.style.color='#aaa'">&times;</span>
+            
+            <!-- Tiêu đề Modal -->
+            <h3 id="commentModalTitle" style="color: #f6d28d; margin-bottom: 18px; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; padding-right: 30px; line-height: 1.4;">Bình luận</h3>
+            
+            <!-- Danh sách comment -->
+            <div id="commentList" style="max-height: 320px; overflow-y: auto; margin-bottom: 18px; padding-right: 8px; scrollbar-width: thin; scrollbar-color: rgba(212,176,106,0.3) transparent;">
+                <!-- Comment sẽ tự load vào đây -->
+            </div>
+
+            <!-- Ô nhập comment -->
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="commentInput" placeholder="Viết bình luận của bạn..." style="flex: 1; padding: 12px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,176,106,0.3); border-radius: 8px; color: #fff; font-size: 0.95rem; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='#d4af37'" onblur="this.style.borderColor='rgba(212,176,106,0.3)'">
+                
+                <button id="btnSendComment" style="padding: 12px 20px; background: #d4af37; border: none; border-radius: 8px; color: #050b14; font-weight: bold; cursor: pointer; font-size: 0.95rem; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px;" onmouseover="this.style.background='#f6d28d'" onmouseout="this.style.background='#d4af37'">
+                    <span>Gửi</span>
+                    <i class="fa-solid fa-paper-plane" style="font-size: 0.85rem;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
