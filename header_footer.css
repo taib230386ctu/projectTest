@@ -93,31 +93,29 @@ body{
 /* =========================================================
    NỘI DUNG NAVBAR
    ========================================================= */
-.nav-inner{
-    width:100%;
-    height:64px;
+.nav-inner {
+    width: 100%;
+    height: 64px;
+    padding-left: clamp(15px, 3vw, 50px);
+    padding-right: clamp(15px, 3vw, 50px);
 
-    padding-left:clamp(15px,3vw,50px);
-    padding-right:clamp(15px,3vw,50px);
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:20px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
+
 
 
 /* LOGO */
 
-.logo{
-    display:flex;
-    align-items:center;
-    flex:0 1 auto;
-    min-width:0;
-
-    text-decoration:none;
-    cursor:pointer;
+.logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0; /* Không cho logo bị co nhỏ lại */
+    text-decoration: none;
+    justify-content: flex-start; /* Căn dính lề trái */
 }
 
 .logo img{
@@ -140,32 +138,69 @@ body{
 
 
 /*Menu navbar*/
-.menu{
-    display:flex;
-    align-items:center;
-    gap:clamp(1.2rem,3vw,3.4rem);
+.menu {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; /* Dải đều các nút */
+    padding: 0; /* ĐÃ XÓA padding-right: 100px để không bị xô lệch */
 }
-.menu a{
+.nav-spacer {
+    flex: 0.5;
+    flex-shrink: 0;
+}
 
-    font-family:var(--font-art);
-    font-style:normal !important;
+.menu a {
+    font-family: var(--font-art);
+    font-style: normal !important;
+    position: relative;
+    color: #fff;
+    text-decoration: none;
 
-    position:relative;
+    /* Tối ưu kích thước chữ để không bị vỡ hàng */
+    font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
+    letter-spacing: .08em; /* Giảm nhẹ nét giãn chữ để dải menu thảnh thơi hơn */
 
-    color:#fff;
-    text-decoration:none;
+    cursor: pointer;
+    white-space: nowrap; /* Giữ chữ trên 1 hàng */
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 
-    font-size:clamp(1rem,1vw + .4rem,1.25rem);
+    transition: color .3s ease, text-shadow .3s ease;
+    animation: menuItemFade .5s cubic-bezier(.25,1,.5,1) both;
+}
 
-    letter-spacing:.12em;
+@media (max-width: 1300px) {
+    .nav-inner {
+        /* Bỏ khoảng trống linh hoạt, cho các khối xếp sát nhau */
+        justify-content: flex-start; 
+        gap: 20px; /* Khoảng cách cố định giữa Logo và Menu */
+    }
 
-    cursor:pointer;
+    /* Logo không chiếm 1 phần nữa mà chỉ lấy vừa đủ dung lượng */
+    .logo {
+        flex: none; 
+    }
 
-    transition:
-        color .3s ease,
-        text-shadow .3s ease;
+    /* Menu bỏ tỉ lệ 3, chuyển sang sát trái và các nút nằm gần nhau */
+    .menu {
+        flex: none; 
+        justify-content: flex-start; 
+        gap: clamp(12px, 1.5vw, 24px); /* Khoảng cách giữa các nút link */
+    }
 
-    animation:menuItemFade .5s cubic-bezier(.25,1,.5,1) both;
+    /* Ẩn khối spacer đối trọng vì lúc này không cần chia 1:3:1 nữa */
+    .nav-spacer {
+        display: none; 
+    }
+}
+.menu a img {
+    height: 4em; /* Tự động thu nhỏ/phóng to đúng bằng kích thước font-size của chữ (16px) */
+    width: auto;  /* Giữ nguyên tỷ lệ chiều rộng ảnh, không bị móp */
+    display: inline-block;
+    vertical-align: middle;
+    object-fit: contain;
 }
 .menu a:hover{
     color:var(--gold-light);
@@ -249,7 +284,31 @@ body{
     }
 }
 
-@media (max-width:768px){
+@media (max-width: 1300px) {
+    .nav-inner {
+        /* Đẩy Logo sang trái, đẩy Menu sang sát lề phải */
+        justify-content: space-between; 
+        gap: 20px;
+    }
+
+    .logo {
+        flex: none; /* Logo thu gọn đúng bằng kích thước thực */
+    }
+
+    .menu {
+        flex: none; /* Bỏ chia tỉ lệ */
+        margin-left: auto; /* Tự động tạo khoảng trống bên trái để đẩy cả cụm Menu sát lề phải */
+        justify-content: flex-end; /* Căn các nút link dính sát về bên phải */
+        gap: clamp(30px, 1.8vw, 40px); /* Khoảng cách giữa các nút link */
+        padding-right: 0;
+    }
+
+    .nav-spacer {
+        display: none; /* Ẩn khối spacer vì đã dùng margin-left: auto */
+    }
+}
+
+@media (max-width:900px){
 
     .menu{
         display:none;
@@ -517,7 +576,7 @@ body{
 }
 
 /*==================== CONFIG RIÊNG ĐIỆN THOẠI ================*/
-@media screen and (max-width: 768px){
+@media screen and (max-width: 900px){
     body{ overflow-x: hidden; }
     .navbar{ padding: 0; }
 
