@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { 
-    getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, increment 
+    getFirestore, collection, query, orderBy, onSnapshot, doc, getDoc, updateDoc, deleteDoc, increment 
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { 
     getStorage, ref, deleteObject 
@@ -22,6 +22,10 @@ const storage = getStorage(app);
 
 let unsubComments = null;
 let currentActiveMomentId = null;
+
+// Quản lý bài viết đã thả tim trên thiết bị hiện tại qua LocalStorage
+const getLikedPosts = () => JSON.parse(localStorage.getItem('admin_liked_posts') || '[]');
+const setLikedPosts = (likedArr) => localStorage.setItem('admin_liked_posts', JSON.stringify(likedArr));
 
 // --- 2. XÁC THỰC ADMIN ---
 const checkAuth = async () => {
@@ -79,13 +83,17 @@ function loadAllPosts() {
     });
 }
 
-// --- 4. RENDER CARD THEO GIAO DIỆN CHUẨN MẪU ---
+// --- 4. RENDER CARD BÀI VIẾT ---
 function renderCard(docSnap, container, currentStatus) {
     const data = docSnap.data();
     const id = docSnap.id; 
     const authorName = data.author || "Người ẩn danh";
-    const likesCount = data.likes || 0;
+    
+    // Ép số tim từ Firestore luôn >= 0 khi hiển thị
+    const likesCount = Math.max(0, data.likeCount || 0); 
     const commentCount = data.commentCount || 0;
+
+    
 
     // Định dạng ngày tháng
     let dateStr = "Vừa xong";
@@ -95,8 +103,8 @@ function renderCard(docSnap, container, currentStatus) {
     }
 
     const mediaTag = data.type === 'video' 
-        ? `<video src="${data.url}" preload="metadata" style="width:100%; height:220px; object-fit:cover; background:#000; cursor:pointer;"></video>`
-        : `<img src="${data.url}" style="width:100%; height:220px; object-fit:cover; cursor:pointer;">`;
+        ? `<video src="${data.url}" preload="metadata" style="width:100%; height:220px; object-fit:cover; background:#000; cursor:pointer; display:block;"></video>`
+        : `<img src="${data.url}" style="width:100%; height:220px; object-fit:cover; cursor:pointer; display:block;">`;
 
     const actionBtn = currentStatus === 'pending' 
         ? `<button class="btn-status-toggle" data-id="${id}" style="flex:1; background:#28a745; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.8rem;">DUYỆT ✅</button>`
@@ -104,8 +112,7 @@ function renderCard(docSnap, container, currentStatus) {
 
     const cardElement = document.createElement('div');
     cardElement.className = 'gallery-card';
-    cardElement.style.cssText = "background: #090d16; border: 1px solid rgba(255,220,150,0.12); border-radius: 16px; overflow: hidden; color: #fff; font-family: sans-serif;";
-    
+
     cardElement.innerHTML = `
         <!-- Media (Ảnh / Video) -->
         <div class="card-media-click" style="width:100%; cursor:pointer;">
@@ -113,8 +120,8 @@ function renderCard(docSnap, container, currentStatus) {
         </div>
 
         <!-- Nội Dung Bài Viết -->
-        <div style="padding: 16px;">
-            <h3 style="font-size: 1.15rem; font-weight: 700; color: #e6ca65; margin-bottom: 12px; font-family: serif;">${data.title || 'Không tiêu đề'}</h3>
+        <div class="card-content">
+            <h3 title="${data.title || 'Không tiêu đề'}">${data.title || 'Không tiêu đề'}</h3>
             
             <p style="color: #d4b06a; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
                 ✦ <span style="color: #fff;">Bởi:</span> <span style="color: #d4b06a;">${authorName}</span>
@@ -124,53 +131,113 @@ function renderCard(docSnap, container, currentStatus) {
                 ✦ ${dateStr}
             </p>
 
-            <!-- Đường kẻ phân cách -->
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 12px;"></div>
+            <!-- Khung đẩy xuống đáy: Tim, Bình luận & Nút Admin -->
+            <div class="card-footer-wrapper">
+                <!-- Đường kẻ phân cách -->
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 12px;"></div>
 
-            <!-- Hàng Footer: ❤️ Góc trái & 💬 Góc phải -->
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px; font-size: 1rem; color: #e2e8f0;">
-                <div class="btn-like-click" style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;">
-                    <span style="font-size: 1.2rem;">❤️</span>
-                    <span style="font-weight: 600; font-size: 0.95rem;">${likesCount}</span>
+                <!-- Hàng Footer: ❤️ Góc trái & 💬 Góc phải -->
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 2px 4px; font-size: 1rem; color: #e2e8f0;">
+                    <div class="btn-like-click" style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;">
+                        <span style="font-size:1.2rem;">❤️</span>
+                        <span style="font-weight:600;font-size:0.95rem;color:#e2e8f0;">
+                            ${likesCount}
+                        </span>
+                    </div>
+
+                    <div class="btn-comment-click" style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;">
+                        <span style="font-size: 1.2rem; filter: opacity(0.9);">💬</span>
+                        <span style="font-weight: 600; font-size: 0.95rem;">${commentCount}</span>
+                    </div>
                 </div>
 
-                <div class="btn-comment-click" style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;">
-                    <span style="font-size: 1.2rem; filter: opacity(0.9);">💬</span>
-                    <span style="font-weight: 600; font-size: 0.95rem;">${commentCount}</span>
+                <!-- Nút Quản lý Admin -->
+                <div style="display: flex; gap: 8px; margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 10px;">
+                    ${actionBtn}
+                    <button class="btn-delete-post" style="flex:1; background:#dc3545; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.8rem;">XÓA ❌</button>
                 </div>
-            </div>
-
-            <!-- Nút Quản lý Admin -->
-            <div style="display: flex; gap: 8px; margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.08); padding-top: 10px;">
-                ${actionBtn}
-                <button class="btn-delete-post" style="flex:1; background:#dc3545; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.8rem;">XÓA ❌</button>
             </div>
         </div>
     `;
 
-    // Sự kiện Click
-    const openModalHandler = () => openMediaModal(id, data);
-    cardElement.querySelector('.card-media-click').onclick = openModalHandler;
-    cardElement.querySelector('.btn-comment-click').onclick = openModalHandler;
+    // --- BẮT SỰ KIỆN CLICK (STOP PROPAGATION) ---
+    
+    // 1. Click Ảnh / Video
+    const mediaClickArea = cardElement.querySelector('.card-media-click');
+    if (mediaClickArea) {
+        mediaClickArea.onclick = (e) => {
+            e.stopPropagation();
+            openMediaModal(id, data);
+        };
+    }
 
-    // Bấm ❤️ thả tim
-    cardElement.querySelector('.btn-like-click').onclick = () => toggleLike(id);
+    // 2. Click Bình Luận
+    const commentBtn = cardElement.querySelector('.btn-comment-click');
+    if (commentBtn) {
+        commentBtn.onclick = (e) => {
+            e.stopPropagation();
+            openMediaModal(id, data);
+        };
+    }
 
-    // Duyệt/Gỡ & Xóa
-    cardElement.querySelector('.btn-status-toggle').onclick = () => updateStatus(id, currentStatus === 'pending' ? 'approved' : 'pending');
-    cardElement.querySelector('.btn-delete-post').onclick = () => deletePost(id, data.url, data.type, data.title, authorName);
+    
+
+    // 4. Duyệt / Gỡ bài
+    const statusBtn = cardElement.querySelector('.btn-status-toggle');
+    if (statusBtn) {
+        statusBtn.onclick = (e) => {
+            e.stopPropagation();
+            updateStatus(id, currentStatus === 'pending' ? 'approved' : 'pending');
+        };
+    }
+
+    // 5. Xóa bài
+    const deleteBtn = cardElement.querySelector('.btn-delete-post');
+    if (deleteBtn) {
+        deleteBtn.onclick = (e) => {
+            e.stopPropagation();
+            deletePost(id, data.url, data.type, data.title, authorName);
+        };
+    }
 
     container.appendChild(cardElement);
 }
 
-// --- 5. TĂNG TIM / DUYỆT / GỠ / XÓA BÀI VIẾT ---
+// --- 5. LOGIC THẢ TIM CHỐNG SỐ ÂM TỪ FIRESTORE ---
 async function toggleLike(id) {
+    let likedPosts = getLikedPosts();
+    const isLiked = likedPosts.includes(id);
+
     try {
-        await updateDoc(doc(db, "moments", id), {
-            likes: increment(1)
-        });
+        const docRef = doc(db, "moments", id);
+
+        if (!isLiked) {
+            // Chưa thả tim -> Tăng 1
+            await updateDoc(docRef, {
+                likes: increment(1)
+            });
+            likedPosts.push(id);
+        } else {
+            // Đã thả tim -> Bỏ tim
+            const snap = await getDoc(docRef);
+            const currentLikes = snap.exists() ? (snap.data().likes || 0) : 0;
+
+            if (currentLikes > 0) {
+                await updateDoc(docRef, {
+                    likes: increment(-1)
+                });
+            } else {
+                // Nếu đang <= 0 thì ÉP VỀ 0, tuyệt đối không trừ âm
+                await updateDoc(docRef, {
+                    likes: 0
+                });
+            }
+
+            likedPosts = likedPosts.filter(postId => postId !== id);
+        }
+        setLikedPosts(likedPosts);
     } catch (err) {
-        console.error("Lỗi thả tim:", err);
+        console.error("Lỗi cập nhật tim Firestore:", err);
     }
 }
 
@@ -309,7 +376,10 @@ function listenComments(momentId) {
                 <button class="btn-delete-comment">🗑️ Xóa</button>
             `;
 
-            item.querySelector('.btn-delete-comment').onclick = () => deleteComment(momentId, commentId);
+            item.querySelector('.btn-delete-comment').onclick = (e) => {
+                e.stopPropagation();
+                deleteComment(momentId, commentId);
+            };
             commentList.appendChild(item);
         });
     });
