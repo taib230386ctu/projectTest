@@ -65,6 +65,7 @@ body{
     inset: 0 0 auto 0;             /* top:0; left:0; right:0 */
     width: 100%;
     z-index: 1000;
+    padding: clamp(5px,3vw,10px) 0;
 
     background: rgba(5, 10, 18, 0.45);
     backdrop-filter: blur(14px);
@@ -112,9 +113,6 @@ body{
 .logo{
     display:flex;
     align-items:center;
-
-    gap:12px;
-
     flex:0 1 auto;
     min-width:0;
 
@@ -123,37 +121,23 @@ body{
 }
 
 .logo img{
-    width:clamp(55px,6vw,100px);
+    width:clamp(80px,6vw,100px);
     height:auto;
 
     flex-shrink:0;
     object-fit:contain;
 }
 
-.logo-text{
-    display:flex;
-    align-items:center;
-
-    white-space:nowrap;
-    min-width:0;
-}
-.part-main{
-    font-family: "LASTCHRISTMAS", serif;
-    font-size: clamp(1.4rem, 2vw, 1.75rem);
-    color: var(--gold);
-    line-height: 1;
+/* Ảnh text PKM2 phóng to chuẩn Responsive */
+.logo-text .text-pkm2 {
+    /* Độ rộng co giãn linh hoạt: Tối thiểu 120px - Lý tưởng 12vw - Tối đa 180px */
+    width: clamp(100px, 12vw, 150px); 
+    
+    height: auto; /* Giữ tỷ lệ ảnh không bị móp méo */
+    display: block;
+    object-fit: contain;
 }
 
-.part-season{
-    font-family: "DancingScript", cursive;
-    font-size: clamp(1.1rem, 1.7vw, 1.5rem);
-    color: var(--gold);
-
-    padding-top: 0.125rem;
-    padding-left: 0.15rem;
-
-    line-height: 1;
-}
 
 /*Menu navbar*/
 .menu{
@@ -546,11 +530,7 @@ body{
         position: relative;
     }
 
-    .logo{ display: flex; align-items: center; justify-content: flex-start !important; }
-    .logo img{ width: 80px !important; height: auto; margin: 0; }
     
-    /* CO NHỎ TÊN THƯƠNG HIỆU: Đảm bảo không đẩy nút 3 gạch rớt dòng */
-    .logo-text{ font-size: 22px !important; margin-left: 0 !important; }
     .hero-content {
         position: relative; z-index: 5;
         width: 100%; text-align: center;
