@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>REAL FINE - Phá Kén</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script>
+        (function() {
+            // File CSS thứ nhất (có sẵn của bạn)
+            const link1 = document.createElement('link');
+            link1.rel = 'stylesheet';
+            link1.href = 'hoatdong.css?v=' + new Date().getTime(); 
+            document.head.appendChild(link1);
+
+            // File CSS thứ hai muốn thêm vào
+            const link2 = document.createElement('link');
+            link2.rel = 'stylesheet';
+            link2.href = 'header_footer.css?v=' + new Date().getTime(); // Thay 'style2.css' bằng tên file của bạn
+            document.head.appendChild(link2);
+        })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="hoatdong.js"></script>
+    <script type="module" src="navbar.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+
+            <a href="index.html" class="logo">
+                <img src="./images/logo/logo.png">
+                <div class="logo-text">
+                    <img class="text-pkm2" src="./images/logo/text_pkenmua2.png" alt="">
+                </div>
+            </a>
+            
+            <div class="menu-toggle">☰</div>
+
+            <div class="menu">
+                <a href="index.html">Home</a>
+                <a href="phaken01.html">Hoạt động</a>
+                <a href="tintuc.html"  class="active">Tin tức</a>
+                <a href="hoatdong.html"><img src="./images/logo/btfly.png" alt="">Kể đi Kén nghe nè</a>
+                <a href="lienhe.html">Liên hệ</a>
+            </div>
+            <div class="nav-spacer"></div>
+        </div>
+    </nav>
+    <h1 style="min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center;">
+        CHƯA CÓ NỘI DUNG
+    </h1>
+    <section class="Footer">
+        <div class="footer-inner">
+            <div class="footer-col footer-brand">
+                <a href="" class="logo">
+                    <img src="./images/logo/logo.png" alt="">
+                </a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Khám Phá</h3>
+                <ul class="footer-links">
+                    <li><a href="phaken01.html">Phá Kén Mùa 1</a></li> 
+                    <li><a href="hoatdong.html">Hoạt Động</a></li>
+                    <li><a href="tintuc.html">Tin Tức</a></li>
+                    <li><a href="lienhe.html">Liên Hệ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Liên Hệ</h3>
+                <ul class="footer-info">
+                    <li>Email: phakenofficial@gmail.com</li>
+                    <li>Hotline: </li>
+                    <li>Địa chỉ: 19 Nguyễn Hữu Thọ, Phường Tân Hưng, TP. Hồ Chí Minh, Việt Nam</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Theo Dõi</h3>
+                <p>Kết nối và cập nhật những thông tin mới nhất từ chúng tôi:</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/phakenofficial" title="Facebook" class="fb"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/phakenofficial/" title="Instagram" class="ig"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@phakenofficial.fss.tdtu" title="TikTok" class="tt"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.threads.com/@phakenofficial?xmt=AQG0LUMe5pznl3MExDXSUUeFvFja1X528Wv_5eFlow5v0V4" title="Threads" class="threads"><i class="fa-brands fa-threads"></i></a>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+</body>
+</html>
