@@ -12,21 +12,66 @@
 <body style="background:#050b14; padding-top: 80px; padding-bottom: 100px;">
 
     <div class="admin-container" style="width: 90%; max-width: 1400px; margin: auto;">
-    <h1 style="color:var(--gold); margin-top:40px;">✦ CHƯA DUYỆT ✦</h1>
-    <h2 class="moments-title">Hình ảnh</h2>
-    <div id="pendingImage" class="gallery-grid" style="margin-bottom: 40px;"></div>
-    <h2 class="moments-title">Video</h2>
-    <div id="pendingVideo" class="gallery-grid" style="margin-bottom: 80px;"></div>
+        <h1 style="color:var(--gold); margin-top:40px;">✦ CHƯA DUYỆT ✦</h1>
+        <h2 class="moments-title">Hình ảnh</h2>
+        <div id="pendingImage" class="gallery-grid" style="margin-bottom: 40px;"></div>
+        <h2 class="moments-title">Video</h2>
+        <div id="pendingVideo" class="gallery-grid" style="margin-bottom: 80px;"></div>
 
-    <h1 style="color:#28a745; border-top: 1px solid rgba(255,255,255,0.1); padding-top:40px;">✦ ĐÃ DUYỆT ✦</h1>
-    <h2 class="moments-title">Hình ảnh</h2>
-    <div id="approvedImage" class="gallery-grid" style="margin-bottom: 40px;"></div>
-    <h2 class="moments-title">Video</h2>
-    <div id="approvedVideo" class="gallery-grid"></div>
-</div>
+        <h1 style="color:#28a745; border-top: 1px solid rgba(255,255,255,0.1); padding-top:40px;">✦ ĐÃ DUYỆT ✦</h1>
+        <h2 class="moments-title">Hình ảnh</h2>
+        <div id="approvedImage" class="gallery-grid" style="margin-bottom: 40px;"></div>
+        <h2 class="moments-title">Video</h2>
+        <div id="approvedVideo" class="gallery-grid"></div>
+    </div>
+
+    <!-- MODAL QUẢN LÝ BÌNH LUẬN (MỚI THÊM) -->
+    <div id="adminCommentsModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: #0a0a0a; border: 1px solid rgba(212,176,106,0.4); border-radius: 16px; width: 90%; max-width: 600px; max-height: 80vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 30px rgba(0,0,0,0.8);">
+            
+            <div style="padding: 15px 20px; border-bottom: 1px solid rgba(212,176,106,0.2); display: flex; justify-content: space-between; align-items: center;">
+                <h3 id="modalMomentTitle" style="color: var(--gold); font-size: 1.1rem; margin: 0;">💬 Bình luận</h3>
+                <button id="closeCommentsModal" style="background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">✕</button>
+            </div>
+
+            <div id="adminCommentList" style="padding: 20px; overflow-y: auto; flex: 1;">
+                <!-- Danh sách comment sẽ tự đổ vào đây -->
+            </div>
+
+        </div>
+    </div>
 
     <a href="index.html" style="position: fixed; bottom: 20px; right: 20px; color: var(--gold); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--gold); padding: 10px 20px; border-radius: 50px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000;">← VỀ TRANG CHỦ</a>
 
-    <script type="module" src="admin.js"></script>
+    <!-- Modal Xem Chi Tiết & Quản Lý Bình Luận -->
+    <div id="mediaModal" class="custom-modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            
+            <div class="modal-body">
+                <!-- Bên trái: Hiển thị Ảnh / Video -->
+                <div class="modal-media-wrapper" id="modalMediaContainer">
+                    <!-- JS sẽ chèn <img> hoặc <video> vào đây -->
+                </div>
+
+                <!-- Bên phải: Thông tin & Bình luận -->
+                <div class="modal-info-wrapper">
+                    <h3 id="modalTitle" class="modal-title">Tiêu đề media</h3>
+                    <p id="modalDesc" class="modal-desc">Mô tả ngắn gọn...</p>
+                    
+                    <hr class="modal-divider">
+
+                    <div class="comments-section">
+                        <h4>BÌNH LUẬN (<span id="commentCount">0</span>)</h4>
+                        <div id="commentList" class="comment-list">
+                            <!-- JS sẽ render danh sách bình luận vào đây -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script type="module" src="admin.js"></script>
 </html>
