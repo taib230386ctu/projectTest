@@ -1,11 +1,11 @@
 /* =========================================================
-   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   1. GLOBAL SETTINGS & VARIABLES
    ========================================================= */
 :root {
     --gold: #d4b06a;
     --gold-light: #f6d28d;
-   
 }
+
 @font-face {
     font-family: 'DancingScript'; 
     src: url('./fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
@@ -30,6 +30,7 @@
     font-family: 'Josefin Sans'; 
     src: url('./fonts/JosefinSans-Medium.ttf') format('truetype');
 }
+
 @font-face {
     font-family: 'Quicksand';
     src: url('./fonts/Quicksand-Bold.ttf') format('truetype');
@@ -42,143 +43,98 @@
     box-sizing: border-box;
 }
 
+html, body {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+
 body {
     background: #050b14;
     color: white;
     overflow-x: hidden;
-    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
+    overflow-y: scroll;
 }
-html, body {
-    /* Cho trình duyệt Chrome, Safari và Opera */
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    
-    /* Cho trình duyệt Firefox */
-    scrollbar-width: none;
-    
-    /* Cho trình duyệt Internet Explorer và Edge cũ */
-    -ms-overflow-style: none; 
-}
+
 
 /* =========================================================
-   3. KHU VỰC CHÍNH (HERO SECTION)
+   2. HERO SECTION
    ========================================================= */
-.hero{
+.hero {
     position: relative;
-
     min-height: 100svh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     overflow: hidden;
 }
 
-/* Lớp tối nền */
-.hero::before{
+.hero::before {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background: #000;
-
     opacity: .52;
-
     filter: brightness(.65) blur(1px);
-
     transform: scale(1.05);
-
     z-index: 1;
 }
 
-/* Gradient */
-.hero::after{
+.hero::after {
     content: "";
-
     position: absolute;
     inset: 0;
+    /* Đổi dải gradient: cho vùng trong suốt kéo dài hơn và chỉ đậm dần ở 15% cuối cùng */
+    background: linear-gradient(
+        to bottom,
+        rgba(5, 10, 18, 0) 0%,
+        rgba(5, 10, 18, 0.2) 60%,
+        rgba(5, 10, 18, 0.95) 100%
+    );
+    z-index: 2;
+    pointer-events: none; /* Tránh đè cảm ứng */
+}
 
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(5,10,18,.12) 0%,
-            rgba(5,10,18,.42) 35%,
-            rgba(5,10,18,.82) 75%,
-            rgba(5,10,18,.98) 100%
-        );
-
+.bg-butterfly {
+    position: absolute;
+    width: clamp(22rem, 60vw, 56rem);
+    aspect-ratio: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -35%);
+    opacity: .05;
+    filter: blur(2px);
+    pointer-events: none;
     z-index: 2;
 }
 
-/* Bướm nền */
-.bg-butterfly{
-
-    position:absolute;
-
-    width:clamp(22rem,60vw,56rem);
-    aspect-ratio:1;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-35%);
-
-    opacity:.05;
-
-    filter:blur(2px);
-
-    pointer-events:none;
-
-    z-index:2;
-}
-
-/* Nội dung */
-.hero-content{
-
-    position:relative;
-
-    z-index:5;
-
-    width:min(90%,75rem);
-
-    text-align:center;
-
-    margin:0 auto;
-}
-
-/* =========================================================
-   BRAND IMAGE
-   ========================================================= */
-
-/* Khung chứa */
-.brand-image-wrapper{
+.hero-content {
     position: relative;
-
-    width: min(90%, 87.5rem);
-
+    z-index: 5;
+    width: min(90%, 75rem);
+    text-align: center;
     margin: 0 auto;
+}
 
+.brand-image-wrapper {
+    position: relative;
+    width: min(90%, 87.5rem);
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 0 1rem;
 }
 
-.brand-image{
+.brand-image {
     width: min(120vw, 1800px);
     height: auto;
-
     display: block;
-
     object-fit: contain;
     object-position: center;
-
     z-index: 1;
-
     mask-image: linear-gradient(
         to right,
         transparent,
@@ -186,7 +142,6 @@ html, body {
         black 85%,
         transparent
     );
-
     -webkit-mask-image: linear-gradient(
         to right,
         transparent,
@@ -194,31 +149,490 @@ html, body {
         black 85%,
         transparent
     );
-
     animation: pulseBackground 4s ease-in-out infinite alternate;
 }
 
-/* Bướm bay */
-.flying-butterfly{
+.flying-butterfly {
     position: absolute;
-
     z-index: 2;
-
     width: clamp(14rem, 55%, 31.25rem);
-
     aspect-ratio: 1;
-
     filter: drop-shadow(0 0 1.25rem rgba(212,176,106,.4));
-
     pointer-events: none;
-
     animation: floatButterfly 6s ease-in-out infinite;
 }
-/* =========================================================
-   ĐỊNH NGHĨA CHUYỂN ĐỘNG CHO BƯỚM (ANIMATIONS)
-   ========================================================= */
 
-/* Hiệu ứng nhịp thở cho bướm nền */
+
+/* =========================================================
+   3. VIDEO SECTION WRAPPER
+   ========================================================= */
+.video-main-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+}
+
+.video-section-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    overflow: hidden;
+    padding: 0;
+}
+
+.video-pk2{
+    width:100%;
+    background:url('./images/background/galaxy.png') no-repeat center center / cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:clamp(24px,4vw,50px) 20px;
+}
+
+.video-wrapper {
+    width: min(95%, 1200px);
+    background: #fff;
+    border-radius: clamp(18px, 2vw, 28px);
+    padding: clamp(8px, 1vw, 16px);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.video-header {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.responsive-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: inherit;
+    vertical-align: middle;
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(3.5rem, 6vw, 5rem);
+    height: clamp(2.4rem, 4vw, 3.5rem);
+    background: rgba(255, 0, 0, 0.9);
+    border-radius: clamp(0.5rem, 1vw, 0.9rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.play-btn::after {
+    content: "";
+    border-style: solid;
+    border-width: 0.75rem 0 0.75rem 1.2rem;
+    border-color: transparent transparent transparent white;
+    margin-left: 0.25rem;
+}
+
+.video-wrapper:hover .play-btn {
+    opacity: 1;
+    background: #ff0000;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.svg-wave-divider {
+    width: 100%;
+    line-height: 0;
+    position: relative;
+    z-index: 15;
+    margin-top: -1px;
+    margin-bottom: clamp(-90px, -8vw, -35px);
+}
+
+.svg-wave-divider svg {
+    width: 100%;
+    height: clamp(45px, 8vw, 110px);
+    display: block;
+}
+
+
+/* =========================================================
+   4. MAIN CONTENT AREA
+   ========================================================= */
+.main-content {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    background: url('./images/background/02.jpg') no-repeat center top / cover;
+    padding: clamp(60px, 10vw, 110px) 0 80px;
+    overflow: visible;
+
+    /* Tăng độ sáng nền lên 15% - 20% */
+    filter: brightness(1.18);
+}
+
+.main-content .spacer {
+    height: 50px;
+    display: block;
+}
+
+.main-content > * {
+    position: relative;
+    z-index: 2;
+}
+
+.main-content{
+    width:100%;
+    padding:80px 0;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header{
+    position: relative;
+
+    width: 80%;
+    /* Chiều cao khung cha tự động bằng đúng chiều cao co giãn của .shape */
+    height: clamp(45px, 5vw, 70px); 
+
+    margin: 40px auto 30px;
+
+    display: flex;
+    align-items: center;
+}
+
+.section-header.extra-margin{
+    margin-top: 90px;
+}
+
+/* Khối nền */
+.shape {
+    position: absolute;
+
+    left: clamp(-90px, -4vw, -40px);
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: clamp(180px, 22vw, 320px);
+    
+    /* Height co giãn linh hoạt: Nhỏ nhất 45px (mobile), vừa 5vw, lớn nhất 70px (desktop) */
+    height: clamp(50px, 5vw, 70px); 
+
+    border-radius: 24px;
+    overflow: hidden;
+
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,.28) 0%,
+        rgba(255,255,255,.12) 55%,
+        transparent 100%
+    );
+}
+
+.shape::after{
+    content: "";
+
+    position: absolute;
+    left: 30px;
+    top: 0;
+
+    width: clamp(125px, 15vw, 210px);
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,.25),
+        rgba(255,255,255,.12) 45%,
+        transparent 100%
+    );
+
+    pointer-events: none;
+}
+
+/* Tiêu đề */
+.section-title{
+    position: absolute;
+    left: clamp(-30px, 1.5vw, 10px);
+    top: 50%;
+    transform: translateY(-50%);
+
+    margin: 0;
+
+    color: #fff;
+
+    font-family: "Nillota", sans-serif;
+    font-size: clamp(25px, 4vw, 35px);
+    font-weight: 800;
+
+    white-space: nowrap;
+    z-index: 2;
+}
+.section-text {
+    /* Đưa về width: 80% để thẳng hàng 100% với khung .section-header */
+    width: 80%;
+    margin: 0 auto;
+    padding-left:50px;
+    /* Responsive font-size: Nhỏ nhất 16px (Mobile), vừa 1.2vw, lớn nhất 22px (Desktop) */
+    font-size: clamp(20px, 1.2vw, 23px);
+    line-height: 1.8;
+    text-align: justify;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 700;
+    font-family: 'Nillota', sans-serif;
+    letter-spacing: 0.2px;
+    box-sizing: border-box;
+}
+
+
+/* 4.3 GRID 2 CARDS */
+.grid-2 {
+    width: min(90%, 1400px);
+    margin: 35px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    box-sizing: border-box;
+}
+
+/* 1. Thiết lập Flexbox cho từng Card để kéo giãn chiều cao */
+.card {
+    padding: 25px 28px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+
+    /* Cấu hình Flex cột để chia đều không gian bên trong */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 2. Ép H3 chiếm không gian cố định / phình tối đa để đẩy P xuống đều nhau */
+.card h3 {
+    color: #fff;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 16px 0;
+    letter-spacing: .3px;
+    text-shadow: 0 2px 4px rgba(0,0,0,.4);
+
+    /* Ép vùng chứa H3 tự giãn lấp đầy khoảng trống dư thừa */
+    flex-grow: 1; 
+    
+    /* Căn giữa tiêu đề theo chiều dọc (tuỳ chọn giúp đẹp mắt hơn) */
+    display: flex;
+    align-items: center; 
+}
+
+/* 3. Đoạn P nằm gọn gàng ở đáy card, luôn bắt đầu cùng dòng hàng ngang */
+.card p {
+    color: rgba(255, 255, 255, 0.86);
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(18px, 1.2vw, 23px);
+    font-weight: 600;
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/* =========================================================
+   5. TẦM NHÌN - SỨ MỆNH - MỤC TIÊU (.TN-SM-MT)
+   ========================================================= */
+/* =========================================================
+   5. TẦM NHÌN - SỨ MỆNH - MỤC TIÊU (.TN-SM-MT)
+   ========================================================= */
+.TN-SM-MT {
+    width: 92%;
+    max-width: 1600px;
+    margin: 100px auto 60px;
+    padding: 110px 50px 60px;
+
+    background: rgba(192, 202, 224, 0.788);
+    border-radius: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 50px;
+    box-sizing: border-box;
+}
+
+/* Card trắng */
+.item-card {
+    flex: 1;
+    min-width: 0;
+    background: linear-gradient(
+        180deg, 
+        #ffffff 0%, 
+        #ffffff 50%, 
+        #f0f3f8 80%, 
+        #e2e7f0 100%
+    );
+    border-radius: 20px;
+    position: relative;
+    padding-top: 75px;
+    box-shadow: 
+        0 15px 35px rgba(19, 61, 141, 0.12),
+        0 5px 15px rgba(0, 0, 0, 0.06);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.item-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(19, 61, 141, 0.2);
+}
+
+/* Hình tròn ảnh */
+.item-image {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: 10px solid white;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nội dung bài viết (Đã gộp chuẩn 1 lần) */
+.item-content {
+    padding: 30px;
+    text-align: center;
+}
+
+.item-content h3 {
+    position: relative;
+    display: inline-block;
+    font-size: 34px;
+    font-family: 'Quicksand', sans-serif;
+    color: #133c8d;
+    margin-bottom: 25px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* Gạch dưới tiêu đề */
+.item-content h3::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(19,61,141,.25) 15%,
+        rgba(19,61,141,.8) 35%,
+        #133d8d 50%,
+        rgba(19,61,141,.8) 65%,
+        rgba(19,61,141,.25) 85%,
+        transparent 100%
+    );
+}
+/* Tối ưu danh sách gạch đầu dòng cho Card Mục Tiêu */
+.item-content ul.card-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.item-content ul.card-list li {
+    font-family: 'Nillota', sans-serif;
+    font-size: clamp(14px, 1.05vw, 17px);
+    font-weight: 700;
+    color: #0b2252;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 18px;
+}
+
+.item-content ul.card-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: -2px;
+    color: #133c8d;
+    font-size: 20px;
+}
+
+/* Làm dày chữ cho đoạn văn P */
+.item-content p {
+    font-family: 'Nillota', sans-serif;
+    font-size: clamp(15px, 1.1vw, 18px);
+    
+    /* Tăng độ đậm lên tối đa */
+    font-weight: 900; 
+    color: #184db6; /* Tone xanh đen siêu đậm */
+    
+    line-height: 1.6;
+    text-align: left;
+    margin-top: 15px;
+    
+    /* Mẹo nét đúp nhẹ giúp font chữ nét dày dặn hơn */
+    -webkit-text-stroke: 0.3px #193774;
+}
+/* =========================================================
+   FIX LỖI BÓP HÌNH TRÊN ĐIỆN THOẠI (MOBILE)
+   ========================================================= */
+@media (max-width: 953px) {
+    /* Nới rộng khoảng cách dọc giữa 3 card */
+    .TN-SM-MT {
+        flex-direction: column;
+        gap: 70px !important; /* Tăng khoảng cách theo chiều dọc */
+        padding-top: 80px !important;
+    }
+    .item-card {
+        padding-top: 40px !important; /* Đẩy chữ lên gần hình tròn */
+    }
+
+    /* Khóa cứng kích thước tròn không cho co dãn */
+    .item-image {
+        width: 100px !important;
+        height: 100px !important;
+        aspect-ratio: 1 / 1 !important; /* Luôn giữ tỉ lệ 1:1 */
+        top: -50px !important; /* Đưa nhô lên 1 nửa */
+        flex-shrink: 0 !important; /* Khóa không cho bóp nghẹt hình */
+    }
+
+    .item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover !important; /* Giữ hình không bị biến dạng */
+    }
+}
+/* =========================================================
+   6. KEYFRAMES ANIMATIONS
+   ========================================================= */
 @keyframes pulseBackground {
     0% { 
         transform: scale(0.98); 
@@ -230,70 +644,36 @@ html, body {
     }
 }
 
-/* Hiệu ứng bay lượn êm ái cho bướm trên */
 @keyframes floatButterfly {
     0% { 
         transform: translateY(0px) translateX(0px) rotate(0deg); 
     }
     33% { 
-        transform: translateY(-15px) translateX(8px) rotate(2deg); /* Lên cao, nghiêng qua phải */
+        transform: translateY(-15px) translateX(8px) rotate(2deg); 
     }
     66% { 
-        transform: translateY(10px) translateX(-5px) rotate(-1deg); /* Bay thấp, nghiêng qua trái */
+        transform: translateY(10px) translateX(-5px) rotate(-1deg); 
     }
     100% { 
         transform: translateY(0px) translateX(0px) rotate(0deg); 
     }
 }
-@media screen and (max-width:768px){
 
-    .flying-butterfly{
-
-        width:clamp(8rem,35vw,15rem);
-
-        filter:
-        drop-shadow(
-            0 0 .75rem rgba(212,176,106,.35)
-        );
-
-        animation:
-        floatButterflyMobile 5s ease-in-out infinite;
-    }
-
-
-    .brand-image{
-
-        animation:
-        pulseBackgroundMobile 4s ease-in-out infinite alternate;
-    }
-
-
-    .flying-butterfly,
-    .brand-image{
-
-        will-change:transform;
-    }
-}
-/* =========================================================
-   ĐỊNH NGHĨA KEYFRAMES RIÊNG CHO MOBILE (BIÊN ĐỘ SIÊU NHỎ)
-   ========================================================= */
-
-/* Ép bướm con chỉ nhích nhẹ 3px - 5px bồng bềnh, nghiêng cánh cực khẽ */
 @keyframes floatButterflyMobile {
     0% { 
         transform: translateY(0px) translateX(0px) rotate(0deg); 
     }
     33% { 
-        transform: translateY(-5px) translateX(2px) rotate(1deg); /* Chỉ nhích lên 5px thay vì 15px */
+        transform: translateY(-5px) translateX(2px) rotate(1deg); 
     }
     66% { 
-        transform: translateY(3px) translateX(-1px) rotate(-0.5deg); /* Chỉ hạ xuống 3px */
+        transform: translateY(3px) translateX(-1px) rotate(-0.5deg); 
     }
     100% { 
         transform: translateY(0px) translateX(0px) rotate(0deg); 
     }
 }
-/* Ép bướm nền đập nhịp cực khẽ, gần như giữ nguyên vị trí tránh mỏi mắt */
+
 @keyframes pulseBackgroundMobile {
     0% { 
         transform: scale(0.99); 
@@ -304,976 +684,298 @@ html, body {
         opacity: 1; 
     }
 }
+
+
 /* =========================================================
-   VIDEO SECTION FULL SCREEN
+   7. MEDIA QUERIES (RESPONSIVE)
    ========================================================= */
-.video-section-container{
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:#000;
-
-    overflow:hidden;
-
-    padding:0;
-
-}
-
-
-.video-wrapper{
-
-    position:relative;
-
-    width:min(95vw,1400px);
-
-    aspect-ratio:16 / 9;
-
-    overflow:hidden;
-
-}
-
-
-.responsive-video{
-
-    width:100%;
-
-    height:100%;
-
-    display:block;
-
-    object-fit:contain;
-
-}
-/* =========================================================
-   PLAY BUTTON
-   ========================================================= */
-
-.play-btn{
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    width:clamp(4rem,8vw,5rem);
-    height:clamp(2.8rem,5vw,3.5rem);
-
-    background:rgba(255,0,0,.9);
-
-    border-radius:clamp(.5rem,1vw,.9rem);
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    cursor:pointer;
-
-    z-index:10;
-
-    opacity:0;
-
-    transition:
-        opacity .3s ease,
-        transform .3s ease,
-        background .3s ease;
-}
-
-
-/* Tam giác */
-.play-btn::after{
-
-    content:"";
-
-    border-style:solid;
-
-    border-width:
-        .75rem 0 .75rem 1.2rem;
-
-    border-color:
-        transparent
-        transparent
-        transparent
-        white;
-
-    margin-left:.25rem;
-}
-
-
-/* Desktop hover */
-.video-wrapper:hover .play-btn{
-
-    opacity:1;
-
-    background:#ff0000;
-
-    transform:
-        translate(-50%,-50%)
-        scale(1.1);
-}
-
-/* =========================================================
-GIỚI THIỆU CHUNG / TINH THẦN MÙA 2
-========================================================= */
-/* =========================================================
-GIỚI THIỆU CHUNG / TINH THẦN MÙA 2
-========================================================= */
-
-.main-content{
-    width:100%;
-    box-sizing:border-box;
-
-    background:
-        
-        url('./images/background/02.jpg');
-
-    background-repeat:no-repeat;
-    background-position:center top;
-    background-size:cover;
-
-    padding:30px 0 80px;
-}
-
-
-/* =========================================================
-1. GIỚI THIỆU CHUNG
-========================================================= */
-
-.GTC{
-    position:relative;
-    width:100%;
-    height:58px;
-
-    margin-top:clamp(8px,5vw,20px);
-
-    display:flex;
-    align-items:center;
-}
-
-
-/* SHAPE */
-
-.GTC-shape{
-    position:absolute;
-
-    left:clamp(10px,3vw,30px);
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:clamp(170px,21vw,280px);
-    height:70px;
-
-    background:linear-gradient(
-        90deg,
-        rgba(255,255,255,.28) 0%,
-        rgba(255,255,255,.22) 25%,
-        rgba(255,255,255,.12) 55%,
-        rgba(255,255,255,.03) 80%,
-        transparent 100%
-    );
-
-    border-radius:24px;
-}
-
-
-/* SHAPE LỚP 2 */
-
-.GTC-shape::after{
-    content:"";
-
-    position:absolute;
-
-    left:30px;
-    top:0;
-
-    width:clamp(125px,15vw,210px);
-    height:100%;
-
-    background:linear-gradient(
-        90deg,
-        rgba(255,255,255,.25),
-        rgba(255,255,255,.12) 45%,
-        transparent 100%
-    );
-
-    border-radius:24px;
-}
-
-
-/* TIÊU ĐỀ */
-
-.GTC .section-title{
-    position:absolute;
-
-    left:clamp(80px,5vw,85px);
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:clamp(180px,25vw,280px);
-    height:70px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    z-index:3;
-
-    color:#fff;
-
-    font-family:'Josefin Sans',sans-serif;
-
-    font-size:clamp(17px,2.5vw,28px);
-    font-weight:800;
-
-    letter-spacing:clamp(.3px,.12vw,1px);
-
-    white-space:nowrap;
-
-    text-shadow:
-        0 2px 4px rgba(0,0,0,.6);
-}
-
-
-/* NỘI DUNG */
-
-.section-text{
-    width:min(90%,1400px);
-
-    margin:35px auto 0;
-
-    color:rgba(255,255,255,.92);
-
-    font-family:'Quicksand',sans-serif;
-
-    font-size:23px;
-    font-weight:600;
-
-    line-height:1.8;
-
-    text-align:justify;
-
-    letter-spacing:.2px;
-
-    text-shadow:
-        0 1px 3px rgba(0,0,0,.25);
-}
-
-
-/* =========================================================
-2. CHUỖI CHƯƠNG TRÌNH
-========================================================= */
-
-.CCT, .TTM2{
-    position:relative;
-    width:100%;
-
-    /* khoảng cách với phần GIỚI THIỆU */
-    margin-top:90px;
-
-    /* chỉ dành chỗ cho tiêu đề */
-    padding-top:58px;
-
-    box-sizing:border-box;
-}
-
-
-/* =========================================================
-SHAPE CCT
-========================================================= */
-
-.CCT-shape, .TTM2-shape{
-    position:absolute;
-
-    left:clamp(10px,3vw,30px);
-    top:0;
-
-    width:clamp(230px,28vw,360px);
-    height:70px;
-
-    background:linear-gradient(
-        90deg,
-        rgba(255,255,255,.28) 0%,
-        rgba(255,255,255,.22) 25%,
-        rgba(255,255,255,.12) 55%,
-        rgba(255,255,255,.03) 80%,
-        transparent 100%
-    );
-
-    border-radius:24px;
-}
-
-
-/* SHAPE LỚP 2 */
-
-.CCT-shape::after, .TTM2-shape::after{
-    content:"";
-
-    position:absolute;
-
-    left:30px;
-    top:0;
-
-    width:clamp(170px,20vw,280px);
-    height:100%;
-
-    background:linear-gradient(
-        90deg,
-        rgba(255,255,255,.25),
-        rgba(255,255,255,.12) 45%,
-        transparent 100%
-    );
-
-    border-radius:24px;
-}
-
-
-/* =========================================================
-TIÊU ĐỀ CCT
-========================================================= */
-
-.CCT .section-title, .TTM2 .section-title{
-    position:absolute;
-
-    left:clamp(90px,6vw,100px);
-    top:0px;
-
-    width:clamp(230px,25vw,320px);
-    height:70px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    z-index:3;
-
-    margin:0;
-
-    color:#fff;
-
-    font-family:'Josefin Sans',sans-serif;
-
-    font-size:clamp(17px,2.5vw,28px);
-    font-weight:800;
-
-    letter-spacing:clamp(.3px,.12vw,1px);
-
-    white-space:nowrap;
-
-    text-shadow:
-        0 2px 4px rgba(0,0,0,.6);
-}
-/* =========================================================
-TIÊU ĐỀ TTM2
-========================================================= */
-
-.TTM2 .section-title{
-    left:clamp(80px,5vw,85px);
-    width:clamp(180px,25vw,280px);
-    height:70px;
-}
-
-
-
-
-/* =========================================================
-3. GRID 2 CARD
-========================================================= */
-
-/* =========================================================
-3. GRID 2 CARD
-========================================================= */
-
-.grid-2{
-    width:min(90%,1400px);
-
-    /* nằm bên dưới hoàn toàn tiêu đề */
-    margin:35px auto 0;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
-
-    gap:25px;
-
-    box-sizing:border-box;
-}
-
-
-/* =========================================================
-CARD
-========================================================= */
-
-.card{
-    padding:25px 28px;
-
-    background:rgba(255,255,255,.07);
-
-    border:1px solid rgba(255,255,255,.16);
-
-    border-radius:16px;
-
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.15);
-
-    box-sizing:border-box;
-}
-
-
-/* TIÊU ĐỀ CARD */
-
-.card h3{
-    color:#fff;
-
-    font-family:'Josefin Sans',sans-serif;
-
-    font-size:21px;
-    font-weight:700;
-
-    line-height:1.4;
-
-    margin:0 0 12px;
-
-    letter-spacing:.3px;
-
-    text-shadow:
-        0 2px 4px rgba(0,0,0,.4);
-}
-
-
-/* NỘI DUNG CARD */
-
-.card p{
-    color:rgba(255,255,255,.86);
-
-    font-family:'Quicksand',sans-serif;
-
-    font-size:18px;
-    font-weight:500;
-
-    line-height:1.7;
-
-    margin:0;
-}
-
-/* =========================================================
-RESPONSIVE
-========================================================= */
-
-@media (max-width:768px){
-
-    /* =========================
-       GIỚI THIỆU CHUNG
-    ========================= */
-
-    .GTC{
-        margin-top:10px;
-        margin-bottom:25px;
+@media (max-width: 1300px) {
+    .hero {
+        min-height: auto !important;
+        height: auto !important;
+        padding-top: 80px;
+        padding-bottom: 0 !important;
+        display: block !important;
     }
 
-    .section-text{
-        width:90%;
-
-        margin:30px auto 0;
-
-        font-size:18px;
-        line-height:1.7;
+    .hero-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
     }
 
-
-    /* =========================
-       CHUỖI CHƯƠNG TRÌNH
-    ========================= */
-
-    .CCT{
-        margin-top:85px;
-
-        /* Khoảng thở sau toàn bộ CCT */
-        margin-bottom:120px;
-
-        padding-top:65px;
-
-        top:auto;
+    /* Đặt wrapper làm chuẩn định vị cho bướm */
+    .brand-image-wrapper {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
     }
 
-    .CCT .section-title{
-        top:0;
+    .brand-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        transform: none !important;
     }
 
-
-    /* =========================
-       GRID CARD
-    ========================= */
-
-    .grid-2{
-        width:90%;
-
-        margin:40px auto 0;
-
-        display:grid;
-
-        grid-template-columns:1fr;
-
-        gap:25px;
+    /* Fix lỗi con bướm: Căn lại theo tỉ lệ màn hình */
+    .flying-butterfly {
+        position: absolute !important;
+        width: clamp(10rem, 30vw, 22rem) !important; /* Thu nhỏ tỉ lệ bướm vừa với ảnh */
+        height: auto !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important; /* Đưa bướm về chính giữa ảnh */
+        z-index: 10 !important;
+    }
+    .spacer{
+        display:none;
+    }
+}
+@media (max-width: 1600px) {
+    .GTC .section-title, .CCT .section-title, .TTM2 .section-title {
+        left: 7vw;
+    }
+}
+/* Tablet / Laptop nhỏ (dưới 992px) */
+@media (max-width: 992px) {
+    .video-pk2 {
+        padding: 30px 16px;
     }
 
-
-    /* =========================
-       CARD
-    ========================= */
-
-    .card{
-        padding:22px;
-    }
-
-    .card h3{
-        font-size:19px;
-
-        line-height:1.4;
-
-        margin-bottom:14px;
-    }
-
-    .card p{
-        font-size:16px;
-
-        line-height:1.7;
-    }
-
-
-    /* =========================
-       TINH THẦN MÙA 2
-    ========================= */
-
-    .TTM2{
-        /* Không dùng top để tránh chồng */
-        top:auto;
-
-        /* Chừa khoảng cho shape + tiêu đề */
-        padding-top:65px;
-
-        /* Tạo khoảng cách với CCT */
-        margin-top:0;
-
-        margin-bottom:50px;
-    }
-
-    .TTM2 .section-title{
-        top:0;
+    .video-wrapper {
+        width: 96%;
+        padding: 10px;
     }
 }
 
-/* =========================================================
-   3 CARD NGANG - PC / LAPTOP
-   ========================================================= */
-
-.TN-SM-MT {
-
-    width:100%;
-
-    padding:clamp(2.5rem,5vw,4rem) clamp(1rem,4vw,4rem);
-
-    background:rgba(194,241,119,.397);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:stretch;
-
-    gap:clamp(1rem,3vw,2rem);
-
-}
-
-
-/* CARD */
-
-.TN-SM-MT .item-card {
-
-    flex:1;
-
-    max-width:420px;
-
-    background:rgba(5,10,18,.65);
-
-    border:1px solid rgba(212,176,106,.15);
-
-    border-radius:16px;
-
-    overflow:hidden;
-
-    transition:.4s ease;
-
-}
-
-
-.item-card:hover {
-
-    transform:translateY(-8px);
-
-    border-color:var(--gold-light);
-
-    box-shadow:
-        0 12px 30px rgba(212,176,106,.1);
-
-}
-
-
-
-/* ẢNH */
-
-.item-image {
-
-    width:100%;
-
-    aspect-ratio:16 / 9;
-
-    overflow:hidden;
-
-}
-
-
-.item-image img {
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    transition:.5s ease;
-
-}
-
-
-.item-card:hover .item-image img {
-
-    transform:scale(1.06);
-
-}
-
-
-
-/* NỘI DUNG */
-
-.item-content {
-
-    padding:clamp(1rem,3vw,1.5rem);
-
-}
-.item-content h3 {
-
-    font-family:'Maglony', serif;
-
-    color:var(--gold);
-
-    font-size:clamp(1.2rem,2vw,1.6rem);
-
-    margin-bottom:.75rem;
-
-    letter-spacing:1px;
-
-}
-
-
-.item-content p {
-
-    color:rgba(255,255,255,.7);
-
-    font-size:clamp(.9rem,1.5vw,1.1rem);
-
-    line-height:1.6;
-
-    text-align:justify;
-
-}
-@media (max-width:768px){
-
-    /* =========================
-       SECTION CHUNG
-    ========================= */
-
+/* Mobile & Tablet dọc (dưới 768px) */
+@media (max-width: 768px) {
+    
+    /* Hero Section */
+    /* Hero Section Mobile */
+    .hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding-top: 30px !important; /* Đã giảm từ 60px xuống 30px để đẩy lên trên */
+        padding-bottom: 0 !important;
+        display: block !important;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        opacity: .35;
+    }
+
+    .hero::after {
+        background: linear-gradient(
+            to bottom,
+            rgba(5, 10, 18, .1),
+            rgba(5, 10, 18, .7)
+        );
+    }
+
+    .hero-content {
+        width: 100%;
+        min-height: auto;
+        padding: 0;
+        margin: 0;
+    }
+
+    .brand-image-wrapper {
+        width: 100%;
+        margin-top: -15px !important; /* Dùng margin âm để kéo hình xích lên trên thêm một chút */
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    
+
+    .brand-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        display: block;
+        transform: none !important;
+        opacity: .9;
+        animation: pulseBackgroundMobile 4s ease-in-out infinite alternate;
+    }
+    /* Đảm bảo hero-content và wrapper ôm sát ảnh, không sinh chiều cao thừa */
+    
+
+    .flying-butterfly {
+        width: clamp(8rem, 35vw, 15rem);
+        max-width: 220px;
+        filter: drop-shadow(0 0 .75rem rgba(212, 176, 106, .35));
+        animation: floatButterflyMobile 5s ease-in-out infinite;
+    }
+
+    .flying-butterfly,
+    .brand-image {
+        will-change: transform;
+    }
+
+    /* Video Section */
+    .video-section-container {
+        height: auto;
+        padding: 0;
+    }
+
+    .video-pk2 {
+        padding: 20px 12px;
+    }
+
+    .video-wrapper {
+        display: flex;
+        width: 100%;
+        padding: 8px;
+        border-radius: 16px;
+        aspect-ratio: 16 / 9;
+    }
+
+    .video-header {
+        flex: 1;
+        border-radius: 12px;
+    }
+
+    .responsive-video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* Divider & Main Content */
+    .svg-wave-divider{
+        margin-top:0px;
+        margin-bottom:-60px;
+    }
+
+    .svg-wave-divider svg{
+        height:60px;
+    }
+
+    .main-content {
+        padding-top: 70px;
+    }
+    .main-content .spacer{
+        display:none;
+    }
+    
+    
+
+    /* General Layout */
     .GioiThieuChung,
     .ChuoiChuongTrinh,
-    .TinhThanMua2{
-
-        padding:60px 20px;
-
+    .TinhThanMua2 {
+        padding: 60px 20px;
     }
-
-
-    .section-title{
-
-        font-size:1.7rem;
-
-        text-align:center !important;
-
-        margin-bottom:25px;
-
-        letter-spacing:1px;
-
-    }
-
-
-    .section-text{
-
-        font-size:15px;
-
-        line-height:1.75;
-
-        text-align:left;
-
-    }
-
-
-    /* =========================
-       GIỚI THIỆU
-    ========================= */
 
     .GTC,
     .TTM2,
-    .CCT{
-
-        width:100%;
-
-        margin:auto;
-
+    .CCT {
+        width: 100%;
+        margin: auto;
     }
 
-
-
-    /* =========================
-       CHUỖI CHƯƠNG TRÌNH
-    ========================= */
-
-    .grid-2{
-
-        display:flex;
-
-        flex-direction:column;
-
-        gap:20px;
-
+    .GTC {
+        margin-top: 10px;
+        margin-bottom: 25px;
     }
 
-
-
-    .card{
-
-        padding:22px;
-
-        border-radius:18px;
-
-        background:
-        rgba(5,10,18,.75);
-
+    .CCT {
+        margin-top: 85px;
+        margin-bottom: 120px;
+        padding-top: 65px;
+        top: auto;
     }
 
-
-    .card h3{
-
-        font-size:20px;
-
-        text-align:center;
-
-        margin-bottom:15px;
-
+    .CCT .section-title,
+    .TTM2 .section-title {
+        top: 0;
     }
 
-
-    .card p{
-
-        font-size:14px;
-
-        line-height:1.7;
-
-        text-align:left;
-
+    .TTM2 {
+        top: auto;
+        padding-top: 65px;
+        margin-top: 0;
+        margin-bottom: 50px;
     }
 
-
-
-    /* =========================
-       3 CARD
-    ========================= */
-
-
-    .TN-SM-MT{
-
-        flex-direction:column;
-
-        padding:60px 20px;
-
-        gap:25px;
-
+    .section-title {
+        font-size: 1.7rem;
+        text-align: center !important;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
     }
 
-
-    .item-card{
-
-        width:100%;
-
-        max-width:none;
-
+    .section-text {
+        width: 90%;
+        margin: 30px auto 0;
+        font-size: 15px;
+        line-height: 1.75;
+        text-align: left;
     }
 
-
-    .item-image{
-
-        height:200px;
-
+    /* Cards */
+    .grid-2 {
+        width: 90%;
+        margin: 40px auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
-
-    .item-content{
-
-        padding:20px;
-
+    .card {
+        padding: 22px;
+        border-radius: 18px;
+        background: rgba(5, 10, 18, .75);
     }
 
-
-    .item-content h3{
-
-        font-size:20px;
-
+    .card h3 {
+        font-size: 19px;
+        text-align: center;
+        margin-bottom: 14px;
+        line-height: 1.4;
     }
 
-
-    .item-content p{
-
-        font-size:14px;
-
-        line-height:1.7;
-
+    .card p {
+        font-size: 14px;
+        line-height: 1.7;
+        text-align: left;
     }
 
-}
-/* ==========================================
-   MOBILE HERO - PHONG CÁCH GỌN HƠN
-   ========================================== */
-
-@media(max-width:768px){
-
-    .hero{
-
-        min-height:auto;
-
-        height:auto;
-
-        padding-top:60px;
-
-        padding-bottom:0;
-
-        overflow:hidden;
-
+    /* 3 Card Section (.TN-SM-MT) */
+    .TN-SM-MT {
+        flex-direction: column;
+        padding: 60px 20px;
+        gap: 25px;
     }
 
-
-    .hero-content{
-
-        padding:0;
-
-        min-height:auto;
-
+    .item-card {
+        width: 100%;
+        max-width: none;
     }
 
-
-    /* Bướm nền */
-    .brand-image-wrapper{
-
-        width:100%;
-
-        margin:0;
-
-        padding:0;
-
+    .item-image {
+        height: 200px;
     }
 
-
-    .brand-image{
-
-        width:130vw;
-
-        max-width:none;
-
-        transform:translateX(-15%);
-
-        opacity:.9;
-
+    .item-content {
+        padding: 20px;
     }
 
-
-    /* Bướm bay */
-    .flying-butterfly{
-
-        width:45%;
-
-        max-width:220px;
-
+    .item-content h3 {
+        font-size: 20px;
     }
 
-
-    /* giảm lớp nền đen */
-    .hero::before{
-
-        opacity:.35;
-
+    .item-content p {
+        font-size: 14px;
+        line-height: 1.7;
     }
-
-
-    .hero::after{
-
-        background:
-        linear-gradient(
-            to bottom,
-            rgba(5,10,18,.1),
-            rgba(5,10,18,.7)
-        );
-
-    }
-
-}
-@media(max-width:768px){
-
-    .video-section-container{
-
-        height:auto;
-
-        padding:0;
-
-    }
-
-
-    .video-wrapper{
-
-        width:100%;
-
-        aspect-ratio:16 / 9;
-
-    }
-
-
-    .responsive-video{
-
-        width:100%;
-
-        height:100%;
-
-        object-fit:contain;
-
-    }
-
 }
