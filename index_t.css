@@ -394,7 +394,7 @@ body {
 }
 .section-text {
     /* Đưa về width: 80% để thẳng hàng 100% với khung .section-header */
-    width: 95%;
+    width: 92%;
     margin: 0 auto;
     padding-left:50px;
     /* Responsive font-size: Nhỏ nhất 16px (Mobile), vừa 1.2vw, lớn nhất 22px (Desktop) */
@@ -931,7 +931,7 @@ body {
     }
 
     .section-text {
-        width: 100%;
+        width: 92%;
         margin: 30px auto 0;
         font-size: 15px;
         line-height: 1.75;
