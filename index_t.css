@@ -394,7 +394,7 @@ body {
 }
 .section-text {
     /* Đưa về width: 80% để thẳng hàng 100% với khung .section-header */
-    width: 80%;
+    width: 95%;
     margin: 0 auto;
     padding-left:50px;
     /* Responsive font-size: Nhỏ nhất 16px (Mobile), vừa 1.2vw, lớn nhất 22px (Desktop) */
@@ -403,7 +403,7 @@ body {
     text-align: justify;
     color: rgba(255, 255, 255, 0.92);
     font-weight: 700;
-    font-family: 'Nillota', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     letter-spacing: 0.2px;
     box-sizing: border-box;
 }
@@ -542,7 +542,7 @@ body {
     position: relative;
     display: inline-block;
     font-size: 34px;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Nillota', sans-serif;
     color: #133c8d;
     margin-bottom: 25px;
     font-weight: 800;
@@ -599,7 +599,7 @@ body {
 
 /* Làm dày chữ cho đoạn văn P */
 .item-content p {
-    font-family: 'Nillota', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: clamp(15px, 1.1vw, 18px);
     
     /* Tăng độ đậm lên tối đa */
@@ -931,7 +931,7 @@ body {
     }
 
     .section-text {
-        width: 90%;
+        width: 100%;
         margin: 30px auto 0;
         font-size: 15px;
         line-height: 1.75;
