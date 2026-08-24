@@ -1,10 +1,15 @@
 /* =========================================================
-   1. KHAI BÁO BIẾN & FONT CHỮ (GLOBAL SETTINGS)
+   1. SYSTEM & RESET
    ========================================================= */
 :root {
     --gold: #d4b06a;
     --gold-light: #f6d28d;
-   
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 @font-face {
     font-family: 'DancingScript'; 
@@ -25,780 +30,333 @@
     font-family: 'Nillota'; 
     src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
 }
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html,
+body {
+    width: 100%;
+    min-height: 100%;
 }
 
 body {
-    background: #050b14;
-    color: white;
-    overflow-x: hidden;
-    overflow-y: scroll; /* Khóa thanh cuộn dọc cố định tránh lệch Nav */
-}
-html, body {
-    /* Cho trình duyệt Chrome, Safari và Opera */
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    
-    /* Cho trình duyệt Firefox */
-    scrollbar-width: none;
-    
-    /* Cho trình duyệt Internet Explorer và Edge cũ */
-    -ms-overflow-style: none; 
+    background: #b7c3d6;
 }
 
-.hero{
-    min-height:40vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding-top: 80px; /* Chỉ giữ lại padding trên để tránh menu */
-    position:relative;
-    padding-bottom: 20px; /* Giảm padding dưới để co lại */
-}
 
-.hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-    radial-gradient(circle at center,
-    rgba(236,195,143,0.12),
-    transparent 50%);
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-    max-width:950px;
-}
-
-.hero-subtitle{
-    color:var(--gold);
-    font-size:20px;
-    letter-spacing:6px;
-    margin-bottom:25px;
-}
-
-.hero-title{
-    font-size:4.5rem;
-    color:var(--gold-light);
-    margin-bottom:15px;
-    line-height:1.2;
-}
-
-.hero-text{
-    color:var(--text-soft);
-    font-size:18px;
-    line-height:2.3;
-}
-/* Tối ưu hóa Hero Section cho Mobile */
-@media screen and (max-width: 768px) {
-    .hero {
-        min-height: 40vh;         /* Giảm thêm chiều cao để trông gọn gàng hơn */
-        padding: 80px 20px 40px;  /* Tăng padding-top lên 80px để không bị vướng Navbar */
-    }
-
-    .hero-content {
-        padding: 0;
-        width: 100%;
-    }
-
-    .hero-subtitle {
-        font-size: 11px;         /* Nhỏ nhưng vẫn đủ thanh thoát */
-        letter-spacing: 4px;
-        margin-bottom: 12px;
-    }
-
-    .hero-title {
-        font-size: 2rem;       /* Tăng nhẹ lên 2.2rem để tiêu đề nổi bật */
-        margin-bottom: 15px;
-        line-height: 1.3;
-    }
-
-    .hero-text {
-        font-size: 14px;         /* Đưa về 14px là chuẩn đọc trên mobile */
-        line-height: 1.6;
-        padding: 0 20px;         /* Tăng padding 2 bên để chữ không bị tràn sát mép */
-        text-align: center;
-        max-width: 100%;        /* Giới hạn độ rộng để chữ không bị dàn quá dài */
-        margin: 0 auto;
-    }
-}
-/* MAIN */
-/* Container bao bọc toàn bộ phần Giới thiệu và Video */
-.section {
+/* =========================================================
+   2. TIÊU ĐỀ CHUNG & CHẾ ĐỘ NỀN (.program-container)
+   ========================================================= */
+.program-container {
     position: relative;
-    background: linear-gradient(rgba(5, 11, 20, 0.6), rgba(5, 11, 20, 0.6)), 
-                url('./images/background/02.jpg') no-repeat center center/cover;
-
+    min-height: 30px;
+    border-radius: 10px;
+    background: linear-gradient(to top left, #f2e8a0 0%, rgb(85, 129, 34) 100%);
 }
-.section-title{
+
+.main-title-CCT {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4a752c;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 12px 25px;
+    z-index: 3;
+}
+
+.section-title {
     font-family: var(--font-art);
     font-size: 35px;
     color: var(--gold);
     margin-bottom: 40px;
     text-align: center;
 }
-.flex-layout {
-    display: flex;
-    align-items: center;
-    margin: 0 30px; /* Căn giữa theo chiều dọc */
-    gap: 100px;          /* Khoảng cách giữa ảnh và chữ */
-    
+
+
+/* =========================================================
+   3. KHỐI CARD GIỚI THIỆU (.pk-card)
+   ========================================================= */
+.pk-card {
+    background: linear-gradient(to left, rgb(85, 129, 34) 0%, #f2e8a0 100%);
+    border: 14px solid #5a7d32;
+    border-radius: 20px;
+    padding: 15px;
+    width: 80%;
+    max-width: 1300px;
+    margin: 0 auto 100px auto;
 }
 
-/* Kích thước ảnh */
-.section-image {
-    width: 50%;          /* Ảnh chiếm 40% chiều rộng */
+.PK1-CCT {
+    background: linear-gradient(to left, rgb(85, 129, 34) 0%, #f2e8a0 100%);
+    border-radius: 10px;
+    padding: 3px;
+    width: 80%;
+    max-width: 1300px;
+    margin: 0 auto 100px auto;
+}
+
+.pk-inner-frame {
+    border-radius: 12px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.pk-image-box {
+    width: 48%;
+    aspect-ratio: 16 / 9;
     height: auto;
-    border-radius: 20px; /* Bo góc ảnh cho mềm mại */
-    object-fit: cover;
-    magrin-left: 20px;
-}
-/* Phần nội dung chiếm 60% còn lại */
-.section-content {
-    width: 50%;
-}
-.section-text {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(212, 176, 106, 0.2);
-    font-size: 19px;        /* Tăng kích thước chữ (mặc định của bạn đang là 17px) */
-    line-height: 1.8;      /* Tăng giãn dòng để chữ không bị dính vào nhau */
-    color: #e0e0e0;
-    line-height: 1.8;
-    font-size: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);      /* Độ dày chữ vừa phải */
-}
-@media screen and (max-width: 768px) {
-    .flex-layout {
-        flex-direction: column; /* Chuyển sang dạng cột dọc */
-        text-align: center;
-        margin: 0 10px; /* Căn giữa theo chiều dọc */
-        gap: 10px;           /* Giảm khoảng cách giữa ảnh và chữ trên mobile */
-    }
-    
-    .section-image {
-        width: 100%;           /* Ảnh full chiều rộng trên mobile */
-        margin-bottom: 20px;
-    }
-    
-    .section-content {
-        width: 100%;
-    }
-}
-/* ================= VIDEO ================= */
-
-.video-section-container{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-}
-
-
-.video-wrapper{
-    position:relative;
-    width:min(95vw,1400px); /* tăng lên */
-    overflow:hidden;
-    border-radius:20px;
-}
-
-.responsive-video{
-    width:100%;
-    height:auto;
-    display:block;
-    background:#000;
-    border-radius:20px;
-}
-
-/* Nút Play căn giữa */
-.play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 55px; /* Tỉ lệ chuẩn của nút YouTube */
-    background: rgba(255, 0, 0, 0.9); /* Màu đỏ YouTube */
-    border-radius: 15px; /* Bo góc đặc trưng */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: 0.3s;
-}
-
-/* Tạo hình tam giác bên trong */
-.play-btn::after {
-    content: '';
-    border-style: solid;
-    border-width: 12px 0 12px 20px; /* Kích thước tam giác */
-    border-color: transparent transparent transparent white;
-    margin-left: 5px; /* Căn chỉnh tam giác vào giữa */
-}
-
-.play-btn:hover {
-    background: #ff0000; /* Đỏ đậm hơn khi di chuột */
-    transform: translate(-50%, -50%) scale(1.1);
-}
-.video-wrapper .play-btn {
-    opacity: 0; /* Ẩn đi ban đầu */
-    transition: opacity 0.3s ease;
-}
-
-.video-wrapper:hover .play-btn {
-    opacity: 1; /* Hiện ra khi di chuột vào */
-}
-
-/* ==========================
-   DẤU ẤN MÙA 1
-========================== */
-
-.season-mark{
-    padding: 100px 80px;
-    background: rgba(194, 241, 119, 0.397);
-    
-}
-
-.season-intro{
-    max-width: 900px;
-    margin: 0 auto 50px;
-    text-align: center;
-    color: #d8d8d8;
-    line-height: 1.8;
-    font-size: 18px;
-}
-
-.season-grid{
-    display:grid;
-    grid-template-columns: repeat(4,1fr);
-    gap:25px;
-}
-
-.season-card{
-    background: rgba(255,255,255,.04);
-    border:1px solid rgba(212,176,106,.25);
-    border-radius:24px;
-    padding:30px 20px;
-    text-align:center;
-    transition:.35s;
-}
-
-.season-card:hover{
-    transform: translateY(-8px);
-
-    border-color: var(--gold);
-
-    box-shadow:
-    0 0 20px rgba(212,176,106,.15);
-}
-
-
-
-.season-number{
-    font-family: var(--font-art);
-    color: var(--gold);
-    font-size:42px;
-    margin-bottom:10px;
-}
-
-.season-card h3{
-    margin-bottom:12px;
-    color:#fff;
-}
-
-.season-card p{
-    color:#cfcfcf;
-    line-height:1.7;
-}
-
-.season-quote{
-    max-width:850px;
-    margin:60px auto 0;
-    text-align:center;
-    color:var(--gold-light);
-    font-size:20px;
-    line-height:1.8;
-    font-style:italic;
-}
-.season-text-card{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.season-text-card h3{
-    font-family: var(--font-art);
-    color: var(--gold);
-    font-size: 26px;
-    margin-bottom: 15px;
-}
-
-@media screen and (max-width:768px){
-
-    .season-mark{
-        padding:60px 20px;
-    }
-
-    .season-intro{
-        font-size:15px;
-        line-height:1.7;
-        margin-bottom:30px;
-    }
-
-    .season-grid{
-        grid-template-columns: 1fr;
-        gap:15px;
-    }
-
-    .season-card{
-        min-height:auto;
-        padding:25px 20px;
-    }
-
-    .season-number{
-        font-size:32px;
-    }
-
-    .season-card h3{
-        font-size:20px;
-    }
-
-    .season-card p{
-        font-size:14px;
-        line-height:1.7;
-    }
-
-    .season-quote{
-        font-size:15px;
-        line-height:1.8;
-        margin-top:35px;
-    }
-}
-/* =========================================================
-   CẤU TRÚC GRID CHO TẦM NHÌN - SỨ MỆNH - MỤC TIÊU
-   ========================================================= */
-.vision-section {
-    width: 100%; /* Ép phần nền rộng full 100% màn hình */
-    margin: 0 auto; /* Đổi margin để hình nền sát với phần trên dưới */
-    padding: 80px 0; /* Tạo khoảng đệm trên dưới cho hình nền thở */
-
-    /* 1. CHÈN HÌNH NỀN VÀ TỐI ƯU */
-    background: url('./images/background/02.jpg'); /* Thay đường dẫn hình nền của bạn vào đây */
-    background-size: cover;         /* Phủ kín toàn bộ không gian section */
-    background-position: center;    /* Giữ tâm hình nền luôn ở chính giữa */
-    background-repeat: no-repeat;   /* Ngăn lặp hình */
-    background-attachment: scroll;  /* Bạn có thể đổi thành 'fixed' nếu muốn hiệu ứng cuộn parallax */
-}
-
-.vision-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    
-    max-width: 1300px; /* Giới hạn độ rộng của khối nội dung */
-    margin: 0 auto;    /* Căn giữa khối nội dung */
-    padding: 0 20px;   /* Khoảng cách an toàn cho 2 rìa khi thu nhỏ màn hình */
-}
-
-/* Định dạng chung cho cả 3 khối card */
-.vision-card {
-    background: rgba(5, 10, 18, 0.75); /* Tăng độ tối nền card (0.75) để dễ đọc chữ đè lên hình nền */
-    border: 1px solid rgba(212, 176, 106, 0.15);
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.4s ease;
-}
-
-.vision-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--gold-light);
-    box-shadow: 0 10px 25px rgba(212, 176, 106, 0.08);
-}
-
-/* QUAN TRỌNG: Ép ô Mục Tiêu dàn hết hàng dưới */
-.vision-bottom {
-    grid-column: span 2; /* Chiếm cả 2 cột */
-    flex-direction: row; /* Riêng mục tiêu đổi thành: Ảnh bên trái, chữ bên phải cho đẹp */
-}
-
-/* Định dạng chung cho vùng chứa ảnh */
-.vision-img {
-    width: 100%;
-    height: 250px; /* Chiều cao ảnh của Tầm Nhìn và Sứ Mệnh */
-    overflow: hidden;
-}
-
-/* Riêng vùng chứa ảnh của Mục Tiêu (khi nằm ngang) */
-.vision-bottom .vision-img {
-    width: 45%; /* Ảnh chiếm 45% bề ngang */
-    height: auto; /* Chiều cao tự động căng theo phần chữ */
-    min-height: 280px;
-}
-
-.vision-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Chống méo hình tuyệt đối */
-    transition: transform 0.6s ease;
-}
-
-.vision-card:hover .vision-img img {
-    transform: scale(1.05); /* Hiệu ứng zoom nhẹ ảnh khi hover */
-}
-
-/* Định dạng phần nội dung chữ bên trong */
-.vision-content {
-    padding: 30px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* Riêng phần chữ của Mục Tiêu */
-.vision-bottom .vision-content {
-    width: 55%;
-}
-
-.vision-content h3 {
-    font-family: 'Maglony', serif; /* Font nghệ thuật gold của bạn */
-    color: var(--gold);
-    font-size: 24px;
-    margin-bottom: 15px;
-    letter-spacing: 1.5px;
-}
-
-.vision-content p {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: justify;
-}
-
-/* Định dạng danh sách dấu chấm của Mục Tiêu */
-.vision-content ul {
-    list-style: none; /* Bỏ dấu chấm tròn mặc định */
-    padding: 0;
-    margin: 0;
-}
-
-.vision-content ul li {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 12px;
+    border-radius: 15px;
     position: relative;
-    padding-left: 20px; /* Nhường chỗ cho dấu icon tự chế */
-}
-
-/* Thay dấu chấm tròn bằng dấu mũi tên/vạch vàng gold xinh xắn */
-.vision-content ul li::before {
-    content: "✦"; 
-    position: absolute;
-    top: 4px;
-    left: 2px;
-    color: var(--gold);
-    font-size: 12px;
-}
-
-/* =========================================================
-   TỐI ƯU RESPONSIVE TRÊN ĐIỆN THOẠI (MOBILE)
-   ========================================================= */
-@media screen and (max-width: 900px) {
-    .vision-grid {
-        grid-template-columns: 1fr; /* Chuyển thành 1 cột duy nhất */
-    }
-
-    .vision-bottom {
-        grid-column: span 1; /* Hủy chiếm 2 cột */
-        flex-direction: column; /* Mục tiêu quay về dạng dọc như 2 ô trên */
-    }
-
-    .vision-bottom .vision-img, 
-    .vision-bottom .vision-content {
-        width: 100%; /* Trả lại 100% chiều rộng trên mobile */
-    }
-
-    .vision-img {
-        height: 200px; /* Thu nhỏ ảnh lại một chút trên điện thoại */
-    }
-    
-    .vision-content {
-        padding: 20px;
-    }
-}
-@media screen and (max-width:768px){
-
-    .vision-section{
-        padding:50px 20px;
-    }
-
-    .vision-grid{
-        grid-template-columns:1fr;
-        gap:15px;
-    }
-
-    .vision-left,
-    .vision-right,
-    .vision-bottom{
-        grid-column:auto;
-        max-width:100%;
-        min-height:auto;
-    }
-
-    .vision-card{
-        padding:20px;
-        min-height:auto;
-    }
-
-    .vision-card h3{
-        font-size:22px;
-        margin-bottom:12px;
-    }
-
-    .vision-card p{
-        font-size:14px;
-        line-height:1.7;
-        max-width:100%;
-    }
-
-    .vision-bottom ul{
-        max-width:100%;
-        padding-left:18px;
-    }
-
-    .vision-bottom li{
-        font-size:14px;
-        line-height:1.7;
-        margin-bottom:10px;
-    }
-}
-.item_tamnhin{
-    width: 350px;
-    height: 350px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-}
-
-
-/* =========================================================
-   THIẾT KẾ PHẦN THÀNH VIÊN (THANH VIÊN SECTION)
-   ========================================================= */
-.thanhvien {
-    padding: 80px 20px;
-    background: #050b14; /* Màu nền tối đồng bộ toàn trang */
-    text-align: center;
-    background: rgba(79, 148, 33, 0.555) ;
-}
-
-
-
-/* Khung chứa ba thành viên nằm ngang */
-.thanhvien-container {
+    z-index: 2;
+    border: 8px solid transparent;
+    background-image: 
+        linear-gradient(#06070a, #06070a),
+        linear-gradient(to bottom, #ffffff, #1e3d0d);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    gap: 40px; /* Khoảng cách giữa các thành viên */
-    max-width: 1100px;
-    margin: 0 auto;
-    flex-wrap: wrap; /* Tự động xuống dòng nếu màn hình điện thoại quá nhỏ */
-}
-
-/* Khối bọc của từng thành viên */
-.thanhvien-card {
-    flex: 1;
-    min-width: 250px; /* Độ rộng tối thiểu trên màn hình nhỏ */
-    max-width: 320px; /* Độ rộng tối đa để cân đối tỉ lệ */
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-/* Khung chứa ảnh đại diện */
-.thanhvien-card .avatar-box {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Ép khung ảnh luôn luôn là hình vuông chuẩn */
-    border-radius: 15px; /* Bo góc nhẹ mềm mại */
-    overflow: hidden; /* Cắt bớt phần thừa khi ảnh phóng to */
-    border: 1px solid rgba(212, 176, 106, 0.2); /* Viền vàng mờ nhẹ sang trọng */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Tạo bóng đổ sâu cho ảnh */
-    margin-bottom: 20px;
-    background: #000;
+.pk-content-box {
+    border: 2px solid transparent;
+    background: 
+        linear-gradient(#dfe7c4, #dfe7c4) padding-box,
+        linear-gradient(to bottom, #ffffff, #1e3d0d) border-box;
+    border-radius: 15px;
+    width: 52%;
+    min-height: 250px;
+    margin-left: -5%;
+    box-shadow: 12px 10px 0px #244b13;
+    position: relative;
+    padding: 50px 30px 40px 75px;
 }
 
-/* Định dạng tấm ảnh bên trong */
-.thanhvien-card .avatar-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ảnh tự động lấp đầy khung hình mà không bị méo */
-    transition: transform 0.5s ease; /* Hiệu ứng zoom mượt mà */
+.pk-title {
+    position: absolute;
+    top: -20px;
+    left: -35px;
+    background-color: #4a752c;
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 12px 25px;
+    box-shadow: 8px 8px 0px #1e3d0d;
+    z-index: 3;
 }
 
-/* Hiệu ứng tương tác: Rê chuột vào ảnh tự phóng to nhẹ */
-.thanhvien-card:hover .avatar-box img {
-    transform: scale(1.06);
-}
-
-/* Khung thông tin tên và vị trí bên dưới ảnh */
-.thanhvien-info h3 {
-    font-family: 'Montserrat', sans-serif;
-    color: #ffffff;
-    font-size: 1.25rem;
-    margin: 0 0 8px 0;
-    font-weight: 600;
+.pk-title h2 {
+    color: white;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 25px;
+    font-weight: normal;
     letter-spacing: 0.5px;
 }
 
-/* Dòng chữ Vị trí (Chức vụ) của thành viên */
-.thanhvien-info .position {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--gold-light, #f6d28d); /* Màu vàng sáng nhẹ thanh lịch */
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin: 0;
-    letter-spacing: 1px;
-    opacity: 0.85;
+.pk-text p {
+    color: #2c3f19;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
 }
 
-/* Tối ưu giao diện mượt mà hiển thị trên điện thoại (Responsive) */
-@media (max-width: 768px) {
-    .thanhvien {
-        padding: 50px 15px;
-    }
-    .thanhvien-container {
-        gap: 30px;
-    }
-    .thanhvien-header h2 {
-        font-size: 1.6rem;
-    }
+.pk-text p:last-child {
+    margin-bottom: 0;
 }
+
+.pk-decor {
+    position: absolute;
+    bottom: -15px;
+    right: 0;
+    width: 150px;
+    height: 22px;
+    background-color: #4a752c;
+    border: 2px solid white;
+    border-radius: 15px;
+    box-shadow: 6px 6px 0px #1e3d0d;
+    z-index: 10;
+}
+
 
 /* =========================================================
-   THIẾT KẾ PHẦN CHUỖI CHƯƠNG TRÌNH (SECTION CCT)
+   4. KHỐI TALKSHOW (.item-talkshow)
    ========================================================= */
-
-.section-cct {
-    min-height: 80vh;
-    background: linear-gradient(rgba(5, 11, 20, 0.6), rgba(5, 11, 20, 0.6)),
-                url('images/background/02.jpg') no-repeat center center/cover;
-    padding-bottom: 60px;
-}
-
-.section-cct .section-title {
-    padding: 60px 0 40px 0;
-    text-align: center;
-    font-size: 50px;
-}
-
-/* Khoảng đệm bên trái */
-.cct-spacer {
-    flex: 0 0 5%;
-}
-.cct-wrapper {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box; /* Tính cả padding/border vào tổng độ rộng */
-}
-
-/* ---------------------------------------------------------
-   1. TALKSHOW "MÌNH CỦA NGÀY BẮT ĐẦU"
-   --------------------------------------------------------- */
-.cct-mcnbd {
+.item-talkshow {
+    border-radius: 12px;
+    padding: 40px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
-    gap: 40px;
+    position: relative;
 }
 
-.talk-show-mcnbd {
-    flex: 0 0 35%;
-    padding-right: 20px;
+.ts-info-box {
+    border: 2px solid transparent;
+    background: 
+        linear-gradient(#dfe7c4, #dfe7c4) padding-box,
+        linear-gradient(to bottom, #ffffff, #1e3d0d) border-box;
+    border-radius: 15px;
+    width: 52%;
+    min-height: 200px;
+    margin-right: -5%;
+    position: relative;
+    padding: 30px 100px 15px 40px;
+    z-index: 2;
 }
 
-.talk-show-mcnbd-title {
-    font-family: var(--font-art);
-    font-size: 38px;
-    color: var(--gold);
-    line-height: 1.3;
+.ts-info-box::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 22px;
+    right: 20px;
+    bottom: -12px;
+    background: #4a752c;
+    border: 2px solid white;
+    border-radius: 15px;
+    box-shadow: 6px 6px 0 #1e3d0d;
+    z-index: -1;
 }
 
-.mcnbd-content {
-    margin: 20px 0;
-    font-size: 21px;
-    line-height: 1.7;
-    color: #e0e0e0;
-}
-
-/* KHUNG SLIDER TALKSHOW - TĂNG LÊN 600PX */
-.image-slider {
+.ts-image-box {
     flex: 0 0 48% !important;
     width: 48% !important;
-    
-    /* Dùng aspect-ratio thay cho height cố định */
-    aspect-ratio: 16 / 10;          /* Giữ tỉ lệ khung hình chuẩn 16:10 */
-    height: auto !important;        /* Chiều cao tự động nhảy theo chiều rộng */
-    max-height: 650px;              /* Giới hạn chiều cao tối đa trên màn PC cực lớn */
-    min-height: 350px;              /* Chiều cao tối thiểu không sợ bị quá bé */
-    
+    aspect-ratio: 3 / 2;
+    height: auto !important;
+    max-height: 650px;
     position: relative;
-    border-radius: 20px;
+    right: -20px;
+    z-index: 2;
+    border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(212, 176, 106, 0.2);
+    border: 8px solid transparent;
+    background-image: 
+        linear-gradient(#06070a, #06070a),
+        linear-gradient(to bottom, #ffffff, #1e3d0d);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
 }
 
+.ts-top-badge {
+    position: absolute;
+    width: 100px;
+    top: -15px;
+    left: -20px;
+    background-color: #4a752c;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 12px 25px;
+    z-index: 3;
+}
+
+
+/* =========================================================
+   5. KHỐI TRẢI NGHIỆM / CHUYẾN ĐI (.item-trip)
+   ========================================================= */
+.item-trip {
+    border-radius: 12px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.trip-info-box {
+    border: 2px solid transparent;
+    background: 
+        linear-gradient(#dfe7c4, #dfe7c4) padding-box,
+        linear-gradient(to bottom, #ffffff, #1e3d0d) border-box;
+    border-radius: 15px;
+    width: 52%;
+    min-height: 200px;
+    margin-left: -5%;
+    box-shadow: 12px 10px 0px #244b13;
+    position: relative;
+    padding: 30px 40px 15px 100px;
+}
+
+.trip-info-box::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 20px;
+    top: -10px;
+    right: -40px;
+    background-color: #4a752c;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 4px 4px 0px #1e3d0d;
+    z-index: 2;
+}
+
+.item-text,
+.trip-item-text {
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+.item-title,
+.trip-item-title {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+.item-title h3,
+.trip-item-title h3 {
+    position: relative;
+    z-index: 2;
+    font-size: 22px;
+    color: #1e3d0d;
+    margin: 0;
+}
+
+.item-title .shape,
+.trip-item-title .shape {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, #b8eb7e 0%, rgba(74, 117, 44, 0) 100%);
+    border-radius: 10px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   6. IMAGE SLIDERS
+   ========================================================= */
 .slide {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     object-position: center !important;
     position: absolute;
-    top: 0; 
+    top: 0;
     left: 0;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
 }
 
-/* ---------------------------------------------------------
-   2. CHUYẾN ĐỊ "2 NGÀY 1 ĐÊM"
-   --------------------------------------------------------- */
-.cct-2n1d {
-    display: flex;
-    width: 100%;
-    max-width: 100%;
-    align-items: center;
-    justify-content: space-between; /* Căn đều 2 khối ảnh và chữ trong màn hình */
-    box-sizing: border-box;
-    gap: 20px; /* Thu hẹp khoảng cách giữa ảnh và chữ tránh bị xô tràn */
-    padding: 40px 0;
-}
-
-/* KHUNG SLIDER 2N1Đ - TĂNG LÊN 600PX */
 .image-slider-2n1d {
     flex: 0 0 50% !important;
-    width:50% !important;
+    width: 50% !important;
     max-width: 50% !important;
-    
     aspect-ratio: 16 / 10;
     height: auto !important;
     max-height: 650px;
     min-height: 350px;
-    
     position: relative;
     overflow: hidden;
     border-radius: 20px;
@@ -820,78 +378,621 @@ html, body {
     transition: transform 1s ease-in-out;
 }
 
-.slide-2n1d.active { transform: translateX(0); }
-.slide-2n1d.exit { transform: translateX(100%); }
-
-.noidung-2n1d {
-    flex: 0 0 38% !important; /* Dùng 38% để tổng (55% ảnh + 38% chữ + gap) < 100% */
-    width: 38% !important;
-    max-width: 38% !important;
-    box-sizing: border-box;   /* Quan trọng: Để padding-left không đẩy khung ra ngoài mép */
-    padding-left: 20px;
-    padding-right: 100px;         /* Bỏ hoàn toàn padding bên phải */
-    text-align: left;
+.slide-2n1d.active {
+    transform: translateX(0);
 }
 
-.trip-2n1d-title {
+.slide-2n1d.exit {
+    transform: translateX(100%);
+}
+
+
+/* =========================================================
+   7. KHỐI VIDEO (.video-section-container)
+   ========================================================= */
+.video-section-container {
+    width: 80%;
+    max-width: 1300px;
+    margin: 0 auto 100px auto;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 8px solid transparent;
+    background-image: 
+        linear-gradient(#000000, #000000), 
+        linear-gradient(to bottom, #ffffff 0%, #1e3d0d 100%);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.responsive-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: rgba(128, 128, 128, 0.7);
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.play-btn::after {
+    content: '';
+    border-style: solid;
+    border-width: 12px 0 12px 20px;
+    border-color: transparent transparent transparent white;
+    margin-left: 4px;
+}
+
+.play-btn:hover {
+    background: rgba(80, 80, 80, 0.9);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-wrapper .play-btn {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.video-wrapper:hover .play-btn {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   8. DẤU ẤN MÙA 1 (.season-mark)
+   ========================================================= */
+.season-mark {
+    padding: 100px 80px;
+    background: rgb(75, 92, 48);
+}
+
+.season-intro {
+    max-width: 900px;
+    margin: 0 auto 50px;
+    text-align: center;
+    color: #d8d8d8;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+.season-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.season-card {
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(212, 176, 106, .25);
+    border-radius: 24px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: .35s;
+}
+
+.season-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(212, 176, 106, .15);
+}
+
+.season-number {
     font-family: var(--font-art);
-    font-size: 38px;
     color: var(--gold);
-    line-height: 1.3;
+    font-size: 42px;
+    margin-bottom: 10px;
 }
 
-.trip-2n1d-content {
-    margin: 20px 0;
-    font-size: 21px;
+.season-card h3 {
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.season-card p {
+    color: #cfcfcf;
     line-height: 1.7;
-    color: #e0e0e0;
 }
-.slide, 
-.slide-2n1d {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;      /* Tự cắt viền thừa để phủ kín khung khi thu phóng */
-    object-position: center !important;
+
+.season-quote {
+    max-width: 850px;
+    margin: 60px auto 0;
+    text-align: center;
+    color: var(--gold-light);
+    font-size: 20px;
+    line-height: 1.8;
+    font-style: italic;
 }
-/* ---------------------------------------------------------
-   RESPONSIVE MOBILE
-   --------------------------------------------------------- */
-@media screen and (max-width: 768px) {
-    .section-cct { padding: 0 20px; }
 
-    .cct-spacer { display: none; }
+.season-text-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    .cct-mcnbd, 
-    .cct-2n1d {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        padding: 30px 0;
-    }
+.season-text-card h3 {
+    font-family: var(--font-art);
+    color: var(--gold);
+    font-size: 26px;
+    margin-bottom: 15px;
+}
 
-    .talk-show-mcnbd, 
-    .noidung-2n1d {
+
+/* =========================================================
+   9. KHỐI THÀNH VIÊN (.thanhvien)
+   ========================================================= */
+.thanhvien {
+    width: 100%;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/background/bg_tv.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.thanhvien-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    max-width: 1100px;
+    width: 90%;
+    margin-bottom: 200px;
+}
+
+.thanhvien-card {
+    flex: 0 1 320px;
+    width: 100%;
+    max-width: 320px;
+    height: fit-content;
+    background: linear-gradient(to bottom, #cad869 0%, #4b9115 40%, #0b3b01 100%);
+    border: 8px solid #fffffd;
+    border-radius: 20px;
+    padding: 25px 15px 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.avatar-box {
+    width: 85%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid transparent;
+    background-image: 
+        linear-gradient(#000000, #000000), 
+        linear-gradient(to bottom, #0a2403 0%, #ffffff 100%);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+.thanhvien-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -22px;
+    z-index: 2;
+}
+
+.thanhvien-info h3 {
+    width: 98%;
+    background: linear-gradient(to right, #3d7a1e 0%, #0d2e05 100%);
+    color: #ffffff;
+    border: 4px solid #ffffff;
+    border-radius: 35px;
+    text-align: center;
+    padding: 10px 12px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Times New Roman', serif;
+    margin: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+.thanhvien-info .position {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-family: sans-serif;
+}
+
+
+/* =========================================================
+   10. SVG & DECOR ELEMENTS
+   ========================================================= */
+.curved-arrow-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+
+/* =========================================================
+   11. MEDIA QUERIES (RESPONSIVE)
+   ========================================================= */
+
+/* --- Screen <= 1100px --- */
+@media (max-width: 1100px) {
+    .pk-card {
         width: 100%;
-        flex: none;
-        text-align: center;
-        padding: 0;
+        margin-bottom: 80px;
     }
 
-    .image-slider, 
-    .image-slider-2n1d {
-        width: 100% !important;
-        flex: none;
-        height: 280px !important;
-        min-height: 280px !important;
+    .PK1-CCT {
+        width: 100%;
     }
 
-    .talk-show-mcnbd-title,
-    .trip-2n1d-title {
-        font-size: 26px;
+    .pk-inner-frame {
+        padding: 10px;
     }
 
-    .mcnbd-content,
-    .trip-2n1d-content {
-        font-size: 16px;
+    .pk-content-box {
+        padding: 50px 30px 40px 55px;
+    }
+
+    .item-talkshow {
+        padding: 45px 10px;
+    }
+
+    .ts-info-box {
+        padding: 30px 20px 30px 100px;
+    }
+
+    .item-trip {
+        padding: 30px 10px 45px 10px;
+    }
+
+    .trip-item-text,
+    .item-text {
+        font-size: 15px;
     }
 }
+
+/* --- Screen <= 930px --- */
+@media (max-width: 930px) {
+    .thanhvien-info h3 {
+        font-size: 18px;
+    }
+
+    .thanhvien-container {
+        gap: 50px;
+    }
+}
+
+/* --- Screen <= 900px --- */
+@media screen and (max-width: 900px) {
+    .season-mark {
+        padding: 60px 20px;
+    }
+
+    .season-intro {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .season-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .season-card {
+        min-height: auto;
+        padding: 25px 20px;
+    }
+
+    .season-number {
+        font-size: 32px;
+    }
+
+    .season-card h3 {
+        font-size: 20px;
+    }
+
+    .season-card p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .season-quote {
+        font-size: 15px;
+        line-height: 1.8;
+        margin-top: 35px;
+    }
+}
+
+/* --- Screen <= 800px --- */
+@media screen and (max-width: 800px) {
+    .thanhvien {
+        clip-path: inset(100px 0px 30px 0px);
+        transform: translateY(-100px);
+        margin-bottom: -130px;
+    }
+}
+
+/* --- Mobile <= 768px --- */
+@media (max-width: 768px) {
+    
+    /* Khối Card Giới Thiệu */
+    .pk-inner-frame {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .pk-image-box {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .pk-content-box {
+        width: 100%;
+        margin-left: 0;
+        padding: 40px 20px 10px 20px;
+        min-height: auto;
+    }
+
+    .pk-title {
+        left: -20px;
+        top: -40px;
+        font-size: 8px;
+    }
+
+    .pk-title h2 {
+        font-size: 18px;
+    }
+
+    .pk-text p {
+        font-size: clamp(13px, 1.2vw + 10px, 15px);
+    }
+
+    /* Khối Talkshow */
+    .item-talkshow {
+        flex-direction: column;
+        padding: 30px 15px 15px 15px;
+    }
+
+    .ts-info-box {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+        padding: 30px 20px 20px 20px;
+        order: 2;
+    }
+
+    .ts-image-box {
+        width: 100% !important;
+        right: 0;
+        order: 1;
+        border: 4px solid transparent;
+    }
+
+    /* Khối Chuyến Đi */
+    .item-trip {
+        flex-direction: column;
+        padding: 15px 15px 30px 15px;
+    }
+
+    .item-trip .ts-image-box {
+        order: 1;
+        margin-bottom: 20px;
+    }
+
+    .trip-info-box {
+        width: 100%;
+        margin-left: 0;
+        padding: 30px 20px 20px 20px;
+        order: 2;
+        min-height: 150px;
+    }
+
+    .trip-info-box::before {
+        width: 80px;
+        right: -10px;
+    }
+
+    /* Tiêu đề chung */
+    .main-title-CCT {
+        width: 85%;
+        text-align: center;
+    }
+
+    .main-title-CCT h2 {
+        font-size: 18px;
+    }
+
+    .trip-item-title h3,
+    .item-title h3 {
+        font-size: 19px;
+    }
+
+    /* Khung Video & SVG */
+    .video-section-container {
+        width: 95%;
+        margin-bottom: 80px;
+    }
+
+    .curved-arrow-svg {
+        display: none;
+    }
+}
+
+/* --- Mobile <= 700px --- */
+@media (max-width: 700px) {
+    .thanhvien-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding: 10px 0;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .thanhvien-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .thanhvien-card {
+        flex: 0 0 85%;
+        max-width: none;
+        scroll-snap-align: center;
+    }
+
+    .thanhvien {
+        clip-path: inset(70px 0px 30px 0px);
+        transform: translateY(-100px);
+    }
+}
+.main-pk1 {
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 0 30px 0;
+    margin-bottom: -40px;
+    
+    /* Thiết lập ảnh nền */
+    background-image: url("./images/background/bg-main-pk1.png"); /* Thay đường dẫn ảnh của bạn vào đây */
+    background-size: cover;          /* Phủ kín toàn bộ khung chứa */
+    background-position: center;     /* Căn giữa hình ảnh */
+    background-repeat: no-repeat;    /* Không lặp lại hình ảnh */
+    background-attachment: scroll;   /* Trôi theo cuộn trang (có thể đổi thành 'fixed' nếu muốn tạo hiệu ứng Parallax) */
+    
+    
+}/* =========================================================
+   2. HERO BACKGROUND (.bg) - ĐÃ CÂN CHỈNH HOÀN HẢO
+   ========================================================= */
+.bg {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.bg-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: pulseBackground 4s ease-in-out infinite alternate;
+}
+
+/* KHỐI COCOON: Sử dụng % để tự động thích ứng với kích thước màn hình */
+.cocoon {
+    position: absolute;
+    top: 25%; /* Chuyển từ px sang % để không bị che đứt cuốn kén */
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    max-width: 500px; 
+    width: 80%;
+    height: auto;
+    z-index: 2;
+    
+    /* Neo điểm xoay đúng ngay đầu dây/cuốn kén */
+    transform-origin: top center; 
+    
+    animation: swingCocoon 3s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* =========================================================
+   SỬA KEYFRAMES & RESPONSIVE
+   ========================================================= */
+
+/* Giữ nguyên translate(-50%, -50%) trong animation để kén không bị nhảy vị trí */
+@keyframes swingCocoon {
+    0% {
+        transform: translate(-50%, -50%) rotate(-6deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(6deg);
+    }
+}
+
+@keyframes pulseBackground {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.03);
+    }
+}
+
+@media (max-width: 1024px) {
+    .bg {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+
+    .bg-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .cocoon {
+        max-width: 300px;
+        top: 25%; /* Hạ tỉ lệ top ở bản mobile để tránh đè lên Navbar */
+        width: 30%;
+        height: auto;
+    }
+}
+@media (max-width: 1024px) {
+    .bg{
+        margin-top:85px;
+    }
+}
+@media (max-width: 768px) {
+    .main-pk1 {
+        margin-bottom:-90px;
+    }
+}
+
