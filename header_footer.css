@@ -1,79 +1,81 @@
 /* =========================================================
-   GLOBAL SETTINGS
+   1. GLOBAL SETTINGS
    ========================================================= */
 
 /* ---------- Biến màu ---------- */
-:root{
-    --gold:#d4b06a;
-    --gold-light:#f6d28d;
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
 }
 
 /* ---------- Fonts ---------- */
-@font-face{
-    font-family:"DancingScript";
-    src:url("./fonts/DancingScript-VariableFont_wght.ttf") format("truetype");
+@font-face {
+    font-family: "DancingScript";
+    src: url("./fonts/DancingScript-VariableFont_wght.ttf") format("truetype");
 }
 
-@font-face{
-    font-family:"Maglony";
-    src:url("./fonts/1FTV-Maglony.ttf") format("truetype");
+@font-face {
+    font-family: "Maglony";
+    src: url("./fonts/1FTV-Maglony.ttf") format("truetype");
 }
 
-@font-face{
-    font-family:"LASTCHRISTMAS";
-    src:url("./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF") format("opentype");
+@font-face {
+    font-family: "LASTCHRISTMAS";
+    src: url("./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF") format("opentype");
 }
 
-@font-face{
-    font-family:"Nillota";
-    src:url("./fonts/1FTV-NILLOTA.TTF") format("truetype");
+@font-face {
+    font-family: "Nillota";
+    src: url("./fonts/1FTV-NILLOTA.TTF") format("truetype");
 }
 
-@font-face{
-    font-family:"JosefinSans";
-    src:url("./fonts/JosefinSans-Medium.ttf") format("truetype");
+@font-face {
+    font-family: "JosefinSans";
+    src: url("./fonts/JosefinSans-Medium.ttf") format("truetype");
 }
 
 /* ---------- Reset CSS ---------- */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* ---------- Trang ---------- */
-html{
-    scrollbar-width:none;
-    -ms-overflow-style:none;
+html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-html::-webkit-scrollbar{
-    display:none;
+html::-webkit-scrollbar {
+    display: none;
 }
 
-body{
-    background:#050b14;
-    color:#fff;
-    overflow-x:hidden;
+body {
+    background: #050b14;
+    color: #fff;
+    overflow-x: hidden;
 }
+
 
 /* =========================================================
-   NAVBAR
+   2. NAVBAR
    ========================================================= */
-.navbar{
+
+.navbar {
     position: fixed;
-    inset: 0 0 auto 0;             /* top:0; left:0; right:0 */
+    inset: 0 0 auto 0; /* top:0; left:0; right:0 */
     width: 100%;
     z-index: 1000;
-    padding: clamp(5px,3vw,10px) 0;
+    padding: clamp(5px, 3vw, 10px) 0;
 
     background: rgba(5, 10, 18, 0.45);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 
-    border-bottom: 1px solid rgba(255,255,255,.05);
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
 
-    animation: navEntrance .8s cubic-bezier(.25,1,.5,1) forwards;
+    animation: navEntrance .8s cubic-bezier(.25, 1, .5, 1) forwards;
 
     transition:
         transform .4s ease,
@@ -81,18 +83,14 @@ body{
         background .3s ease,
         backdrop-filter .3s ease;
 }
-.navbar.hide{
 
-    transform:translateY(-120%) !important;
-
-    opacity:0;
-
-    pointer-events:none;
-
+.navbar.hide {
+    transform: translateY(-120%) !important;
+    opacity: 0;
+    pointer-events: none;
 }
-/* =========================================================
-   NỘI DUNG NAVBAR
-   ========================================================= */
+
+/* ---------- Nội dung Navbar ---------- */
 .nav-inner {
     width: 100%;
     height: 64px;
@@ -104,10 +102,7 @@ body{
     box-sizing: border-box;
 }
 
-
-
 /* LOGO */
-
 .logo {
     flex: 1;
     display: flex;
@@ -117,31 +112,29 @@ body{
     justify-content: flex-start; /* Căn dính lề trái */
 }
 
-.logo img{
+.logo img {
     width: clamp(55px, 4vw, 80px);
     height: auto;
     display: block;
 }
 
-/* Ảnh text PKM2 phóng to chuẩn Responsive */
+/* Ảnh text PKM2 */
 .logo-text .text-pkm2 {
-    /* Độ rộng co giãn linh hoạt: Tối thiểu 120px - Lý tưởng 12vw - Tối đa 180px */
     width: clamp(100px, 12vw, 150px); 
-    
-    height: auto; /* Giữ tỷ lệ ảnh không bị móp méo */
+    height: auto;
     display: block;
     object-fit: contain;
 }
 
-
-/*Menu navbar*/
+/* MENU NAVBAR */
 .menu {
     flex: 3;
     display: flex;
     align-items: center;
-    justify-content: space-evenly; /* Dải đều các nút */
-    padding: 0; /* ĐÃ XÓA padding-right: 100px để không bị xô lệch */
+    justify-content: space-evenly;
+    padding: 0;
 }
+
 .nav-spacer {
     flex: 0.5;
     flex-shrink: 0;
@@ -153,64 +146,41 @@ body{
     position: relative;
     color: #fff;
     text-decoration: none;
-
-    /* Tối ưu kích thước chữ để không bị vỡ hàng */
     font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
-    letter-spacing: .08em; /* Giảm nhẹ nét giãn chữ để dải menu thảnh thơi hơn */
+    letter-spacing: .08em;
 
     cursor: pointer;
-    white-space: nowrap; /* Giữ chữ trên 1 hàng */
+    white-space: nowrap;
     display: inline-flex;
     align-items: center;
     gap: 6px;
 
     transition: color .3s ease, text-shadow .3s ease;
-    animation: menuItemFade .5s cubic-bezier(.25,1,.5,1) both;
+    animation: menuItemFade .5s cubic-bezier(.25, 1, .5, 1) both;
 }
 
-@media (max-width: 1300px) {
-    .nav-inner {
-        /* Bỏ khoảng trống linh hoạt, cho các khối xếp sát nhau */
-        justify-content: flex-start; 
-        gap: 20px; /* Khoảng cách cố định giữa Logo và Menu */
-    }
-
-    /* Logo không chiếm 1 phần nữa mà chỉ lấy vừa đủ dung lượng */
-    .logo {
-        flex: none; 
-    }
-
-    /* Menu bỏ tỉ lệ 3, chuyển sang sát trái và các nút nằm gần nhau */
-    .menu {
-        flex: none; 
-        justify-content: flex-start; 
-        gap: clamp(12px, 1.5vw, 24px); /* Khoảng cách giữa các nút link */
-    }
-
-    /* Ẩn khối spacer đối trọng vì lúc này không cần chia 1:3:1 nữa */
-    .nav-spacer {
-        display: none; 
-    }
-}
 .menu a img {
-    height: 4em; /* Tự động thu nhỏ/phóng to đúng bằng kích thước font-size của chữ (16px) */
-    width: auto;  /* Giữ nguyên tỷ lệ chiều rộng ảnh, không bị móp */
+    height: 4em;
+    width: auto;
     display: inline-block;
     vertical-align: middle;
     object-fit: contain;
 }
-.menu a:hover{
-    color:var(--gold-light);
-    text-shadow:0 0 10px rgba(246,210,141,.5);
+
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, .5);
 }
+
 .menu a.active {
     color: var(--gold-light) !important;
     text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
 }
+
 .menu a.active::after {
     content: '';
     position: absolute;
-    bottom:-.25rem;
+    bottom: -.25rem;
     left: 50%;
     transform: translateX(-50%);
     width: 85%;
@@ -218,30 +188,24 @@ body{
     background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
     box-shadow: 0 0 12px var(--gold);
     border-radius: 10px;
-    
-    /* Vệt sáng active bung tỏa nhẹ nhàng từ giữa chữ giãn ra 2 bên */
     animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
-.menu-toggle{
 
-    display:none;
-
-    font-size:clamp(1.5rem,3vw,2rem);
-
-    color:#fff;
-
-    cursor:pointer;
-
-    user-select:none;
+.menu-toggle {
+    display: none;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
 }
+
+/* Stagger Animation cho Menu Items */
 .menu a:nth-child(1) { animation-delay: 0.1s; }
 .menu a:nth-child(2) { animation-delay: 0.18s; }
 .menu a:nth-child(3) { animation-delay: 0.26s; }
 .menu a:nth-child(4) { animation-delay: 0.34s; }
 
-/* =========================================================
-ĐỊNH NGHĨA CÁC KHUNG CHUYỂN ĐỘNG (KEYFRAMES ANIMATION)
-   ========================================================= */
+/* ---------- Keyframes Navbar ---------- */
 @keyframes navEntrance {
     from {
         opacity: 0;
@@ -281,333 +245,409 @@ body{
     }
 }
 
+/* ---------- Responsive Navbar ---------- */
 @media (max-width: 1300px) {
     .nav-inner {
-        /* Đẩy Logo sang trái, đẩy Menu sang sát lề phải */
         justify-content: space-between; 
         gap: 20px;
     }
 
     .logo {
-        flex: none; /* Logo thu gọn đúng bằng kích thước thực */
+        flex: none; 
     }
 
     .menu {
-        flex: none; /* Bỏ chia tỉ lệ */
-        margin-left: auto; /* Tự động tạo khoảng trống bên trái để đẩy cả cụm Menu sát lề phải */
-        justify-content: flex-end; /* Căn các nút link dính sát về bên phải */
-        gap: clamp(30px, 1.8vw, 40px); /* Khoảng cách giữa các nút link */
+        flex: none; 
+        margin-left: auto; 
+        justify-content: flex-end; 
+        gap: clamp(30px, 1.8vw, 40px); 
         padding-right: 0;
     }
 
     .nav-spacer {
-        display: none; /* Ẩn khối spacer vì đã dùng margin-left: auto */
+        display: none; 
     }
 }
 
-@media (max-width:900px){
-
-    .menu{
-        display:none;
+@media (max-width: 900px) {
+    .menu {
+        display: none;
     }
 
-    .menu-toggle{
-        display:block;
+    .menu-toggle {
+        display: block;
     }
 
-    .part-main{
-        font-size:1.4rem;
+    .part-main {
+        font-size: 1.4rem;
     }
 
-    .part-season{
-        font-size:1.15rem;
+    .part-season {
+        font-size: 1.15rem;
     }
-
 }
 
 /* =========================================================
-   FOOTER
-========================================================= */
+   2. FOOTER LAYOUT & CÁC CỘT
+   ========================================================= */
 
-.Footer{
-    width:100%;
-    padding:60px 0 25px;
-    background:linear-gradient(180deg,#091731 0%,#0c111d 55%,#000 100%);
-    border-top:1px solid rgba(212,176,106,.2);
-    font-family:"JosefinSans",sans-serif;
+.Footer {
+    width: 100%;
+    min-height: 200px; 
+    background: 
+        linear-gradient(135deg, rgba(7, 38, 165, 0.678) 0%, #0c2a77a1 100%),
+        url('./images/background/bg_footer.png');
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    font-family: "Quicksand", sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.footer-inner{
-    width:min(95%,1600px);
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-        0.8fr
-        0.9fr
-        1.4fr
-        1fr;
-
-    gap:32px;
-    align-items:start;
+.footer-inner {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    flex-wrap: nowrap; /* Mặc định luôn nằm trên 1 hàng */
 }
 
-.footer-col{
-    min-width:0;
+/* Kích thước chiều cao chung */
+.cot-1, .cot-2, .cot-3, .cot-4 {
+    height: 200px;
 }
 
-/* ===== Logo ===== */
-.footer-brand{
+/* CỘT 1 */
+.cot-1 { 
+    flex: 0.8 1 0;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 10px;
+}
+
+.cot-1 .logo {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: visible;
-    min-height: 180px;
+    max-width: 100%;
 }
 
-.footer-brand .logo{
-    position: relative;
-    display: block;
-    top: -15px;          /* nhấc logo lên */
-    z-index: 2;
-}
-
-.footer-brand .logo img{
-    display: block;
-    width: clamp(130px, 10vw, 220px);
+.cot-1 .logo img {
+    max-height: 140px;
+    max-width: 100%;
     height: auto;
+    width: auto;
     object-fit: contain;
+    display: block;
 }
 
-/* Đường vàng */
-.footer-brand::after{
-    content:"";
-    position:absolute;
-
-    right:clamp(10px,2vw,45px);
-    top:50%;
-    transform:translateY(-50%);
-
-    width:2px;
-    height:clamp(130px,14vw,190px);
-
-    background:linear-gradient(
-        transparent,
-        rgba(212,176,106,.9),
-        rgba(212,176,106,.35),
-        transparent
+/* CHỈ CÓ CỘT 1 CÓ VẠCH KẺ DỌC */
+.cot-1::after {
+    content: "";
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 75%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(212, 176, 106, 0.8) 20%,
+        var(--gold, #d4b06a) 50%,
+        rgba(212, 176, 106, 0.8) 80%,
+        transparent 100%
     );
-
-    border-radius:999px;
-}
-/* ===== Heading ===== */
-
-.footer-col h3{
-    color:var(--gold);
-    font-size:clamp(15px,1.3vw,24px);
-    margin:0 0 18px;
-    position:relative;
+    box-shadow: 0 0 8px rgba(212, 176, 106, 0.4);
+    border-radius: 999px;
+    z-index: 5; 
 }
 
-.footer-col h3::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-8px;
-
-    width:90px;
-    height:2px;
-
-    background:linear-gradient(
-        to right,
-        var(--gold),
-        transparent
-    );
+/* 3 CỘT CÒN LẠI */
+.cot-2, .cot-3, .cot-4 {
+    min-width: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ===== Text ===== */
+.cot-2 { flex: 0.8 1 0; }
+.cot-3 { flex: 1.4 1 0; }
+.cot-4 { flex: 1.4 1 0; }
 
-.footer-links,
-.footer-info{
-    list-style:none;
-    padding:0;
-    margin:0;
-}
 
-.footer-links li,
-.footer-info li,
-.footer-col p{
-    color:rgba(255,255,255,.75);
-    line-height:1.7;
-    margin-bottom:10px;
-    font-size:clamp(11px,0.95vw,17px);
-}
-.footer-info li{
-    max-width:260px;
-    line-height:1.7;
-    word-break:break-word;
-}
-.footer-col:nth-child(3) li{
-    max-width:400px;
-}
-.footer-links a{
-    color:inherit;
-    text-decoration:none;
-    transition:.3s;
-}
-
-.footer-links a:hover{
-    color:var(--gold-light);
-    transform:translateX(5px);
-}
-
-/* ===== Social ===== */
-
-.social-icons{
-    display:flex;
-    gap:12px;
-}
-
-.social-icons a{
-    width:38px;
-    height:38px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    border-radius:50%;
-    background:#fff;
-    color:#000;
-
-    transition:.3s;
-}
-
-.social-icons a:hover{
-    background:var(--gold);
-    color:#000;
-    transform:translateY(-4px);
-}
-
-/* ===== Copyright ===== */
-
-.footer-bottom{
-    width:min(95%,1400px);
-    margin:45px auto 0;
-    padding-top:20px;
-    border-top:1px solid rgba(255,255,255,.08);
-    text-align:center;
-}
-
-.footer-bottom p{
-    margin:0;
-    font-size:13px;
-    color:rgba(255,255,255,.45);
-}
-.footer-links li,
-.footer-links a,
-.footer-info li,
-.footer-col p{
-    font-size: clamp(15px, 1.1vw, 20px);
-    line-height: 1.7;
-    color: rgba(255,255,255,.75);
-}
 /* =========================================================
-   TABLET + MOBILE
-========================================================= */
+   3. STYLE NỘI DUNG TRONG CỘT
+   ========================================================= */
 
-@media (max-width:992px){
+.noidung-cot2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    height: 100%;
+    width: 100%;
+}
 
-    .footer-brand{
-        min-height:100px;
+/* TIÊU ĐỀ DÙNG CHUNG */
+.cot-2-title {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cot-2-title h2 {
+    font-family: "Maglony";
+    color: var(--gold-light);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.cot-2-title h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        to right, 
+        var(--gold, #e4f07d) 0%, 
+        rgba(247, 228, 120, 0.4) 60%, 
+        transparent 100%
+    );
+    border-radius: 999px;
+}
+
+/* CONTENT CỘT 2 & 3 (CĂN GIỮA DỌC) */
+.cot-2-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cot-2-content li {
+    font-family: "Quicksand";
+    margin-bottom: 8px;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.cot-2-content li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.cot-2-content li a:hover {
+    color: #d4b06a;
+    transform: translateX(5px);
+}
+
+/* CONTENT CỘT 4 (CĂN TRÊN - KHÔNG CĂN GIỮA) */
+.cot-4-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 5px;
+}
+
+/* Đoạn văn mô tả Cột 4 */
+.cot-4-content p {
+    margin-bottom: 18px;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+/* Social Icons (Cột 4) */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0c2a77;
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.social-icons a:hover {
+    background-color: var(--gold, #d4b06a);
+    color: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(212, 176, 106, 0.4);
+}
+
+
+/* =========================================================
+   4. RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 1280px) {
+    .cot-2-content li {
+        margin-bottom: 8px;
+        font-size: 17px;
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 1080px) {
+    .cot-4-content p {
+        margin-bottom: 18px;
+        font-size: 17px;
+        line-height: 1.4;
+        color: #ffffff;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 851px) {
+    .cot-2-title h2 {
+        font-size: 20px;
+    }
+    .cot-2-content li a {
+        font-size: 13px;
+    }
+    .cot-2-content li,
+    .cot-4-content p {
+        font-size: 13px;
+    }
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .cot-2-content li {
+        margin-bottom: 8px;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+    .cot-2-content li a {
+        font-size: 15px;
+    }
+    .cot-4-content p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 850px) {
+    .cot-2-title h2 {
+        font-size: 15px;
+    }
+    .cot-2-content li a {
+        font-size: 13px;
+    }
+    .cot-2-content li,
+    .cot-4-content p {
+        font-size: 11px;
+    }
+    .social-icons a {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+}
+
+/* Dưới 768px bắt đầu cho các cột xuống dòng xếp chồng */
+@media (max-width: 768px) {
+    .footer-inner {
+        flex-wrap: wrap; /* Cho phép xuống dòng */
+        gap: 20px;
     }
 
-    .footer-brand .logo{
-        top:0;
+    .cot-1, .cot-2, .cot-3, .cot-4 {
+        flex: 1 1 100%;
+        height: auto;
+        padding: 10px 0;
     }
 
-    .footer-brand .logo img{
-        width:90px;
+    /* Ẩn vạch kẻ dọc trên Cột 1 */
+    .cot-1::after {
+        display: none;
     }
 
-    .footer-brand::after{
-        display:none;
-    }
-}/* =========================================================
-   FOOTER - MOBILE
-========================================================= */
-@media (max-width:768px){
-
-    .Footer{
-        padding:40px 16px 25px;
+    .cot-1 .logo img {
+        max-height: 100px;
     }
 
-    .footer-inner{
-        grid-template-columns:70px 1fr 1.2fr .9fr;
-        gap:16px;
-        align-items:start;
+    .cot-2-title, 
+    .cot-2-content, 
+    .cot-4-content {
+        height: auto;
     }
 
-    /* ===== Logo ===== */
-
-    .footer-brand{
-        min-height:70px;
+    .cot-2-title {
+        margin-bottom: 10px;
     }
 
-    .footer-brand .logo{
-        top:0;
+    .cot-2-title h2 {
+        font-size: 18px;
     }
 
-    .footer-brand .logo img{
-        width:70px;
+    .cot-2-content li a {
+        font-size: 15px;
     }
 
-    .footer-brand::after{
-        display:none;
-    }
-    .footer-col:nth-child(3){
-        margin-left: -30px;
-        margin-right: 30px;
-
+    .cot-2-content li,
+    .cot-4-content p {
+        font-size: 13px;
     }
 
-    /* ===== Heading ===== */
-
-    .footer-col h3{
-        font-size:16px;
-        margin-bottom:14px;
+    .social-icons {
+        gap: 12px;
     }
 
-    .footer-col h3::after{
-        width:60px;
+    .social-icons a {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
     }
+}
 
-    /* ===== Text ===== */
-
-    .footer-links li,
-    .footer-links a,
-    .footer-info li,
-    .footer-col p{
-        font-size:13px;
-        line-height:1.6;
-    }
-
-    .footer-info li{
-        max-width:none;
-    }
-
-    /* ===== Social ===== */
-
-    .social-icons{
-        gap:8px;
-        flex-wrap:wrap;
-    }
-
-    .social-icons a{
-        width:30px;
-        height:30px;
-        font-size:14px;
+@media (max-width: 750px) {
+    .footer-inner {
+        gap: 20px;
     }
 }
