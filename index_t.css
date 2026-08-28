@@ -1013,3 +1013,67 @@ body {
         line-height: 1.7;
     }
 }
+/* =========================================
+   BUBBLE
+========================================= */
+/* =========================================================================
+   SỬA CHO TRANG TRÍ BUNG RẤT TO VÀ NẰM SÁT SÁT PHẢI MÀN HÌNH
+   ========================================================================= */
+
+/* 1. KHUNG CHỨA TRANG TRÍ (SỬA ĐỂ BUNG RỘNG) */
+.bubble-decoration {
+    position: absolute;
+    /* Dùng 100vw để khung này chiếm TRỌN bề ngang màn hình, không bị giới hạn 1200px */
+    width: 100vw; 
+    /* Đưa nó về góc trái màn hình để làm gốc định vị */
+    left: 0;
+    
+    top: 0; /* Hoặc điều chỉnh vị trí dọc bạn muốn */
+    height: 100%; /* Giúp định vị top/bottom cho ảnh con */
+    
+    /* XÓA BỎ các dòng này nếu có: left: 50%; transform: translateX(-50%); */
+    
+    z-index: 3;
+    pointer-events: none; /* Không ngăn cản người dùng click */
+    
+    /* (Tùy chọn) Ẩn phần hình ảnh thừa nếu nó bung quá rộng lấn ra ngoài màn hình */
+    /* overflow: hidden; */ 
+}
+
+/* 2. THUỘC TÍNH CHUNG CHO ẢNH CON (GIỮ NGUYÊN) */
+.bubble-decoration img {
+    position: absolute; 
+    height: auto;
+    display: block;
+}
+
+/* 3. ẢNH ĐẦU TIÊN (BONG BÓNG/BƯỚM 1) - TĂNG CỰC ĐẠI VÀ SÁT PHẢI */
+.bubble-decoration img:first-of-type {
+    /* ĐẶT KÍCH THƯỚC TO ĐÙNG Ở ĐÂY:
+       Tăng vw (ví dụ 40vw - 50vw), tăng min và max pixel cực đại (ví dụ 800px, 1200px) */
+    width: clamp(400px, 40vw, 1100px); 
+    
+    /* KÉO SÁT SẠT PHẢI MÀN HÌNH */
+    right: -10%; 
+    
+    /* Căn dọc bạn muốn (top hoặc bottom) */
+    top: 25%; 
+    
+    z-index: 100;
+}
+
+/* 4. ẢNH THỨ HAI (BONG BÓNG/BƯỚM 2) - TĂNG KÍCH THƯỚC VÀ ĐỊNH VỊ TÙY Ý */
+.bubble-decoration img:nth-of-type(2) {
+    /* Thường ảnh này nhỏ hơn để tạo chiều sâu, nhưng cũng tăng lên */
+    width: clamp(400px, 40vw, 1100px); 
+    
+    /* Có thể đặt sang trái hoặc vị trí khác cho đỡ trùng */
+    left: 28%;  
+    top: 40%;
+}
+@media (max-width: 769px) {
+    .bubble-decoration img:first-of-type {
+        top: 20%;
+        right:-90px;
+    }
+}
