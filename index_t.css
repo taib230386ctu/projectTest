@@ -383,27 +383,26 @@ body {
 
     margin: 0;
 
-    /* Gradient chuyển màu dốc từ Trắng -> Xanh dương nhạt -> Xanh xám */
+    /* Dải màu chuẩn: Trắng ngà nhẹ -> Xanh băng -> Xanh ghi đằm */
     background: linear-gradient(
         180deg, 
         #FFFFFF 0%, 
-        #E2ECF8 45%, 
-        #A2B8D6 75%, 
-        #7998C2 100%
+        #F0F5FA 35%, 
+        #BACEE6 70%, 
+        #7895B8 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 
-    /* Viền chữ mỏng 1px (màu xanh xám nhạt để match với chân chữ) */
-    -webkit-text-stroke: 1px rgba(180, 205, 235, 0.6);
-
-    /* Bóng đổ hướng lệch sang phải (X: 3px, Y: 2px) */
-    filter: drop-shadow(3px 2px 3px rgba(0, 15, 40, 0.45));
+    /* Dùng viền siêu mảnh kết hợp bóng đổ tối nhẹ để nổi bật mà không bị gắt */
+    filter: 
+        drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.411))  /* Mép trên bắt sáng nhẹ */
+        drop-shadow(2px 2px 2px rgba(5, 20, 50, 0.5));     /* Bóng tối lệch phải bên dưới */
 
     font-family: "Nillota", sans-serif;
     font-size: clamp(25px, 4vw, 35px);
-    font-weight: 100;
+    font-weight: 700;
 
     white-space: nowrap;
     z-index: 2;
