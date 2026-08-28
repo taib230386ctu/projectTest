@@ -30,6 +30,10 @@
     font-family: 'Nillota'; 
     src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
 }
+@font-face {
+    font-family: 'Quicksand'; 
+    src: url('./fonts/Quicksand-Bold.ttf') format('truetype');
+}
 html,
 body {
     width: 100%;
@@ -60,6 +64,9 @@ body {
     border-radius: 8px;
     padding: 12px 25px;
     z-index: 3;
+}
+.main-title-CCT h2{
+    font-family: "Quicksand"
 }
 
 .section-title {
@@ -149,7 +156,7 @@ body {
 
 .pk-title h2 {
     color: white;
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Quicksand';
     font-size: 25px;
     font-weight: normal;
     letter-spacing: 0.5px;
@@ -278,7 +285,7 @@ body {
     width: 52%;
     min-height: 200px;
     margin-left: -5%;
-    box-shadow: 12px 10px 0px #244b13;
+    box-shadow: 7px 5px 0px #244b13;
     position: relative;
     padding: 30px 40px 15px 100px;
 }
@@ -317,6 +324,7 @@ body {
     font-size: 22px;
     color: #1e3d0d;
     margin: 0;
+    font-family: 'Quicksand';
 }
 
 .item-title .shape,
@@ -326,8 +334,8 @@ body {
     left: -10px;
     transform: translateY(-50%);
     width: 60%;
-    height: 100%;
-    background: linear-gradient(to right, #b8eb7e 0%, rgba(74, 117, 44, 0) 100%);
+    height: 110%;
+    background: linear-gradient(to right, #d2d87e 0%, rgba(74, 117, 44, 0) 100%);
     border-radius: 10px;
     z-index: 1;
     pointer-events: none;
@@ -639,6 +647,8 @@ body {
     margin-top: 15px;
     margin-bottom: 5px;
     font-family: sans-serif;
+    text-align: center;
+    min-height: 30px;
 }
 
 
@@ -694,6 +704,9 @@ body {
     .trip-item-text,
     .item-text {
         font-size: 15px;
+    }
+    .thanhvien-info .position {
+        min-height: 45px;
     }
 }
 
@@ -756,6 +769,9 @@ body {
         clip-path: inset(100px 0px 30px 0px);
         transform: translateY(-100px);
         margin-bottom: -130px;
+    }
+    .thanhvien-info .position {
+        min-height: 60px;
     }
 }
 
