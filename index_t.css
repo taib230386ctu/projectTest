@@ -1021,6 +1021,27 @@ body {
    ========================================================================= */
 
 /* 1. KHUNG CHỨA TRANG TRÍ (SỬA ĐỂ BUNG RỘNG) */
+/* =========================================================================
+   1. ĐỊNH NGHĨA HIỆU ỨNG HOẠT HÌNH (ANIMATION KEYFRAMES)
+   Hiệu ứng này sẽ làm phần tử di chuyển lên xuống nhẹ nhàng và xoay một chút.
+   ========================================================================= */
+@keyframes floating {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        /* Di chuyển lên 15px và xoay nhẹ 2 độ */
+        transform: translateY(-15px) rotate(2deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+/* =========================================================================
+   2. CSS GỐC CỦA BẠN (ĐÃ CÓ THÊM ANIMATION)
+   ========================================================================= */
+
 .bubble-decoration {
     position: absolute;
     /* Dùng 100vw để khung này chiếm TRỌN bề ngang màn hình, không bị giới hạn 1200px */
@@ -1060,6 +1081,10 @@ body {
     top: 25%; 
     
     z-index: 100;
+
+    /* --- THÊM HIỆU ỨNG Ở ĐÂY --- */
+    /* Tên hiệu ứng: floating, Thời gian: 6 giây, Kiểu chạy: slow-fast-slow (ease-in-out), Lặp lại: vô hạn */
+    animation: floating 6s ease-in-out infinite;
 }
 
 /* 4. ẢNH THỨ HAI (BONG BÓNG/BƯỚM 2) - TĂNG KÍCH THƯỚC VÀ ĐỊNH VỊ TÙY Ý */
@@ -1070,7 +1095,12 @@ body {
     /* Có thể đặt sang trái hoặc vị trí khác cho đỡ trùng */
     left: 28%;  
     top: 40%;
+
+    /* --- THÊM HIỆU ỨNG Ở ĐÂY --- */
+    /* Thời gian khác (8 giây) và có độ trễ (delay 1 giây) để hai ảnh không chuyển động y hệt nhau */
+    animation: floating 8s ease-in-out infinite 1s;
 }
+
 @media (max-width: 769px) {
     .bubble-decoration img:first-of-type {
         top: 20%;
