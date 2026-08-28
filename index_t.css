@@ -336,7 +336,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
 
-    width: clamp(180px, 22vw, 320px);
+    width: clamp(125px, 15vw, 210px);
     
     /* Height co giãn linh hoạt: Nhỏ nhất 45px (mobile), vừa 5vw, lớn nhất 70px (desktop) */
     height: clamp(50px, 5vw, 70px); 
@@ -345,9 +345,9 @@ body {
     overflow: hidden;
 
     background: linear-gradient(
-        90deg,
-        rgba(255,255,255,.28) 0%,
-        rgba(255,255,255,.12) 55%,
+        100deg,
+        rgba(175, 205, 245, 0.349) 0%,
+        rgba(0, 105, 243, 0) 60%,
         transparent 100%
     );
 }
@@ -366,8 +366,8 @@ body {
 
     background: linear-gradient(
         90deg,
-        rgba(255,255,255,.25),
-        rgba(255,255,255,.12) 45%,
+        rgba(193, 210, 235, 0.589) 0%,
+        rgba(180, 210, 250, 0.40) 50%,
         transparent 100%
     );
 
@@ -375,19 +375,35 @@ body {
 }
 
 /* Tiêu đề */
-.section-title{
+.section-title {
     position: absolute;
-    left: clamp(-30px, 1.5vw, 10px);
+    left: clamp(-40px, -1vw, -10px);    
     top: 50%;
     transform: translateY(-50%);
 
     margin: 0;
 
-    color: #fff;
+    /* Gradient chuyển màu dốc từ Trắng -> Xanh dương nhạt -> Xanh xám */
+    background: linear-gradient(
+        180deg, 
+        #FFFFFF 0%, 
+        #E2ECF8 45%, 
+        #A2B8D6 75%, 
+        #7998C2 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    /* Viền chữ mỏng 1px (màu xanh xám nhạt để match với chân chữ) */
+    -webkit-text-stroke: 1px rgba(180, 205, 235, 0.6);
+
+    /* Bóng đổ hướng lệch sang phải (X: 3px, Y: 2px) */
+    filter: drop-shadow(3px 2px 3px rgba(0, 15, 40, 0.45));
 
     font-family: "Nillota", sans-serif;
     font-size: clamp(25px, 4vw, 35px);
-    font-weight: 800;
+    font-weight: 100;
 
     white-space: nowrap;
     z-index: 2;
