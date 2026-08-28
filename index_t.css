@@ -1,5 +1,5 @@
 /* =========================================================
-   1. GLOBAL SETTINGS & VARIABLES
+   1. GLOBAL SETTINGS, FONTS & VARIABLES
    ========================================================= */
 :root {
     --gold: #d4b06a;
@@ -44,23 +44,26 @@
 }
 
 html, body {
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    scrollbar-width: none;
-    -ms-overflow-style: none; 
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important; /* Chặn tuyệt đối cuộn ngang */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE / Edge cũ */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none; /* Chrome / Safari / Opera */
 }
 
 body {
     background: #050b14;
     color: white;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    position: relative;
 }
 
-
 /* =========================================================
-   2. HERO SECTION
+   2. HERO SECTION (<section class="hero">)
    ========================================================= */
 .hero {
     position: relative;
@@ -86,7 +89,6 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    /* Đổi dải gradient: cho vùng trong suốt kéo dài hơn và chỉ đậm dần ở 15% cuối cùng */
     background: linear-gradient(
         to bottom,
         rgba(5, 10, 18, 0) 0%,
@@ -94,7 +96,7 @@ body {
         rgba(5, 10, 18, 0.95) 100%
     );
     z-index: 2;
-    pointer-events: none; /* Tránh đè cảm ứng */
+    pointer-events: none;
 }
 
 .bg-butterfly {
@@ -162,62 +164,52 @@ body {
     animation: floatButterfly 6s ease-in-out infinite;
 }
 
-
 /* =========================================================
-   3. VIDEO SECTION WRAPPER
+   3. VIDEO MAIN WRAPPER & VIDEO SECTION (<section class="video-pk2">)
    ========================================================= */
-.video-wrapper{
-    width:min(95%,1200px);
-    border-radius:clamp(18px,2vw,28px);
-    overflow:hidden;
-    box-sizing:border-box;
-
-    border:2px solid rgba(212,176,106,.5);
-
-    box-shadow:
-        0 0 15px rgba(212,176,106,.45),
-        0 0 35px rgba(212,176,106,.35),
-        0 0 70px rgba(212,176,106,.25),
-        0 0 120px rgba(212,176,106,.15),
-        0 20px 45px rgba(0,0,0,.45);
-
-    transition:.35s ease;
-    z-index:10;
-}
-
-
-
 .video-section-container {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #000;
-    overflow:visible;
-    position:relative;
-    z-index:2;
+    overflow: visible;
+    position: relative;
+    z-index: 2;
     padding: 0;
 }
 
-.video-pk2{
-    width:100%;
-    background:rgba(0,0,0,.75);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:clamp(24px,4vw,50px) 20px;
+.video-pk2 {
+    width: 100%;
+    background: rgba(0,0,0,.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(24px, 4vw, 50px) 20px;
 }
 
-
+.video-wrapper {
+    width: min(95%, 1200px);
+    border-radius: clamp(18px, 2vw, 28px);
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 2px solid rgba(212,176,106,.5);
+    box-shadow:
+        0 0 15px rgba(212,176,106,.45),
+        0 0 35px rgba(212,176,106,.35),
+        0 0 70px rgba(212,176,106,.25),
+        0 0 120px rgba(212,176,106,.15),
+        0 20px 45px rgba(0,0,0,.45);
+    transition: .35s ease;
+    z-index: 10;
+}
 
 .video-header {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: inherit;
-    border-radius:24px;
-    overflow:hidden;
+    border-radius: 24px;
 }
 
 .responsive-video {
@@ -261,6 +253,9 @@ body {
     transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* =========================================================
+   4. SVG WAVE DIVIDER (<div class="svg-wave-divider">)
+   ========================================================= */
 .svg-wave-divider {
     width: 100%;
     line-height: 0;
@@ -276,9 +271,8 @@ body {
     display: block;
 }
 
-
 /* =========================================================
-   4. MAIN CONTENT AREA
+   5. MAIN CONTENT AREA (<section class="main-content">)
    ========================================================= */
 .main-content {
     position: relative;
@@ -287,8 +281,6 @@ body {
     background: url('./images/background/02.jpg') no-repeat center top / cover;
     padding: clamp(60px, 10vw, 110px) 0 80px;
     overflow: visible;
-
-    /* Tăng độ sáng nền lên 15% - 20% */
     filter: brightness(1.18);
 }
 
@@ -302,91 +294,93 @@ body {
     z-index: 2;
 }
 
-.main-content{
-    width:100%;
-    padding:80px 0;
+/* --- 5.1 BUBBLE DECORATION --- */
+.bubble-decoration {
+    position: absolute;
+    width: 100%; 
+    left: 0;
+    top: 0; 
+    height: 100%; 
+    z-index: 3;
+    pointer-events: none; 
 }
 
-/* =========================================================
-   SECTION HEADER
-========================================================= */
+.bubble-decoration img {
+    position: absolute; 
+    height: auto;
+    display: block;
+}
 
-.section-header{
+.bubble-decoration img:first-of-type {
+    width: clamp(400px, 40vw, 1100px); 
+    right: -10%; 
+    top: 25%; 
+    z-index: 100;
+    animation: floating 6s ease-in-out infinite;
+}
+
+.bubble-decoration img:nth-of-type(2) {
+    width: clamp(400px, 40vw, 1100px); 
+    left: 28%;  
+    top: 40%;
+    animation: floating 8s ease-in-out infinite 1s;
+}
+
+/* --- 5.2 SECTION HEADERS & TEXT --- */
+.section-header {
     position: relative;
-
     width: 80%;
-    /* Chiều cao khung cha tự động bằng đúng chiều cao co giãn của .shape */
     height: clamp(45px, 5vw, 70px); 
-
     margin: 40px auto 30px;
-
     display: flex;
     align-items: center;
 }
 
-.section-header.extra-margin{
+.section-header.extra-margin {
     margin-top: 90px;
 }
 
-/* Khối nền */
 .shape {
     position: absolute;
-
     left: clamp(-90px, -4vw, -40px);
     top: 50%;
     transform: translateY(-50%);
-
     width: clamp(125px, 15vw, 210px);
-    
-    /* Height co giãn linh hoạt: Nhỏ nhất 45px (mobile), vừa 5vw, lớn nhất 70px (desktop) */
     height: clamp(50px, 5vw, 70px); 
-
     border-radius: 24px;
     overflow: hidden;
-
     background: linear-gradient(
         100deg,
         rgba(175, 205, 245, 0.349) 0%,
         rgba(0, 105, 243, 0) 60%,
         transparent 100%
     );
-    /* Bóng đổ tối màu xanh sẫm dưới bụng và kéo dài về bên phải */
     filter: drop-shadow(4px 6px 8px rgba(0, 20, 50, 0.45));
 }
 
-.shape::after{
+.shape::after {
     content: "";
-
     position: absolute;
     left: 30px;
     top: 0;
-
     width: clamp(125px, 15vw, 210px);
     height: 100%;
-
     border-radius: inherit;
-
-    /* Gradient màu sáng tan dần hoàn toàn từ 65% độ dài */
     background: linear-gradient(
         90deg,
         rgba(215, 232, 255, 0.75) 0%,
         rgba(180, 210, 250, 0.35) 45%,
         transparent 75%
     );
-
     pointer-events: none;
 }
 
-/* Tiêu đề */
 .section-title {
     position: absolute;
     left: clamp(-40px, -1vw, -10px);    
     top: 50%;
     transform: translateY(-50%);
-
     margin: 0;
-
-    /* Dải màu chuẩn: Trắng ngà nhẹ -> Xanh băng -> Xanh ghi đằm */
     background: linear-gradient(
         180deg, 
         #FFFFFF 0%, 
@@ -397,25 +391,20 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-
-    /* Dùng viền siêu mảnh kết hợp bóng đổ tối nhẹ để nổi bật mà không bị gắt */
     filter: 
-        drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.411))  /* Mép trên bắt sáng nhẹ */
-        drop-shadow(2px 2px 2px rgba(5, 20, 50, 0.5));     /* Bóng tối lệch phải bên dưới */
-
+        drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.411))
+        drop-shadow(2px 2px 2px rgba(5, 20, 50, 0.5));
     font-family: "Nillota", sans-serif;
     font-size: clamp(25px, 4vw, 35px);
     font-weight: 700;
-
     white-space: nowrap;
     z-index: 2;
 }
+
 .section-text {
-    /* Đưa về width: 80% để thẳng hàng 100% với khung .section-header */
     width: 92%;
     margin: 0 auto;
-    padding-left:50px;
-    /* Responsive font-size: Nhỏ nhất 16px (Mobile), vừa 1.2vw, lớn nhất 22px (Desktop) */
+    padding-left: 50px;
     font-size: clamp(20px, 1.2vw, 23px);
     line-height: 1.8;
     text-align: justify;
@@ -426,8 +415,7 @@ body {
     box-sizing: border-box;
 }
 
-
-/* 4.3 GRID 2 CARDS */
+/* --- 5.3 GRID 2 CARDS (<div class="grid-2">) --- */
 .grid-2 {
     width: min(90%, 1400px);
     margin: 35px auto 0;
@@ -437,7 +425,6 @@ body {
     box-sizing: border-box;
 }
 
-/* 1. Thiết lập Flexbox cho từng Card để kéo giãn chiều cao */
 .card {
     padding: 25px 28px;
     background: rgba(255, 255, 255, 0.07);
@@ -447,13 +434,10 @@ body {
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
-
-    /* Cấu hình Flex cột để chia đều không gian bên trong */
     display: flex;
     flex-direction: column;
 }
 
-/* 2. Ép H3 chiếm không gian cố định / phình tối đa để đẩy P xuống đều nhau */
 .card h3 {
     color: #fff;
     font-family: 'Quicksand', sans-serif;
@@ -463,16 +447,11 @@ body {
     margin: 0 0 16px 0;
     letter-spacing: .3px;
     text-shadow: 0 2px 4px rgba(0,0,0,.4);
-
-    /* Ép vùng chứa H3 tự giãn lấp đầy khoảng trống dư thừa */
     flex-grow: 1; 
-    
-    /* Căn giữa tiêu đề theo chiều dọc (tuỳ chọn giúp đẹp mắt hơn) */
     display: flex;
     align-items: center; 
 }
 
-/* 3. Đoạn P nằm gọn gàng ở đáy card, luôn bắt đầu cùng dòng hàng ngang */
 .card p {
     color: rgba(255, 255, 255, 0.86);
     font-family: 'Quicksand', sans-serif;
@@ -482,22 +461,14 @@ body {
     margin: 0;
 }
 
-
-/* =========================================================
-   5. TẦM NHÌN - SỨ MỆNH - MỤC TIÊU (.TN-SM-MT)
-   ========================================================= */
-/* =========================================================
-   5. TẦM NHÌN - SỨ MỆNH - MỤC TIÊU (.TN-SM-MT)
-   ========================================================= */
+/* --- 5.4 TẦM NHÌN - SỨ MỆNH - MỤC TIÊU (<section class="TN-SM-MT">) --- */
 .TN-SM-MT {
     width: 92%;
     max-width: 1600px;
     margin: 100px auto 60px;
     padding: 110px 50px 60px;
-
     background: rgba(192, 202, 224, 0.788);
     border-radius: 30px;
-
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -505,7 +476,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Card trắng */
 .item-card {
     flex: 1;
     min-width: 0;
@@ -531,7 +501,6 @@ body {
     box-shadow: 0 20px 40px rgba(19, 61, 141, 0.2);
 }
 
-/* Hình tròn ảnh */
 .item-image {
     width: 120px;
     height: 120px;
@@ -540,17 +509,25 @@ body {
     left: 50%;
     transform: translateX(-50%);
     border-radius: 50%;
-    border: 10px solid white;
+    border: 8px solid white;
     overflow: hidden;
+    background: #a4c4e0;
 }
 
 .item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    bottom: 0;
 }
 
-/* Nội dung bài viết (Đã gộp chuẩn 1 lần) */
+.TN-SM-MT .item-card:first-child .item-image img,
+.TN-SM-MT .item-card:last-child .item-image img {
+    width: 100%;            
+    height: 130%;
+    object-fit: contain;  
+}
+
 .item-content {
     padding: 30px;
     text-align: center;
@@ -567,7 +544,6 @@ body {
     text-transform: uppercase;
 }
 
-/* Gạch dưới tiêu đề */
 .item-content h3::after {
     content: "";
     position: absolute;
@@ -587,7 +563,7 @@ body {
         transparent 100%
     );
 }
-/* Tối ưu danh sách gạch đầu dòng cho Card Mục Tiêu */
+
 .item-content ul.card-list {
     list-style: none;
     padding: 0;
@@ -615,51 +591,17 @@ body {
     font-size: 20px;
 }
 
-/* Làm dày chữ cho đoạn văn P */
 .item-content p {
     font-family: 'Quicksand', sans-serif;
     font-size: clamp(15px, 1.1vw, 18px);
-    
-    /* Tăng độ đậm lên tối đa */
     font-weight: 900; 
-    color: #184db6; /* Tone xanh đen siêu đậm */
-    
+    color: #184db6; 
     line-height: 1.6;
     text-align: left;
     margin-top: 15px;
-    
-    /* Mẹo nét đúp nhẹ giúp font chữ nét dày dặn hơn */
     -webkit-text-stroke: 0.3px #193774;
 }
-/* =========================================================
-   FIX LỖI BÓP HÌNH TRÊN ĐIỆN THOẠI (MOBILE)
-   ========================================================= */
-@media (max-width: 953px) {
-    /* Nới rộng khoảng cách dọc giữa 3 card */
-    .TN-SM-MT {
-        flex-direction: column;
-        gap: 70px !important; /* Tăng khoảng cách theo chiều dọc */
-        padding-top: 80px !important;
-    }
-    .item-card {
-        padding-top: 40px !important; /* Đẩy chữ lên gần hình tròn */
-    }
 
-    /* Khóa cứng kích thước tròn không cho co dãn */
-    .item-image {
-        width: 100px !important;
-        height: 100px !important;
-        aspect-ratio: 1 / 1 !important; /* Luôn giữ tỉ lệ 1:1 */
-        top: -50px !important; /* Đưa nhô lên 1 nửa */
-        flex-shrink: 0 !important; /* Khóa không cho bóp nghẹt hình */
-    }
-
-    .item-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover !important; /* Giữ hình không bị biến dạng */
-    }
-}
 /* =========================================================
    6. KEYFRAMES ANIMATIONS
    ========================================================= */
@@ -670,6 +612,17 @@ body {
     }
     100% { 
         transform: scale(1.02); 
+        opacity: 1; 
+    }
+}
+
+@keyframes pulseBackgroundMobile {
+    0% { 
+        transform: scale(0.99); 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: scale(1.01); 
         opacity: 1; 
     }
 }
@@ -704,21 +657,27 @@ body {
     }
 }
 
-@keyframes pulseBackgroundMobile {
-    0% { 
-        transform: scale(0.99); 
-        opacity: 0.7; 
+@keyframes floating {
+    0% {
+        transform: translateY(0px) rotate(0deg);
     }
-    100% { 
-        transform: scale(1.01); 
-        opacity: 1; 
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
     }
 }
-
 
 /* =========================================================
    7. MEDIA QUERIES (RESPONSIVE)
    ========================================================= */
+@media (max-width: 1600px) {
+    .GTC .section-title, .CCT .section-title, .TTM2 .section-title {
+        left: 7vw;
+    }
+}
+
 @media (max-width: 1300px) {
     .hero {
         min-height: auto !important;
@@ -734,7 +693,6 @@ body {
         height: auto !important;
     }
 
-    /* Đặt wrapper làm chuẩn định vị cho bướm */
     .brand-image-wrapper {
         position: relative !important;
         width: 100% !important;
@@ -752,43 +710,66 @@ body {
         transform: none !important;
     }
 
-    /* Fix lỗi con bướm: Căn lại theo tỉ lệ màn hình */
     .flying-butterfly {
         position: absolute !important;
-        width: clamp(10rem, 30vw, 22rem) !important; /* Thu nhỏ tỉ lệ bướm vừa với ảnh */
+        width: clamp(10rem, 30vw, 22rem) !important; 
         height: auto !important;
         top: 50% !important;
         left: 50% !important;
-        transform: translate(-50%, -50%) !important; /* Đưa bướm về chính giữa ảnh */
+        transform: translate(-50%, -50%) !important; 
         z-index: 10 !important;
     }
-    .spacer{
-        display:none;
+
+    .spacer {
+        display: none;
     }
 }
-@media (max-width: 1600px) {
-    .GTC .section-title, .CCT .section-title, .TTM2 .section-title {
-        left: 7vw;
-    }
-}
-/* Tablet / Laptop nhỏ (dưới 992px) */
+
 @media (max-width: 992px) {
     .video-pk2 {
         padding: 30px 16px;
     }
-
-    
 }
 
-/* Mobile & Tablet dọc (dưới 768px) */
+@media (max-width: 953px) {
+    .TN-SM-MT {
+        flex-direction: column;
+        gap: 70px !important; 
+        padding-top: 80px !important;
+    }
+
+    .item-card {
+        padding-top: 40px !important; 
+    }
+
+    .item-image {
+        width: 100px !important;
+        height: 100px !important;
+        aspect-ratio: 1 / 1 !important; 
+        top: -50px !important; 
+        flex-shrink: 0 !important; 
+    }
+
+    .item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover !important; 
+    }
+}
+
+@media (max-width: 769px) {
+    .bubble-decoration img:first-of-type {
+        top: 20%;
+        right: -90px;
+    }
+}
+
 @media (max-width: 768px) {
-    
-    /* Hero Section */
     /* Hero Section Mobile */
     .hero {
         min-height: 0 !important;
         height: auto !important;
-        padding-top: 30px !important; /* Đã giảm từ 60px xuống 30px để đẩy lên trên */
+        padding-top: 30px !important; 
         padding-bottom: 0 !important;
         display: block !important;
         overflow: hidden;
@@ -815,14 +796,13 @@ body {
 
     .brand-image-wrapper {
         width: 100%;
-        margin-top: -15px !important; /* Dùng margin âm để kéo hình xích lên trên thêm một chút */
+        margin-top: -15px !important; 
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         position: relative;
     }
-    
 
     .brand-image {
         width: 100% !important;
@@ -833,8 +813,6 @@ body {
         opacity: .9;
         animation: pulseBackgroundMobile 4s ease-in-out infinite alternate;
     }
-    /* Đảm bảo hero-content và wrapper ôm sát ảnh, không sinh chiều cao thừa */
-    
 
     .flying-butterfly {
         width: clamp(8rem, 35vw, 15rem);
@@ -848,62 +826,60 @@ body {
         will-change: transform;
     }
 
-    /* Video Section */
+    /* Video Section Mobile */
     .video-section-container {
         height: auto;
         padding: 0;
     }
 
-     .video-pk2{
-        padding:20px 12px;
+    .video-pk2 {
+        padding: 20px 12px;
     }
 
-    .video-wrapper{
-        width:90%;
-        display:block;
-        padding:0;              /* bỏ khoảng trắng */
-        border:none;
-        background:transparent;
-        border-radius:16px;
-        overflow:visible;       /* cho glow tràn ra ngoài */
-
-        
-}
-
-    .video-header{
-        width:100%;
-        aspect-ratio:16/9;
-        border-radius:16px;
-        overflow:hidden;
+    .video-wrapper {
+        width: 90%;
+        display: block;
+        padding: 0;             
+        border: none;
+        background: transparent;
+        border-radius: 16px;
+        overflow: visible;      
     }
 
-    .responsive-video{
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        display:block;
-        border-radius:inherit;
-    }
-    /* Divider & Main Content */
-    .svg-wave-divider{
-        margin-top:0px;
-        margin-bottom:-60px;
+    .video-header {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 16px;
+        overflow: hidden;
     }
 
-    .svg-wave-divider svg{
-        height:60px;
+    .responsive-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: inherit;
+    }
+
+    /* Divider & Main Content Mobile */
+    .svg-wave-divider {
+        margin-top: 0px;
+        margin-bottom: -60px;
+    }
+
+    .svg-wave-divider svg {
+        height: 60px;
     }
 
     .main-content {
         padding-top: 70px;
     }
-    .main-content .spacer{
-        display:none;
-    }
-    
-    
 
-    /* General Layout */
+    .main-content .spacer {
+        display: none;
+    }
+
+    /* Layout Sections Mobile */
     .GioiThieuChung,
     .ChuoiChuongTrinh,
     .TinhThanMua2 {
@@ -956,7 +932,7 @@ body {
         text-align: left;
     }
 
-    /* Cards */
+    /* Cards Mobile */
     .grid-2 {
         width: 90%;
         margin: 40px auto 0;
@@ -984,7 +960,7 @@ body {
         text-align: left;
     }
 
-    /* 3 Card Section (.TN-SM-MT) */
+    /* TN-SM-MT Mobile */
     .TN-SM-MT {
         flex-direction: column;
         padding: 60px 20px;
@@ -1011,99 +987,5 @@ body {
     .item-content p {
         font-size: 14px;
         line-height: 1.7;
-    }
-}
-/* =========================================
-   BUBBLE
-========================================= */
-/* =========================================================================
-   SỬA CHO TRANG TRÍ BUNG RẤT TO VÀ NẰM SÁT SÁT PHẢI MÀN HÌNH
-   ========================================================================= */
-
-/* 1. KHUNG CHỨA TRANG TRÍ (SỬA ĐỂ BUNG RỘNG) */
-/* =========================================================================
-   1. ĐỊNH NGHĨA HIỆU ỨNG HOẠT HÌNH (ANIMATION KEYFRAMES)
-   Hiệu ứng này sẽ làm phần tử di chuyển lên xuống nhẹ nhàng và xoay một chút.
-   ========================================================================= */
-@keyframes floating {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        /* Di chuyển lên 15px và xoay nhẹ 2 độ */
-        transform: translateY(-15px) rotate(2deg);
-    }
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-}
-
-/* =========================================================================
-   2. CSS GỐC CỦA BẠN (ĐÃ CÓ THÊM ANIMATION)
-   ========================================================================= */
-
-.bubble-decoration {
-    position: absolute;
-    /* Dùng 100vw để khung này chiếm TRỌN bề ngang màn hình, không bị giới hạn 1200px */
-    width: 100vw; 
-    /* Đưa nó về góc trái màn hình để làm gốc định vị */
-    left: 0;
-    
-    top: 0; /* Hoặc điều chỉnh vị trí dọc bạn muốn */
-    height: 100%; /* Giúp định vị top/bottom cho ảnh con */
-    
-    /* XÓA BỎ các dòng này nếu có: left: 50%; transform: translateX(-50%); */
-    
-    z-index: 3;
-    pointer-events: none; /* Không ngăn cản người dùng click */
-    
-    /* (Tùy chọn) Ẩn phần hình ảnh thừa nếu nó bung quá rộng lấn ra ngoài màn hình */
-    /* overflow: hidden; */ 
-}
-
-/* 2. THUỘC TÍNH CHUNG CHO ẢNH CON (GIỮ NGUYÊN) */
-.bubble-decoration img {
-    position: absolute; 
-    height: auto;
-    display: block;
-}
-
-/* 3. ẢNH ĐẦU TIÊN (BONG BÓNG/BƯỚM 1) - TĂNG CỰC ĐẠI VÀ SÁT PHẢI */
-.bubble-decoration img:first-of-type {
-    /* ĐẶT KÍCH THƯỚC TO ĐÙNG Ở ĐÂY:
-       Tăng vw (ví dụ 40vw - 50vw), tăng min và max pixel cực đại (ví dụ 800px, 1200px) */
-    width: clamp(400px, 40vw, 1100px); 
-    
-    /* KÉO SÁT SẠT PHẢI MÀN HÌNH */
-    right: -10%; 
-    
-    /* Căn dọc bạn muốn (top hoặc bottom) */
-    top: 25%; 
-    
-    z-index: 100;
-
-    /* --- THÊM HIỆU ỨNG Ở ĐÂY --- */
-    /* Tên hiệu ứng: floating, Thời gian: 6 giây, Kiểu chạy: slow-fast-slow (ease-in-out), Lặp lại: vô hạn */
-    animation: floating 6s ease-in-out infinite;
-}
-
-/* 4. ẢNH THỨ HAI (BONG BÓNG/BƯỚM 2) - TĂNG KÍCH THƯỚC VÀ ĐỊNH VỊ TÙY Ý */
-.bubble-decoration img:nth-of-type(2) {
-    /* Thường ảnh này nhỏ hơn để tạo chiều sâu, nhưng cũng tăng lên */
-    width: clamp(400px, 40vw, 1100px); 
-    
-    /* Có thể đặt sang trái hoặc vị trí khác cho đỡ trùng */
-    left: 28%;  
-    top: 40%;
-
-    /* --- THÊM HIỆU ỨNG Ở ĐÂY --- */
-    /* Thời gian khác (8 giây) và có độ trễ (delay 1 giây) để hai ảnh không chuyển động y hệt nhau */
-    animation: floating 8s ease-in-out infinite 1s;
-}
-
-@media (max-width: 769px) {
-    .bubble-decoration img:first-of-type {
-        top: 20%;
-        right:-90px;
     }
 }
