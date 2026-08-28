@@ -1,39 +1,43 @@
 /* =========================================================
    1. SYSTEM & RESET
    ========================================================= */
-:root {
-    --gold: #d4b06a;
-    --gold-light: #f6d28d;
-}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 @font-face {
-    font-family: 'DancingScript'; 
+    font-family: 'DancingScript';
     src: url('./fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Maglony'; 
+    font-family: 'Maglony';
     src: url('./fonts/1FTV-Maglony.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'LASTCHRISTMAS'; 
+    font-family: 'LASTCHRISTMAS';
     src: url('./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF') format('truetype');
 }
 
 @font-face {
-    font-family: 'Nillota'; 
+    font-family: 'Nillota';
     src: url('./fonts/1FTV-NILLOTA.TTF') format('truetype');
 }
+
 @font-face {
-    font-family: 'Quicksand'; 
+    font-family: 'Quicksand';
     src: url('./fonts/Quicksand-Bold.ttf') format('truetype');
 }
+
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+}
+
 html,
 body {
     width: 100%;
@@ -46,16 +50,44 @@ body {
 
 
 /* =========================================================
-   2. TIÊU ĐỀ CHUNG & CHẾ ĐỘ NỀN (.program-container)
+   2. NỀN MỜ BG_KHONGCHU & CONTENT WRAPPER
+   ========================================================= */
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Tạo lớp giả chứa background mờ chìm bên dưới */
+.content-wrapper::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background-image: url('./images/background/bg_khongchu.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1; /* Tăng/giảm độ mờ của nền tại đây (0.1 - 1.0) */
+    z-index: -1;   /* Đưa nền xuống bên dưới tất cả thẻ con */
+}
+
+
+/* =========================================================
+   3. TIÊU ĐỀ CHUNG & CHẾ ĐỘ NỀN (.program-container)
    ========================================================= */
 .program-container {
     position: relative;
     min-height: 30px;
     border-radius: 10px;
-    background: linear-gradient(to top left, #f2e8a0 0%, rgb(85, 129, 34) 100%);
+    background: linear-gradient(to top left, rgba(242, 232, 160, 0.85) 0%, rgba(85, 129, 34, 0.85) 100%);
 }
 
-.main-title-CCT {
+.main-title-CCT,
+.section-title-DAM1 {
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -65,24 +97,43 @@ body {
     padding: 12px 25px;
     z-index: 3;
 }
-.main-title-CCT h2{
-    font-family: "Quicksand"
+
+.main-title-CCT h2 {
+    font-family: "Quicksand";
 }
 
-.section-title {
-    font-family: var(--font-art);
-    font-size: 35px;
-    color: var(--gold);
-    margin-bottom: 40px;
-    text-align: center;
+.section-title-DAM1 {
+    transform: translate(-50%, -230%);
+    border-radius: 8px;
+    padding: 12px 25px;
+    border: 2px solid transparent;
+    background-image: linear-gradient(to right, #769865, #14400b), 
+                      linear-gradient(to right, #134603, #fefefe);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.section-title-DAM1 h2 {
+    font-family: 'Quicksand', sans-serif;
 }
 
 
 /* =========================================================
-   3. KHỐI CARD GIỚI THIỆU (.pk-card)
+    4. KHỐI CARD GIỚI THIỆU (.pk-card)
    ========================================================= */
+.main-pk1 {
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 0 30px 0;
+    margin-bottom: 0;
+    background:url(./images/background/bg-main-pk1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 .pk-card {
-    background: linear-gradient(to left, rgb(85, 129, 34) 0%, #f2e8a0 100%);
+    background: linear-gradient(to left, rgba(85, 129, 34) 0%, rgba(242, 232, 160) 100%);
     border: 14px solid #5a7d32;
     border-radius: 20px;
     padding: 15px;
@@ -92,7 +143,7 @@ body {
 }
 
 .PK1-CCT {
-    background: linear-gradient(to left, rgb(85, 129, 34) 0%, #f2e8a0 100%);
+    background: linear-gradient(to left, rgba(85, 129, 34, 0.9) 0%, rgba(242, 232, 160, 0.9) 100%);
     border-radius: 10px;
     padding: 3px;
     width: 80%;
@@ -188,7 +239,7 @@ body {
 
 
 /* =========================================================
-   4. KHỐI TALKSHOW (.item-talkshow)
+   5. KHỐI TALKSHOW (.item-talkshow)
    ========================================================= */
 .item-talkshow {
     border-radius: 12px;
@@ -266,7 +317,7 @@ body {
 
 
 /* =========================================================
-   5. KHỐI TRẢI NGHIỆM / CHUYẾN ĐI (.item-trip)
+   6. KHỐI TRẢI NGHIỆM / CHUYẾN ĐI (.item-trip)
    ========================================================= */
 .item-trip {
     border-radius: 12px;
@@ -343,7 +394,7 @@ body {
 
 
 /* =========================================================
-   6. IMAGE SLIDERS
+   7. IMAGE SLIDERS
    ========================================================= */
 .slide {
     width: 100% !important;
@@ -396,7 +447,7 @@ body {
 
 
 /* =========================================================
-   7. KHỐI VIDEO (.video-section-container)
+   8. KHỐI VIDEO (.video-section-container)
    ========================================================= */
 .video-section-container {
     width: 80%;
@@ -467,20 +518,35 @@ body {
 
 
 /* =========================================================
-   8. DẤU ẤN MÙA 1 (.season-mark)
+   9. DẤU ẤN MÙA 1 (.season-mark)
    ========================================================= */
 .season-mark {
+    position: relative; /* Bắt buộc có để z-index hoạt động */
+    z-index: 5;         /* Cho chỉ số lớn để đè nổi lên trên tất cả các khối lân cận */
     padding: 100px 80px;
-    background: rgb(75, 92, 48);
+    background: linear-gradient(to top left, rgba(244, 234, 162, 0.85), rgba(114, 151, 71, 0.85));
+    border-top: 8px solid #ffffff;
+    margin-top: 0;      /* Đảm bảo không bị dính margin âm */
 }
 
-.season-intro {
+.season-intro-DAM1,
+.season-quote {
     max-width: 900px;
     margin: 0 auto 50px;
     text-align: center;
-    color: #d8d8d8;
     line-height: 1.8;
     font-size: 18px;
+}
+
+.season-intro-DAM1 p,
+.season-quote p {
+    font-family: 'Quicksand';
+    font-size: clamp(1rem, 1.2vw + 0.8rem, 1.5rem);
+    color: #3f5213;
+}
+
+.season-quote {
+    margin-top: 50px;
 }
 
 .season-grid {
@@ -490,11 +556,17 @@ body {
 }
 
 .season-card {
-    background: rgba(255, 255, 255, .04);
-    border: 1px solid rgba(212, 176, 106, .25);
-    border-radius: 24px;
-    padding: 30px 20px;
+    background: linear-gradient(180deg, rgba(250, 248, 238, 0.95) 0%, rgba(216, 224, 192, 0.95) 100%);
+    border: 3px solid #3E5E32;
+    border-radius: 20px;
+    padding: 24px 16px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Quicksand';
     transition: .35s;
 }
 
@@ -504,49 +576,133 @@ body {
     box-shadow: 0 0 20px rgba(212, 176, 106, .15);
 }
 
-.season-number {
-    font-family: var(--font-art);
-    color: var(--gold);
-    font-size: 42px;
-    margin-bottom: 10px;
+.season-heading h3 {
+    color: #2D4321;
+    font-size: clamp(1.125rem, 1.5vw + 0.8rem, 1.875rem);            
+    font-weight: 200;
+    padding: 6px 24px;
+    border-radius: 20px;
+    display: inline-block;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
 }
 
-.season-card h3 {
-    margin-bottom: 12px;
-    color: #fff;
+.season-title h3 {
+    color: #2D4321;
+    font-size: clamp(1rem, 1.25vw + 0.8rem, 1.5625rem);
+    font-weight: 200;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
-.season-card p {
-    color: #cfcfcf;
-    line-height: 1.7;
-}
-
-.season-quote {
-    max-width: 850px;
-    margin: 60px auto 0;
-    text-align: center;
-    color: var(--gold-light);
-    font-size: 20px;
-    line-height: 1.8;
-    font-style: italic;
-}
-
-.season-text-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.season-text-card h3 {
-    font-family: var(--font-art);
-    color: var(--gold);
-    font-size: 26px;
-    margin-bottom: 15px;
+.season-content p {
+    color: #4A5B3D;
+    font-size: clamp(0.875rem, 0.8vw + 0.7rem, 1.125rem);
+    line-height: 1.5;
+    font-weight: 500;
 }
 
 
 /* =========================================================
-   9. KHỐI THÀNH VIÊN (.thanhvien)
+   10. KHỐI MỤC TIÊU, SỨ MỆNH, TẦM NHÌN
+   ========================================================= */
+.MT-SM-TN-wrapper {
+    border-top: 5px solid #124703;
+    background-color: #435e0559;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.MT-SM-TN {
+    background: linear-gradient(to bottom right, #568223, #f3e9a1);    
+    border-radius: 35px;
+    padding: 45px;
+    display: flex;
+    gap: 50px;
+    max-width: 1100px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.card-MT-SM-TN {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 35px 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.card-MT-SM-TN:hover {
+    transform: translateY(-5px);
+}
+
+.card-MT-SM-TN-heading h3 {
+    color: #567b45;
+    font-size: clamp(1.125rem, 1.5vw + 0.8rem, 1.875rem);
+    font-weight: 200;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-family: 'Quicksand';
+}
+
+.card-MT-SM-TN-heading h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(
+        90deg, 
+        rgba(74, 92, 26, 0) 0%, 
+        rgba(74, 92, 26, 1) 50%, 
+        rgba(74, 92, 26, 0) 100%
+    );
+}
+
+.card-MT-SM-TN-content {
+    color: #567b45;
+    font-size: clamp(0.875rem, 0.8vw + 0.7rem, 1.125rem);
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 600;
+    width: 100%;
+    font-family: 'Quicksand';
+}
+
+.card-MT-SM-TN-content p {
+    position: relative;
+    padding-left: 18px;
+    text-align: left;
+    margin-bottom: 12px;
+    font-size: 13.5px;
+}
+
+.card-MT-SM-TN-content p::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #2b3a0b;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   11. KHỐI THÀNH VIÊN (.thanhvien)
    ========================================================= */
 .thanhvien {
     width: 100%;
@@ -651,9 +807,40 @@ body {
     min-height: 30px;
 }
 
+.highlight {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    padding: 2px 0 2px 10px;
+}
+
+.season-intro-DAM1 .highlight::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #c3dc62 0%, rgba(196, 220, 98, 0) 80%);
+    border-radius: 24px;
+    z-index: -1;
+}
+
+.season-heading .highlight::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 100%;
+    background: linear-gradient(90deg, #c3dc62 0%, rgba(196, 220, 98, 0.123) 100%);
+    border-radius: 24px;
+    z-index: -1;
+}
+
 
 /* =========================================================
-   10. SVG & DECOR ELEMENTS
+   12. SVG & DECOR ELEMENTS
    ========================================================= */
 .curved-arrow-svg {
     position: absolute;
@@ -667,263 +854,7 @@ body {
 
 
 /* =========================================================
-   11. MEDIA QUERIES (RESPONSIVE)
-   ========================================================= */
-
-/* --- Screen <= 1100px --- */
-@media (max-width: 1100px) {
-    .pk-card {
-        width: 100%;
-        margin-bottom: 80px;
-    }
-
-    .PK1-CCT {
-        width: 100%;
-    }
-
-    .pk-inner-frame {
-        padding: 10px;
-    }
-
-    .pk-content-box {
-        padding: 50px 30px 40px 55px;
-    }
-
-    .item-talkshow {
-        padding: 45px 10px;
-    }
-
-    .ts-info-box {
-        padding: 30px 20px 30px 100px;
-    }
-
-    .item-trip {
-        padding: 30px 10px 45px 10px;
-    }
-
-    .trip-item-text,
-    .item-text {
-        font-size: 15px;
-    }
-    .thanhvien-info .position {
-        min-height: 45px;
-    }
-}
-
-/* --- Screen <= 930px --- */
-@media (max-width: 930px) {
-    .thanhvien-info h3 {
-        font-size: 18px;
-    }
-
-    .thanhvien-container {
-        gap: 50px;
-    }
-}
-
-/* --- Screen <= 900px --- */
-@media screen and (max-width: 900px) {
-    .season-mark {
-        padding: 60px 20px;
-    }
-
-    .season-intro {
-        font-size: 15px;
-        line-height: 1.7;
-        margin-bottom: 30px;
-    }
-
-    .season-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .season-card {
-        min-height: auto;
-        padding: 25px 20px;
-    }
-
-    .season-number {
-        font-size: 32px;
-    }
-
-    .season-card h3 {
-        font-size: 20px;
-    }
-
-    .season-card p {
-        font-size: 14px;
-        line-height: 1.7;
-    }
-
-    .season-quote {
-        font-size: 15px;
-        line-height: 1.8;
-        margin-top: 35px;
-    }
-}
-
-/* --- Screen <= 800px --- */
-@media screen and (max-width: 800px) {
-    .thanhvien {
-        clip-path: inset(100px 0px 30px 0px);
-        transform: translateY(-100px);
-        margin-bottom: -130px;
-    }
-    .thanhvien-info .position {
-        min-height: 60px;
-    }
-}
-
-/* --- Mobile <= 768px --- */
-@media (max-width: 768px) {
-    
-    /* Khối Card Giới Thiệu */
-    .pk-inner-frame {
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .pk-image-box {
-        width: 100%;
-        margin-bottom: 25px;
-    }
-
-    .pk-content-box {
-        width: 100%;
-        margin-left: 0;
-        padding: 40px 20px 10px 20px;
-        min-height: auto;
-    }
-
-    .pk-title {
-        left: -20px;
-        top: -40px;
-        font-size: 8px;
-    }
-
-    .pk-title h2 {
-        font-size: 18px;
-    }
-
-    .pk-text p {
-        font-size: clamp(13px, 1.2vw + 10px, 15px);
-    }
-
-    /* Khối Talkshow */
-    .item-talkshow {
-        flex-direction: column;
-        padding: 30px 15px 15px 15px;
-    }
-
-    .ts-info-box {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 20px;
-        padding: 30px 20px 20px 20px;
-        order: 2;
-    }
-
-    .ts-image-box {
-        width: 100% !important;
-        right: 0;
-        order: 1;
-        border: 4px solid transparent;
-    }
-
-    /* Khối Chuyến Đi */
-    .item-trip {
-        flex-direction: column;
-        padding: 15px 15px 30px 15px;
-    }
-
-    .item-trip .ts-image-box {
-        order: 1;
-        margin-bottom: 20px;
-    }
-
-    .trip-info-box {
-        width: 100%;
-        margin-left: 0;
-        padding: 30px 20px 20px 20px;
-        order: 2;
-        min-height: 150px;
-    }
-
-    .trip-info-box::before {
-        width: 80px;
-        right: -10px;
-    }
-
-    /* Tiêu đề chung */
-    .main-title-CCT {
-        width: 85%;
-        text-align: center;
-    }
-
-    .main-title-CCT h2 {
-        font-size: 18px;
-    }
-
-    .trip-item-title h3,
-    .item-title h3 {
-        font-size: 19px;
-    }
-
-    /* Khung Video & SVG */
-    .video-section-container {
-        width: 95%;
-        margin-bottom: 80px;
-    }
-
-    .curved-arrow-svg {
-        display: none;
-    }
-}
-
-/* --- Mobile <= 700px --- */
-@media (max-width: 700px) {
-    .thanhvien-container {
-        justify-content: flex-start;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        padding: 10px 0;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .thanhvien-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    .thanhvien-card {
-        flex: 0 0 85%;
-        max-width: none;
-        scroll-snap-align: center;
-    }
-
-    .thanhvien {
-        clip-path: inset(70px 0px 30px 0px);
-        transform: translateY(-100px);
-    }
-}
-.main-pk1 {
-    width: 100%;
-    min-height: 100vh;
-    padding: 60px 0 30px 0;
-    margin-bottom: -40px;
-    
-    /* Thiết lập ảnh nền */
-    background-image: url("./images/background/bg-main-pk1.png"); /* Thay đường dẫn ảnh của bạn vào đây */
-    background-size: cover;          /* Phủ kín toàn bộ khung chứa */
-    background-position: center;     /* Căn giữa hình ảnh */
-    background-repeat: no-repeat;    /* Không lặp lại hình ảnh */
-    background-attachment: scroll;   /* Trôi theo cuộn trang (có thể đổi thành 'fixed' nếu muốn tạo hiệu ứng Parallax) */
-    
-    
-}/* =========================================================
-   2. HERO BACKGROUND (.bg) - ĐÃ CÂN CHỈNH HOÀN HẢO
+   13. HERO BACKGROUND (.bg)
    ========================================================= */
 .bg {
     position: relative;
@@ -940,29 +871,20 @@ body {
     animation: pulseBackground 4s ease-in-out infinite alternate;
 }
 
-/* KHỐI COCOON: Sử dụng % để tự động thích ứng với kích thước màn hình */
 .cocoon {
     position: absolute;
-    top: 25%; /* Chuyển từ px sang % để không bị che đứt cuốn kén */
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%); 
     max-width: 500px; 
     width: 80%;
     height: auto;
     z-index: 2;
-    
-    /* Neo điểm xoay đúng ngay đầu dây/cuốn kén */
     transform-origin: top center; 
-    
     animation: swingCocoon 3s ease-in-out infinite alternate;
     will-change: transform;
 }
 
-/* =========================================================
-   SỬA KEYFRAMES & RESPONSIVE
-   ========================================================= */
-
-/* Giữ nguyên translate(-50%, -50%) trong animation để kén không bị nhảy vị trí */
 @keyframes swingCocoon {
     0% {
         transform: translate(-50%, -50%) rotate(-6deg);
@@ -981,34 +903,283 @@ body {
     }
 }
 
+
+/* =========================================================
+   14. MEDIA QUERIES (RESPONSIVE)
+   ========================================================= */
+@media (max-width: 1100px) {
+    .pk-card, .PK1-CCT {
+        width: 100%;
+    }
+    .pk-card {
+        margin-bottom: 80px;
+    }
+    .pk-inner-frame {
+        padding: 10px;
+    }
+    .pk-content-box {
+        padding: 50px 30px 40px 55px;
+    }
+    .item-talkshow {
+        padding: 45px 10px;
+    }
+    .ts-info-box {
+        padding: 30px 20px 30px 100px;
+    }
+    .item-trip {
+        padding: 30px 10px 45px 10px;
+    }
+    .trip-item-text, .item-text {
+        font-size: 15px;
+    }
+    .thanhvien-info .position {
+        min-height: 45px;
+    }
+}
+
 @media (max-width: 1024px) {
     .bg {
         width: 100%;
         height: auto;
         overflow: hidden;
+        margin-top: 85px;
     }
-
     .bg-image {
         width: 100%;
         height: auto;
         object-fit: contain;
     }
-
     .cocoon {
         max-width: 300px;
-        top: 25%; /* Hạ tỉ lệ top ở bản mobile để tránh đè lên Navbar */
+        top: 25%;
         width: 30%;
         height: auto;
     }
 }
-@media (max-width: 1024px) {
-    .bg{
-        margin-top:85px;
-    }
-}
-@media (max-width: 768px) {
-    .main-pk1 {
-        margin-bottom:-90px;
+
+@media (max-width: 992px) {
+    .season-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
+@media (max-width: 930px) {
+    .thanhvien-info h3 {
+        font-size: 18px;
+    }
+    .thanhvien-container {
+        gap: 50px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .season-mark {
+        padding: 60px 20px;
+    }
+    .season-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .season-card {
+        min-height: auto;
+        padding: 25px 20px;
+    }
+    .section-title-DAM1 {
+        transform: translate(-50%, -175%);
+    }
+    .MT-SM-TN {
+        flex-direction: column;
+        padding: 25px;
+    }
+    .card-MT-SM-TN-heading h3 {
+        font-size: clamp(0.9375rem, 0.8vw + 0.75rem, 1.25rem);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .thanhvien {
+        clip-path: inset(100px 0px 30px 0px);
+        transform: translateY(-100px);
+        margin-bottom: -130px;
+    }
+    .thanhvien-info .position {
+        min-height: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-pk1 {
+        margin-bottom: -90px;
+    }
+    .pk-inner-frame {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .pk-image-box {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    .pk-content-box {
+        width: 100%;
+        margin-left: 0;
+        padding: 40px 20px 10px 20px;
+        min-height: auto;
+    }
+    .pk-title {
+        left: -20px;
+        top: -40px;
+    }
+    .pk-title h2 {
+        font-size: 18px;
+    }
+    .pk-text p {
+        font-size: clamp(13px, 1.2vw + 10px, 15px);
+    }
+    .item-talkshow {
+        flex-direction: column;
+        padding: 30px 15px 15px 15px;
+    }
+    .ts-info-box {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+        padding: 30px 20px 20px 20px;
+        order: 2;
+    }
+    .ts-image-box {
+        width: 100% !important;
+        right: 0;
+        order: 1;
+        border: 4px solid transparent;
+    }
+    .item-trip {
+        flex-direction: column;
+        padding: 15px 15px 30px 15px;
+    }
+    .item-trip .ts-image-box {
+        order: 1;
+        margin-bottom: 20px;
+    }
+    .trip-info-box {
+        width: 100%;
+        margin-left: 0;
+        padding: 30px 20px 20px 20px;
+        order: 2;
+        min-height: 150px;
+    }
+    .trip-info-box::before {
+        width: 80px;
+        right: -10px;
+    }
+    .main-title-CCT,
+    .section-title-DAM1 {
+        width: 85%;
+        text-align: center;
+    }
+    .main-title-CCT h2,
+    .section-title-DAM1 h2 {
+        font-size: 18px;
+    }
+    .trip-item-title h3,
+    .item-title h3 {
+        font-size: 19px;
+    }
+    .video-section-container {
+        width: 95%;
+        margin-bottom: 80px;
+    }
+    .curved-arrow-svg {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .thanhvien-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        padding: 10px 0;
+        gap: 15px;
+        width: 100%;
+    }
+    .thanhvien-container::-webkit-scrollbar {
+        display: none;
+    }
+    .thanhvien-card {
+        flex: 0 0 85%;
+        max-width: none;
+        scroll-snap-align: center;
+    }
+    .thanhvien {
+        clip-path: inset(70px 0px 30px 0px);
+        transform: translateY(-100px);
+    }
+}
+
+@media (max-width: 576px) {
+    .season-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.decor-content-wrapper{
+    position: absolute;
+    z-index: 10;
+    width: 100%;        /* Tự động co dãn theo độ rộng màn hình (dưới 300px) */
+    height: 100%;}
+.btfly-decor{
+    position: absolute;
+    z-index: 10;
+    width: 30vw;        /* Tự động co dãn theo độ rộng màn hình (dưới 300px) */
+    max-width: 350px;
+}
+@keyframes floatUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Base style cho con bướm */
+.pk-image-box .btfly-decor{
+    left: -10vw;
+    bottom: -20vh;
+    width: 25vw;
+    animation: floatUpDown 3s ease-in-out infinite;
+    z-index: 100;
+    position:absolute;
+}
+.btfly-2{
+    scale: -1 1;
+    top:35vh;
+    right:-5vw;
+    width: 20vw;
+    animation: floatUpDown 3s ease-in-out infinite;
+
+}
+.btfly-3{
+    top:25vh;
+    left:-8vw;
+    width: 15vw;
+    animation: floatUpDown 3s ease-in-out infinite;
+
+}
+@media (max-width: 1100px) {
+    .btfly-3{
+        left:-3vw;
+
+    }
+}
+@media (max-width: 769px) {
+    .btfly-3{
+        left:-3vw;
+        top:60vh;
+        width: 18vw;
+
+    }
+    .btfly-2{
+        top:200vh;
+    }
+}
