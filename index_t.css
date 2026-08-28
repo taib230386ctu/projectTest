@@ -350,6 +350,8 @@ body {
         rgba(0, 105, 243, 0) 60%,
         transparent 100%
     );
+    /* Bóng đổ tối màu xanh sẫm dưới bụng và kéo dài về bên phải */
+    filter: drop-shadow(4px 6px 8px rgba(0, 20, 50, 0.45));
 }
 
 .shape::after{
@@ -364,11 +366,12 @@ body {
 
     border-radius: inherit;
 
+    /* Gradient màu sáng tan dần hoàn toàn từ 65% độ dài */
     background: linear-gradient(
         90deg,
-        rgba(193, 210, 235, 0.589) 0%,
-        rgba(180, 210, 250, 0.40) 50%,
-        transparent 100%
+        rgba(215, 232, 255, 0.75) 0%,
+        rgba(180, 210, 250, 0.35) 45%,
+        transparent 75%
     );
 
     pointer-events: none;
