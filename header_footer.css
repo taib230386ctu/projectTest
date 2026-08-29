@@ -651,3 +651,64 @@ body {
         gap: 20px;
     }
 }
+
+@media (max-width: 992px) {
+    .navbar {
+        position: relative;
+        z-index: 9999;
+    }
+
+    .menu-toggle {
+        display: block !important;
+        font-size: 28px;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 15px;
+        left: auto;
+        width: 260px; /* Tăng rộng lên 260px để chứa chữ to hơn */
+        background-color: #050b14;
+        border: 1px solid rgba(212, 176, 106, 0.4);
+        border-radius: 12px;
+        padding: 10px 0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        flex-direction: column;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .menu a {
+        width: 100%;
+        padding: 14px 18px;
+        color: #ffffff;
+        font-size: 17px;   /* Tăng cỡ chữ lên 17px */
+        font-weight: 600;  /* Tăng độ đậm nhẹ cho nổi bật */
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .menu a img {
+        width: 20px;       /* Tăng icon bướm lên 20px cho cân bằng với chữ */
+        height: auto;
+    }
+
+    .menu a:last-child {
+        border-bottom: none;
+    }
+
+    .menu.active {
+        display: flex !important;
+    }
+}
