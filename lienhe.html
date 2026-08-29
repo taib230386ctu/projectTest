@@ -9,16 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script>
         (function() {
-            // File CSS thứ nhất (có sẵn của bạn)
             const link1 = document.createElement('link');
             link1.rel = 'stylesheet';
-            link1.href = 'hoatdong.css?v=' + new Date().getTime(); 
+            link1.href = 'lienhe.css?v=' + new Date().getTime(); 
             document.head.appendChild(link1);
 
-            // File CSS thứ hai muốn thêm vào
             const link2 = document.createElement('link');
             link2.rel = 'stylesheet';
-            link2.href = 'header_footer.css?v=' + new Date().getTime(); // Thay 'style2.css' bằng tên file của bạn
+            link2.href = 'header_footer.css?v=' + new Date().getTime(); 
             document.head.appendChild(link2);
         })();
     </script>
@@ -27,9 +25,10 @@
     <script type="module" src="navbar.js"></script>
 </head>
 <body>
+
+    <!-- NAVBAR HEADER -->
     <nav class="navbar">
         <div class="nav-inner">
-
             <a href="index.html" class="logo">
                 <img src="./images/logo/logo.png">
                 <div class="logo-text">
@@ -44,14 +43,132 @@
                 <a href="phaken01.html">Hoạt động</a>
                 <a href="tintuc.html">Tin tức</a>
                 <a href="hoatdong.html"><img src="./images/logo/btfly.png" alt="">Kể đi Kén nghe nè</a>
-                <a href="lienhe.html" class="active">Liên hệ</a>
+                <a href="lienhe.html" class="active"> Liên hệ</a>
             </div>
             <div class="nav-spacer"></div>
         </div>
     </nav>
-    <h1 style="min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center;">
-        CHƯA CÓ NỘI DUNG
-    </h1>
+
+    <!-- NỘI DUNG CHÍNH TRANG LIÊN HỆ -->
+    <main class="contact-container">
+        
+        <!-- HEADER LIÊN HỆ -->
+        <div class="contact-header">
+            <div class="shape"></div>
+            <h1>LIÊN HỆ</h1>
+            
+        </div>
+        
+        <!-- KHỐI NỘI DUNG CHÍNH (GỒM 2 BÊN) -->
+        <div class="contact-grid">
+            
+            <!-- BÊN TRÁI: THÔNG TIN LIÊN HỆ -->
+            <div class="card info-card">
+                <h2>Thông tin liên hệ trực tiếp</h2>
+                
+                <div class="info-list">
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fa-regular fa-envelope"></i></div>
+                        <div class="info-text">
+                            <strong>Email chính thức:</strong>
+                            <p>phakenofficial@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                        <div class="info-text">
+                            <strong>Hotline:</strong>
+                            <p>xxxxxxxxxxxxxxxxx</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="info-text">
+                            <strong>Địa chỉ:</strong>
+                            <p>19 Nguyễn Hữu Thọ, Phường Tân Hưng, TP. Hồ Chí Minh, Việt Nam</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="icon-box"><i class="fa-regular fa-clock"></i></div>
+                        <div class="info-text">
+                            <strong>Khung giờ mở cửa & đón tiếp:</strong>
+                            <p>7:00-17:00 (các ngày trong tuần)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BÊN PHẢI: FORM GỬI THÔNG ĐIỆP -->
+            <div class="card form-card">
+                <h2>Gửi thông điệp của bạn</h2>
+                <p class="form-subtitle">Điền thông tin bên dưới và Kén sẽ phản hồi bạn trong vòng 24 giờ.</p>
+
+                <form action="#" method="POST" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Họ và tên của bạn <span class="required">*</span></label>
+                            <input type="text" placeholder="Ví dụ: Lê Minh Tâm" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email liên hệ <span class="required">*</span></label>
+                            <input type="email" placeholder="email@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Số điện thoại (Tùy chọn)</label>
+                            <input type="tel" placeholder="0912345678">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mục đích kết nối</label>
+                            <input type="text" placeholder="Chia sẻ tâm tư riêng/Cần hỗ trợ tinh thần">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Nội dung thông điệp <span class="required">*</span></label>
+                        <textarea rows="4" placeholder="Hãy viết ra những điều bạn muốn nhắn nhủ đến Phá Kén..." required></textarea>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-regular fa-paper-plane"></i> Gửi thông điệp
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- PHẦN CÂU HỎI THƯỜNG GẶP (FAQ) -->
+        <section class="faq-section">
+            <h2>Những câu hỏi về Phá Kén</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <span>Phá Kén - Chạm Tỏa là dự án gì?</span>
+                </div>
+                <div class="faq-item">
+                    <span>Những câu chuyện gửi về “Kén Nghe Nề” có được bảo mật không?</span>
+                </div>
+                <div class="faq-item">
+                    <span>Làm thế nào để đăng ký tham gia Đêm Showcase hoặc Chuyến đi 2N1Đ?</span>
+                </div>
+                <div class="faq-item">
+                    <span>Tôi có thể đóng góp câu chuyện hoặc tham gia làm Tình Nguyện Viên không?</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
     <section class="Footer">
         <div class="footer-inner">
             <div class="cot-1">
@@ -62,24 +179,20 @@
             <div class="cot-2">
                 <div class="noidung-cot2">
                     <div class="cot-2-title">
-                        <h2>
-                            Khám Phá
-                        </h2>
+                        <h2>Khám Phá</h2>
                     </div>
-                    <div class="cot-2-content">
+                    <ul class="cot-2-content">
                         <li><a href="index.html">Phá Kén Mùa 2</a></li>
                         <li><a href="hoatdong.html">Hoạt Động</a></li>
                         <li><a href="tintuc.html">Tin Tức</a></li>
                         <li><a href="lienhe.html">Liên Hệ</a></li>
-                    </div>
+                    </ul>
                 </div>
             </div>
             <div class="cot-3">
                 <div class="noidung-cot2">
                     <div class="cot-2-title">
-                        <h2>
-                            Liên Hệ
-                        </h2>
+                        <h2>Liên Hệ</h2>
                     </div>
                     <ul class="cot-2-content">
                         <li>Email: phakenofficial@gmail.com</li>
@@ -91,9 +204,7 @@
             <div class="cot-4">
                 <div class="noidung-cot2">
                     <div class="cot-2-title">
-                        <h2>
-                            Theo Dõi
-                        </h2>
+                        <h2>Theo Dõi</h2>
                     </div>
                     <div class="cot-4-content">
                         <p>Kết nối và cập nhật những thông tin mới nhất từ chúng tôi:</p>
@@ -108,5 +219,6 @@
             </div>
         </div>
     </section>
+
 </body>
 </html>
