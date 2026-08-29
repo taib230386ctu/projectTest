@@ -408,3 +408,11 @@
         padding-top: 100px;
     }
 }
+body.swal2-shown {
+    padding-right: 0 !important;
+    overflow-y: auto !important;
+}
+
+html.swal2-shown {
+    height: 100% !important;
+}
