@@ -38,10 +38,15 @@ document.addEventListener('DOMContentLoaded', function(){
     // PLAY VIDEO
     // ==========================
     function startVideo() {
-        if (!video) return;
-        video.play().catch(()=>{});
+    if (!video) return;
+    
+    // Gán dữ liệu vào src nếu video chưa được tải
+    if (!video.getAttribute("src")) {
+        video.setAttribute("src", video.getAttribute("data-src"));
     }
-
+    
+    video.play().catch(()=>{});
+}
     // Nút play giữa video
     if(playBtn){
         playBtn.addEventListener("click",(e)=>{
