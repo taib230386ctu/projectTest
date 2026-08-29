@@ -1,0 +1,410 @@
+/* =========================================================
+   1. GLOBAL & FONTS SETTINGS
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+}
+
+@font-face {
+    font-family: "DancingScript";
+    src: url("./fonts/DancingScript-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Maglony";
+    src: url("./fonts/1FTV-Maglony.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "LASTCHRISTMAS";
+    src: url("./fonts/LASTCHRISTMAS_PERSONAL_USE_ONLY.OTF") format("opentype");
+}
+
+@font-face {
+    font-family: "Nillota";
+    src: url("./fonts/1FTV-NILLOTA.TTF") format("truetype");
+}
+
+@font-face {
+    font-family: "JosefinSans";
+    src: url("./fonts/JosefinSans-Medium.ttf") format("truetype");
+}
+
+/* =========================================================
+   2. MAIN CONTAINER FULL BACKGROUND
+   ========================================================= */
+.contact-container {
+    background: url('./images/background/02.jpg') no-repeat center center / cover;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    margin: 0;
+    padding: 120px 20px 60px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Căn chỉnh các khối nội dung giữa màn hình */
+.contact-header,
+.contact-grid, 
+.faq-section {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================================
+   HEADER LIÊN HỆ
+========================================================= */
+
+.contact-header {
+    position: relative;
+    width: fit-content;
+    max-width: none;
+    height: 60px;
+    margin: 0 auto 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================================================
+   SHAPE CHÍNH (ĐÈ LÊN 2 CÁNH)
+========================================================= */
+.contact-header .shape {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 132px;
+    height: 38px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+
+    /* Đậm ở 2 đầu (#a2b9d9), nhạt mờ dần ở giữa */
+    background: linear-gradient(
+        to right,
+        #a2b9d9 0%,
+        rgba(238, 246, 255, 0) 50%,
+        #a2b9d9 100%
+    );
+
+    /* Đặt z-index: 2 và cách ly ngữ cảnh để ép ::before/::after nằm dưới nó */
+    z-index: 2;
+    isolation: isolate;
+    pointer-events: none;
+}
+
+/* =========================================================
+   CÁNH TRÁI + CÁNH PHẢI (NẰM CHÌM DƯỚI SHAPE CHÍNH)
+========================================================= */
+
+.contact-header .shape::before,
+.contact-header .shape::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 42px;
+    height: 38px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    
+    /* Gán z-index -1 để chui xuống dưới background của .shape */
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* CÁNH TRÁI */
+.contact-header .shape::before {
+    left: -16px;
+    background: radial-gradient(
+        circle at 20% 50%,
+        #6378a7 0%,
+        rgba(188, 210, 235, 0.1) 70%,
+        transparent 100%
+    );
+}
+
+/* CÁNH PHẢI */
+.contact-header .shape::after {
+    right: -16px;
+    background: radial-gradient(
+        circle at 80% 50%,
+        #6378a7 0%,
+        rgba(188, 210, 235,0.1) 70%,
+        transparent 100%
+    );
+}
+
+/* =========================================================
+   CHỮ LIÊN HỆ (NẰM TRÊN CÙNG)
+========================================================= */
+
+.contact-header h1 {
+    position: relative;
+    z-index: 5; /* Đảm bảo chữ nằm trên cả .shape (z-index: 2) */
+
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family:
+        "Maglony",
+        "Times New Roman",
+        serif;
+
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1;
+
+    color: #ffffff;
+    white-space: nowrap;
+    text-align: center;
+
+    text-shadow:
+        0 1px 2px rgba(50, 70, 100, 0.45);
+}
+/* =========================================================
+   4. KHUNG CARD CHÍNH (GRID 2 CỘT)
+   ========================================================= */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0);
+    border: 4px solid rgba(255, 255, 255, 1);
+    border-radius: 30px;
+    padding: 30px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    position: relative;
+    color: #ffffff;
+}
+
+.card h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* --- Cột trái: Thông tin --- */
+.info-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    background: linear-gradient(to right, #164092, #b7cce9);    
+    border: 2px solid rgba(255, 255, 255);
+    border-radius: 20px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-box {
+    font-size: 22px;
+    color: #fff;
+    width: 35px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.info-text strong {
+    display: block;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.info-text p {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 2px;
+    word-break: break-word;
+}
+
+/* --- Cột phải: Form --- */
+.form-subtitle {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.required {
+    color: #ff6b6b;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 18px;
+
+    /* Chuyển màu từ #164092 (trái) sang #b7cce9 (phải) */
+    background: linear-gradient(to right, #164092, #bed4f3);
+
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.contact-form textarea {
+    resize: none;
+}
+
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn-submit {
+    background: linear-gradient(
+        to right, 
+        rgba(22, 64, 146, 0.8) 0%,     /* Xanh đậm ở đầu trái */
+        rgba(183, 204, 233, 0.7) 50%,   /* Xanh nhạt ở giữa */
+        rgba(22, 64, 146, 0.8) 100%    /* Xanh đậm ở đầu phải */
+    );    border: 2px solid rgba(255, 255, 255, 0.9);
+    padding: 10px 30px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: rgba(255, 255, 255, 0.781);
+    transform: translateY(-2px);
+        color: #164092;                            /* Chữ chuyển sang màu xanh đậm */
+
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* Khi nhấn giữ (Active / Click): Thanh thành FULL TRẮNG, chữ đổi XANH ĐẬM, phát sáng rực rỡ */
+.btn-submit:active {
+    background: #ffffff;                       /* Thanh đổi sang full trắng */
+    color: #164092;                            /* Chữ chuyển sang màu xanh đậm */
+    transform: translateY(0);                  /* Nhấn chìm nút xuống lại */
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.9),     /* Hào quang phát sáng rực rỡ bên ngoài */
+        0 0 40px rgba(255, 255, 255, 0.6);
+}
+/* =========================================================
+   5. PHẦN HỎI ĐÁP (FAQ SECTION)
+   ========================================================= */
+.faq-section {
+    text-align: center;
+    position: relative;
+    max-width: 800px;
+    color: #ffffff;
+}
+
+.faq-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.faq-item {
+    background: linear-gradient(to right, #164092, #b7cce9);    
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    color: #164092;                            /* Chữ chuyển sang màu xanh đậm */
+}
+
+/* =========================================================
+   6. RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-container {
+        padding-top: 100px;
+    }
+}
