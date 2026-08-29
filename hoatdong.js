@@ -509,135 +509,143 @@ if (btnCancel) {
     let unsubImage = null;
 
     function loadVideos() {
-        if (!videoGrid) return;
-        if (unsubVideo) unsubVideo(); 
+    if (!videoGrid) return;
+    if (unsubVideo) unsubVideo(); 
+    
+    const fetchLimit = searchQuery ? 50 : currentVideoLimit;
+    const qVideo = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "video"), orderBy("createdAt", "desc"), limit(fetchLimit));
+    
+    unsubVideo = onSnapshot(qVideo, (snapshot) => {
+        videoGrid.innerHTML = ""; 
+        if (snapshot.empty) {
+            videoGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Chưa có thước phim nào...</p>`;
+            if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none';
+            return;
+        }
         
-        const fetchLimit = searchQuery ? 50 : currentVideoLimit;
-        const qVideo = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "video"), orderBy("createdAt", "desc"), limit(fetchLimit));
-        
-        unsubVideo = onSnapshot(qVideo, (snapshot) => {
-            videoGrid.innerHTML = ""; 
-            if (snapshot.empty) {
-                videoGrid.innerHTML = `<p style="color:#444; text-align:center; grid-column:1/-1;">Chưa có thước phim nào...</p>`;
-                if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none';
-                return;
-            }
-            
-            let count = 0;
-            snapshot.forEach((docSnap) => {
-                const data = docSnap.data();
-                const docId = docSnap.id;
-                const authorName = data.author || "Người ẩn danh";
-                const title = data.title || "";
-                const likes = data.likeCount || 0;
-                const comments = data.commentCount || 0;
+        let count = 0;
+        snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const docId = docSnap.id;
+            const authorName = data.author || "Người ẩn danh";
+            const title = data.title || "";
+            const likes = data.likeCount || 0;
+            const comments = data.commentCount || 0;
 
-                const filterText = searchQuery.toLowerCase();
-                if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
-                    count++;
-                    const posterUrl = data.url.replace(/\.[^/.]+$/, ".jpg");
-                    const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
-                        ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
-                    
-                    const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
-                    const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
-                    const heartColor = isLiked ? '#e74c3c' : '#ccc';
+            const filterText = searchQuery.toLowerCase();
+            if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
+                count++;
+                const posterUrl = data.url.replace(/\.[^/.]+$/, ".jpg");
+                const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
+                    ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
+                
+                const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
+                const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
+                const heartColor = isLiked ? '#e74c3c' : '#ccc';
 
-                    videoGrid.innerHTML += `
-                        <div class="gallery-card" style="cursor: pointer;" onclick="openModal('video', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
-                            <video src="${data.url}" poster="${posterUrl}" preload="none" style="width: 100%; height: 260px; object-fit: cover; background: #000; pointer-events: none;"></video>
-                            <div class="card-content">
-                                <h3>${title}</h3>
-                                <p style="color: var(--gold-light); font-weight: 600; margin-bottom: 5px;">✦ Bởi: ${authorName}</p>
-                                <p>✦ ${dateDisplay}</p>
-                                
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px;">
-                                    <button onclick="toggleLike(event, '${docId}')" style="background: none; border: none; color: ${heartColor}; cursor: pointer; font-size: 1.1rem;">
-                                        <i class="${heartClass} fa-heart"></i> <span class="like-count" style="font-size: 0.9rem; color: #fff;">${likes}</span>
-                                    </button>
-                                    <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="background: none; border: none; color: #ccc; cursor: pointer; font-size: 1.1rem;">
-                                        <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
-                                    </button>
-                                </div>
+                videoGrid.innerHTML += `
+                    <div class="gallery-card moment-card" style="cursor: pointer;" onclick="openModal('video', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
+                        <div class="card-image-box">
+                            <video src="${data.url}" poster="${posterUrl}" preload="none" style="pointer-events: none;"></video>
+                        </div>
+                        <div class="card-content">
+                            <h3>${title}</h3>
+                            <div class="card-info-list">
+                                <p><i class="fa-solid fa-seedling"></i> Bởi: <span>${authorName}</span></p>
+                                <p><i class="fa-solid fa-seedling"></i> <span>${dateDisplay}</span></p>
+                            </div>
+                            
+                            <div class="card-actions-bar">
+                                <button onclick="toggleLike(event, '${docId}')" style="color: ${heartColor};">
+                                    <i class="${heartClass} fa-heart"></i> <span style="font-size: 0.9rem; color: #fff;">${likes}</span>
+                                </button>
+                                <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="color: #ccc;">
+                                    <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
+                                </button>
                             </div>
                         </div>
-                    `;
-                }
-            });
-
-            if (count === 0 && searchQuery) {
-                videoGrid.innerHTML = `<p style="color:#666; text-align:center; grid-column:1/-1;">Không tìm thấy video phù hợp...</p>`;
+                    </div>
+                `;
             }
-
-            if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none'; 
-            else if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'inline-block'; 
         });
-    }
 
-    function loadImages() {
-        if (!imageGrid) return;
-        if (unsubImage) unsubImage();
-        
-        const fetchLimit = searchQuery ? 50 : currentImageLimit;
-        const qImage = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "image"), orderBy("createdAt", "desc"), limit(fetchLimit));
-        
-        unsubImage = onSnapshot(qImage, (snapshot) => {
-            imageGrid.innerHTML = ""; 
-            if (snapshot.empty) {
-                imageGrid.innerHTML = `<p style="color:#444; text-align:center; grid-column:1/-1;">Chưa có bức hình nào...</p>`;
-                if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
-                return;
-            }
+        if (count === 0 && searchQuery) {
+            videoGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Không tìm thấy video phù hợp...</p>`;
+        }
 
-            let count = 0;
-            snapshot.forEach((docSnap) => {
-                const data = docSnap.data();
-                const docId = docSnap.id;
-                const authorName = data.author || "Người ẩn danh";
-                const title = data.title || "";
-                const likes = data.likeCount || 0;
-                const comments = data.commentCount || 0;
+        if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none'; 
+        else if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'inline-block'; 
+    });
+}
 
-                const filterText = searchQuery.toLowerCase();
-                if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
-                    count++;
-                    const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
-                        ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
-                    
-                    const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
-                    const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
-                    const heartColor = isLiked ? '#e74c3c' : '#ccc';
+function loadImages() {
+    if (!imageGrid) return;
+    if (unsubImage) unsubImage();
+    
+    const fetchLimit = searchQuery ? 50 : currentImageLimit;
+    const qImage = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "image"), orderBy("createdAt", "desc"), limit(fetchLimit));
+    
+    unsubImage = onSnapshot(qImage, (snapshot) => {
+        imageGrid.innerHTML = ""; 
+        if (snapshot.empty) {
+            imageGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Chưa có bức hình nào...</p>`;
+            if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
+            return;
+        }
 
-                    imageGrid.innerHTML += `
-                        <div class="gallery-card" style="cursor: pointer;" onclick="openModal('image', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
-                            <img src="${data.url}" style="width: 100%; height: 260px; object-fit: cover;">
-                            <div class="card-content">
-                                <h3>${title}</h3>
-                                <p style="color: var(--gold-light); font-weight: 600; margin-bottom: 5px;">✦ Bởi: ${authorName}</p>
-                                <p>✦ ${dateDisplay}</p>
-                                
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px;">
-                                    <button onclick="toggleLike(event, '${docId}')" style="background: none; border: none; color: ${heartColor}; cursor: pointer; font-size: 1.1rem;">
-                                        <i class="${heartClass} fa-heart"></i> <span class="like-count" style="font-size: 0.9rem; color: #fff;">${likes}</span>
-                                    </button>
-                                    <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="background: none; border: none; color: #ccc; cursor: pointer; font-size: 1.1rem;">
-                                        <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
-                                    </button>
-                                </div>
+        let count = 0;
+        snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const docId = docSnap.id;
+            const authorName = data.author || "Người ẩn danh";
+            const title = data.title || "";
+            const likes = data.likeCount || 0;
+            const comments = data.commentCount || 0;
+
+            const filterText = searchQuery.toLowerCase();
+            if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
+                count++;
+                const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
+                    ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
+                
+                const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
+                const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
+                const heartColor = isLiked ? '#e74c3c' : '#ccc';
+
+                imageGrid.innerHTML += `
+                    <div class="gallery-card moment-card" style="cursor: pointer;" onclick="openModal('image', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
+                        <div class="card-image-box">
+                            <img src="${data.url}" alt="${title}">
+                        </div>
+                        <div class="card-content">
+                            <h3>${title}</h3>
+                            <div class="card-info-list">
+                                <p><i class="fa-solid fa-seedling"></i> Bởi: <span>${authorName}</span></p>
+                                <p><i class="fa-solid fa-seedling"></i> <span>${dateDisplay}</span></p>
+                            </div>
+                            
+                            <div class="card-actions-bar">
+                                <button onclick="toggleLike(event, '${docId}')" style="color: ${heartColor};">
+                                    <i class="${heartClass} fa-heart"></i> <span style="font-size: 0.9rem; color: #fff;">${likes}</span>
+                                </button>
+                                <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="color: #ccc;">
+                                    <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
+                                </button>
                             </div>
                         </div>
-                    `;
-                }
-            });
-
-            if (count === 0 && searchQuery) {
-                imageGrid.innerHTML = `<p style="color:#666; text-align:center; grid-column:1/-1;">Không tìm thấy hình ảnh phù hợp...</p>`;
+                    </div>
+                `;
             }
-
-            if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
-            else if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'inline-block';
         });
-    }
+
+        if (count === 0 && searchQuery) {
+            imageGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Không tìm thấy hình ảnh phù hợp...</p>`;
+        }
+
+        if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
+        else if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'inline-block';
+    });
+}
 
     if (videoGrid) loadVideos();
     if (imageGrid) loadImages();
@@ -696,6 +704,7 @@ if (btnCancel) {
 
         loadModalComments(momentId);
         mediaModal.classList.add('show');
+        document.body.classList.add('modal-open');
     };
 
     function loadModalComments(momentId) {
@@ -800,22 +809,37 @@ if (btnCancel) {
     }
 
     if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => {
-            mediaModal.classList.remove('show');
-            modalMediaContainer.innerHTML = ''; 
-            if (unsubModalComments) unsubModalComments();
-        });
-    }
+    closeModalBtn.addEventListener('click', () => {
+
+        mediaModal.classList.remove('show');
+
+        document.body.classList.remove('modal-open');
+
+        modalMediaContainer.innerHTML = '';
+
+        if (unsubModalComments) {
+            unsubModalComments();
+        }
+    });
+}
 
     if (mediaModal) {
-        mediaModal.addEventListener('click', (e) => {
-            if (e.target === mediaModal) {
-                mediaModal.classList.remove('show');
-                modalMediaContainer.innerHTML = '';
-                if (unsubModalComments) unsubModalComments();
+    mediaModal.addEventListener('click', (e) => {
+
+        if (e.target === mediaModal) {
+
+            mediaModal.classList.remove('show');
+
+            document.body.classList.remove('modal-open');
+
+            modalMediaContainer.innerHTML = '';
+
+            if (unsubModalComments) {
+                unsubModalComments();
             }
-        });
-    }
+        }
+    });
+}
 
     // -----------------------------------------------------
     // PHẦN 7: MODAL BÌNH LUẬN ĐƠN (COMMENT MODAL)
@@ -937,10 +961,17 @@ if (btnCancel) {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (mediaModal && mediaModal.classList.contains('show')) {
-                mediaModal.classList.remove('show');
-                modalMediaContainer.innerHTML = '';
-                if (unsubModalComments) unsubModalComments();
-            }
+
+    mediaModal.classList.remove('show');
+
+    document.body.classList.remove('modal-open');
+
+    modalMediaContainer.innerHTML = '';
+
+    if (unsubModalComments) {
+        unsubModalComments();
+    }
+}
             if (commentModal && commentModal.classList.contains('show')) {
                 commentModal.classList.remove('show');
                 if (unsubComments) unsubComments();
