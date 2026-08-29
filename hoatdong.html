@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>REAL FINE - Phá Kén</title>
+    <title>Phá Kén Mùa 1</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script>
         (function() {
             // File CSS thứ nhất (có sẵn của bạn)
             const link1 = document.createElement('link');
             link1.rel = 'stylesheet';
-            link1.href = 'hoatdong.css?v=' + new Date().getTime(); 
+            link1.href = '1.css?v=' + new Date().getTime(); 
             document.head.appendChild(link1);
 
-            // File CSS thứ hai muốn thêm vào
             const link2 = document.createElement('link');
             link2.rel = 'stylesheet';
             link2.href = 'header_footer.css?v=' + new Date().getTime(); // Thay 'style2.css' bằng tên file của bạn
             document.head.appendChild(link2);
+            
         })();
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module" src="hoatdong.js"></script>
+    <script type="module" src="phaken01.js"></script>
     <script type="module" src="navbar.js"></script>
-
+    <script type="module" src="1.js"></script>
 </head>
 <body>
+
+    <!-- NAVBAR HEADER -->
     <nav class="navbar">
         <div class="nav-inner">
-
             <a href="index.html" class="logo">
-                <img src="./images/logo/logo.png">
+                <img src="./images/logo/logo.png" alt="Logo">
                 <div class="logo-text">
-                    <img class="text-pkm2" src="./images/logo/text_pkenmua2.png" alt="">
+                    <img class="text-pkm2" src="./images/logo/text_pkenmua2.png" alt="Text Logo">
                 </div>
             </a>
             
@@ -50,17 +51,16 @@
             <div class="nav-spacer"></div>
         </div>
     </nav>
-    <section class="hero">
 
-        <div class="hero-content">
-            <div class="line"></div>
-            <div class="main-title">
+    <!-- SECTION HERO CHÍNH -->
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-main-title">
                 REAL FINE
             </div>
             <div class="subtitle">
                 Dạo này bạn thế nào?
             </div>
-            <div class="line"></div>
             <div class="desc">
                 Chào bạn, hãy để tâm hồn mình được "thở"
                 <br>
@@ -78,70 +78,131 @@
         </div>
     </section>
 
-    <div class="upload-form" id="uploadSection" style="display: none;">
-        <h3>Thả khoảnh khắc vào Galaxy</h3>
-        
-        <textarea id="imgTitle" placeholder="Tiêu đề khoảnh khắc..." rows="2"></textarea>
-        
-        <div class="file-upload-wrapper">
-            <label for="imgFile" class="preview-box" id="previewContainer">
-                <div class="preview-placeholder" id="previewPlaceholder">
-                    <span class="upload-icon">✦</span>
-                    <p>Bấm vào đây để chọn khoảnh khắc</p>
-                    <span style="font-size: 0.8rem; opacity: 0.6;">(Hỗ trợ Ảnh hoặc Video)</span>
+    <!-- SECTION KHU VƯỜN -->
+    <section class="garden-section">
+        <div class="garden-container" data-aos="fade-up">
+            <h1 class="garden-title">Gieo khoảnh khắc vào Khu vườn</h1>
+
+            <div class="input-group">
+                <input type="text" id="imgTitle" class="title-input" placeholder="Tiêu đề khoảnh khắc...">
+            </div>
+
+            <div class="upload-box" onclick="document.getElementById('file-input').click();">
+                <input type="file" id="file-input" accept="image/*,video/*" style="display: none;">
+                
+                <!-- Phần thông báo ban đầu -->
+                <div id="previewPlaceholder">
+                    <p class="upload-title">Bấm vào đây để chọn khoảnh khắc</p>
+                    <p class="upload-subtitle">(Hỗ trợ Ảnh hoặc Video)</p>
                 </div>
-                <img id="imagePreview" style="display: none;">
-                <video id="videoPreview" controls style="display: none;"></video>
-            </label>
-            <input type="file" id="imgFile" accept="video/*,image/*" style="display: none;">
-            <div id="file-name-display" class="file-name-display">Bạn chưa chọn khoảnh khắc nào...</div>
-        </div>
 
-        <div class="form-actions">
-            <button id="btnCancel" type="button" class="cancel-btn">Bỏ vào thùng rác</button>
-            <button id="btnUpload" class="start-btn">Thả vào Galaxy</button>
-        </div>
-    </div>
-    <div class="search-container">
-        <div class="search-box">
-            <!-- Icon kính lúp (SVG) -->
-            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-
-            <input type="text" id="searchInput" placeholder="Tìm kiếm tiêu đề hoặc tên người đăng..." autocomplete="off">
+                <!-- Khung hiển thị xem trước ảnh/video -->
+                <img id="imagePreview" style="display: none; width: 100%; max-height: 280px; object-fit: contain; border-radius: 10px;">
+                <video id="videoPreview" controls style="display: none; width: 100%; max-height: 280px; object-fit: contain; border-radius: 10px;"></video>
+            </div>
             
-            <!-- Nút xóa nhanh khi gõ chữ -->
-            <button id="clearSearch" class="clear-btn" type="button" aria-label="Xóa">&times;</button>
+            <p class="hint-text" id="file-name-display">Bạn chưa chọn khoảnh khắc nào...</p>
+
+            <div class="button-group">
+                <button id="btnCancel" type="button" class="cancel-btn">Bỏ vào thùng rác</button>
+                <button class="btn-action">Gieo khoảnh khắc</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- KHU VƯỜN KHOẢNH KHẮC -->
+    <section class="gallery-section">
+
+    <!-- BACKGROUND -->
+    <div class="gallery-sky"></div>
+    <div class="gallery-grass"></div>
+
+    <!-- CONTENT -->
+    <div class="gallery-container">
+
+        <h2 class="gallery-title">
+            Những khoảnh khắc trong Khu vườn
+        </h2>
+
+        <div class="gallery-search">
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Tìm theo tiêu đề hoặc tên người đăng..."
+            >
+
+            <button id="clearSearch" type="button">
+                Xóa
+            </button>
+        </div>
+
+        <h3 class="gallery-subtitle">
+            Thước phim
+        </h3>
+
+        <div id="videoGrid" class="gallery-grid"></div>
+
+        <button
+            id="btnLoadMoreVideo"
+            class="load-more-btn"
+            type="button"
+        >
+            Xem thêm video
+        </button>
+
+        <h3 class="gallery-subtitle">
+            Hình ảnh
+        </h3>
+
+        <div id="imageGrid" class="gallery-grid"></div>
+
+        <button
+            id="btnLoadMoreImage"
+            class="load-more-btn"
+            type="button"
+        >
+            Xem thêm hình ảnh
+        </button>
+
+    </div>
+
+</section>
+
+    <!-- MEDIA MODAL -->
+    <div id="mediaModal" class="media-modal">
+        <div class="media-modal-content">
+            <button id="closeModal" class="modal-close" type="button">&times;</button>
+            <div id="modalMediaContainer" class="modal-media"></div>
+            <div class="modal-info">
+                <h2 id="modalTitle"></h2>
+                <p id="modalAuthor"></p>
+                <p id="modalDate"></p>
+                <button id="modalLikeBtn" class="modal-like-btn" type="button">
+                    <i id="modalLikeIcon" class="fa-regular fa-heart"></i>
+                    <span id="modalLikeCount">0</span>
+                </button>
+                <div id="modalCommentList" class="modal-comment-list"></div>
+                <div class="comment-form">
+                    <input id="modalCommentInput" type="text" placeholder="Viết bình luận...">
+                    <button id="modalBtnSendComment" type="button">Gửi</button>
+                </div>
+            </div>
         </div>
     </div>
-    <section id="sectionVideo" class="moments-section">
-        <h2 class="moments-title">✦ KHOẢNH KHẮC CỦA MỌI NGƯỜI ✦</h2>
-        <p style="text-align: center; color: #555; font-size: 13px; font-style: italic; margin-top: -30px; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
-            Những khoảnh khắc được ghi lại...
-        </p>
-        <div class="gallery-container">
-            <div id="videoGrid" class="gallery-grid"></div>
-            <div style="text-align: center; margin-top: 40px;">
-                <button id="btnLoadMoreVideo" class="cancel-btn" style="padding: 12px 35px; display: none;">✦ Xem thêm...</button>
+
+    <!-- COMMENT MODAL -->
+    <div id="commentModal" class="media-modal">
+        <div class="comment-modal-content">
+            <button id="closeCommentModal" class="modal-close" type="button">&times;</button>
+            <h2 id="commentModalTitle">Bình luận</h2>
+            <div id="commentList" class="modal-comment-list"></div>
+            <div class="comment-form">
+                <input id="commentInput" type="text" placeholder="Viết bình luận...">
+                <button id="btnSendComment" type="button">Gửi</button>
             </div>
         </div>
-    </section>
-
-    <section id="sectionImage" class="moments-section" style="margin-top: 80px;">
-        <h2 class="moments-title">✦ GALAXY CỦA CHÚNG TA ✦</h2>
-        <p style="text-align: center; color: #555; font-size: 13px; font-style: italic; margin-top: -30px; margin-bottom: 30px; font-family: 'Montserrat', sans-serif;">
-            Những hình ảnh được lưu lại...
-        </p>
-        <div class="gallery-container">
-            <div id="imageGrid" class="gallery-grid"></div>
-            <div style="text-align: center; margin-top: 40px;">
-                <button id="btnLoadMoreImage" class="cancel-btn" style="padding: 12px 35px; display: none;">✦ Xem thêm...</button>
-            </div>
-        </div>
-    </section>
-
+    </div>
     <section class="Footer">
         <div class="footer-inner">
             <div class="cot-1">
@@ -198,75 +259,16 @@
             </div>
         </div>
     </section>
-    <!-- Modal Phóng to Media (Lightbox 2 Cột) -->
-    <div id="mediaModal" class="modal">
-        <div class="modal-content-lightbox">
-            <!-- Nút đóng Modal -->
-            <span id="closeModal" class="close-lightbox">&times;</span>
 
-            <div class="lightbox-layout">
-                <!-- CỘT BÊN TRÁI: HIỂN THỊ ẢNH / VIDEO -->
-                <div class="lightbox-media" id="modalMediaContainer">
-                    <!-- File media sẽ load vào đây -->
-                </div>
-
-                <!-- CỘT BÊN PHẢI: CHI TIẾT + TIM + BÌNH LUẬN -->
-                <div class="lightbox-sidebar">
-                    <div class="lightbox-header">
-                        <h3 id="modalTitle">Tiêu đề bài viết</h3>
-                        <p id="modalAuthor">✦ Bởi: Tên tác giả</p>
-                        <p id="modalDate">✦ Ngày đăng: --/--/----</p>
-                    </div>
-
-                    <!-- Thanh đếm lượt Tim & icon tương tác -->
-                    <div class="lightbox-stats">
-                        <button id="modalLikeBtn" class="lightbox-like-btn">
-                            <i id="modalLikeIcon" class="fa-regular fa-heart"></i>
-                            <span id="modalLikeCount">0</span> lượt thích
-                        </button>
-                    </div>
-
-                    <hr style="border: 0; border-top: 1px solid rgba(212,176,106,0.2); margin: 15px 0;">
-
-                    <!-- Danh sách bình luận -->
-                    <h4 style="color: #f6d28d; margin-bottom: 10px; font-size: 1rem;">Bình luận</h4>
-                    <div id="modalCommentList" class="lightbox-comments">
-                        <!-- Bình luận sẽ load vào đây -->
-                    </div>
-
-                    <!-- Ô nhập bình luận nhanh trong Lightbox -->
-                    <div class="lightbox-input-box">
-                        <input type="text" id="modalCommentInput" placeholder="Viết bình luận...">
-                        <button id="modalBtnSendComment"><i class="fa-solid fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL BÌNH LUẬN -->
-    <div id="commentModal" class="modal">
-        <div class="modal-content" style="max-width: 500px; width: 90%; background: #050b14; border: 1px solid rgba(212,176,106,0.3); color: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; backdrop-filter: blur(10px);">
-            <!-- Nút đóng Modal -->
-            <span id="closeCommentModal" class="close" style="color: #aaa; position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#f6d28d'" onmouseout="this.style.color='#aaa'">&times;</span>
-            
-            <!-- Tiêu đề Modal -->
-            <h3 id="commentModalTitle" style="color: #f6d28d; margin-bottom: 18px; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; padding-right: 30px; line-height: 1.4;">Bình luận</h3>
-            
-            <!-- Danh sách comment -->
-            <div id="commentList" style="max-height: 320px; overflow-y: auto; margin-bottom: 18px; padding-right: 8px; scrollbar-width: thin; scrollbar-color: rgba(212,176,106,0.3) transparent;">
-                <!-- Comment sẽ tự load vào đây -->
-            </div>
-
-            <!-- Ô nhập comment -->
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <input type="text" id="commentInput" placeholder="Viết bình luận của bạn..." style="flex: 1; padding: 12px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,176,106,0.3); border-radius: 8px; color: #fff; font-size: 0.95rem; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='#d4af37'" onblur="this.style.borderColor='rgba(212,176,106,0.3)'">
-                
-                <button id="btnSendComment" style="padding: 12px 20px; background: #d4af37; border: none; border-radius: 8px; color: #050b14; font-weight: bold; cursor: pointer; font-size: 0.95rem; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px;" onmouseover="this.style.background='#f6d28d'" onmouseout="this.style.background='#d4af37'">
-                    <span>Gửi</span>
-                    <i class="fa-solid fa-paper-plane" style="font-size: 0.85rem;"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+    <!-- INIT AOS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+        });
+    </script>
 </body>
 </html>
