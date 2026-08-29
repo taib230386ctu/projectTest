@@ -764,6 +764,7 @@ html, body {
     margin-top: 15px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    flex-direction: row-reverse; /* Đảo ngược vị trí 2 nút trái/phải */
 }
 
 /* Định dạng kích thước 2 nút BẰNG NHAU HOÀN TOÀN */
@@ -1313,7 +1314,7 @@ html, body {
     background:
         rgba(255, 255, 255, 0.18);
 
-    color: #ffffff;
+    color: #000000;
 
     font-size: 15px;
 
