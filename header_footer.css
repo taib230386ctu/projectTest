@@ -1,8 +1,8 @@
 /* =========================================================
-   1. GLOBAL SETTINGS
+   1. GLOBAL SETTINGS & RESET
    ========================================================= */
 
-/* ---------- Biến màu ---------- */
+/* ---------- CSS Variables ---------- */
 :root {
     --gold: #d4b06a;
     --gold-light: #f6d28d;
@@ -41,7 +41,7 @@
     box-sizing: border-box;
 }
 
-/* ---------- Trang ---------- */
+/* ---------- Global Page Styles ---------- */
 html {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -62,6 +62,7 @@ body {
    2. NAVBAR
    ========================================================= */
 
+/* ---------- Main Navbar Container ---------- */
 .navbar {
     position: fixed;
     inset: 0 0 auto 0; /* top:0; left:0; right:0 */
@@ -90,7 +91,6 @@ body {
     pointer-events: none;
 }
 
-/* ---------- Nội dung Navbar ---------- */
 .nav-inner {
     width: 100%;
     height: 64px;
@@ -102,14 +102,14 @@ body {
     box-sizing: border-box;
 }
 
-/* LOGO */
+/* ---------- Navbar Logo ---------- */
 .logo {
     flex: 1;
     display: flex;
     align-items: center;
-    flex-shrink: 0; /* Không cho logo bị co nhỏ lại */
+    flex-shrink: 0;
     text-decoration: none;
-    justify-content: flex-start; /* Căn dính lề trái */
+    justify-content: flex-start;
 }
 
 .logo img {
@@ -118,7 +118,6 @@ body {
     display: block;
 }
 
-/* Ảnh text PKM2 */
 .logo-text .text-pkm2 {
     width: clamp(100px, 12vw, 150px); 
     height: auto;
@@ -126,7 +125,7 @@ body {
     object-fit: contain;
 }
 
-/* MENU NAVBAR */
+/* ---------- Navbar Menu ---------- */
 .menu {
     flex: 3;
     display: flex;
@@ -191,6 +190,7 @@ body {
     animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+/* Menu Toggle Button (Hambuger Icon) */
 .menu-toggle {
     display: none;
     font-size: clamp(1.5rem, 3vw, 2rem);
@@ -245,52 +245,12 @@ body {
     }
 }
 
-/* ---------- Responsive Navbar ---------- */
-@media (max-width: 1300px) {
-    .nav-inner {
-        justify-content: space-between; 
-        gap: 20px;
-    }
-
-    .logo {
-        flex: none; 
-    }
-
-    .menu {
-        flex: none; 
-        margin-left: auto; 
-        justify-content: flex-end; 
-        gap: clamp(30px, 1.8vw, 40px); 
-        padding-right: 0;
-    }
-
-    .nav-spacer {
-        display: none; 
-    }
-}
-
-@media (max-width: 900px) {
-    .menu {
-        display: none;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .part-main {
-        font-size: 1.4rem;
-    }
-
-    .part-season {
-        font-size: 1.15rem;
-    }
-}
 
 /* =========================================================
-   2. FOOTER LAYOUT & CÁC CỘT
+   3. FOOTER
    ========================================================= */
 
+/* ---------- Main Footer Container ---------- */
 .Footer {
     width: 100%;
     min-height: 200px; 
@@ -313,18 +273,18 @@ body {
     display: flex;
     gap: 30px;
     align-items: stretch;
-    flex-wrap: nowrap; /* Mặc định luôn nằm trên 1 hàng */
+    flex-wrap: nowrap;
 }
 
-/* Kích thước chiều cao chung */
+/* Kích thước chiều cao chung các cột */
 .cot-1, .cot-2, .cot-3, .cot-4 {
     height: 200px;
+    min-width: 0;
 }
 
-/* CỘT 1 */
+/* ---------- Cột 1 (Logo & Line Separator) ---------- */
 .cot-1 { 
     flex: 0.8 1 0;
-    min-width: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -350,7 +310,7 @@ body {
     display: block;
 }
 
-/* CHỈ CÓ CỘT 1 CÓ VẠCH KẺ DỌC */
+/* Vạch kẻ dọc duy nhất ở Cột 1 */
 .cot-1::after {
     content: "";
     position: absolute;
@@ -372,9 +332,8 @@ body {
     z-index: 5; 
 }
 
-/* 3 CỘT CÒN LẠI */
+/* ---------- Cột 2, 3, 4 Common ---------- */
 .cot-2, .cot-3, .cot-4 {
-    min-width: 0;
     padding: 15px;
     box-sizing: border-box;
     overflow: hidden;
@@ -386,11 +345,6 @@ body {
 .cot-3 { flex: 1.4 1 0; }
 .cot-4 { flex: 1.4 1 0; }
 
-
-/* =========================================================
-   3. STYLE NỘI DUNG TRONG CỘT
-   ========================================================= */
-
 .noidung-cot2 {
     display: flex;
     flex-direction: column;
@@ -401,7 +355,7 @@ body {
     width: 100%;
 }
 
-/* TIÊU ĐỀ DÙNG CHUNG */
+/* Tiêu đề cột */
 .cot-2-title {
     height: 20%;
     width: 100%;
@@ -439,7 +393,7 @@ body {
     border-radius: 999px;
 }
 
-/* CONTENT CỘT 2 & 3 (CĂN GIỮA DỌC) */
+/* Nội dung Cột 2 & 3 */
 .cot-2-content {
     flex: 1;
     width: 100%;
@@ -471,7 +425,7 @@ body {
     transform: translateX(5px);
 }
 
-/* CONTENT CỘT 4 (CĂN TRÊN - KHÔNG CĂN GIỮA) */
+/* Nội dung Cột 4 */
 .cot-4-content {
     flex: 1;
     width: 100%;
@@ -481,7 +435,6 @@ body {
     padding-top: 5px;
 }
 
-/* Đoạn văn mô tả Cột 4 */
 .cot-4-content p {
     margin-bottom: 18px;
     font-size: 18px;
@@ -489,7 +442,7 @@ body {
     color: #ffffff;
 }
 
-/* Social Icons (Cột 4) */
+/* Social Icons */
 .social-icons {
     display: flex;
     gap: 15px;
@@ -520,9 +473,34 @@ body {
 
 
 /* =========================================================
-   4. RESPONSIVE DESIGN
+   4. MEDIA QUERIES (RESPONSIVE)
    ========================================================= */
 
+/* ---------- Màn hình Laptop / Desktop vừa (Max 1300px) ---------- */
+@media (max-width: 1300px) {
+    .nav-inner {
+        justify-content: space-between; 
+        gap: 20px;
+    }
+
+    .logo {
+        flex: none; 
+    }
+
+    .menu {
+        flex: none; 
+        margin-left: auto; 
+        justify-content: flex-end; 
+        gap: clamp(30px, 1.8vw, 40px); 
+        padding-right: 0;
+    }
+
+    .nav-spacer {
+        display: none; 
+    }
+}
+
+/* ---------- Màn hình <= 1280px ---------- */
 @media (max-width: 1280px) {
     .cot-2-content li {
         margin-bottom: 8px;
@@ -531,6 +509,7 @@ body {
     }
 }
 
+/* ---------- Màn hình <= 1080px ---------- */
 @media (max-width: 1080px) {
     .cot-4-content p {
         margin-bottom: 18px;
@@ -540,13 +519,12 @@ body {
     }
 }
 
+/* ---------- Màn hình Tablet lớn (851px - 1024px) ---------- */
 @media (max-width: 1024px) and (min-width: 851px) {
     .cot-2-title h2 {
         font-size: 20px;
     }
-    .cot-2-content li a {
-        font-size: 13px;
-    }
+    .cot-2-content li a,
     .cot-2-content li,
     .cot-4-content p {
         font-size: 13px;
@@ -558,20 +536,80 @@ body {
     }
 }
 
+/* ---------- Màn hình <= 1000px ---------- */
 @media (max-width: 1000px) {
     .cot-2-content li {
         margin-bottom: 8px;
         font-size: 15px;
         line-height: 1.4;
     }
-    .cot-2-content li a {
-        font-size: 15px;
-    }
+    .cot-2-content li a,
     .cot-4-content p {
         font-size: 15px;
     }
 }
 
+/* ---------- Màn hình Tablet nhỏ (Max 900px) ---------- */
+@media (max-width: 900px) {
+    /* Navbar Responsive */
+    .menu {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        color: #ffffff;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .navbar .menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 32, 67, 0.95);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 30px;
+        display: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+    }
+
+    .navbar .menu.active {
+        display: flex;
+    }
+
+    .navbar .menu a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: fit-content;
+    }
+
+    .navbar .menu a img {
+        position: absolute;
+        right: 100%;
+        margin-right: 8px;
+        height: 50px;
+        width: auto;
+        pointer-events: none;
+    }
+
+    .part-main {
+        font-size: 1.4rem;
+    }
+
+    .part-season {
+        font-size: 1.15rem;
+    }
+}
+
+/* ---------- Màn hình <= 850px ---------- */
 @media (max-width: 850px) {
     .cot-2-title h2 {
         font-size: 15px;
@@ -590,10 +628,11 @@ body {
     }
 }
 
-/* Dưới 768px bắt đầu cho các cột xuống dòng xếp chồng */
+/* ---------- Màn hình Mobile (Max 768px) ---------- */
 @media (max-width: 768px) {
+    /* Footer xếp chồng thành 1 cột */
     .footer-inner {
-        flex-wrap: wrap; /* Cho phép xuống dòng */
+        flex-wrap: wrap;
         gap: 20px;
     }
 
@@ -603,7 +642,7 @@ body {
         padding: 10px 0;
     }
 
-    /* Ẩn vạch kẻ dọc trên Cột 1 */
+    /* Ẩn vạch kẻ dọc */
     .cot-1::after {
         display: none;
     }
@@ -646,79 +685,41 @@ body {
     }
 }
 
+/* ---------- Màn hình Mobile nhỏ (Max 750px) ---------- */
 @media (max-width: 750px) {
     .footer-inner {
         gap: 20px;
     }
 }
-
-/* --- Spacer & Toggle (Mobile) --- */
-.nav-spacer {
-    display: none;
-}
-
-.menu-toggle {
-    display: none;
-    color: #ffffff;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* --- Responsive Menu --- */
-@media (max-width: 900px) {
-    .menu-toggle {
-        display: block;
+@media (max-width: 500px) {
+    .navbar{
+        max-height:85px;
+        padding:0;
     }
-
-    .navbar .menu {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: rgba(15, 32, 67, 0.95);
-    flex-direction: column;
-    align-items: center;    /* Căn giữa các chữ/item theo chiều ngang */
-    padding: 20px 0;
-    gap: 30px;              /* Khoảng cách đều giữa các dòng menu */
-    display: none;          /* Hiển thị qua JS khi click toggle */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-sizing: border-box; /* Đảm bảo padding không làm tràn khung */
 }
-.navbar .menu {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: rgba(15, 32, 67, 0.95);
-    flex-direction: column;
-    align-items: center;       /* Căn giữa tất cả các item */
-    padding: 20px 0;
-    gap: 30px;                 /* Khoảng cách đều giữa các dòng */
-    display: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-sizing: border-box;
+/* Đổi style hover/active cho thẻ span thay vì toàn bộ thẻ a */
+.menu a:hover span,
+.menu a .active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
 }
 
-/* Thẻ link menu */
-.navbar .menu a {
-    position: relative;        /* Làm mốc tọa độ cho hình ảnh bên trong */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: fit-content;
+/* Định vị gạch vàng ăn theo thẻ span chứa chữ */
+.menu a .active {
+    position: relative;
+    display: inline-block;
 }
 
-/* Đặt hình ảnh chìm ra ngoài luồng để chữ nằm chuẩn giữa 100% */
-.navbar .menu a img {
+.menu a .active::after {
+    content: '';
     position: absolute;
-    right: 100%;              /* Đẩy hình nằm hoàn toàn bên trái chữ */
-    margin-right: 8px;        /* Khoảng cách nhỏ giữa hình và chữ */
-    height: 50px;
-    width: auto;
-    pointer-events: none;     /* Tránh bị vướng khi click */
-}
-    .navbar .menu.active {
-        display: flex;
-    }
+    bottom: -.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%; /* Hoặc 85% tùy mức độ dài gạch bạn muốn */
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
