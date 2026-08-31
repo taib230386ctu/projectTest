@@ -11,93 +11,195 @@ html, body {
 /* ==========================================
    2. HERO SECTION
    ========================================== */
+/* =====================================================
+   HERO
+===================================================== */
+
 .hero {
+    position: relative;
+
     width: 100%;
     min-height: 100vh;
-    container-type: inline-size;
-    background: url('./images/background/bg_hoatdong.png') center / cover no-repeat;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px 20px 40px 20px;
-    box-sizing: border-box;
+
+    overflow: hidden;
+
+    /*
+        BG có bướm 2 bên
+        Thay đường dẫn bằng file background của bạn
+    */
+    background-image: url("./images/background/bg_hoatdong.png");
+
+    background-repeat: no-repeat;
+    background-position: center ;
+
+    /*
+        Quan trọng:
+        Không dùng cover vì cover có thể làm mất bướm
+        khi đổi tỉ lệ màn hình.
+    */
+    background-size: 100% 100%;
+    aspect-ratio: 16 / 9;
+    margin-top:-85px;
 }
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
 
 .hero-content {
-    max-width: 600px;
-    width: 100%;
+    position: relative;
+    z-index: 2;
+
+    width: min(650px, 90%);
+
     text-align: center;
-    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.hero .hero-main-title {
-    font-size: 5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding-bottom: 30px;
-    color: var(--gold-light, #ffd700);
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
-    text-shadow: 
-        0 0 15px rgba(255, 255, 255, 0.4),
-        0 10px 20px rgba(0, 0, 0, 0.8);
+
+/* =====================================================
+   REAL FINE
+===================================================== */
+
+.hero-main-title {
+    width: 520px;
+    max-width: 90%;
 }
+
+.hero-main-title img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+
+/* =====================================================
+   SUBTITLE
+===================================================== */
 
 .subtitle {
-    font-size: 1.5rem;
-    margin: 10px 0 30px 0;
-    opacity: 0.9;
+    margin-top: 25px;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    color: #315fa8;
 }
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
 
 .desc {
+    margin-top: 14px;
+
     font-size: 18px;
-    margin-bottom: 40px;
-    line-height: 1.6;
-    opacity: 0.85;
+    line-height: 1.7;
+
+    color: #4c6d99;
 }
 
+
+/* =====================================================
+   INPUT LABEL
+===================================================== */
+
 .input-label {
-    margin-bottom: 12px;
-    font-size: 1rem;
+    margin-top: 30px;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #315fa8;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.input-box {
+    width: 430px;
+    max-width: 90%;
+
+    margin-top: 10px;
 }
 
 .input-box input {
     width: 100%;
-    max-width: 320px;
-    height: 50px;
-    padding: 12px 16px;
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
+
+    padding: 15px 22px;
+
+    border: 2px solid rgba(91, 145, 210, 0.45);
+    border-radius: 30px;
+
     outline: none;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    font-size: 16px;
     text-align: center;
-    margin-bottom: 25px;
-    box-sizing: border-box;
-    backdrop-filter: blur(5px);
+
+    color: #315fa8;
+
+    box-shadow:
+        0 5px 20px rgba(70, 130, 200, 0.12);
 }
 
+.input-box input::placeholder {
+    color: #8ca8c8;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
 .start-btn {
-    width: 100%;
-    max-width: 450px;
-    height: 60px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px 28px;
+    margin-top: 22px;
+
+    padding: 14px 32px;
+
+    border: none;
     border-radius: 30px;
-    background: transparent;
-    color: var(--gold-light, #ffd700);
-    border: 2px solid var(--gold-light, #ffd700);
+
     cursor: pointer;
-    transition: all 0.3s ease;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #709fe0,
+        #4d7fca
+    );
+
+    box-shadow:
+        0 8px 20px rgba(65, 120, 190, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .start-btn:hover {
-    background: #feb47b;
-    color: #1e1e2f;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(254, 180, 123, 0.4);
-}
 
+    box-shadow:
+        0 12px 25px rgba(65, 120, 190, 0.35);
+}
 /* ==========================================
    3. GARDEN SECTION
    ========================================== */
@@ -1687,4 +1789,144 @@ html, body {
 }
 body.modal-open {
     overflow: hidden;
+}
+/* =====================================================
+   MOBILE HERO
+   DESIGN MOBILE: 768 × 1152
+===================================================== */
+
+@media (max-width: 769px) {
+
+    .hero {
+        margin-top: clamp(-200px, calc(-200px + (769px - 100vw) * 0.5), -50px);
+        width: 100%;
+        padding-top: clamp(
+            0px,
+            calc((769px - 100vw) * 0.143),
+            64px
+        );
+
+        /*
+            Tỉ lệ của background mobile
+            768 × 1152 = 2 : 3
+        */
+        aspect-ratio: 768 / 1152;
+
+        min-height: 0;
+        height: auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-image: url("./images/background/bg_hoatdong_mobile.png");
+
+        background-repeat: no-repeat;
+        background-position: center top;
+
+        /*
+            Background mobile tự co theo màn hình
+        */
+        background-size: 100% 100%;
+    }
+
+
+    /* =========================================
+       CONTENT MOBILE
+    ========================================= */
+
+    .hero-content {
+        width: 100%;
+
+        padding: 0 8%;
+
+        text-align: center;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    /* =========================================
+       REAL FINE
+    ========================================= */
+
+    .hero-main-title {
+        width: 68%;
+        max-width: none;
+    }
+
+    .hero-main-title img {
+        width: 100%;
+        height: auto;
+    }
+
+
+    /* =========================================
+       SUBTITLE
+    ========================================= */
+
+    .subtitle {
+        margin-top: 5%;
+
+        font-size: clamp(20px, 5vw, 30px);
+    }
+
+
+    /* =========================================
+       DESCRIPTION
+    ========================================= */
+
+    .desc {
+        margin-top: 2.5%;
+
+        font-size: clamp(13px, 3.2vw, 18px);
+
+        line-height: 1.6;
+    }
+
+
+    /* =========================================
+       LABEL
+    ========================================= */
+
+    .input-label {
+        margin-top: 6%;
+
+        font-size: clamp(13px, 3.2vw, 18px);
+    }
+
+
+    /* =========================================
+       INPUT
+    ========================================= */
+
+    .input-box {
+        width: 68%;
+        max-width: none;
+
+        margin-top: 2.5%;
+    }
+
+    .input-box input {
+        width: 100%;
+
+        padding: 3.5% 5%;
+
+        font-size: clamp(13px, 3.2vw, 16px);
+    }
+
+
+    /* =========================================
+       BUTTON
+    ========================================= */
+
+    .start-btn {
+        margin-top: 4%;
+
+        padding: 3.5% 6%;
+
+        font-size: clamp(12px, 3.2vw, 16px);
+    }
 }
