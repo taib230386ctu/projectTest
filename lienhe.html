@@ -16,8 +16,13 @@
 
             const link2 = document.createElement('link');
             link2.rel = 'stylesheet';
-            link2.href = 'header_footer.css?v=' + new Date().getTime(); 
+            link2.href = 'hd.css?v=' + new Date().getTime(); 
             document.head.appendChild(link2);
+
+            const link3 = document.createElement('link');
+            link3.rel = 'stylesheet';
+            link3.href = 'ft.css?v=' + new Date().getTime(); 
+            document.head.appendChild(link3);
         })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -26,7 +31,6 @@
 </head>
 <body>
 
-    <!-- NAVBAR HEADER -->
     <nav class="navbar">
         <div class="nav-inner">
             <a href="index.html" class="logo">
@@ -35,15 +39,25 @@
                     <img class="text-pkm2" src="./images/logo/text_pkenmua2.png" alt="">
                 </div>
             </a>
-            
             <div class="menu-toggle">☰</div>
-
             <div class="menu">
                 <a href="index.html">Trang chủ</a>
-                <a href="phaken01.html">Hoạt động</a>
+                <div class="menu-dropdown">
+                    <h2>
+                        Hoạt động
+                    </h2>
+                    <div class="menu-dropdown-content">
+                        <a href="phaken01.html">
+                            Phá kén mùa 1
+                        </a>
+                        <a href="phaken02.html">
+                            Phá kén mùa 2
+                        </a>
+                    </div>
+                </div>
                 <a href="tintuc.html">Tin tức</a>
                 <a href="hoatdong.html"><img src="./images/logo/btfly.png" alt="">Kể đi Kén nghe nè</a>
-                <a href="lienhe.html" class="active"> Liên hệ</a>
+                <a href="lienhe.html"  class="active">Liên hệ</a>
             </div>
             <div class="nav-spacer"></div>
         </div>
