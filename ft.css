@@ -1,0 +1,348 @@
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+/* ---------- Main Footer Container ---------- */
+.Footer {
+    width: 100%;
+    min-height: 200px; 
+    background: 
+        linear-gradient(135deg, rgba(7, 38, 165, 0.678) 0%, #0c2a77a1 100%),
+        url('./images/background/bg_footer.png');
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    font-family: "Quicksand", sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.footer-inner {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+
+/* Kích thước chiều cao chung các cột */
+.cot-1, .cot-2, .cot-3, .cot-4 {
+    height: 200px;
+    min-width: 0;
+}
+
+/* ---------- Cột 1 (Logo & Line Separator) ---------- */
+.cot-1 { 
+    flex: 0.8 1 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 10px;
+}
+
+.cot-1 .logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.cot-1 .logo img {
+    max-height: 140px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Vạch kẻ dọc duy nhất ở Cột 1 */
+.cot-1::after {
+    content: "";
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 75%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(212, 176, 106, 0.8) 20%,
+        var(--gold, #d4b06a) 50%,
+        rgba(212, 176, 106, 0.8) 80%,
+        transparent 100%
+    );
+    box-shadow: 0 0 8px rgba(212, 176, 106, 0.4);
+    border-radius: 999px;
+    z-index: 5; 
+}
+
+/* ---------- Cột 2, 3, 4 Common ---------- */
+.cot-2, .cot-3, .cot-4 {
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.cot-2 { flex: 0.8 1 0; }
+.cot-3 { flex: 1.4 1 0; }
+.cot-4 { flex: 1.4 1 0; }
+
+.noidung-cot2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    height: 100%;
+    width: 100%;
+}
+
+/* Tiêu đề cột */
+.cot-2-title {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cot-2-title h2 {
+    font-family: "Maglony";
+    color: var(--gold-light, #f6d28d);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.cot-2-title h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        to right, 
+        var(--gold, #e4f07d) 0%, 
+        rgba(247, 228, 120, 0.4) 60%, 
+        transparent 100%
+    );
+    border-radius: 999px;
+}
+
+/* Nội dung Cột 2 & 3 */
+.cot-2-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cot-2-content li {
+    font-family: "Quicksand";
+    margin-bottom: 8px;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.cot-2-content li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.cot-2-content li a:hover {
+    color: #d4b06a;
+    transform: translateX(5px);
+}
+
+/* Nội dung Cột 4 */
+.cot-4-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 5px;
+}
+
+.cot-4-content p {
+    margin-bottom: 18px;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-icons a {
+    width: 42px;
+    height: 42px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0c2a77;
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.social-icons a:hover {
+    background-color: var(--gold, #d4b06a);
+    color: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(212, 176, 106, 0.4);
+}
+
+/* Responsive Footer */
+@media (max-width: 1280px) {
+    .cot-2-content li {
+        margin-bottom: 8px;
+        font-size: 17px;
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 1080px) {
+    .cot-4-content p {
+        margin-bottom: 18px;
+        font-size: 17px;
+        line-height: 1.4;
+        color: #ffffff;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 851px) {
+    .cot-2-title h2 {
+        font-size: 20px;
+    }
+    .cot-2-content li a,
+    .cot-2-content li,
+    .cot-4-content p {
+        font-size: 13px;
+    }
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .cot-2-content li {
+        margin-bottom: 8px;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+    .cot-2-content li a,
+    .cot-4-content p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 850px) {
+    .cot-2-title h2 {
+        font-size: 15px;
+    }
+    .cot-2-content li a {
+        font-size: 13px;
+    }
+    .cot-2-content li,
+    .cot-4-content p {
+        font-size: 11px;
+    }
+    .social-icons a {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-inner {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .cot-1, .cot-2, .cot-3, .cot-4 {
+        flex: 1 1 100%;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .cot-1::after {
+        display: none;
+    }
+
+    .cot-1 .logo img {
+        max-height: 100px;
+    }
+
+    .cot-2-title, 
+    .cot-2-content, 
+    .cot-4-content {
+        height: auto;
+    }
+
+    .cot-2-title {
+        margin-bottom: 10px;
+    }
+
+    .cot-2-title h2 {
+        font-size: 18px;
+    }
+
+    .cot-2-content li a {
+        font-size: 15px;
+    }
+
+    .cot-2-content li,
+    .cot-4-content p {
+        font-size: 13px;
+    }
+
+    .social-icons {
+        gap: 12px;
+    }
+
+    .social-icons a {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 750px) {
+    .footer-inner {
+        gap: 20px;
+    }
+}

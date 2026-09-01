@@ -1,0 +1,530 @@
+/* =========================================================
+   1. GLOBAL SETTINGS, FONTS & VARIABLES
+   ========================================================= */
+:root {
+    --gold: #d4b06a;
+    --gold-light: #f6d28d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important; /* Chặn tuyệt đối cuộn ngang */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE / Edge cũ */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none; /* Chrome / Safari / Opera */
+}
+
+body {
+    background: #050b14;
+    color: white;
+    position: relative;
+}
+@font-face {
+    font-family: "Maglony";
+    src: url("./fonts/1FTV-Maglony.ttf") format("truetype");
+}
+
+/* =========================================================
+   2. NAVBAR
+   ========================================================= */
+.navbar {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(5, 10, 18, 0.45);
+    backdrop-filter: blur(14px);
+    width: 100%;
+    min-height: 90px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.nav-inner {
+    width: 100%;
+    height: 100%;
+    padding-left: clamp(15px, 3vw, 50px);
+    padding-right: clamp(15px, 3vw, 50px);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* ---------- Navbar Logo ---------- */
+.logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+    justify-content: flex-start;
+}
+
+.logo img {
+    width: clamp(55px, 4vw, 80px);
+    height: auto;
+    display: block;
+}
+
+.logo-text .text-pkm2 {
+    width: clamp(100px, 12vw, 150px); 
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* ---------- Navbar Menu ---------- */
+.menu {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0;
+}
+
+.nav-spacer {
+    flex: 0.5;
+    flex-shrink: 0;
+}
+
+.menu a {
+    font-family:'Maglony';
+    font-style: normal !important;
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
+    letter-spacing: .08em;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color .3s ease, text-shadow .3s ease;
+    animation: menuItemFade .5s cubic-bezier(.25, 1, .5, 1) both;
+}
+
+.menu a img {
+    height: 4em;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, .5);
+}
+
+.menu a.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Style hover/active cho thẻ span trong menu */
+.menu a:hover span,
+.menu a .active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu a .active {
+    position: relative;
+    display: inline-block;
+}
+
+.menu a .active::after {
+    content: '';
+    position: absolute;
+    bottom: -.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Menu Toggle Button (Hamburger Icon) */
+.menu-toggle {
+    display: none;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Stagger Animation cho Menu Items */
+.menu a:nth-child(1) { animation-delay: 0.1s; }
+.menu a:nth-child(2) { animation-delay: 0.18s; }
+.menu a:nth-child(3) { animation-delay: 0.26s; }
+.menu a:nth-child(4) { animation-delay: 0.34s; }
+
+/* Keyframes Navbar */
+@keyframes navEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+@keyframes menuItemFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowSlideIn {
+    from {
+        width: 0%;
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.3);
+    }
+    to {
+        width: 85%;
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+/* Responsive Navbar */
+@media (max-width: 1300px) {
+    .nav-inner {
+        justify-content: space-between; 
+        gap: 20px;
+    }
+
+    .logo {
+        flex: none; 
+    }
+
+    .menu {
+        flex: none; 
+        margin-left: auto; 
+        justify-content: flex-end; 
+        gap: clamp(30px, 1.8vw, 40px); 
+        padding-right: 0;
+    }
+
+    .nav-spacer {
+        display: none; 
+    }
+}
+
+@media (max-width: 900px) {
+    .menu {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        color: #ffffff;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .navbar .menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 32, 67, 0.95);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 30px;
+        display: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+    }
+
+    .navbar .menu.active {
+        display: flex;
+    }
+
+    .navbar .menu a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: fit-content;
+    }
+
+    .navbar .menu a img {
+        position: absolute;
+        right: 100%;
+        margin-right: 8px;
+        height: 50px;
+        width: auto;
+        pointer-events: none;
+    }
+
+    .part-main {
+        font-size: 1.4rem;
+    }
+
+    .part-season {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 769px) {
+    .navbar {
+        max-height: 85px;
+        min-height: 80px;
+    }
+}
+/* =========================================================
+   DROPDOWN: HOẠT ĐỘNG
+========================================================= */
+
+/* --- 1. Khung chứa chính --- */
+.menu-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* --- 2. Tiêu đề "Hoạt động" (thẻ h2) --- */
+.menu-dropdown > h2 {
+    font-family: 'Maglony';
+    font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
+    font-weight: normal;
+    font-style: normal !important;
+    color: #ffffff;
+    letter-spacing: .08em;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    position: relative;
+    transition: color .3s ease, text-shadow .3s ease;
+}
+
+
+
+/* Hover & Active cho Tiêu đề h2 */
+.menu-dropdown:hover > h2 {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 10px rgba(246, 210, 141, .5);
+}
+
+.menu-dropdown > h2.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+/* Đường gạch mờ 2 đầu khi Active */
+.menu-dropdown > h2.active::before {
+    content: '';
+    position: absolute;
+    bottom: -.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+
+
+/* --- 3. Khung chứa menu con (Desktop) --- */
+.menu-dropdown-content {
+    position: absolute;
+    top: calc(100% + 18px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    display: flex;
+    align-items: stretch;
+    gap: 5px;
+    width: max-content;
+    min-width: 400px;
+    padding: 7px;
+    background: rgba(10, 22, 28, .97);
+    border: 1px solid rgba(246, 210, 141, .28);
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .45);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+    z-index: 9999;
+}
+
+/* Khoảng cầu nối giữ hover không bị trượt */
+.menu-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: 20px;
+}
+
+/* Hiển thị Menu Con (Desktop) */
+.menu-dropdown:hover .menu-dropdown-content,
+.menu-dropdown.open .menu-dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --- 4. Các thẻ link con (Phá kén mùa 1 & 2) --- */
+.menu-dropdown-content a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 190px;
+    min-height: 50px;
+    padding: 10px 18px;
+    color: rgba(255, 255, 255, .88) !important;
+    background: transparent;
+    border-radius: 7px;
+    font-family: 'Maglony';
+    font-size: 1rem !important;
+    letter-spacing: .04em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .2s ease, background .2s ease;
+}
+
+/* Hover & Active cho thẻ link con */
+.menu-dropdown-content a:hover {
+    color: var(--gold-light) !important;
+    background: rgba(246, 210, 141, .08);
+}
+
+.menu-dropdown-content a.active {
+    color: var(--gold-light) !important;
+}
+
+
+/* =========================================================
+   DROPDOWN RESPONSIVE (IPAD & MOBILE)
+========================================================= */
+
+/* Cảm ứng / iPad */
+@media (hover: none) and (pointer: coarse) {
+    .menu-dropdown:hover .menu-dropdown-content {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-50%) translateY(-8px);
+    }
+
+    .menu-dropdown.open .menu-dropdown-content {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    .menu-dropdown::after { 
+        display: none; 
+    }
+}
+
+/* Mobile <= 900px */
+@media (max-width: 900px) {
+    .menu-dropdown {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-dropdown > h2 {
+        justify-content: center;
+        
+    }
+
+    /* Đổi về tĩnh (static) để tự động đẩy nút Tin Tức xuống bên dưới */
+    .menu-dropdown-content {
+        position: static;
+        transform: none !important;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        min-width: 0;
+        padding: 0;
+        gap: 8px;
+        background: rgba(10, 22, 28, 0.6);
+        border: 1px solid transparent;
+        border-radius: 8px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        max-height: 0;
+        overflow: hidden;
+        margin-top: 0;
+        transition: all 0.3s ease;
+    }
+
+    /* Khi mở Dropdown trên Mobile */
+    .menu-dropdown.open .menu-dropdown-content {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        max-height: 200px;
+        margin-top: 10px;
+        padding: 8px;
+        border-color: rgba(246, 210, 141, .28);
+    }
+
+    .menu-dropdown-content a {
+        width: 100%;
+        min-width: 0;
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 0.95rem !important;
+    }
+}
