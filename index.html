@@ -12,6 +12,11 @@
             link1.rel = 'stylesheet';
             link1.href = 'index_t.css?v=' + new Date().getTime(); 
             document.head.appendChild(link1);
+
+            const link3 = document.createElement('link');
+                link3.rel = 'stylesheet';
+                link3.href = 'ft.css?v=' + new Date().getTime(); 
+                document.head.appendChild(link3);
         })();
     </script>
     <!-- Thêm defer để script không bị lỗi dính DOM -->
