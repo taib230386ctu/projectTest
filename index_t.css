@@ -402,4 +402,80 @@ body {
         padding: 8px;
         border-color: rgba(246, 210, 141, .28);
     }
+}body{
+    margin:0;
+    padding:0;
+    width:100%;
+    
+}
+
+.hero {
+    position: relative; /* Làm điểm tựa tọa độ cho phần tử con absolute */
+    width: 100%;
+    display: inline-block; /* Hoặc block, giúp khung bao sát theo chiều cao của ảnh */
+}
+
+.brand-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: pulseBackground 4s ease-in-out infinite alternate;
+}
+
+.flying-butterfly {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Gán vị trí ban đầu và gọi animation */
+    transform: translate(-50%, -80%);
+    width: 25%;
+    height: auto;
+    animation: floatButterfly 6s ease-in-out infinite;
+}
+
+/* Keyframes cho Desktop */
+@keyframes floatButterfly {
+    0%, 100% { 
+        transform: translate(-50%, -80%) translateY(0px) translateX(0px) rotate(0deg); 
+    }
+    33% { 
+        transform: translate(-50%, -80%) translateY(-20px) translateX(12px) rotate(3deg); 
+    }
+    66% { 
+        transform: translate(-50%, -80%) translateY(10px) translateX(-8px) rotate(-2deg); 
+    }
+}
+
+/* Keyframes cho Mobile */
+@keyframes floatButterflyMobile {
+    0%, 100% { 
+        transform: translate(-50%, -80%) translateY(0px) translateX(0px) rotate(0deg); 
+    }
+    33% { 
+        transform: translate(-50%, -80%) translateY(-8px) translateX(4px) rotate(1.5deg); 
+    }
+    66% { 
+        transform: translate(-50%, -80%) translateY(4px) translateX(-3px) rotate(-1deg); 
+    }
+}
+@keyframes pulseBackground {
+    0% { 
+        transform: scale(1); 
+        opacity: 0.6; 
+    }
+    100% { 
+        transform: scale(1.1); 
+        opacity: 1; 
+    }
+}
+
+@keyframes pulseBackgroundMobile {
+    0% { 
+        transform: scale(1); 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: scale(1.1); 
+        opacity: 1; 
+    }
 }
