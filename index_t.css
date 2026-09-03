@@ -15,190 +15,52 @@
 html, body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden !important;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    overflow-x: hidden !important; /* Chặn tuyệt đối cuộn ngang */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE / Edge cũ */
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-    display: none;
+    display: none; /* Chrome / Safari / Opera */
 }
 
 body {
     background: #050b14;
-    color: #ffffff;
+    color: white;
     position: relative;
 }
-
 @font-face {
     font-family: "Maglony";
     src: url("./fonts/1FTV-Maglony.ttf") format("truetype");
 }
 
 /* =========================================================
-   2. HERO SECTION & ANIMATIONS
-   ========================================================= */
-.hero {
-    position: relative;
-    width: 100%;
-    display: inline-block;
-}
-
-.brand-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    animation: pulseBackground 4s ease-in-out infinite alternate;
-}
-
-.flying-butterfly {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -80%);
-    width: 25%;
-    height: auto;
-    animation: floatButterfly 6s ease-in-out infinite;
-}
-
-/* Keyframes cho Background */
-@keyframes pulseBackground {
-    0% { 
-        transform: scale(1); 
-        opacity: 0.6; 
-    }
-    100% { 
-        transform: scale(1.1); 
-        opacity: 1; 
-    }
-}
-
-@keyframes pulseBackgroundMobile {
-    0% { 
-        transform: scale(1); 
-        opacity: 0.7; 
-    }
-    100% { 
-        transform: scale(1.1); 
-        opacity: 1; 
-    }
-}
-
-/* Keyframes cho Con Bướm */
-@keyframes floatButterfly {
-    0%, 100% { 
-        transform: translate(-50%, -80%) translateY(0px) translateX(0px) rotate(0deg); 
-    }
-    33% { 
-        transform: translate(-50%, -80%) translateY(-20px) translateX(12px) rotate(3deg); 
-    }
-    66% { 
-        transform: translate(-50%, -80%) translateY(10px) translateX(-8px) rotate(-2deg); 
-    }
-}
-
-@keyframes floatButterflyMobile {
-    0%, 100% { 
-        transform: translate(-50%, -80%) translateY(0px) translateX(0px) rotate(0deg); 
-    }
-    33% { 
-        transform: translate(-50%, -80%) translateY(-8px) translateX(4px) rotate(1.5deg); 
-    }
-    66% { 
-        transform: translate(-50%, -80%) translateY(4px) translateX(-3px) rotate(-1deg); 
-    }
-}
-
-/* Keyframes cho Hiệu ứng Gạch chân Menu */
-@keyframes glowSlideIn {
-    from {
-        width: 0%;
-        opacity: 0;
-        transform: translateX(-50%) scaleX(0.3);
-    }
-    to {
-        width: 85%;
-        opacity: 1;
-        transform: translateX(-50%) scaleX(1);
-    }
-}
-
-/* =========================================================
-   3. NAVBAR - TRẠNG THÁI BAN ĐẦU (Nút 3 gạch nhỏ)
+   2. NAVBAR
    ========================================================= */
 .navbar {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    left: auto;
-    width: 55px;
-    height: 55px;
-    min-height: 55px;
     z-index: 1000;
-    background: rgba(10, 22, 28, 0.85);
-    border: 1px solid rgba(246, 210, 141, 0.3);
-    border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background: rgba(5, 10, 18, 0.45);
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    width: 100%;
+    min-height: 90px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .nav-inner {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-}
-
-.menu-toggle {
-    display: block !important;
-    font-size: 24px;
-    color: var(--gold-light);
-    cursor: pointer;
-    user-select: none;
-    line-height: 1;
-}
-
-.navbar .logo,
-.navbar .menu,
-.navbar .nav-spacer {
-    display: none !important;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-/* =========================================================
-   4. NAVBAR - TRẠNG THÁI KHI CUỘN CHUỘT (.scrolled)
-   ========================================================= */
-.navbar.scrolled {
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    min-height: 90px;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid rgba(246, 210, 141, 0.2);
-    background: rgba(5, 10, 18, 0.85);
-    overflow: visible;
-}
-
-.navbar.scrolled .nav-inner {
     padding-left: clamp(15px, 3vw, 50px);
     padding-right: clamp(15px, 3vw, 50px);
-    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
-/* ---------- Logo Style ---------- */
+/* ---------- Navbar Logo ---------- */
 .logo {
     flex: 1;
     display: flex;
@@ -221,7 +83,7 @@ body {
     object-fit: contain;
 }
 
-/* ---------- Menu Style ---------- */
+/* ---------- Navbar Menu ---------- */
 .menu {
     flex: 3;
     display: flex;
@@ -236,10 +98,10 @@ body {
 }
 
 .menu a {
-    font-family: 'Maglony';
+    font-family:'Maglony';
     font-style: normal !important;
     position: relative;
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
     font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
     letter-spacing: .08em;
@@ -249,6 +111,7 @@ body {
     align-items: center;
     gap: 6px;
     transition: color .3s ease, text-shadow .3s ease;
+    animation: menuItemFade .5s cubic-bezier(.25, 1, .5, 1) both;
 }
 
 .menu a img {
@@ -259,7 +122,11 @@ body {
     object-fit: contain;
 }
 
-.menu a:hover,
+.menu a:hover {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, .5);
+}
+
 .menu a.active {
     color: var(--gold-light) !important;
     text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
@@ -279,19 +146,192 @@ body {
     animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+/* Style hover/active cho thẻ span trong menu */
+.menu a:hover span,
+.menu a .active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu a .active {
+    position: relative;
+    display: inline-block;
+}
+
+.menu a .active::after {
+    content: '';
+    position: absolute;
+    bottom: -.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Menu Toggle Button (Hamburger Icon) */
+.menu-toggle {
+    display: none;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Stagger Animation cho Menu Items */
+.menu a:nth-child(1) { animation-delay: 0.1s; }
+.menu a:nth-child(2) { animation-delay: 0.18s; }
+.menu a:nth-child(3) { animation-delay: 0.26s; }
+.menu a:nth-child(4) { animation-delay: 0.34s; }
+
+/* Keyframes Navbar */
+@keyframes navEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+@keyframes menuItemFade {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowSlideIn {
+    from {
+        width: 0%;
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0.3);
+    }
+    to {
+        width: 85%;
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1);
+    }
+}
+
+/* Responsive Navbar */
+@media (max-width: 1300px) {
+    .nav-inner {
+        justify-content: space-between; 
+        gap: 20px;
+    }
+
+    .logo {
+        flex: none; 
+    }
+
+    .menu {
+        flex: none; 
+        margin-left: auto; 
+        justify-content: flex-end; 
+        gap: clamp(30px, 1.8vw, 40px); 
+        padding-right: 0;
+    }
+
+    .nav-spacer {
+        display: none; 
+    }
+}
+
+@media (max-width: 900px) {
+    .menu {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        color: #ffffff;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .navbar .menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 32, 67, 0.95);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 30px;
+        display: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+    }
+
+    .navbar .menu.active {
+        display: flex;
+    }
+
+    .navbar .menu a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: fit-content;
+    }
+
+    .navbar .menu a img {
+        position: absolute;
+        right: 100%;
+        margin-right: 8px;
+        height: 50px;
+        width: auto;
+        pointer-events: none;
+    }
+
+    .part-main {
+        font-size: 1.4rem;
+    }
+
+    .part-season {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 769px) {
+    .navbar {
+        max-height: 85px;
+        min-height: 80px;
+    }
+}
 /* =========================================================
-   5. DROPDOWN MENU
-   ========================================================= */
+   DROPDOWN: HOẠT ĐỘNG
+========================================================= */
+
+/* --- 1. Khung chứa chính --- */
 .menu-dropdown {
     position: relative;
     display: flex;
     align-items: center;
 }
 
+/* --- 2. Tiêu đề "Hoạt động" (thẻ h2) --- */
 .menu-dropdown > h2 {
     font-family: 'Maglony';
     font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
     font-weight: normal;
+    font-style: normal !important;
     color: #ffffff;
     letter-spacing: .08em;
     white-space: nowrap;
@@ -304,12 +344,20 @@ body {
     transition: color .3s ease, text-shadow .3s ease;
 }
 
-.menu-dropdown:hover > h2,
+
+
+/* Hover & Active cho Tiêu đề h2 */
+.menu-dropdown:hover > h2 {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 10px rgba(246, 210, 141, .5);
+}
+
 .menu-dropdown > h2.active {
     color: var(--gold-light) !important;
     text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
 }
 
+/* Đường gạch mờ 2 đầu khi Active */
 .menu-dropdown > h2.active::before {
     content: '';
     position: absolute;
@@ -324,6 +372,9 @@ body {
     animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+
+
+/* --- 3. Khung chứa menu con (Desktop) --- */
 .menu-dropdown-content {
     position: absolute;
     top: calc(100% + 18px);
@@ -333,7 +384,7 @@ body {
     align-items: stretch;
     gap: 5px;
     width: max-content;
-    min-width: 380px;
+    min-width: 400px;
     padding: 7px;
     background: rgba(10, 22, 28, .97);
     border: 1px solid rgba(246, 210, 141, .28);
@@ -348,6 +399,7 @@ body {
     z-index: 9999;
 }
 
+/* Khoảng cầu nối giữ hover không bị trượt */
 .menu-dropdown::after {
     content: "";
     position: absolute;
@@ -357,6 +409,7 @@ body {
     height: 20px;
 }
 
+/* Hiển thị Menu Con (Desktop) */
 .menu-dropdown:hover .menu-dropdown-content,
 .menu-dropdown.open .menu-dropdown-content {
     opacity: 1;
@@ -365,14 +418,15 @@ body {
     transform: translateX(-50%) translateY(0);
 }
 
+/* --- 4. Các thẻ link con (Phá kén mùa 1 & 2) --- */
 .menu-dropdown-content a {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
-    min-width: 170px;
-    min-height: 45px;
+    min-width: 190px;
+    min-height: 50px;
     padding: 10px 18px;
     color: rgba(255, 255, 255, .88) !important;
     background: transparent;
@@ -385,77 +439,55 @@ body {
     transition: color .2s ease, background .2s ease;
 }
 
-.menu-dropdown-content a:hover,
-.menu-dropdown-content a.active {
+/* Hover & Active cho thẻ link con */
+.menu-dropdown-content a:hover {
     color: var(--gold-light) !important;
     background: rgba(246, 210, 141, .08);
 }
 
+.menu-dropdown-content a.active {
+    color: var(--gold-light) !important;
+}
+
+
 /* =========================================================
-   6. RESPONSIVE DESIGN (DESKTOP & MOBILE)
-   ========================================================= */
-/* Desktop (Hiển thị đầy đủ menu khi cuộn) */
-@media (min-width: 901px) {
-    .navbar.scrolled .logo,
-    .navbar.scrolled .menu {
-        display: flex !important;
-        opacity: 1;
+   DROPDOWN RESPONSIVE (IPAD & MOBILE)
+========================================================= */
+
+/* Cảm ứng / iPad */
+@media (hover: none) and (pointer: coarse) {
+    .menu-dropdown:hover .menu-dropdown-content {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-50%) translateY(-8px);
     }
 
-    .navbar.scrolled .nav-spacer {
-        display: block !important;
-        opacity: 1;
+    .menu-dropdown.open .menu-dropdown-content {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
     }
 
-    .navbar.scrolled .menu-toggle {
-        display: none !important;
+    .menu-dropdown::after { 
+        display: none; 
     }
 }
 
-/* Mobile & Tablet (<= 900px) */
+/* Mobile <= 900px */
 @media (max-width: 900px) {
-    .brand-image {
-        animation-name: pulseBackgroundMobile;
-    }
-
-    .flying-butterfly {
-        animation-name: floatButterflyMobile;
-    }
-
-    .navbar.scrolled .logo {
-        display: flex !important;
-        opacity: 1;
-    }
-
-    .navbar.scrolled .menu-toggle {
-        display: block !important;
-    }
-
-    .navbar.scrolled .menu {
-        position: absolute;
-        top: 90px;
-        left: 0;
-        width: 100%;
-        background: rgba(10, 22, 28, 0.95);
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        gap: 20px;
-        display: none !important;
-        border-bottom: 1px solid rgba(246, 210, 141, 0.2);
-    }
-
-    .navbar.scrolled .menu.active {
-        display: flex !important;
-        opacity: 1;
-    }
-
     .menu-dropdown {
         width: 100%;
         flex-direction: column;
         align-items: center;
     }
 
+    .menu-dropdown > h2 {
+        justify-content: center;
+        
+    }
+
+    /* Đổi về tĩnh (static) để tự động đẩy nút Tin Tức xuống bên dưới */
     .menu-dropdown-content {
         position: static;
         transform: none !important;
@@ -465,15 +497,19 @@ body {
         min-width: 0;
         padding: 0;
         gap: 8px;
-        background: rgba(5, 10, 18, 0.6);
+        background: rgba(10, 22, 28, 0.6);
         border: 1px solid transparent;
+        border-radius: 8px;
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
         max-height: 0;
         overflow: hidden;
+        margin-top: 0;
         transition: all 0.3s ease;
     }
 
+    /* Khi mở Dropdown trên Mobile */
     .menu-dropdown.open .menu-dropdown-content {
         opacity: 1 !important;
         visibility: visible !important;
@@ -482,5 +518,66 @@ body {
         margin-top: 10px;
         padding: 8px;
         border-color: rgba(246, 210, 141, .28);
+    }
+
+    .menu-dropdown-content a {
+        width: 100%;
+        min-width: 0;
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 0.95rem !important;
+    }
+}
+/* =========================================================
+   THÊM ĐOẠN NÀY VÀO CUỐI FILE CSS CỦA BẠN
+   ========================================================= */
+
+/* 1. Xử lý Hero nằm ngay bên dưới Navbar */
+.hero {
+    position: relative;
+    width: 100%;
+    /* Đẩy Hero xuống đúng bằng chiều cao Navbar (90px) để không bị che */
+    margin-top: 90px; 
+    z-index: 1; /* Thấp hơn z-index: 1000 của .navbar */
+    overflow: hidden;
+    display: block;
+}
+
+/* 2. Ảnh nền Hero: Rộng 100%, Height Auto, không bao giờ bị méo */
+.brand-image {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    object-fit: contain; /* Bật tỉ lệ chuẩn của ảnh */
+    animation: pulseBackground 4s ease-in-out infinite alternate;
+}
+
+/* 3. Con bướm bay giữ nguyên tỉ lệ */
+.flying-butterfly {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    width: 25%;
+    height: auto !important;
+    pointer-events: none; /* Tránh cản trở click chuột */
+    animation: floatButterfly 6s ease-in-out infinite;
+}
+
+/* 4. Animation cho Hero */
+@keyframes pulseBackground {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes floatButterfly {
+    0%, 100% { transform: translate(-50%, -80%) translateY(0px) rotate(0deg); }
+    50% { transform: translate(-50%, -80%) translateY(-15px) rotate(2deg); }
+}
+
+/* Responsive nhỏ cho Mobile nếu chiều cao Nav thay đổi */
+@media (max-width: 769px) {
+    .hero {
+        margin-top: 80px; /* Khớp với min-height: 80px của mobile navbar */
     }
 }
