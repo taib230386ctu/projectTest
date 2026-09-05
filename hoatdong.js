@@ -72,7 +72,7 @@ async function ensureVisitorName() {
     return null;
 }
 
-// Hàm thả tim (Like / Unlike) dùng chung cho cả Card trên Grid
+// Hàm thả tim (Like / Unlike)
 window.toggleLike = async function(e, momentId) {
     e.stopPropagation();
     if (!momentId) return;
@@ -91,16 +91,17 @@ window.toggleLike = async function(e, momentId) {
 };
 
 // =========================================================
-// 3. LUỒNG XỬ LÝ CHÍNH THEO THỨ TỰ GIAO DIỆN HTML
+// 3. LUỒNG XỬ LÝ CHÍNH
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
 
     // -----------------------------------------------------
-    // PHẦN 1: HERO SECTION (NÚT BẮT ĐẦU HÀNH TRÌNH)
+    // PHẦN 1: HERO SECTION - BẮT ĐẦU HÀNH TRÌNH (ẨN OPT-1, HIỆN OPT-2)
     // -----------------------------------------------------
     const startBtn = document.querySelector('.start-btn');
     const nameInput = document.getElementById('visitorName');
-    const uploadSection = document.querySelector('.garden-section');
+    const opt1 = document.querySelector('.opt-1');
+    const opt2 = document.querySelector('.opt-2');
 
     if (startBtn && nameInput) {
         startBtn.addEventListener('click', async (e) => {
@@ -159,9 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     buttonsStyling: false,
                     showConfirmButton: true
                 }).then(() => {
-                    if (!uploadSection) return;
-                    uploadSection.style.display = 'flex';
-                    setTimeout(() => { uploadSection.classList.add('active-fly'); }, 10);
+                    // Xử lý chuyển đổi giao diện: Ẩn opt-1, Hiện opt-2
+                    if (opt1) opt1.style.display = 'none';
+                    if (opt2) opt2.style.display = 'flex';
                 });
 
             } catch (err) {
@@ -175,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -----------------------------------------------------
-    // PHẦN 2: UPLOAD FORM SECTION (ĐĂNG VÀ HỦY BÀI)
+    // PHẦN 2: UPLOAD FORM SECTION
     // -----------------------------------------------------
     const fileInput = document.getElementById('file-input');
     const placeholder = document.getElementById('previewPlaceholder');
@@ -186,7 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCancel = document.getElementById('btnCancel');
     const imgTitle = document.getElementById('imgTitle');
 
-    // Xem trước File Ảnh/Video
     if (fileInput) {
         fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fileType = file.type;
                 const fileUrl = URL.createObjectURL(file);
                 if (fileNameDisplay) {
-                    fileNameDisplay.innerHTML = `Đã nhận: <b>${file.name}</b>`;
+                    fileNameDisplay.innerHTML = `Đã chọn: <b>${file.name}</b>`;
                     fileNameDisplay.style.color = '#f6d28d';
                 }
                 if (placeholder) placeholder.style.display = 'none';
@@ -226,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Tự động dãn độ cao Textarea
     if (imgTitle) {
         imgTitle.addEventListener('input', function () {
             this.style.height = 'auto'; 
@@ -234,14 +233,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Nút Upload bài lên Cloudinary & Firestore
-    // Nút Upload bài lên Cloudinary & Firestore
     if (btnUpload) {
         btnUpload.onclick = async () => {
             const file = fileInput ? fileInput.files[0] : null;
             const title = imgTitle ? imgTitle.value.trim() : "";
 
-            // 1. Kiểm tra đầu vào
             if (!file || !title) {
                 return Swal.fire({
                     title: 'Thiếu thông tin!',
@@ -252,13 +248,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // 2. Lấy thông tin Tên người dùng, Tiêu đề và Tên file
             const author = await ensureVisitorName();
             if (!author) return; 
 
-            const fileName = file.name; // Lấy tên file người dùng vừa chọn
+            const fileName = file.name;
 
-            // 3. Hiển thị Popup xác nhận
             Swal.fire({
                 html: `
                     <div class="popup-subhead-gieo">REAL FINE</div>
@@ -288,7 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     cancelButton: 'custom-gieo-btn-cancel'
                 }
             }).then(async (result) => {
-                // Nếu bấm "🌱 Gieo khoảnh khắc!" (confirmButton)
                 if (result.isConfirmed) {
                     try {
                         btnUpload.innerText = `ĐANG GIEO KHOẢNH KHẮC...`;
@@ -319,25 +312,25 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
 
                             Swal.fire({
-    html: `
-        <div class="custom-success-card">
-            <div class="custom-success-avatar">
-                <img src="./images/ML/ML_5.png" alt="Giỏi quá!">
-            </div>
-            <h2 class="custom-success-title">Đã gieo mầm!</h2>
-            <p class="custom-success-text">
-                Khoảnh khắc của bạn đang chờ được duyệt để gieo mầm trong khu vườn nhé!
-            </p>
-        </div>
-    `,
-    confirmButtonText: 'OK',
-    buttonsStyling: false,
-    customClass: {
-        popup: 'custom-success-popup',
-        actions: 'custom-success-actions',
-        confirmButton: 'custom-success-btn'
-    }
-});
+                                html: `
+                                    <div class="custom-success-card">
+                                        <div class="custom-success-avatar">
+                                            <img src="./images/ML/ML_5.png" alt="Giỏi quá!">
+                                        </div>
+                                        <h2 class="custom-success-title">Đã gieo mầm!</h2>
+                                        <p class="custom-success-text">
+                                            Khoảnh khắc của bạn đang chờ được duyệt để gieo mầm trong khu vườn nhé!
+                                        </p>
+                                    </div>
+                                `,
+                                confirmButtonText: 'OK',
+                                buttonsStyling: false,
+                                customClass: {
+                                    popup: 'custom-success-popup',
+                                    actions: 'custom-success-actions',
+                                    confirmButton: 'custom-success-btn'
+                                }
+                            });
 
                             if (imgTitle) imgTitle.value = ""; 
                             if (fileInput) fileInput.value = "";
@@ -361,118 +354,75 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // Nút Bỏ vào thùng rác (Cancel)
-    // Nút Bỏ vào thùng rác (Cancel)
-if (btnCancel) {
-    btnCancel.onclick = () => {
+    if (btnCancel) {
+        btnCancel.onclick = () => {
+            const title = imgTitle ? imgTitle.value.trim() : "";
+            const file = fileInput ? fileInput.files[0] : null;
 
-        // Kiểm tra dữ liệu hiện tại
-        const title = imgTitle ? imgTitle.value.trim() : "";
-        const file = fileInput ? fileInput.files[0] : null;
+            if (!title && !file) {
+                return Swal.fire({
+                    title: 'Chưa có gì để xóa!',
+                    text: 'Bạn chưa nhập tiêu đề hoặc chọn hình ảnh/video nào cả.',
+                    icon: 'warning',
+                    confirmButtonText: 'Đã hiểu',
+                    buttonsStyling: false,
+                    customClass: {
+                        popup: 'custom-swal-popup',
+                        confirmButton: 'custom-swal-btn'
+                    }
+                });
+            }
 
-        // Nếu chưa có tiêu đề VÀ chưa chọn hình/video
-        if (!title && !file) {
-            return Swal.fire({
-                title: 'Chưa có gì để xóa!',
-                text: 'Bạn chưa nhập tiêu đề hoặc chọn hình ảnh/video nào cả.',
-                icon: 'warning',
-                confirmButtonText: 'Đã hiểu',
+            Swal.fire({
+                html: `
+                    <div class="popup-subhead-outside">REAL FINE</div>
+                    <div class="custom-welcome-box">
+                        <div class="avatar-circle">
+                            <img src="./images/ML/ML_4.png" alt="Butterfly Icon">
+                        </div>
+                        <h2 class="welcome-title">Bạn muốn xóa bỏ sao?</h2>
+                        <p class="welcome-text">
+                            Những thông tin và hình ảnh/video bạn đang nhập sẽ bị xóa khỏi biểu mẫu.
+                        </p>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Bỏ',
+                cancelButtonText: 'Mình đổi ý',
                 buttonsStyling: false,
                 customClass: {
                     popup: 'custom-swal-popup',
-                    confirmButton: 'custom-swal-btn'
+                    actions: 'button-group',
+                    confirmButton: 'custom-swal-btn',
+                    cancelButton: 'custom-swal-btn'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (imgTitle) {
+                        imgTitle.value = "";
+                        imgTitle.style.height = 'auto';
+                    }
+                    if (fileInput) fileInput.value = "";
+                    if (imgPreview) {
+                        imgPreview.src = "";
+                        imgPreview.style.display = 'none';
+                    }
+                    if (videoPreview) {
+                        videoPreview.src = "";
+                        videoPreview.style.display = 'none';
+                    }
+                    if (placeholder) placeholder.style.display = 'block';
+                    if (fileNameDisplay) {
+                        fileNameDisplay.innerText = "Bạn chưa chọn khoảnh khắc nào...";
+                        fileNameDisplay.style.color = '#666';
+                    }
                 }
             });
-        }
-
-        // Có dữ liệu → hỏi xác nhận
-        Swal.fire({
-            html: `
-                <div class="popup-subhead-outside">REAL FINE</div>
-
-                <div class="custom-welcome-box">
-
-                    <div class="avatar-circle">
-                        <img 
-                            src="./images/ML/ML_4.png" 
-                            alt="Butterfly Icon"
-                        >
-                    </div>
-
-                    <h2 class="welcome-title">
-                        Bạn muốn xóa bỏ sao?
-                    </h2>
-
-                    <p class="welcome-text">
-                        Những thông tin và hình ảnh/video bạn đang nhập
-                        sẽ bị xóa khỏi biểu mẫu.
-                    </p>
-
-                </div>
-            `,
-
-            showCancelButton: true,
-
-            confirmButtonText: 'Bỏ',
-            cancelButtonText: 'Mình đổi ý',
-
-            buttonsStyling: false,
-
-            customClass: {
-                popup: 'custom-swal-popup',
-                actions: 'button-group',
-                confirmButton: 'custom-swal-btn',
-                cancelButton: 'custom-swal-btn'
-            }
-
-        }).then((result) => {
-
-            // Người dùng xác nhận xóa
-            if (result.isConfirmed) {
-
-                // Xóa tiêu đề
-                if (imgTitle) {
-                    imgTitle.value = "";
-                    imgTitle.style.height = 'auto';
-                }
-
-                // Xóa file
-                if (fileInput) {
-                    fileInput.value = "";
-                }
-
-                // Xóa preview ảnh
-                if (imgPreview) {
-                    imgPreview.src = "";
-                    imgPreview.style.display = 'none';
-                }
-
-                // Xóa preview video
-                if (videoPreview) {
-                    videoPreview.src = "";
-                    videoPreview.style.display = 'none';
-                }
-
-                // Hiện placeholder
-                if (placeholder) {
-                    placeholder.style.display = 'block';
-                }
-
-                // Reset tên file
-                if (fileNameDisplay) {
-                    fileNameDisplay.innerText =
-                        "Bạn chưa chọn khoảnh khắc nào...";
-
-                    fileNameDisplay.style.color = '#666';
-                }
-            }
-
-        });
-    };
-}
+        };
+    }
 
     // -----------------------------------------------------
-    // PHẦN 3: SEARCH BAR (TÌM KIẾM)
+    // PHẦN 3: SEARCH BAR
     // -----------------------------------------------------
     const searchInput = document.getElementById('searchInput');
     const clearSearchBtn = document.getElementById('clearSearch');
@@ -496,7 +446,7 @@ if (btnCancel) {
     }
 
     // -----------------------------------------------------
-    // PHẦN 4 & 5: GALLERIES (LOAD VIDEO & IMAGE GRIDS)
+    // PHẦN 4 & 5: GALLERIES
     // -----------------------------------------------------
     const videoGrid = document.getElementById('videoGrid');
     const imageGrid = document.getElementById('imageGrid');
@@ -509,143 +459,143 @@ if (btnCancel) {
     let unsubImage = null;
 
     function loadVideos() {
-    if (!videoGrid) return;
-    if (unsubVideo) unsubVideo(); 
-    
-    const fetchLimit = searchQuery ? 50 : currentVideoLimit;
-    const qVideo = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "video"), orderBy("createdAt", "desc"), limit(fetchLimit));
-    
-    unsubVideo = onSnapshot(qVideo, (snapshot) => {
-        videoGrid.innerHTML = ""; 
-        if (snapshot.empty) {
-            videoGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Chưa có thước phim nào...</p>`;
-            if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none';
-            return;
-        }
+        if (!videoGrid) return;
+        if (unsubVideo) unsubVideo(); 
         
-        let count = 0;
-        snapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            const docId = docSnap.id;
-            const authorName = data.author || "Người ẩn danh";
-            const title = data.title || "";
-            const likes = data.likeCount || 0;
-            const comments = data.commentCount || 0;
-
-            const filterText = searchQuery.toLowerCase();
-            if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
-                count++;
-                const posterUrl = data.url.replace(/\.[^/.]+$/, ".jpg");
-                const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
-                    ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
-                
-                const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
-                const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
-                const heartColor = isLiked ? '#e74c3c' : '#ccc';
-
-                videoGrid.innerHTML += `
-                    <div class="gallery-card moment-card" style="cursor: pointer;" onclick="openModal('video', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
-                        <div class="card-image-box">
-                            <video src="${data.url}" poster="${posterUrl}" preload="none" style="pointer-events: none;"></video>
-                        </div>
-                        <div class="card-content">
-                            <h3>${title}</h3>
-                            <div class="card-info-list">
-                                <p><i class="fa-solid fa-seedling"></i> Bởi: <span>${authorName}</span></p>
-                                <p><i class="fa-solid fa-seedling"></i> <span>${dateDisplay}</span></p>
-                            </div>
-                            
-                            <div class="card-actions-bar">
-                                <button onclick="toggleLike(event, '${docId}')" style="color: ${heartColor};">
-                                    <i class="${heartClass} fa-heart"></i> <span style="font-size: 0.9rem; color: #fff;">${likes}</span>
-                                </button>
-                                <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="color: #ccc;">
-                                    <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
+        const fetchLimit = searchQuery ? 50 : currentVideoLimit;
+        const qVideo = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "video"), orderBy("createdAt", "desc"), limit(fetchLimit));
+        
+        unsubVideo = onSnapshot(qVideo, (snapshot) => {
+            videoGrid.innerHTML = ""; 
+            if (snapshot.empty) {
+                videoGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Chưa có thước phim nào...</p>`;
+                if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none';
+                return;
             }
-        });
+            
+            let count = 0;
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const docId = docSnap.id;
+                const authorName = data.author || "Người ẩn danh";
+                const title = data.title || "";
+                const likes = data.likeCount || 0;
+                const comments = data.commentCount || 0;
 
-        if (count === 0 && searchQuery) {
-            videoGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Không tìm thấy video phù hợp...</p>`;
-        }
+                const filterText = searchQuery.toLowerCase();
+                if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
+                    count++;
+                    const posterUrl = data.url.replace(/\.[^/.]+$/, ".jpg");
+                    const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
+                        ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
+                    
+                    const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
+                    const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
+                    const heartColor = isLiked ? '#e74c3c' : '#ccc';
 
-        if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none'; 
-        else if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'inline-block'; 
-    });
-}
-
-function loadImages() {
-    if (!imageGrid) return;
-    if (unsubImage) unsubImage();
-    
-    const fetchLimit = searchQuery ? 50 : currentImageLimit;
-    const qImage = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "image"), orderBy("createdAt", "desc"), limit(fetchLimit));
-    
-    unsubImage = onSnapshot(qImage, (snapshot) => {
-        imageGrid.innerHTML = ""; 
-        if (snapshot.empty) {
-            imageGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Chưa có bức hình nào...</p>`;
-            if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
-            return;
-        }
-
-        let count = 0;
-        snapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            const docId = docSnap.id;
-            const authorName = data.author || "Người ẩn danh";
-            const title = data.title || "";
-            const likes = data.likeCount || 0;
-            const comments = data.commentCount || 0;
-
-            const filterText = searchQuery.toLowerCase();
-            if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
-                count++;
-                const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
-                    ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
-                
-                const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
-                const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
-                const heartColor = isLiked ? '#e74c3c' : '#ccc';
-
-                imageGrid.innerHTML += `
-                    <div class="gallery-card moment-card" style="cursor: pointer;" onclick="openModal('image', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
-                        <div class="card-image-box">
-                            <img src="${data.url}" alt="${title}">
-                        </div>
-                        <div class="card-content">
-                            <h3>${title}</h3>
-                            <div class="card-info-list">
-                                <p><i class="fa-solid fa-seedling"></i> Bởi: <span>${authorName}</span></p>
-                                <p><i class="fa-solid fa-seedling"></i> <span>${dateDisplay}</span></p>
+                    videoGrid.innerHTML += `
+                        <div class="gallery-card moment-card" style="cursor: pointer;" onclick="openModal('video', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
+                            <div class="card-image-box">
+                                <video src="${data.url}" poster="${posterUrl}" preload="none" style="pointer-events: none;"></video>
                             </div>
-                            
-                            <div class="card-actions-bar">
-                                <button onclick="toggleLike(event, '${docId}')" style="color: ${heartColor};">
-                                    <i class="${heartClass} fa-heart"></i> <span style="font-size: 0.9rem; color: #fff;">${likes}</span>
-                                </button>
-                                <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="color: #ccc;">
-                                    <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
-                                </button>
+                            <div class="card-content">
+                                <h3>${title}</h3>
+                                <div class="card-info-list">
+                                    <p><i class="fa-solid fa-seedling"></i> Bởi: <span>${authorName}</span></p>
+                                    <p><i class="fa-solid fa-seedling"></i> <span>${dateDisplay}</span></p>
+                                </div>
+                                
+                                <div class="card-actions-bar">
+                                    <button onclick="toggleLike(event, '${docId}')" style="color: ${heartColor};">
+                                        <i class="${heartClass} fa-heart"></i> <span style="font-size: 0.9rem; color: #fff;">${likes}</span>
+                                    </button>
+                                    <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="color: #ccc;">
+                                        <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
+            });
+
+            if (count === 0 && searchQuery) {
+                videoGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Không tìm thấy video phù hợp...</p>`;
             }
+
+            if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'none'; 
+            else if (btnLoadMoreVideo) btnLoadMoreVideo.style.display = 'inline-block'; 
         });
+    }
 
-        if (count === 0 && searchQuery) {
-            imageGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Không tìm thấy hình ảnh phù hợp...</p>`;
-        }
+    function loadImages() {
+        if (!imageGrid) return;
+        if (unsubImage) unsubImage();
+        
+        const fetchLimit = searchQuery ? 50 : currentImageLimit;
+        const qImage = query(collection(db, "moments"), where("status", "==", "approved"), where("type", "==", "image"), orderBy("createdAt", "desc"), limit(fetchLimit));
+        
+        unsubImage = onSnapshot(qImage, (snapshot) => {
+            imageGrid.innerHTML = ""; 
+            if (snapshot.empty) {
+                imageGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Chưa có bức hình nào...</p>`;
+                if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
+                return;
+            }
 
-        if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
-        else if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'inline-block';
-    });
-}
+            let count = 0;
+            snapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const docId = docSnap.id;
+                const authorName = data.author || "Người ẩn danh";
+                const title = data.title || "";
+                const likes = data.likeCount || 0;
+                const comments = data.commentCount || 0;
+
+                const filterText = searchQuery.toLowerCase();
+                if (title.toLowerCase().includes(filterText) || authorName.toLowerCase().includes(filterText)) {
+                    count++;
+                    const dateDisplay = (data.createdAt && typeof data.createdAt.seconds !== 'undefined') 
+                        ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('vi-VN') : 'Vừa xong';
+                    
+                    const isLiked = localStorage.getItem(`liked_${docId}`) === 'true';
+                    const heartClass = isLiked ? 'fa-solid' : 'fa-regular';
+                    const heartColor = isLiked ? '#e74c3c' : '#ccc';
+
+                    imageGrid.innerHTML += `
+                        <div class="gallery-card moment-card" style="cursor: pointer;" onclick="openModal('image', '${data.url}', '${title.replace(/'/g, "\\'")}', '${authorName.replace(/'/g, "\\'")}', '${dateDisplay}', '${docId}', ${likes})">
+                            <div class="card-image-box">
+                                <img src="${data.url}" alt="${title}">
+                            </div>
+                            <div class="card-content">
+                                <h3>${title}</h3>
+                                <div class="card-info-list">
+                                    <p><i class="fa-solid fa-seedling"></i> Bởi: <span>${authorName}</span></p>
+                                    <p><i class="fa-solid fa-seedling"></i> <span>${dateDisplay}</span></p>
+                                </div>
+                                
+                                <div class="card-actions-bar">
+                                    <button onclick="toggleLike(event, '${docId}')" style="color: ${heartColor};">
+                                        <i class="${heartClass} fa-heart"></i> <span style="font-size: 0.9rem; color: #fff;">${likes}</span>
+                                    </button>
+                                    <button onclick="openCommentModal(event, '${docId}', '${title.replace(/'/g, "\\'")}')" style="color: #ccc;">
+                                        <i class="fa-regular fa-comment"></i> <span style="font-size: 0.9rem; color: #fff;">${comments}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (count === 0 && searchQuery) {
+                imageGrid.innerHTML = `<p style="color:#fff; text-align:center; grid-column:1/-1;">Không tìm thấy hình ảnh phù hợp...</p>`;
+            }
+
+            if ((snapshot.docs.length < fetchLimit || searchQuery) && btnLoadMoreImage) btnLoadMoreImage.style.display = 'none';
+            else if (btnLoadMoreImage) btnLoadMoreImage.style.display = 'inline-block';
+        });
+    }
 
     if (videoGrid) loadVideos();
     if (imageGrid) loadImages();
@@ -663,7 +613,7 @@ function loadImages() {
     }
 
     // -----------------------------------------------------
-    // PHẦN 6: MODAL LIGHTBOX 2 CỘT (MEDIA MODAL)
+    // PHẦN 6: MODAL LIGHTBOX
     // -----------------------------------------------------
     const mediaModal = document.getElementById('mediaModal');
     const closeModalBtn = document.getElementById('closeModal');
@@ -798,9 +748,7 @@ function loadImages() {
         }
     }
 
-    if (modalBtnSendComment) {
-        modalBtnSendComment.onclick = handleSendModalComment;
-    }
+    if (modalBtnSendComment) modalBtnSendComment.onclick = handleSendModalComment;
 
     if (modalCommentInput) {
         modalCommentInput.addEventListener('keypress', (e) => {
@@ -809,40 +757,27 @@ function loadImages() {
     }
 
     if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', () => {
-
-        mediaModal.classList.remove('show');
-
-        document.body.classList.remove('modal-open');
-
-        modalMediaContainer.innerHTML = '';
-
-        if (unsubModalComments) {
-            unsubModalComments();
-        }
-    });
-}
+        closeModalBtn.addEventListener('click', () => {
+            mediaModal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            modalMediaContainer.innerHTML = '';
+            if (unsubModalComments) unsubModalComments();
+        });
+    }
 
     if (mediaModal) {
-    mediaModal.addEventListener('click', (e) => {
-
-        if (e.target === mediaModal) {
-
-            mediaModal.classList.remove('show');
-
-            document.body.classList.remove('modal-open');
-
-            modalMediaContainer.innerHTML = '';
-
-            if (unsubModalComments) {
-                unsubModalComments();
+        mediaModal.addEventListener('click', (e) => {
+            if (e.target === mediaModal) {
+                mediaModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+                modalMediaContainer.innerHTML = '';
+                if (unsubModalComments) unsubModalComments();
             }
-        }
-    });
-}
+        });
+    }
 
     // -----------------------------------------------------
-    // PHẦN 7: MODAL BÌNH LUẬN ĐƠN (COMMENT MODAL)
+    // PHẦN 7: MODAL BÌNH LUẬN ĐƠN
     // -----------------------------------------------------
     const commentModal = document.getElementById('commentModal');
     const closeCommentModal = document.getElementById('closeCommentModal');
@@ -931,9 +866,7 @@ function loadImages() {
         }
     }
 
-    if (btnSendComment) {
-        btnSendComment.onclick = handleSendComment;
-    }
+    if (btnSendComment) btnSendComment.onclick = handleSendComment;
 
     if (commentInput) {
         commentInput.addEventListener('keypress', (e) => {
@@ -961,17 +894,11 @@ function loadImages() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (mediaModal && mediaModal.classList.contains('show')) {
-
-    mediaModal.classList.remove('show');
-
-    document.body.classList.remove('modal-open');
-
-    modalMediaContainer.innerHTML = '';
-
-    if (unsubModalComments) {
-        unsubModalComments();
-    }
-}
+                mediaModal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+                modalMediaContainer.innerHTML = '';
+                if (unsubModalComments) unsubModalComments();
+            }
             if (commentModal && commentModal.classList.contains('show')) {
                 commentModal.classList.remove('show');
                 if (unsubComments) unsubComments();
