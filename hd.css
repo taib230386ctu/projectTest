@@ -176,7 +176,7 @@ body {
 .menu-toggle {
     display: none;
     font-size: clamp(1.5rem, 3vw, 2rem);
-    color: #fff;
+    color: #ffffff;
     cursor: pointer;
     user-select: none;
 }
@@ -262,6 +262,7 @@ body {
         font-size: 24px;
         cursor: pointer;
     }
+
 
     .navbar .menu {
         position: absolute;
@@ -527,4 +528,22 @@ body {
         padding: 8px 12px;
         font-size: 0.95rem !important;
     }
+}
+/* Sửa nút menu-toggle không bị tệp màu trắng */
+button.menu-toggle {
+    background-color: transparent !important; /* Hoặc đổi thành màu tối như #04328a */
+    color: #ffffff !important;              /* Đổi màu chữ/icon sang xanh tối/đen */
+    border: none;                             /* Bỏ viền mặc định nếu có */
+}
+
+/* Trường hợp nút dùng icon FontAwesome / SVG bên trong */
+button.menu-toggle i,
+button.menu-toggle svg {
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+/* Trường hợp nút dùng các thẻ span tạo vạch 3 gạch */
+button.menu-toggle span {
+    background-color: #000000 !important;
 }
