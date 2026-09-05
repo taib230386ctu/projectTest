@@ -259,7 +259,7 @@ body {
     min-height: 200px;
     margin-right: -5%;
     position: relative;
-    padding: 30px 100px 15px 40px;
+    padding: 30px 50px 15px 40px;
     z-index: 2;
 }
 
@@ -372,10 +372,15 @@ body {
 .trip-item-title h3 {
     position: relative;
     z-index: 2;
-    font-size: 22px;
+    font-size: clamp(16px, 4.5vw, 22px);
     color: #1e3d0d;
     margin: 0;
     font-family: 'Quicksand';
+
+    /* Bắt buộc nằm trên 1 dòng */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-title .shape,
@@ -923,9 +928,6 @@ body {
     .item-talkshow {
         padding: 45px 10px;
     }
-    .ts-info-box {
-        padding: 30px 20px 30px 100px;
-    }
     .item-trip {
         padding: 30px 10px 45px 10px;
     }
@@ -1181,5 +1183,10 @@ body {
     }
     .btfly-2{
         top:200vh;
+    }
+}
+@media (max-width: 1300px) {
+    .item-title h3, .trip-item-title h3{
+        font-size:18px;
     }
 }
