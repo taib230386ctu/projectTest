@@ -13,6 +13,11 @@
             link1.href = 'index_t.css?v=' + new Date().getTime(); 
             document.head.appendChild(link1);
 
+            const link2 = document.createElement('link');
+                link2.rel = 'stylesheet';
+                link2.href = 'hd.css?v=' + new Date().getTime(); 
+                document.head.appendChild(link2);
+
             const link3 = document.createElement('link');
                 link3.rel = 'stylesheet';
                 link3.href = 'ft.css?v=' + new Date().getTime(); 
@@ -21,6 +26,8 @@
     </script>
     <!-- Thêm defer để script không bị lỗi dính DOM -->
     <script src="index_t.js?v=1.0" defer></script>
+    <script src="navbar.js?v=1.0" defer></script>
+
 </head>
 <body>
     <nav class="navbar">
@@ -35,16 +42,43 @@
             <div class="menu">
                 <a href="index.html" class="active">Trang chủ</a>
                 <div class="menu-dropdown">
-                    <h2>
-                        Hoạt động
-                    </h2>
+                    <h2>Hoạt động</h2>
                     <div class="menu-dropdown-content">
-                        <a href="phaken01.html">
-                            Phá kén mùa 1
-                        </a>
-                        <a href="phaken02.html">
-                            Phá kén mùa 2
-                        </a>
+                        <!-- MÙA 1 -->
+                        <div class="season-card season-1">
+                            <div class="season-info">
+                                <a href="phaken01.html">
+                                    Phá kén mùa 1
+                                </a>
+                                <img
+                                    src="./images/chu/phakenchammo.png"
+                                    alt=""
+                                >
+                            </div>
+                            <img
+                                class="season-decor"
+                                src="./images/ken/COCOON 2.png"
+                                alt=""
+                            >
+                        </div>
+                        <!-- MÙA 2 -->
+                        <div class="season-card season-2">
+                            <div class="season-info">
+                                <a href="phaken02.html">
+                                    Phá kén mùa 2
+                                </a>
+                                <img
+                                    class="season-logo"
+                                    src="./images/logo/text_pkenmua2.png"
+                                    alt=""
+                                >
+                            </div>
+                            <img
+                                class="season-decor"
+                                src="./images/ML/ML_1.png"
+                                alt=""
+                            >
+                        </div>
                     </div>
                 </div>
                 <a href="tintuc.html">Tin tức</a>
