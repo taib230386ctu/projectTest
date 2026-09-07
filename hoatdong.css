@@ -1262,7 +1262,7 @@ body.modal-open {
     }
 
     .gallery-title {
-        font-size: 25px;
+        font-size: 23px;
     }
 
     .gallery-subtitle {
@@ -1295,4 +1295,25 @@ body.modal-open {
         height: 150px;
         padding: 20px;
     }
+}
+.gallery-title-subtitle {
+  /* Căn giữa */
+  text-align: center;
+
+  /* Cách trên dưới 20px */
+  margin: 20px auto;
+
+  /* Gradient: Trắng sang xanh nhạt */
+  background: linear-gradient(to bottom, #ffffff 0%, #a8d8ea 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  /* Viền đen mờ nhẹ nhàng */
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+
+  display: block;
+  font-weight: 600;
+    font-size: clamp(18px, 4vw, 25px);
 }
