@@ -761,3 +761,22 @@ button.menu-toggle span {
         height: 60px;
     }
 }
+.menu-dropdown > h2.active {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
+}
+
+.menu-dropdown > h2.active::before {
+    /* Gạch chân phát sáng */
+    content: '';
+    position: absolute;
+    bottom: -.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    height: 2px;
+    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+    box-shadow: 0 0 12px var(--gold);
+    border-radius: 10px;
+    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
