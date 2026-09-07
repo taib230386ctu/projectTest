@@ -149,14 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <img src="./images/ML/ML_2.png" alt="Butterfly Icon">
                             </div>
                             <h2 class="welcome-title">Chào mừng ${currentVisitorName}!</h2>
-                            <p class="welcome-text">Cảm ơn bạn đã ghé thăm. Hãy cùng gieo những khoảnh khắc thật đẹp vào khu vườn nhé!</p>
+                            <p class="welcome-text">Chúc bạn có một hành trình thật nhẹ nhàng tại Phá Kén. ✨</p>
                         </div>
                     `,
                     customClass: {
                         popup: 'custom-swal-popup',
                         confirmButton: 'custom-swal-btn'
                     },
-                    confirmButtonText: 'BẮT ĐẦU HÀNH TRÌNH',
+                    confirmButtonText: 'BẮT ĐẦU THÔI',
                     buttonsStyling: false,
                     showConfirmButton: true
                 }).then(() => {
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="popup-subhead-gieo">REAL FINE</div>
                     <div class="custom-gieo-card">
                         <div class="custom-gieo-avatar">
-                            <img src="./images/icon_tb/icon_tb1.png" alt="Icon">
+                            <img src="./images/icon_tb/camon.png" alt="Icon" style="width: 100px; height: auto; vertical-align: middle;">
                         </div>
                         <h2 class="custom-gieo-title">Gieo khoảnh khắc này nhé?</h2>
                         
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p>✦ File: ${fileName}</p>
                         </div>
                         
-                        <p class="custom-gieo-subtext">Bạn đã sẵn sàng gieo khoảnh khắc này chưa</p>
+                        <p class="custom-gieo-subtext">Bạn đã sẵn sàng thả chiếc khoảnh khắc này chưa?</p>
                     </div>
                 `,
                 showCancelButton: true,
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `,
                 showCancelButton: true,
-                confirmButtonText: 'Bỏ',
+                confirmButtonText: 'Ngừng gieo',
                 cancelButtonText: 'Mình đổi ý',
                 buttonsStyling: false,
                 customClass: {
