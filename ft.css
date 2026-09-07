@@ -7,7 +7,7 @@
     width: 100%;
     min-height: 200px; 
     background: 
-        linear-gradient(135deg, rgba(7, 38, 165, 0.678) 0%, #0c2a77a1 100%),
+        linear-gradient(135deg, rgba(7, 89, 165, 0.479) 0%, #0c2a77a1 100%),
         url('./images/background/bg_footer.png');
     background-size: cover;
     background-position: bottom;
@@ -46,15 +46,23 @@
 }
 
 .cot-1 .logo {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
+    display: inline-flex;
+  flex-direction: column; /* Xếp logo ở trên, chữ ở dưới */
+  align-items: center;    /* Căn giữa cả 2 theo trục dọc */
+  width: fit-content;     /* Chiều rộng container co lại bằng đúng kích thước logo */
+  text-decoration: none;
 }
 
 .cot-1 .logo img {
-    max-height: 140px;
+    max-height: 120px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+.cot-1 .logo img:last-child {
+    max-height: 60px;
     max-width: 100%;
     height: auto;
     width: auto;
