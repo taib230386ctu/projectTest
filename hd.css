@@ -446,7 +446,7 @@ button.menu-toggle span {
         flex: none;
         margin-left: auto;
         justify-content: flex-end;
-        gap: clamp(30px, 1.8vw, 40px);
+        gap: clamp(20px, 1.8vw, 40px);
         padding-right: 0;
     }
 
