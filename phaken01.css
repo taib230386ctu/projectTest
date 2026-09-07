@@ -1,5 +1,5 @@
 /* =========================================================
-   1. SYSTEM & RESET
+   1season-card-DAM1 season-1 SYSTEM & RESET
    ========================================================= */
 
 * {
@@ -560,7 +560,7 @@ body {
     gap: 25px;
 }
 
-.season-card {
+.season-card-DAM1 {
     background: linear-gradient(180deg, rgba(250, 248, 238, 0.95) 0%, rgba(216, 224, 192, 0.95) 100%);
     border: 3px solid #3E5E32;
     border-radius: 20px;
@@ -575,7 +575,7 @@ body {
     transition: .35s;
 }
 
-.season-card:hover {
+.season-card-DAM1:hover {
     transform: translateY(-8px);
     border-color: var(--gold);
     box-shadow: 0 0 20px rgba(212, 176, 106, .15);
@@ -982,7 +982,7 @@ body {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-    .season-card {
+    .season-card-DAM1 {
         min-height: auto;
         padding: 25px 20px;
     }
