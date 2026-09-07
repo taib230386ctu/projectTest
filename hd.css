@@ -16,20 +16,21 @@ html, body {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden !important; /* Chặn tuyệt đối cuộn ngang */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE / Edge cũ */
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE / Edge cũ */
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-    display: none; /* Chrome / Safari / Opera */
+    display: none;                /* Chrome / Safari / Opera */
 }
 
 body {
     background: #050b14;
-    color: white;
+    color: #ffffff;
     position: relative;
 }
+
 @font-face {
     font-family: "Maglony";
     src: url("./fonts/1FTV-Maglony.ttf") format("truetype");
@@ -40,14 +41,17 @@ body {
    ========================================================= */
 .navbar {
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: 1000;
-    background: rgba(5, 10, 18, 0.45);
-    backdrop-filter: blur(14px);
     width: 100%;
     min-height: 90px;
-    box-sizing: border-box;
+    background: rgba(5, 10, 18, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     display: flex;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .nav-inner {
@@ -65,9 +69,9 @@ body {
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     flex-shrink: 0;
     text-decoration: none;
-    justify-content: flex-start;
 }
 
 .logo img {
@@ -77,7 +81,7 @@ body {
 }
 
 .logo-text .text-pkm2 {
-    width: clamp(100px, 12vw, 150px); 
+    width: clamp(100px, 12vw, 150px);
     height: auto;
     display: block;
     object-fit: contain;
@@ -98,10 +102,10 @@ body {
 }
 
 .menu a {
-    font-family:'Maglony';
+    font-family: 'Maglony';
     font-style: normal !important;
     position: relative;
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
     font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
     letter-spacing: .08em;
@@ -172,22 +176,220 @@ body {
     animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Menu Toggle Button (Hamburger Icon) */
+/* Menu Toggle Button (Mobile Hamburger) */
 .menu-toggle {
     display: none;
     font-size: clamp(1.5rem, 3vw, 2rem);
     color: #ffffff;
     cursor: pointer;
     user-select: none;
+    background-color: transparent !important;
+    border: none;
 }
 
-/* Stagger Animation cho Menu Items */
-.menu a:nth-child(1) { animation-delay: 0.1s; }
+button.menu-toggle i,
+button.menu-toggle svg {
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+button.menu-toggle span {
+    background-color: #000000 !important;
+}
+
+/* Menu Item Stagger Delays */
+.menu a:nth-child(1) { animation-delay: 0.10s; }
 .menu a:nth-child(2) { animation-delay: 0.18s; }
 .menu a:nth-child(3) { animation-delay: 0.26s; }
 .menu a:nth-child(4) { animation-delay: 0.34s; }
 
-/* Keyframes Navbar */
+/* =========================================================
+   3. DROPDOWN - HOẠT ĐỘNG
+   ========================================================= */
+.menu-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Tiêu đề "Hoạt động" */
+.menu-dropdown > h2 {
+    font-family: 'Maglony';
+    font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
+    font-weight: normal;
+    font-style: normal;
+    color: #ffffff;
+    letter-spacing: .08em;
+    white-space: nowrap;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    transition: color .3s ease, text-shadow .3s ease;
+}
+
+.menu-dropdown:hover > h2 {
+    color: var(--gold-light);
+    text-shadow: 0 0 10px rgba(246, 210, 141, .5);
+}
+
+/* Vùng đệm hover (giữ chuột không rớt dropdown) */
+.menu-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -25px;
+    width: calc(100% + 50px);
+    height: 20px;
+}
+
+/* Khung dropdown chính */
+.menu-dropdown-content {
+    position: absolute;
+    top: calc(100% + 18px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    width: 500px;
+    height: 86px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 40px;
+
+    /* Nền trong suốt xịn */
+    background: linear-gradient(
+        to right,
+        rgba(14, 43, 101, 0.6) 0%,
+        rgba(143, 158, 197, 0.6) 100%
+    );
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+    z-index: 9999;
+}
+
+/* Lớp viền rỗng ruột - không bị lót màu trắng bên dưới */
+.menu-dropdown-content::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 40px;
+    padding: 3px; /* Độ dày viền */
+    background: linear-gradient(to bottom, #bdbdbf, #5a6f9c);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Hiệu ứng nền bóng chéo bên trong Dropdown */
+.menu-dropdown-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255, 255, 255, .04) 40%,
+        rgba(255, 255, 255, .12) 50%,
+        transparent 65%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Trạng thái mở Dropdown */
+.menu-dropdown:hover .menu-dropdown-content,
+.menu-dropdown.open .menu-dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- Chi tiết Item trong Dropdown ---------- */
+.season-card {
+    position: relative;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.season-info {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.season-info a {
+    display: block;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: #ffffff !important;
+    font-family: 'Maglony';
+    font-size: 18px !important;
+    font-weight: normal;
+    letter-spacing: .01em;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color .2s ease, transform .2s ease;
+}
+
+.season-info a:hover {
+    color: var(--gold-light) !important;
+    background: none !important;
+    transform: scale(1.03);
+}
+
+.season-info .season-logo,
+.season-info > img {
+    width: 60px;
+    height: 30px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Ảnh Decor */
+.season-decor {
+    position: absolute;
+    z-index: 5;
+    width: auto;
+    height: 60px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.season-1 .season-decor {
+    right: 0;
+    top: 0px;
+}
+
+.season-2 .season-decor {
+    right: 5px;
+    height: 100px;
+}
+
+/* =========================================================
+   4. ANIMATIONS & KEYFRAMES
+   ========================================================= */
 @keyframes navEntrance {
     from {
         opacity: 0;
@@ -227,27 +429,29 @@ body {
     }
 }
 
-/* Responsive Navbar */
+/* =========================================================
+   5. RESPONSIVE MEDIA QUERIES
+   ========================================================= */
 @media (max-width: 1300px) {
     .nav-inner {
-        justify-content: space-between; 
+        justify-content: space-between;
         gap: 20px;
     }
 
     .logo {
-        flex: none; 
+        flex: none;
     }
 
     .menu {
-        flex: none; 
-        margin-left: auto; 
-        justify-content: flex-end; 
-        gap: clamp(30px, 1.8vw, 40px); 
+        flex: none;
+        margin-left: auto;
+        justify-content: flex-end;
+        gap: clamp(30px, 1.8vw, 40px);
         padding-right: 0;
     }
 
     .nav-spacer {
-        display: none; 
+        display: none;
     }
 }
 
@@ -262,7 +466,6 @@ body {
         font-size: 24px;
         cursor: pointer;
     }
-
 
     .navbar .menu {
         position: absolute;
@@ -316,234 +519,245 @@ body {
         min-height: 80px;
     }
 }
-/* =========================================================
-   DROPDOWN: HOẠT ĐỘNG
-========================================================= */
+@media (max-width: 900px) and (min-width: 501px) {
 
-/* --- 1. Khung chứa chính --- */
-.menu-dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-/* --- 2. Tiêu đề "Hoạt động" (thẻ h2) --- */
-.menu-dropdown > h2 {
-    font-family: 'Maglony';
-    font-size: clamp(1rem, 1.1vw + 0.4rem, 1.35rem);
-    font-weight: normal;
-    font-style: normal !important;
-    color: #ffffff;
-    letter-spacing: .08em;
-    white-space: nowrap;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0;
-    position: relative;
-    transition: color .3s ease, text-shadow .3s ease;
-}
-
-
-
-/* Hover & Active cho Tiêu đề h2 */
-.menu-dropdown:hover > h2 {
-    color: var(--gold-light) !important;
-    text-shadow: 0 0 10px rgba(246, 210, 141, .5);
-}
-
-.menu-dropdown > h2.active {
-    color: var(--gold-light) !important;
-    text-shadow: 0 0 15px rgba(246, 210, 141, 0.6);
-}
-
-/* Đường gạch mờ 2 đầu khi Active */
-.menu-dropdown > h2.active::before {
-    content: '';
-    position: absolute;
-    bottom: -.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    height: 2px;
-    background: linear-gradient(to right, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
-    box-shadow: 0 0 12px var(--gold);
-    border-radius: 10px;
-    animation: glowSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-
-
-/* --- 3. Khung chứa menu con (Desktop) --- */
-.menu-dropdown-content {
-    position: absolute;
-    top: calc(100% + 18px);
-    left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    display: flex;
-    align-items: stretch;
-    gap: 5px;
-    width: max-content;
-    min-width: 400px;
-    padding: 7px;
-    background: rgba(10, 22, 28, .97);
-    border: 1px solid rgba(246, 210, 141, .28);
-    border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, .45);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
-    z-index: 9999;
-}
-
-/* Khoảng cầu nối giữ hover không bị trượt */
-.menu-dropdown::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: -20px;
-    width: calc(100% + 40px);
-    height: 20px;
-}
-
-/* Hiển thị Menu Con (Desktop) */
-.menu-dropdown:hover .menu-dropdown-content,
-.menu-dropdown.open .menu-dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* --- 4. Các thẻ link con (Phá kén mùa 1 & 2) --- */
-.menu-dropdown-content a {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    min-width: 190px;
-    min-height: 50px;
-    padding: 10px 18px;
-    color: rgba(255, 255, 255, .88) !important;
-    background: transparent;
-    border-radius: 7px;
-    font-family: 'Maglony';
-    font-size: 1rem !important;
-    letter-spacing: .04em;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color .2s ease, background .2s ease;
-}
-
-/* Hover & Active cho thẻ link con */
-.menu-dropdown-content a:hover {
-    color: var(--gold-light) !important;
-    background: rgba(246, 210, 141, .08);
-}
-
-.menu-dropdown-content a.active {
-    color: var(--gold-light) !important;
-}
-
-
-/* =========================================================
-   DROPDOWN RESPONSIVE (IPAD & MOBILE)
-========================================================= */
-
-/* Cảm ứng / iPad */
-@media (hover: none) and (pointer: coarse) {
-    .menu-dropdown:hover .menu-dropdown-content {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transform: translateX(-50%) translateY(-8px);
-    }
-
-    .menu-dropdown.open .menu-dropdown-content {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-    }
-
-    .menu-dropdown::after { 
-        display: none; 
-    }
-}
-
-/* Mobile <= 900px */
-@media (max-width: 900px) {
     .menu-dropdown {
-        width: 100%;
+        position: relative;
+        display: flex;
         flex-direction: column;
         align-items: center;
+        width: auto;
     }
 
     .menu-dropdown > h2 {
-        justify-content: center;
-        
+        font-size: 1.1rem;
     }
 
-    /* Đổi về tĩnh (static) để tự động đẩy nút Tin Tức xuống bên dưới */
     .menu-dropdown-content {
-        position: static;
-        transform: none !important;
-        flex-direction: column;
-        align-items: center;
-        width: 80%;
-        min-width: 0;
-        padding: 0;
-        gap: 8px;
-        background: rgba(10, 22, 28, 0.6);
-        border: 1px solid transparent;
-        border-radius: 8px;
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+
+        width: 360px;
+        height: 68px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+
+        border: 3px solid transparent;
+        border-radius: 35px;
+
+        background:
+            linear-gradient(110deg, #102d68, #7186b5) padding-box,
+            linear-gradient(180deg, #d8d8da, #536a99) border-box;
+
+        box-shadow:
+            0 8px 22px rgba(0,0,0,.35),
+            inset 0 0 14px rgba(255,255,255,.08);
+
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        max-height: 0;
-        overflow: hidden;
-        margin-top: 0;
-        transition: all 0.3s ease;
+
+        transition:
+            opacity .2s ease,
+            transform .2s ease,
+            visibility .2s ease;
+
+        z-index: 9999;
     }
 
-    /* Khi mở Dropdown trên Mobile */
+    .menu-dropdown:hover .menu-dropdown-content,
     .menu-dropdown.open .menu-dropdown-content {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        max-height: 200px;
-        margin-top: 10px;
-        padding: 8px;
-        border-color: rgba(246, 210, 141, .28);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
     }
 
-    .menu-dropdown-content a {
-        width: 100%;
-        min-width: 0;
-        min-height: 40px;
-        padding: 8px 12px;
-        font-size: 0.95rem !important;
+    .season-card {
+        position: relative;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+    }
+
+    .season-info {
+        position: relative;
+        z-index: 3;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+    }
+
+    .season-info a {
+        font-size: 12px !important;
+        line-height: 1;
+        letter-spacing: 0 !important;
+    }
+
+    .season-info .season-logo,
+    .season-info > img {
+        width: 50px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    .season-decor {
+        position: absolute;
+        z-index: 2;
+
+        height: 40px;
+        width: auto;
+
+        pointer-events: none;
+    }
+
+    .season-1 .season-decor {
+        top: 0;
+    }
+
+    .season-2 .season-decor {
+        
+        height: 75px;
     }
 }
-/* Sửa nút menu-toggle không bị tệp màu trắng */
-button.menu-toggle {
-    background-color: transparent !important; /* Hoặc đổi thành màu tối như #04328a */
-    color: #ffffff !important;              /* Đổi màu chữ/icon sang xanh tối/đen */
-    border: none;                             /* Bỏ viền mặc định nếu có */
-}
+    @media (max-width: 500px) {
 
-/* Trường hợp nút dùng icon FontAwesome / SVG bên trong */
-button.menu-toggle i,
-button.menu-toggle svg {
-    color: #000000 !important;
-    fill: #000000 !important;
-}
+    .menu-dropdown {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: auto;
+    }
 
-/* Trường hợp nút dùng các thẻ span tạo vạch 3 gạch */
-button.menu-toggle span {
-    background-color: #000000 !important;
+    .menu-dropdown > h2 {
+        font-size: 1.05rem;
+        margin: 0;
+    }
+
+    .menu-dropdown-content {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+
+        width: 300px;
+        height: 58px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+
+
+        border: 2px solid transparent;
+        border-radius: 30px;
+
+        background:
+            linear-gradient(110deg, #102d68, #7186b5) padding-box,
+            linear-gradient(180deg, #d8d8da, #536a99) border-box;
+
+        box-shadow:
+            0 8px 20px rgba(0,0,0,.35),
+            inset 0 0 12px rgba(255,255,255,.08);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            opacity .2s ease,
+            transform .2s ease,
+            visibility .2s ease;
+
+        z-index: 9999;
+    }
+
+    .menu-dropdown:hover .menu-dropdown-content,
+    .menu-dropdown.open .menu-dropdown-content {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* 2 ô mùa */
+    .season-card {
+        position: relative;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+    }
+
+    .season-info {
+        position: relative;
+        z-index: 3;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        gap: 2px;
+    }
+
+    .season-info a {
+        width: auto !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+
+        padding: 0 !important;
+        margin: 0 !important;
+
+        background: none !important;
+        border: none !important;
+
+        color: white !important;
+
+        font-family: 'Maglony';
+        font-size: 10px !important;
+        line-height: 1;
+        letter-spacing: 0 !important;
+        white-space: nowrap;
+    }
+
+    .season-info .season-logo,
+    .season-info > img {
+        width: 36px;
+        height: 17px;
+        object-fit: contain;
+    }
+
+    .season-decor {
+        position: absolute;
+        z-index: 2;
+
+        width: auto;
+        height: 34px;
+
+        object-fit: contain;
+        pointer-events: none;
+    }
+
+    .season-1 .season-decor {
+        top: 0;
+    }
+
+    .season-2 .season-decor {
+        
+        height: 60px;
+    }
 }
