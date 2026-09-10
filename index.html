@@ -25,8 +25,9 @@
         })();
     </script>
     <!-- Thêm defer để script không bị lỗi dính DOM -->
-    <script src="index_t.js?v=1.0" defer></script>
-    <script src="navbar.js?v=1.0" defer></script>
+    <script type="module" src="index_t.js?v=1.0"></script>
+    <script type="module" src="navbar.js"></script>
+
 
 </head>
 <body>
@@ -90,20 +91,226 @@
         </div>
     </nav>
     
-    <!-- Hero Section -->
     <section class="hero">
-        <img
-            class="brand-image"
-            src="./images/background/bg_index.jpg"
-            alt="Phá Kén Mùa 2">
-        <img
-                class="flying-butterfly"
-                src="./images/Butterfly/butterfly.png"
-                alt="">
+        <div class="hero-container">
+            
+            <div class="hero-col-left">
+                <img src="./images/chu/phakenchamtoa.png" alt="Phá Kén Chạm Tỏa" class="hero-title-img">
+
+                <p class="hero-desc">
+                    Một hành trình để được lắng nghe,<br>
+                    được kết nối và trở thành chính mình
+                </p>
+
+                <div class="btn-group">
+                    <a href="hoatdong.html" class="btn">
+                        KHÁM PHÁ HÀNH TRÌNH <span>&rarr;</span>
+                    </a>
+                    <a href="phaken01.html" class="btn">
+                        TÌM HIỂU THÊM <span>&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-col-right">
+                <img src="./images/Butterfly/butterfly-00.png" alt="Bướm phát sáng" class="hero-butterfly-img">
+            </div>
+
+        </div>
     </section>
-    <h1 style="min-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center;">
-        CHƯA CÓ NỘI DUNG
-    </h1>
+    <!-- KHỐI BỌC CHUNG NỀN CHO CẢ 4 PHẦN -->
+<div class="home-main-flow">
+
+    <!-- SECTION: ĐƠN VỊ TỔ CHỨC -->
+    <section class="organizers">
+        <h2 class="organizers-title">ĐƠN VỊ TỔ CHỨC</h2>
+        <div class="organizers-wrapper">
+            <div class="organizers-grid">
+                <!-- Card 1 -->
+                <div class="org-card">
+                    <div class="org-logo">
+                        <img src="./images/logo/tdt-logo.png" alt="Trường Đại học Tôn Đức Thắng">
+                    </div>
+                    <h3 class="org-name">TRƯỜNG ĐẠI HỌC TÔN ĐỨC THẮNG</h3>
+                    <p class="org-desc">
+                        Trường Đại học Tôn Đức Thắng: là môi trường giáo dục đại học tạo nền tảng để sinh viên phát triển toàn diện về kiến thức chuyên môn, kỹ năng thực hành và năng lực hội nhập, đồng thời khuyến khích sinh viên chủ động học hỏi, rèn luyện và phát huy năng lực của bản thân. 
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="org-card">
+                    <div class="org-logo">
+                        <img src="./images/logo/khoa-khtt-logo.png" alt="Khoa Khoa Học Thể Thao">
+                    </div>
+                    <h3 class="org-name">KHOA KHOA HỌC THỂ THAO</h3>
+                    <p class="org-desc">
+                        Khoa Khoa học Thể thao: là đơn vị đào tạo và phát triển nguồn nhân lực trong lĩnh vực khoa học thể thao, kết hợp kiến thức chuyên môn với thực hành và trải nghiệm thực tế, tạo môi trường để sinh viên học hỏi, rèn luyện và phát triển năng lực.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="org-card">
+                    <div class="org-logo">
+                        <img src="./images/logo/logo.png" alt="Dự án Phá Kén">
+                    </div>
+                    <h3 class="org-name">DỰ ÁN PHÁ KÉN</h3>
+                    <p class="org-desc">
+                        Phá Kén: Một dự án được thực hiện từ chính môi trường đại học, hướng đến việc tạo ra những không gian và trải nghiệm để người trẻ kết nối, khám phá bản thân, bước ra khỏi vùng an toàn và trưởng thành theo cách riêng. 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: SỰ RA ĐỜI CỦA PHÁ KÉN -->
+    <section class="story-section">
+        <div class="story-wrapper">
+            <div class="story-title-group">
+                <div class="content-title">
+                    <span class="shape-1"></span>
+                    <span class="shape-2"></span>
+                    <h1>SỰ RA ĐỜI CỦA PHÁ KÉN</h1>
+                </div>
+                <img src="./images/Butterfly/butterfly-00.png" alt="Bướm xanh" class="story-butterfly-blue">
+            </div>
+            
+            <div class="decor-story-butterfly-gold">
+                <img src="./images/decor/3btfly.png" alt="Bướm vàng" class="story-butterfly-gold">
+            </div>
+
+            <div class="story-glass-card">
+                <div class="story-text-body">
+                    <h3 class="story-highlight-title">Hành trình của Phá Kén 1 và Phá Kén 2</h3>
+                    <p class="p-lead">
+                        <span class="first-letter">T</span>uổi trẻ luôn đi cùng những câu hỏi, những kỳ vọng và những điều khiến chúng ta chần chừ. Có những lúc ta muốn thử, muốn bước lên, muốn trở thành một phiên bản khác của chính mình, nhưng lại bị giữ lại bởi sự tự ti, nỗi sợ thất bại hay ánh nhìn của người khác. Từ những trăn trở ấy, Phá Kén ra đời với mong muốn trở thành một nơi để người trẻ có thể nhìn lại chính mình, đối diện với những giới hạn bên trong và bắt đầu hành trình bước ra khỏi vùng an toàn.
+                    </p>
+                    <p>
+                        Phá Kén - Mùa 1 là bước khởi đầu cho hành trình ấy, khi người trẻ được khuyến khích nhìn lại, đối diện và dám bước ra khỏi lớp kén của sự e dè, tự ti nhưng bước ra chỉ là khởi đầu. Sau đó, người trẻ vẫn phải đối diện với những hoang mang, áp lực và kỳ vọng về việc phải trở nên nổi bật, phải đủ giỏi hay phải nhanh chóng tìm được hướng đi cho mình.
+                    </p>
+                    <p class="p-quote">
+                        Đó cũng là lý do Phá Kén - Mùa 2: Chạm Tỏa tiếp tục câu chuyện với một góc nhìn khác: không phải hành trình trở nên hoàn hảo, mà là hành trình hiểu mình, đối diện với những điều còn dang dở và tìm thấy giá trị riêng. Bởi ai cũng có một điểm xuất phát khác nhau, một tốc độ khác nhau và có những điều chỉ có thể nhận ra khi tự mình bước đi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: PHÁ KÉN MANG ĐẾN ĐIỀU GÌ & CHUỖI MÙA 2 -->
+    <section class="integrated-feature-section">
+        <div class="main-feature-card">
+            <div class="mascot-decor top-mascot">
+                <img src="./images/ML/ML_2.png" alt="Mascot">
+            </div>
+            <div class="bg-butterfly-faint">
+                <img src="./images/Butterfly/butterfly-00.png" alt="">
+            </div>
+
+            <div class="content-title">
+                <span class="shape-1"></span>
+                <span class="shape-2"></span>
+                <h1>PHÁ KÉN MANG ĐẾN ĐIỀU GÌ</h1>
+            </div>
+
+            <div class="value-grid">
+                <div class="value-card">
+                    <h3>Một cộng đồng dành cho sinh viên</h3>
+                    <p>Nơi những câu chuyện thật được lắng nghe, những cảm xúc được đồng cảm và những con người tìm thấy sự kết nối với nhau.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Một nơi bạn không cần phải tỏ ra ổn</h3>
+                    <p>Bạn được là chính mình, được thừa nhận những điều chưa hoàn hảo và không cần che giấu cảm xúc thật.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Một hành trình của riêng mỗi người</h3>
+                    <p>Mỗi câu chuyện, mỗi trải nghiệm đều có một cách để được kể và được cảm nhận khác nhau.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Một hành trình vẫn đang được tiếp tục</h3>
+                    <p>Bởi trưởng thành không có một điểm kết thúc, và mỗi ngày đều là một cơ hội để hiểu mình hơn, bước tiếp và trở thành phiên bản mình mong muốn.</p>
+                </div>
+            </div>
+            
+            <div class="decor-corner-gold">
+                <img src="./images/decor/3btfly.png" alt="Bướm vàng">
+            </div>
+
+            <div class="inner-series-box">
+                <div class="title-with-mascot">
+                    <div class="content-title">
+                        <span class="shape-1"></span>
+                        <span class="shape-2"></span>
+                        <h1>CHUỖI CHƯƠNG TRÌNH MÙA 2</h1>
+                    </div>
+                    <img src="./images/ML/ML_6.png" alt="Mascot Mini" class="mini-mascot">
+                </div>
+
+                <div class="series-grid">
+                    <div class="program-card">
+                        <div class="program-thumb">
+                            <img src="./images/ML/ML_7.png" alt="2 Ngày 1 Đêm">
+                        </div>
+                        <div class="program-info">
+                            <span class="program-tag pill-trip">Chuyến đi</span>
+                            <h3 class="program-title">2 NGÀY 1 ĐÊM</h3>
+                            <p class="program-desc">
+                                Hành trình trải nghiệm giúp sinh viên kết nối với bạn bè, giảng viên và chính bản thân mình thông qua các hoạt động tập thể, sẻ chia và khám phá giới hạn cá nhân.
+                            </p>
+                            <a href="phaken02.html#chuoi-chuong-trinh" class="btn-detail">XEM CHI TIẾT</a>
+                        </div>
+                    </div>
+
+                    <div class="program-card">
+                        <div class="program-thumb">
+                            <img src="./images/ML/ML_8.png" alt="Showcase">
+                        </div>
+                        <div class="program-info">
+                            <span class="program-tag pill-showcase">Showcase</span>
+                            <h3 class="program-title">MÌNH CỦA NGÀY HÔM NAY</h3>
+                            <p class="program-desc">
+                                Đêm nhạc kịch truyền cảm hứng kết hợp âm nhạc và storytelling, mang đến những câu chuyện rất “đời” về tuổi trẻ, sự trưởng thành và hành trình đi tìm giá trị riêng của mỗi người.
+                            </p>
+                            <a href="hoatdong.html" class="btn-detail">XEM CHI TIẾT</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: KHU VƯỜN CỦA CHÚNG TA -->
+    <section class="garden-section">
+        <div class="garden-container">
+            <div class="content-title">
+                <span class="shape-1"></span>
+                <span class="shape-2"></span>
+                <h1>KỂ ĐI KÉN NGHE NÈ</h1>
+            </div>
+
+            <div class="garden-scenery-frame">
+                <div class="garden-badge-pill">
+                    <img src="./images/decor/sprout.png" alt="Mầm cây" class="badge-sprout-icon" onerror="this.style.display='none'">
+                    <span>🌱 KHU VƯỜN CỦA CHÚNG TA</span>
+                </div>
+
+                <div class="garden-glass-board">
+                    <div class="garden-cards-grid" id="homeGardenGrid">
+                        <!-- JavaScript nạp dữ liệu Firebase -->
+                    </div>
+                </div>
+
+                <div class="garden-btn-group">
+                    <a href="hoatdong.html" class="btn-garden">
+                        <span class="btn-sprout">🌱</span> GIEO KHOẢNH KHẮC
+                    </a>
+                    <a href="hoatdong.html" class="btn-garden">
+                        <span class="btn-sprout">🌱</span> GHÉ KHU VƯỜN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div> <!-- KẾT THÚC HOME-MAIN-FLOW -->
      <!-- FOOTER -->
     <section class="Footer">
         <div class="footer-inner">
