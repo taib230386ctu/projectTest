@@ -29,8 +29,19 @@ html, body {
     /* Ẩn thanh cuộn (Scrollbar) */
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scroll-behavior: smooth;
+}
+/* Bù khoảng đệm chiều cao menu khi nhảy tới id chuoi-chuong-trinh */
+#chuoi-chuong-trinh {
+    scroll-margin-top: 130px; /* Chiều cao an toàn né trọn thanh navbar */
 }
 
+/* Tinh chỉnh riêng cho thiết bị di động */
+@media (max-width: 768px) {
+    #chuoi-chuong-trinh {
+        scroll-margin-top: 95px;
+    }
+}
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
     display: none;
