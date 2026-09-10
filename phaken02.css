@@ -662,3 +662,211 @@ h1, h2, h3, h4, h5, h6 {
         margin-right: 10%;
     }
 }
+/* Container danh sách các banner */
+.program-series-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    margin-top: 35px;
+    align-items: center; /* Giúp tất cả các card con tự căn giữa */
+}
+
+/* Khung card bo góc lớn phủ kính mờ xanh */
+.program-banner-card {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(74, 119, 194, 0.45) 0%, rgba(35, 75, 150, 0.55) 100%);
+    border: 2px solid rgba(175, 215, 255, 0.45);
+    border-radius: 36px;
+    padding: 40px 50px;
+    box-shadow: 0 15px 35px rgba(0, 10, 45, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #ffffff;
+    box-sizing: border-box;
+    width: 80%;
+}
+@media (max-width: 1000px) {
+    .program-banner-card{
+        width: 100%;
+
+    }
+}
+
+/* Cột trái: Thông tin chương trình */
+.banner-col-left {
+    flex: 1.35;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+@media (min-width: 1300px) {
+    .banner-col-left {
+        padding-right: 100px;
+    }
+}
+.badge-subtitle {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+.program-main-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: clamp(1.4rem, 2vw, 1.85rem);
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+/* Đường gạch trang trí uốn cong nhẹ dưới tiêu đề */
+.title-accent-line {
+    width: 300px;
+    height: 12px;
+    background: url('./images/decor/white-line.png') no-repeat left center;
+    border-radius: 999px;
+    margin: 8px 0 18px;
+}
+
+.program-main-desc {
+    font-size: 0.96rem;
+    line-height: 1.3;
+    color: #e2e8f0;
+    text-align: justify;
+    margin: 0;
+}
+
+/* Đường vạch ngăn cách mỏng */
+.banner-vertical-line {
+    width: 1.5px;
+    align-self: stretch;
+    background: rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+}
+
+/* Cột phải: Thời gian, địa điểm & nút */
+.banner-col-right {
+    flex: 1;
+    padding-left: 45px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.program-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.meta-circle-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #2f68b9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #ffffff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(10, 30, 80, 0.35);
+}
+
+.meta-info h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0 0 3px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.meta-info p {
+    font-size: 0.92rem;
+    color: #dbe4f0;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Nút bấm viên thuốc dẹt */
+.banner-btn-wrap {
+    margin-top: 6px;
+}
+
+.btn-program-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Cố định chiều rộng và chiều cao bằng nhau */
+    width: 250px;
+    height: 42px;
+    padding: 0 16px;
+    box-sizing: border-box;
+
+    border-radius: 999px;
+    background: #2f68b9;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    white-space: nowrap; /* Giữ chữ không bị xuống dòng */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(39, 105, 214, 0.45);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-program-action:hover {
+    background: #1d57b8;
+    transform: translateY(-1.5px);
+}
+
+.btn-program-action.btn-disabled {
+    cursor: default;
+    background: #2f68b9;
+    opacity: 0.95;
+}
+
+/* Responsive cho Tablet và Mobile */
+@media (max-width: 900px) {
+    .program-banner-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 24px;
+        border-radius: 26px;
+        gap: 25px;
+    }
+
+    .banner-col-left {
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .banner-vertical-line {
+        width: 100%;
+        height: 1.5px;
+    }
+
+    .banner-col-right {
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .btn-program-action {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
