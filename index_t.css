@@ -198,10 +198,11 @@ body {
 
 .hero-butterfly-img {
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     height: auto;
     object-fit: contain;
-    
+    position: relative;
+    top: -50px;
     animation: float 4s ease-in-out infinite;
 }
 
